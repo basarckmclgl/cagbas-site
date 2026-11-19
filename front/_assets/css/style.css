@@ -3687,3 +3687,7 @@ input.parsley-error, textarea.parsley-error {
  .cagbas-service-tile__description{font-size:12px!important;line-height:1.4!important}
  .cagbas-service-tile__action{font-size:11px!important;margin-top:8px!important}
 }
+
+/* Hizmet kartı içerikleri: kısa alt alta hizmet başlıkları */
+.cagbas-service-tile__description{display:flex!important;flex-direction:column!important;align-items:flex-start!important;gap:5px!important}
+.cagbas-service-tile__description span{display:block!important}
