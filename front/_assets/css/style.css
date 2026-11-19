@@ -3667,27 +3667,6 @@ input.parsley-error, textarea.parsley-error {
 @media(prefers-reduced-motion:reduce){.cagbas-service-tile{transition:none}.cagbas-services-track{scroll-behavior:auto}}
 
 
-/* Hizmet kartları: tüm ekranlarda dikey ilgi alanı listesi */
-.cagbas-services-track{display:flex!important;flex-direction:column!important;gap:16px!important;overflow:visible!important;padding:0!important;scroll-snap-type:none!important}
-.cagbas-service-tile{display:grid!important;grid-template-columns:minmax(190px,28%) minmax(0,1fr)!important;min-height:190px!important;flex:none!important;width:100%!important;max-width:none!important;border-radius:18px!important}
-.cagbas-service-tile__photo{width:100%!important;height:100%!important;min-height:190px!important;max-height:230px!important;object-fit:cover!important;flex:none!important}
-.cagbas-service-tile__glass{min-height:190px!important;padding:22px 26px!important;justify-content:center!important}
-.cagbas-service-tile__title{font-size:22px!important;margin-bottom:10px!important}
-.cagbas-service-tile__description{font-size:15px!important;max-width:760px}
-.cagbas-service-tile__action{margin-top:15px!important;padding-top:4px!important;max-width:180px}
-.cagbas-services-dots,.cagbas-services-hint{display:none!important}
-@media(max-width:767px){
- .cagbas-services-visual{padding:22px 14px!important}
- .cagbas-services-track{gap:13px!important}
- .cagbas-service-tile{grid-template-columns:112px minmax(0,1fr)!important;min-height:154px!important;border-radius:14px!important}
- .cagbas-service-tile__photo{height:100%!important;min-height:154px!important;max-height:none!important}
- .cagbas-service-tile__glass{min-height:154px!important;padding:13px 14px!important}
- .cagbas-service-tile__index{font-size:10px!important;margin-bottom:4px!important}
- .cagbas-service-tile__title{font-size:16px!important;line-height:1.2!important;margin-bottom:6px!important}
- .cagbas-service-tile__description{font-size:12px!important;line-height:1.4!important}
- .cagbas-service-tile__action{font-size:11px!important;margin-top:8px!important}
-}
-
 /* Hizmet kartı içerikleri: kısa alt alta hizmet başlıkları */
 .cagbas-service-tile__description{display:flex!important;flex-direction:column!important;align-items:flex-start!important;gap:5px!important}
 .cagbas-service-tile__description span{display:block!important}
