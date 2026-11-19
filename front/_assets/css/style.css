@@ -3670,3 +3670,24 @@ input.parsley-error, textarea.parsley-error {
 /* Hizmet kartı içerikleri: kısa alt alta hizmet başlıkları */
 .cagbas-service-tile__description{display:flex!important;flex-direction:column!important;align-items:flex-start!important;gap:5px!important}
 .cagbas-service-tile__description span{display:block!important}
+
+/* ÇAĞBAŞ ortak içerik ve yasal bağlantılar alanı */
+.cagbas-site-footer-content{padding:48px clamp(20px,5vw,72px);background:#1d1821;color:#f7f1fb;border-top:1px solid rgba(255,255,255,.12)}
+.cagbas-footer-grid{max-width:1240px;margin:0 auto;display:grid;grid-template-columns:1.35fr 1fr 1fr 1.15fr;gap:34px}
+.cagbas-footer-grid h3{margin:0 0 16px;color:#d8b4ff;font-size:15px;font-weight:800}
+.cagbas-footer-grid p{max-width:270px;color:rgba(255,255,255,.72);font-size:13px;line-height:1.7}
+.cagbas-footer-grid ul{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.cagbas-footer-grid a{color:rgba(255,255,255,.82);font-size:13px;text-decoration:none;line-height:1.5}
+.cagbas-footer-grid a:hover{color:#d8b4ff;text-decoration:underline}
+.cagbas-footer-grid .cagbas-footer-name{display:inline-block;color:#fff;font-size:24px;font-weight:900;letter-spacing:.12em}
+.cagbas-legal-page{max-width:920px;margin:0 auto;padding:56px 24px 90px;color:#282330;line-height:1.8}
+.cagbas-legal-page h1{font-size:clamp(30px,5vw,44px);margin:22px 0 8px;color:#32134b}
+.cagbas-legal-page h2{font-size:22px;margin:30px 0 8px;color:#542477}
+.cagbas-legal-page p{font-size:15px}
+.cagbas-legal-page a{color:#7437a3}
+.cagbas-legal-intro{color:#6b6271;font-size:17px}
+.cagbas-legal-back{display:inline-block;margin-bottom:18px;text-decoration:none}
+.cagbas-legal-note{margin-top:38px;padding:16px 18px;border-left:3px solid #9560bd;background:#f5eff9;color:#65566e;font-size:13px}
+.cagbas-license-text{white-space:pre-wrap;overflow-wrap:anywhere;padding:24px;border-radius:12px;background:#f5f2f7;font:14px/1.8 ui-monospace,monospace}
+@media(max-width:760px){.cagbas-site-footer-content{padding:34px 22px}.cagbas-footer-grid{grid-template-columns:1fr 1fr;gap:28px 18px}.cagbas-footer-brand{grid-column:1/-1}.cagbas-legal-page{padding:36px 20px 64px}.cagbas-legal-page h2{font-size:19px}}
+@media(max-width:420px){.cagbas-footer-grid{grid-template-columns:1fr}.cagbas-footer-brand{grid-column:auto}}
