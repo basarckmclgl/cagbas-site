@@ -3630,3 +3630,137 @@ input.parsley-error, textarea.parsley-error {
         background-color: #555;
     }
     
+
+/* ÇAĞBAŞ hizmet vitrini — masaüstü grid, mobil otomatik kayan cam kartlar */
+.cagbas-service-showcase {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  padding: clamp(46px, 6vw, 82px) 24px 42px;
+  background:
+    radial-gradient(ellipse at 12% 18%, rgba(150, 54, 255, .42), transparent 38%),
+    radial-gradient(ellipse at 88% 82%, rgba(85, 32, 145, .46), transparent 40%),
+    linear-gradient(125deg, #100b1b 0%, #21102f 48%, #100d1c 100%);
+}
+.cagbas-service-showcase::before,
+.cagbas-service-showcase::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  pointer-events: none;
+  border-radius: 50%;
+  filter: blur(2px);
+}
+.cagbas-service-showcase::before {
+  width: 48vw; height: 48vw; min-width: 340px; min-height: 340px;
+  top: -28%; left: -12%;
+  border: 1px solid rgba(194, 139, 255, .22);
+  box-shadow: 0 0 100px rgba(135, 48, 235, .2), inset 0 0 80px rgba(135, 48, 235, .12);
+}
+.cagbas-service-showcase::after {
+  width: 42vw; height: 42vw; min-width: 300px; min-height: 300px;
+  right: -12%; bottom: -36%;
+  border: 1px solid rgba(194, 139, 255, .2);
+  box-shadow: 0 0 110px rgba(135, 48, 235, .22);
+}
+.cagbas-service-showcase__inner { max-width: 1240px; margin: 0 auto; }
+.cagbas-service-track {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 18px;
+}
+.cagbas-service-card {
+  position: relative;
+  display: flex;
+  min-width: 0;
+  min-height: 340px;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 22px 20px 20px;
+  overflow: hidden;
+  color: #fff !important;
+  text-decoration: none !important;
+  border: 1px solid rgba(220, 190, 255, .32);
+  border-radius: 22px;
+  background: linear-gradient(145deg, rgba(91, 57, 125, .43), rgba(28, 20, 42, .62));
+  box-shadow: 0 18px 46px rgba(0,0,0,.24), inset 0 1px 0 rgba(255,255,255,.16);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+  transition: transform .28s ease, border-color .28s ease, background .28s ease;
+}
+.cagbas-service-card::after {
+  content: "";
+  position: absolute;
+  left: 20px; right: 20px; bottom: 0;
+  height: 3px;
+  border-radius: 3px 3px 0 0;
+  background: linear-gradient(90deg, transparent, #b35cff, #8d42f5, transparent);
+  opacity: .9;
+}
+.cagbas-service-card:hover,
+.cagbas-service-card:focus-visible {
+  transform: translateY(-5px);
+  border-color: rgba(207, 164, 255, .72);
+  background: linear-gradient(145deg, rgba(119, 72, 161, .55), rgba(35, 23, 52, .72));
+  outline: none;
+}
+.cagbas-service-card__visual {
+  display: grid; place-items: center;
+  width: 76px; height: 76px; margin: 0 auto 20px;
+  align-self: center;
+  border: 1px solid rgba(188, 125, 255, .68);
+  border-radius: 20px;
+  background: rgba(130, 63, 190, .2);
+  box-shadow: 0 0 28px rgba(150, 70, 235, .16), inset 0 0 22px rgba(176, 113, 255, .1);
+}
+.cagbas-service-card__visual svg {
+  width: 52px; height: 52px; fill: none; stroke: #c58aff; stroke-width: 3;
+  stroke-linecap: round; stroke-linejoin: round;
+}
+.cagbas-service-card__number { color: #c58aff; font-size: 12px; font-weight: 800; letter-spacing: .16em; margin-bottom: 7px; }
+.cagbas-service-card__title { display: block; color: #fff; font-size: 19px; line-height: 1.25; font-weight: 800; margin-bottom: 10px; }
+.cagbas-service-card__text { color: rgba(255,255,255,.8); font-size: 14px; line-height: 1.55; }
+.cagbas-service-card__cta { display: flex; justify-content: space-between; align-items: center; gap: 10px; width: 100%; margin-top: auto; padding-top: 18px; color: #d6b3ff; font-size: 13px; font-weight: 800; }
+.cagbas-service-card__cta span { font-size: 18px; }
+.cagbas-service-track__hint,
+.cagbas-service-track__note { display: none; }
+.cagbas-creative-heading { padding: 36px 20px 24px; }
+.cagbas-creative-heading .tab-area-header { margin: 0; }
+.cagbas-creative-heading h2 { margin: 0; text-align: center; }
+@media (max-width: 767px) {
+  .cagbas-service-showcase { padding: 30px 0 28px; }
+  .cagbas-service-showcase__inner { width: 100%; }
+  .cagbas-service-track {
+    display: flex;
+    gap: 14px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding: 10px 7vw 18px;
+    scroll-snap-type: x mandatory;
+    scroll-padding-left: 7vw;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .cagbas-service-track::-webkit-scrollbar { display: none; }
+  .cagbas-service-card {
+    flex: 0 0 82vw;
+    width: 82vw;
+    min-height: 318px;
+    padding: 20px 18px 18px;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+    border-radius: 20px;
+  }
+  .cagbas-service-card__visual { width: 68px; height: 68px; margin-bottom: 16px; }
+  .cagbas-service-card__visual svg { width: 46px; height: 46px; }
+  .cagbas-service-card__title { font-size: 18px; }
+  .cagbas-service-track__hint { display: flex; justify-content: center; gap: 6px; margin: 4px auto 0; }
+  .cagbas-service-track__hint span { width: 6px; height: 6px; border-radius: 99px; background: rgba(255,255,255,.32); }
+  .cagbas-service-track__hint span:first-child { width: 20px; background: #b76cff; }
+  .cagbas-service-track__note { display: block; margin: 12px 20px 0; color: rgba(255,255,255,.65); text-align: center; font-size: 11px; letter-spacing: .02em; }
+  .cagbas-creative-heading { padding: 28px 16px 22px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cagbas-service-card { transition: none; }
+  .cagbas-service-track { scroll-behavior: auto; }
+}
