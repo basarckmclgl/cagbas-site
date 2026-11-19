@@ -206,9 +206,7 @@
         </span>
       </a>
     </div>
-    <div class="cagbas-services-dots" aria-hidden="true"><span class="is-active"></span><span></span><span></span><span></span></div>
-    <p class="cagbas-services-hint">Hizmet alanlarını keşfetmek için kaydırın</p>
-  </div>
+</div>
 </section>
 <div class="about-us-middle-tab-container cagbas-creative-heading">
   <div class="about-us-middle-tab-wrapper">
@@ -415,29 +413,5 @@
     }*/
     </style>
     
-<script>
-(function(){
-  var track=document.getElementById('cagbasServicesTrack');
-  if(!track)return;
-  var cards=Array.prototype.slice.call(track.querySelectorAll('.cagbas-service-tile'));
-  var dots=document.querySelectorAll('.cagbas-services-dots span');
-  var mobile=window.matchMedia('(max-width: 767px)');
-  var reduced=window.matchMedia('(prefers-reduced-motion: reduce)');
-  var timer=null,resume=null;
-  function activeIndex(){var center=track.scrollLeft+track.clientWidth/2;var best=0,dist=Infinity;cards.forEach(function(card,i){var c=card.offsetLeft+card.offsetWidth/2;var d=Math.abs(c-center);if(d<dist){dist=d;best=i;}});return best;}
-  function paint(){var i=activeIndex();dots.forEach(function(dot,n){dot.classList.toggle('is-active',n===i);});}
-  function stop(){if(timer){clearInterval(timer);timer=null;}}
-  function start(){stop();if(!mobile.matches||reduced.matches)return;timer=setInterval(function(){var next=(activeIndex()+1)%cards.length;track.scrollTo({left:cards[next].offsetLeft-track.offsetLeft,behavior:'smooth'});},3000);}
-  function pause(){stop();if(resume)clearTimeout(resume);if(mobile.matches&&!reduced.matches)resume=setTimeout(start,4500);}
-  track.addEventListener('scroll',paint,{passive:true});
-  track.addEventListener('touchstart',pause,{passive:true});
-  track.addEventListener('pointerdown',pause,{passive:true});
-  track.addEventListener('click',pause);
-  window.addEventListener('resize',start);
-  if(mobile.addEventListener)mobile.addEventListener('change',start);else mobile.addListener(start);
-  if(reduced.addEventListener)reduced.addEventListener('change',start);else reduced.addListener(start);
-  paint();start();
-})();
-</script>
 </body>
     </html>
