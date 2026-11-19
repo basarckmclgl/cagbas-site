@@ -125,16 +125,13 @@ const sendWelcomeEmail = (email) => {
         html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; padding: 20px; border: 1px solid #ddd; border-radius: 10px;">
             <div style="text-align: center;">
-                <img src="http://adasutrading.com/_assets/images/logo.png" alt="Adasu Trading Logo" style="max-width: 150px; margin-bottom: 20px;">
+                <img src="https://cagbas-site.pages.dev/_assets/images/cagbas-logo.svg" alt="ÇAĞBAŞ Logo" style="max-width: 150px; margin-bottom: 20px;">
             </div>
-            <h2 style="color: #333; text-align: center;">Adasu Trading'e Hoş Geldiniz!</h2>
+            <h2 style="color: #333; text-align: center;">ÇAĞBAŞ e-bültenine hoş geldiniz!</h2>
             <p style="color: #555; text-align: center;">Merhaba,</p>
             <p style="color: #555; text-align: center;">E-bültenimize abone olduğunuz için teşekkür ederiz. Sizleri en son haberler, güncellemeler ve özel teklifler hakkında bilgilendireceğiz.</p>
-            <div style="text-align: center; margin: 30px 0;">
-                <img src="http://adasutrading.com/_assets/images/welcome-image.jpg" alt="Welcome" style="max-width: 100%; border-radius: 10px;">
-            </div>
-            <p style="color: #555; text-align: center;">Güncellemeler için takipte kalın. Herhangi bir sorunuz varsa, <a href="mailto:info@adasutading.com" style="color: #3498db;">bizimle iletişime geçin</a>.</p>
-            <p style="color: #777; text-align: center; font-size: 12px;">Bu mesajı istemiyorsanız <a href="http://adasutrading.com/unsubscribe.html?email=${encodeURIComponent(email)}" style="color: #3498db;">abonelikten çıkabilirsiniz</a>.</p>
+            <p style="color: #555; text-align: center;">Güncellemeler için takipte kalın. Herhangi bir sorunuz varsa, <a href="mailto:basarcekmecelioglu6@gmail.com" style="color: #3498db;">bizimle iletişime geçin</a>.</p>
+            <p style="color: #777; text-align: center; font-size: 12px;">Bu mesajı istemiyorsanız <a href="https://cagbas-site.pages.dev/unsubscribe.html?email=${encodeURIComponent(email)}" style="color: #3498db;">abonelikten çıkabilirsiniz</a>.</p>
         </div>
         `
     };
@@ -186,7 +183,7 @@ app.post('/send-email', (req, res) => {
 
     let mailOptions = {
         from: Email,
-        to: 'deneme.17.06.2022@gmail.com',
+        to: 'basarcekmecelioglu6@gmail.com',
         //cc:'firmanın ikinci maili veya sahibinin maili yazılabilir. ikinci alıcı.',
         subject: `Yeni İletişim Formu: ${Subject}`,
         text: `İsim Soyisim: ${FullName}\nEmail: ${Email}\nTelefon: ${Phone}\n\nMesaj:\n${Message}`
