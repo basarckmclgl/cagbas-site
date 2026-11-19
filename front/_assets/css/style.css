@@ -3703,3 +3703,8 @@ input.parsley-error, textarea.parsley-error {
 .cagbas-footer-socials a:hover{background:rgba(163,103,213,.18);border-color:rgba(216,180,255,.6)}
 .cagbas-footer-socials svg{width:17px;height:17px;fill:currentColor}
 @media(max-width:760px){.cagbas-site-footer-content{padding-bottom:18px!important}.footer-wrapper{padding:14px 20px!important;gap:8px!important}.footer-wrapper div{margin-bottom:0!important}.footer-item-end{justify-content:center!important}.cagbas-footer-socials{justify-content:flex-start;flex-wrap:wrap}}
+
+/* Social links: footer koyu alaninin alt-orta hizasinda */
+.cagbas-site-footer-content{position:relative;padding-bottom:82px!important}
+.cagbas-footer-brand .cagbas-footer-socials{position:absolute;left:50%;bottom:18px;transform:translateX(-50%);margin:0;justify-content:center;white-space:nowrap}
+@media(max-width:760px){.cagbas-site-footer-content{padding-bottom:76px!important}.cagbas-footer-brand .cagbas-footer-socials{left:50%;bottom:16px;justify-content:center}}
