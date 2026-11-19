@@ -3630,3 +3630,38 @@ input.parsley-error, textarea.parsley-error {
         background-color: #555;
     }
     
+
+/* ÇAĞBAŞ — ortak görsel zemin üzerinde yarı saydam hizmet kartları */
+.cagbas-services-visual{position:relative;isolation:isolate;overflow:hidden;padding:clamp(38px,5vw,68px) 24px 34px;background:#160d24 url('/_assets/images/cagbas-services-background.jpg') center 48%/cover no-repeat}
+.cagbas-services-visual__shade{position:absolute;inset:0;z-index:-1;background:linear-gradient(115deg,rgba(24,8,43,.82),rgba(55,17,83,.69) 52%,rgba(18,10,33,.82))}
+.cagbas-services-visual__inner{max-width:1240px;margin:0 auto}
+.cagbas-services-track{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}
+.cagbas-service-tile{position:relative;display:flex;min-width:0;min-height:355px;flex-direction:column;overflow:hidden;border:1px solid rgba(255,255,255,.34);border-radius:20px;color:#fff!important;text-decoration:none!important;background:rgba(48,25,68,.34);box-shadow:0 18px 48px rgba(0,0,0,.26),inset 0 1px 0 rgba(255,255,255,.2);backdrop-filter:blur(13px);-webkit-backdrop-filter:blur(13px);transition:transform .3s ease,border-color .3s ease,box-shadow .3s ease}
+.cagbas-service-tile:hover,.cagbas-service-tile:focus-visible{transform:translateY(-5px);border-color:rgba(225,190,255,.85);box-shadow:0 22px 54px rgba(0,0,0,.34),0 0 28px rgba(175,105,255,.18);outline:none}
+.cagbas-service-tile__photo{display:block;width:100%;height:172px;object-fit:cover;flex:0 0 172px;filter:saturate(.95)}
+.cagbas-service-tile__glass{position:relative;display:flex;flex:1;flex-direction:column;padding:17px 18px 18px;background:linear-gradient(145deg,rgba(120,69,157,.57),rgba(29,17,43,.74));backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
+.cagbas-service-tile__glass:before{content:"";position:absolute;inset:0 0 auto;height:1px;background:rgba(255,255,255,.32)}
+.cagbas-service-tile__index{display:block;margin-bottom:7px;color:#dfbdff;font-size:12px;font-weight:800;letter-spacing:.18em}
+.cagbas-service-tile__title{display:block;margin-bottom:9px;color:#fff;font-size:19px;line-height:1.25;font-weight:750}
+.cagbas-service-tile__description{display:block;color:rgba(255,255,255,.88);font-size:13px;line-height:1.55}
+.cagbas-service-tile__action{display:flex;justify-content:space-between;align-items:center;margin-top:auto;padding-top:17px;color:#e2c7ff;font-size:12px;font-weight:800}
+.cagbas-service-tile__action span{font-size:18px}
+.cagbas-services-dots,.cagbas-services-hint{display:none}
+.cagbas-creative-heading{padding:34px 20px 20px}
+.cagbas-creative-heading .tab-area-header{margin:0}
+.cagbas-creative-heading .tab-area-header h2{margin:0;text-align:center}
+@media(max-width:767px){
+ .cagbas-services-visual{padding:25px 0 23px;background-position:center;background-attachment:scroll}
+ .cagbas-services-track{display:flex;gap:13px;overflow-x:auto;overflow-y:hidden;padding:9px 7vw 16px;scroll-snap-type:x mandatory;scroll-padding-left:7vw;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+ .cagbas-services-track::-webkit-scrollbar{display:none}
+ .cagbas-service-tile{flex:0 0 82vw;width:82vw;min-height:330px;scroll-snap-align:center;scroll-snap-stop:always;border-radius:18px}
+ .cagbas-service-tile__photo{height:166px;flex-basis:166px}
+ .cagbas-service-tile__glass{padding:15px 16px 16px}
+ .cagbas-service-tile__title{font-size:18px}
+ .cagbas-services-dots{display:flex;justify-content:center;gap:7px;margin:4px auto 0}
+ .cagbas-services-dots span{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.38);transition:all .25s ease}
+ .cagbas-services-dots span.is-active{width:20px;border-radius:8px;background:#d3a5ff}
+ .cagbas-services-hint{display:block;margin:10px 16px 0;text-align:center;color:rgba(255,255,255,.76);font-size:11px;letter-spacing:.02em}
+ .cagbas-creative-heading{padding:26px 16px 18px}
+}
+@media(prefers-reduced-motion:reduce){.cagbas-service-tile{transition:none}.cagbas-services-track{scroll-behavior:auto}}
