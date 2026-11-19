@@ -3708,3 +3708,8 @@ input.parsley-error, textarea.parsley-error {
 .cagbas-site-footer-content{position:relative;padding-bottom:82px!important}
 .cagbas-footer-brand .cagbas-footer-socials{position:absolute;left:50%;bottom:18px;transform:translateX(-50%);margin:0;justify-content:center;white-space:nowrap}
 @media(max-width:760px){.cagbas-site-footer-content{padding-bottom:76px!important}.cagbas-footer-brand .cagbas-footer-socials{left:50%;bottom:16px;justify-content:center}}
+
+/* Fixed WhatsApp contact button */
+#cagbas-whatsapp-float{position:fixed;right:24px;bottom:24px;z-index:99999;display:flex;align-items:center;gap:9px;padding:13px 17px;border-radius:999px;background:#25D366;color:#fff!important;font:700 14px/1.2 Arial,sans-serif;text-decoration:none!important;box-shadow:0 5px 20px rgba(0,0,0,.24);transition:transform .2s ease,box-shadow .2s ease}
+#cagbas-whatsapp-float:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,0,0,.3)}#cagbas-whatsapp-float svg{width:24px;height:24px;fill:currentColor;flex:none}#cagbas-whatsapp-float:focus-visible{outline:3px solid #111;outline-offset:3px}
+@media(max-width:600px){#cagbas-whatsapp-float{right:16px;bottom:16px;padding:13px;border-radius:50%;width:54px;height:54px;justify-content:center}#cagbas-whatsapp-float span{display:none}#cagbas-whatsapp-float svg{width:27px;height:27px}}
