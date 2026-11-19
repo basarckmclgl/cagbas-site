@@ -96,20 +96,6 @@ $(document).ready(function () {
         var accordion = new Accordion($('#accordion'), false);
     });
 
-    if ($("#map").length > 0) {
-
-        mapboxgl.accessToken = 'pk.eyJ1IjoiYmFzYXJja21jbGdsIiwiYSI6ImNtd25zMzNtZDAyZW8yeHNkaWZ1bTE5azYifQ.yXjHCGlZvM7xX1hzXNvfoQ';
-        var map = new mapboxgl.Map({
-            container: 'map', // container id
-            style: 'mapbox://styles/mapbox/streets-v11', // stylesheet location
-            center: [29.9295, 40.7633], // starting position [lng, lat]
-            zoom: 15 // starting zoom
-        });
-        var marker = new mapboxgl.Marker()
-            .setLngLat([29.9295, 40.7633]) // marker position [lng, lat]
-            .addTo(map);
-    
-    }    
 
     $(".modal .close, .modal .modal-close").click(function () { $(".modal").hide(); $(".modal iframe").attr("src", "about:blank"); })
     $(".modal").click(function (e) { if ($(e.target).hasClass("modal")) { $(".modal").hide(); $(".modal iframe").attr("src", "about:blank"); } });
