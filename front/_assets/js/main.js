@@ -161,28 +161,55 @@ jQuery(function ($) {
 
 });
 
-document.addEventListener('DOMContentLoaded', function() {
-    document.getElementById('newsletterForm').addEventListener('submit', function(event) {
+document.addEventListener('DOMContentLoaded', function () {
+    const newsletterForm = document.getElementById('newsletterForm');
+    if (!newsletterForm) return;
+
+    newsletterForm.addEventListener('submit', async function (event) {
         event.preventDefault();
+        const emailInput = document.getElementById('newsletterEmail');
+        const consentInput = document.getElementById('newsletterConsent');
+        const feedback = document.getElementById('newsletterFeedback');
+        const submitButton = newsletterForm.querySelector('button[type="submit"]');
+        const email = emailInput ? emailInput.value.trim() : '';
 
-        const email = document.getElementById('Email').value;
+        if (!emailInput || !emailInput.checkValidity()) {
+            if (emailInput) emailInput.reportValidity();
+            return;
+        }
+        if (!consentInput || !consentInput.checked) {
+            if (feedback) feedback.textContent = 'Lütfen e-bülten gönderimi için onayınızı verin.';
+            if (consentInput) consentInput.focus();
+            return;
+        }
 
-        fetch('http://localhost:3000/Newsletter/Insert', { 
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ Email: email })
-        })
-        .then(response => response.json())
-        .then(data => {
-            console.log('Başarı:', data.message);
-            _success('Abonelik başarılı!');
-        })
-        .catch(error => {
-            console.error('Hata:', error);
-            _error('Abonelik başarısız!');
-        });
+        const originalText = submitButton ? submitButton.textContent : '';
+        if (submitButton) {
+            submitButton.disabled = true;
+            submitButton.textContent = '...';
+        }
+        if (feedback) feedback.textContent = '';
+
+        try {
+            const response = await fetch('/api/newsletter', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email, marketingConsent: true })
+            });
+            const result = await response.json();
+            if (!response.ok) throw new Error(result.error || 'Abonelik kaydedilemedi.');
+            newsletterForm.reset();
+            if (feedback) feedback.textContent = result.message || 'Abonelik talebiniz alındı.';
+            else if (typeof _success === 'function') _success(result.message || 'Abonelik talebiniz alındı.');
+        } catch (error) {
+            if (feedback) feedback.textContent = error.message || 'Bir hata oluştu. Lütfen tekrar deneyin.';
+            else if (typeof _error === 'function') _error(error.message || 'Bir hata oluştu.');
+        } finally {
+            if (submitButton) {
+                submitButton.disabled = false;
+                submitButton.textContent = originalText;
+            }
+        }
     });
 });
 
