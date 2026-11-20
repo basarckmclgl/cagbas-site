@@ -190,44 +190,30 @@ document.addEventListener('DOMContentLoaded', function() {
     const contactForm = document.getElementById('contact-form');
     if (!contactForm) return;
 
-    contactForm.addEventListener('submit', async function (event) {
+    contactForm.addEventListener('submit', function (event) {
         event.preventDefault();
         if (window.jQuery && !window.jQuery(contactForm).parsley().isValid()) return;
 
-        const submitButton = contactForm.querySelector('button[type="submit"]');
-        const originalButtonText = submitButton ? submitButton.textContent : '';
-        if (submitButton) {
-            submitButton.disabled = true;
-            submitButton.textContent = 'GÖNDERİLİYOR...';
-        }
+        const fullName = document.getElementById('FullName').value.trim();
+        const email = document.getElementById('Email').value.trim();
+        const phone = document.getElementById('Phone').value.trim();
+        const subject = document.getElementById('Subject').value.trim();
+        const message = document.getElementById('Message').value.trim();
 
-        const formData = {
-            fullName: document.getElementById('FullName').value.trim(),
-            email: document.getElementById('Email').value.trim(),
-            phone: document.getElementById('Phone').value.trim(),
-            subject: document.getElementById('Subject').value.trim(),
-            message: document.getElementById('Message').value.trim()
-        };
+        const whatsappMessage = [
+            'Merhaba ÇAĞBAŞ, web siteniz üzerinden iletişime geçiyorum.',
+            '',
+            'Ad Soyad: ' + fullName,
+            'E-posta: ' + email,
+            'Telefon: ' + phone,
+            'Konu: ' + subject,
+            '',
+            'Mesaj:',
+            message
+        ].join('\n');
 
-        try {
-            const response = await fetch('/api/contact', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(formData)
-            });
-            const result = await response.json().catch(() => ({}));
-            if (!response.ok) throw new Error(result.error || 'Mesaj gönderilemedi.');
-            contactForm.reset();
-            _success('Mesajınız başarıyla gönderildi.');
-        } catch (error) {
-            console.error('İletişim formu hatası:', error);
-            _error(error.message || 'Mesaj gönderilirken bir hata oluştu.');
-        } finally {
-            if (submitButton) {
-                submitButton.disabled = false;
-                submitButton.textContent = originalButtonText;
-            }
-        }
+        const whatsappUrl = 'https://wa.me/905384483866?text=' + encodeURIComponent(whatsappMessage);
+        window.location.href = whatsappUrl;
     });
 });
 
