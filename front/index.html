@@ -324,24 +324,76 @@
 </div>
 
 <style>
-.cagbas-site-footer-content{background:#101522;color:#e8edf7;padding:64px clamp(22px,5vw,76px) 22px;border-top:1px solid rgba(255,255,255,.09);position:relative;z-index:1}
-.cagbas-site-footer-content *{box-sizing:border-box}
-.cagbas-footer-grid{width:min(1240px,100%);margin:0 auto;display:grid;grid-template-columns:1.45fr 1fr .8fr 1.15fr;gap:clamp(26px,4vw,64px);align-items:start}
-.cagbas-footer-brand{max-width:330px}
-.cagbas-footer-name{display:inline-block;color:#fff;text-decoration:none;font-size:29px;line-height:1;font-weight:800;letter-spacing:.09em;margin-bottom:18px}
-.cagbas-footer-brand p{margin:0;color:#aeb9cc;font-size:14px;line-height:1.85;max-width:290px}
-.cagbas-footer-grid h3{margin:2px 0 20px;color:#c9a6ff;font-size:14px;font-weight:750;letter-spacing:.08em}
-.cagbas-footer-grid ul{list-style:none;margin:0;padding:0;display:grid;gap:13px}
-.cagbas-footer-grid li{margin:0;padding:0}
-.cagbas-footer-grid li a{color:#c5cede;text-decoration:none;font-size:13px;line-height:1.6;transition:color .2s ease}
-.cagbas-footer-grid li a:hover{color:#fff}
-.cagbas-footer-socials{display:flex;gap:10px;flex-wrap:wrap;margin-top:23px}
-.cagbas-footer-socials a{display:inline-flex;align-items:center;gap:9px;padding:9px 13px;border:1px solid rgba(201,166,255,.28);border-radius:10px;color:#d8c1ff;text-decoration:none;font-size:12px;transition:background .2s ease,border-color .2s ease}
-.cagbas-footer-socials a:hover{background:rgba(201,166,255,.1);border-color:#c9a6ff}
-.cagbas-footer-socials svg{width:15px;height:15px;fill:currentColor}
-.cagbas-footer-bottom{width:min(1240px,100%);margin:42px auto 0;padding-top:18px;border-top:1px solid rgba(255,255,255,.12);color:#8793a8;font-size:12px}
-@media(max-width:850px){.cagbas-footer-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:34px}.cagbas-footer-brand{max-width:none}}
-@media(max-width:520px){.cagbas-site-footer-content{padding:44px 22px 20px}.cagbas-footer-grid{grid-template-columns:1fr 1fr;gap:30px 18px}.cagbas-footer-brand{grid-column:1/-1}.cagbas-footer-grid h3{font-size:12px;margin-bottom:14px}.cagbas-footer-grid li a{font-size:12px}.cagbas-footer-bottom{margin-top:30px}}
+/* Footer contrast and layout hardening */
+.cagbas-site-footer-content{
+  display:block!important;width:100%!important;min-height:250px!important;
+  background:#111827!important;color:#edf2fb!important;
+  padding:64px clamp(22px,5vw,76px) 22px!important;
+  border-top:1px solid rgba(255,255,255,.12)!important;
+  position:relative!important;z-index:2!important;
+  opacity:1!important;visibility:visible!important;filter:none!important;
+}
+.cagbas-site-footer-content,.cagbas-site-footer-content *{
+  box-sizing:border-box!important;text-shadow:none!important;
+}
+.cagbas-site-footer-content .cagbas-footer-grid{
+  width:min(1240px,100%)!important;margin:0 auto!important;
+  display:grid!important;grid-template-columns:1.45fr 1fr .8fr 1.15fr!important;
+  gap:clamp(26px,4vw,64px)!important;align-items:start!important;
+}
+.cagbas-site-footer-content .cagbas-footer-brand{max-width:330px!important}
+.cagbas-site-footer-content .cagbas-footer-name{
+  display:inline-block!important;color:#fff!important;text-decoration:none!important;
+  font-size:29px!important;line-height:1!important;font-weight:800!important;
+  letter-spacing:.09em!important;margin:0 0 18px!important;
+}
+.cagbas-site-footer-content .cagbas-footer-brand p{
+  margin:0!important;color:#c4cede!important;font-size:14px!important;
+  line-height:1.85!important;max-width:290px!important;opacity:1!important;
+}
+.cagbas-site-footer-content .cagbas-footer-grid h3{
+  margin:2px 0 20px!important;color:#d6b8ff!important;font-size:14px!important;
+  font-weight:750!important;letter-spacing:.08em!important;opacity:1!important;
+}
+.cagbas-site-footer-content .cagbas-footer-grid ul{
+  list-style:none!important;margin:0!important;padding:0!important;
+  display:grid!important;gap:13px!important;
+}
+.cagbas-site-footer-content .cagbas-footer-grid li{margin:0!important;padding:0!important}
+.cagbas-site-footer-content .cagbas-footer-grid li a{
+  color:#d2d9e6!important;text-decoration:none!important;font-size:13px!important;
+  line-height:1.65!important;opacity:1!important;transition:color .2s ease!important;
+}
+.cagbas-site-footer-content .cagbas-footer-grid li a:hover{color:#fff!important}
+.cagbas-site-footer-content .cagbas-footer-socials{
+  display:flex!important;gap:10px!important;flex-wrap:wrap!important;margin-top:23px!important;
+}
+.cagbas-site-footer-content .cagbas-footer-socials a{
+  display:inline-flex!important;align-items:center!important;gap:9px!important;
+  padding:9px 13px!important;border:1px solid rgba(214,184,255,.35)!important;
+  border-radius:10px!important;color:#e2ceff!important;text-decoration:none!important;
+  font-size:12px!important;opacity:1!important;
+}
+.cagbas-site-footer-content .cagbas-footer-socials svg{
+  width:15px!important;height:15px!important;fill:currentColor!important;
+}
+.cagbas-site-footer-content .cagbas-footer-bottom{
+  width:min(1240px,100%)!important;margin:42px auto 0!important;
+  padding-top:18px!important;border-top:1px solid rgba(255,255,255,.16)!important;
+  color:#aeb9ca!important;font-size:12px!important;opacity:1!important;
+}
+@media(max-width:850px){
+  .cagbas-site-footer-content .cagbas-footer-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:34px!important}
+  .cagbas-site-footer-content .cagbas-footer-brand{max-width:none!important}
+}
+@media(max-width:520px){
+  .cagbas-site-footer-content{padding:44px 22px 20px!important}
+  .cagbas-site-footer-content .cagbas-footer-grid{grid-template-columns:1fr 1fr!important;gap:30px 18px!important}
+  .cagbas-site-footer-content .cagbas-footer-brand{grid-column:1/-1!important}
+  .cagbas-site-footer-content .cagbas-footer-grid h3{font-size:12px!important;margin-bottom:14px!important}
+  .cagbas-site-footer-content .cagbas-footer-grid li a{font-size:12px!important}
+  .cagbas-site-footer-content .cagbas-footer-bottom{margin-top:30px!important}
+}
 </style>
 <section class="cagbas-site-footer-content" aria-label="ÇAĞBAŞ içerik ve bağlantılar">
   <div class="cagbas-footer-grid">
