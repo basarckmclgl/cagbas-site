@@ -61,6 +61,66 @@
 
     </style>
 
+<style id="cb-homepage-redesign">
+:root{--cb-ink:#171521;--cb-paper:#f7f6f8;--cb-purple:#7851a5;--cb-lilac:#d8c3ee;--cb-muted:#77717e}
+html{scroll-behavior:smooth}body{background:#fff!important;color:var(--cb-ink)!important}
+.container{width:100%!important;max-width:none!important;overflow:hidden}
+.main-wrapper{width:100%!important;max-width:none!important}
+.menu-container{position:sticky!important;top:0!important;z-index:1000!important;background:rgba(255,255,255,.94)!important;backdrop-filter:blur(16px)!important;border-bottom:1px solid #eee9f2!important;box-shadow:0 6px 24px rgba(25,18,35,.045)!important}
+.menu-wrapper{max-width:1320px!important;margin:auto!important;padding:13px 28px!important;min-height:76px!important}
+.menu-logo img{max-height:42px!important;width:auto!important}
+.menu-bar-links{gap:clamp(14px,2.4vw,34px)!important}
+.menu-bar-links a{font-size:13px!important;font-weight:700!important;letter-spacing:.02em!important;color:#292432!important;text-decoration:none!important;transition:color .2s ease!important}
+.menu-bar-links a:hover{color:var(--cb-purple)!important}
+.mobile-menu-container{background:#fff!important;border-bottom:1px solid #eee9f2!important}
+.banner-slider-wrapper{position:relative!important;min-height:clamp(300px,42vw,560px)!important;overflow:hidden!important;background:#171521!important}
+.banner-slider-wrapper .banner-swiper-wrapper,.banner-slider-wrapper .main-slider-container,.banner-slider-wrapper .swiper-wrapper,.banner-slider-wrapper .swiper-slide{height:clamp(300px,42vw,560px)!important}
+.banner-slider-wrapper .swiper-slide{background-position:center!important;background-size:cover!important}
+.banner-slider-wrapper:after{content:"";position:absolute;inset:0;z-index:2;pointer-events:none;background:linear-gradient(90deg,rgba(12,10,20,.44),rgba(12,10,20,.08) 75%)}
+.banner-content-swiper-container{z-index:3!important}
+.banner-content-swiper-container .slider-content-wrapper span{color:#fff!important;text-shadow:0 2px 20px rgba(0,0,0,.45)!important}
+.cb-home-intro{width:min(1280px,100%);margin:0 auto;padding:84px 34px 88px;display:grid;grid-template-columns:minmax(0,1.5fr) minmax(230px,.65fr);gap:8%;align-items:center;background:#fff}
+.cb-home-intro__eyebrow{font-size:10px;letter-spacing:2.2px;font-weight:850;color:var(--cb-purple)}
+.cb-home-intro h1{font-size:clamp(38px,5.4vw,70px)!important;line-height:1.08!important;letter-spacing:-2.7px!important;font-weight:800!important;color:#1b1722!important;margin:20px 0 22px!important;max-width:850px}
+.cb-home-intro h1 em{font-family:Georgia,serif;font-weight:400;color:var(--cb-purple)}
+.cb-home-intro__inner>p{font-size:16px!important;line-height:1.9!important;color:#706a77!important;max-width:690px!important;margin:0!important}
+.cb-home-intro__actions{display:flex;gap:13px;flex-wrap:wrap;margin-top:30px}
+.cb-home-intro__actions a{display:inline-flex;align-items:center;gap:18px;padding:15px 20px;border-radius:5px;background:#7851a5;color:#fff!important;text-decoration:none!important;font-size:13px;font-weight:800;transition:transform .2s,background .2s}
+.cb-home-intro__actions a:hover{transform:translateY(-2px);background:#604087}
+.cb-home-intro__actions a span{font-size:18px}
+.cb-home-intro__actions a.cb-home-intro__secondary{background:#f2edf7;color:#5c3e7d!important}
+.cb-home-intro__side{border-left:1px solid #e8e1ed;padding:12px 0 12px 32px;display:flex;flex-direction:column;gap:28px}
+.cb-home-intro__side>span{font-size:11px;color:#9a8ba8;letter-spacing:2px;font-weight:800}
+.cb-home-intro__side strong{font-size:clamp(23px,2.7vw,34px);line-height:1.25;letter-spacing:-1px;color:#27212e}
+.cb-home-intro__side strong i{font-family:Georgia,serif;font-weight:400;color:var(--cb-purple)}
+.cb-home-intro__side small{font-size:9px;letter-spacing:2px;color:#9a929f;font-weight:800}
+.cb-home-process{max-width:none!important;background:#f7f6f8!important;padding:92px max(30px,calc((100% - 1210px)/2)) 82px!important}
+.cb-home-process__head{max-width:1210px;margin-left:auto!important;margin-right:auto!important}
+.cb-home-process__grid{max-width:1210px;margin:0 auto!important;border-color:#e4dfe8!important}
+.cb-home-process__item{border-color:#e4dfe8!important}
+.footer-banner{background:#171521!important;padding:72px 28px!important;position:relative!important;overflow:hidden!important}
+.footer-banner:before{content:"";position:absolute;width:440px;height:440px;border:1px solid rgba(216,195,238,.18);border-radius:50%;right:-110px;top:-240px}
+.footer-banner-text-wrapper{max-width:1000px!important;margin:auto!important;text-align:left!important;position:relative!important;z-index:1}
+.footer-banner-text-wrapper h4{font-size:clamp(30px,4vw,48px)!important;line-height:1.12!important;color:#fff!important;font-weight:800!important;letter-spacing:-1.4px!important;margin:0 0 18px!important}
+.footer-banner-text-wrapper p{max-width:690px!important;color:#c9c2d0!important;font-size:15px!important;line-height:1.85!important;margin:0!important}
+.footer-contact-area-container{background:#f1eef4!important;padding:64px 28px!important}
+.footer-contact-area-wrapper{max-width:1160px!important;margin:auto!important;display:grid!important;grid-template-columns:1fr 1fr!important;gap:8%!important}
+.footer-bize-ulasin-area h4,.footer-contact-area-item-e-bulten h4{font-size:23px!important;color:#211b29!important;font-weight:800!important;margin:0 0 16px!important}
+.footer-bize-ulasin-area p,.footer-contact-area-item-e-bulten>p{font-size:14px!important;line-height:1.8!important;color:#6f6876!important}
+.footer-contact-area-item-e-bulten h5{font-size:16px!important;color:#453453!important;margin:0 0 10px!important}
+.footer-contact-area-container a{color:#67438b!important}
+.footer-contact-area-item-e-bulten .input-wrapper{display:flex!important;gap:8px!important}
+.footer-contact-area-item-e-bulten input[type=email]{min-width:0!important;flex:1!important;border:1px solid #d9d1e0!important;border-radius:5px!important;background:#fff!important;padding:13px 14px!important;color:#27212e!important}
+.footer-contact-area-item-e-bulten .signup-button{background:#7851a5!important;color:#fff!important;border:0!important;border-radius:5px!important;padding:0 18px!important;font-weight:800!important}
+.newsletter-privacy,.checkbox-wrapper label{font-size:11px!important;line-height:1.6!important;color:#746d79!important}
+.cagbas-site-footer-content{background:#111827!important}
+.footer-container{background:#111827!important;color:#aeb9ca!important}
+#cagbas-whatsapp-float{z-index:1200!important}
+@media(max-width:800px){.menu-wrapper{padding:10px 18px!important}.cb-home-intro{grid-template-columns:1fr;padding:62px 24px;gap:38px}.cb-home-intro__side{border-left:0;border-top:1px solid #e8e1ed;padding:24px 0 0;gap:16px}.cb-home-intro__side strong br{display:none}.footer-contact-area-wrapper{grid-template-columns:1fr!important;gap:38px!important}.footer-banner{padding:56px 24px!important}}
+@media(max-width:520px){.banner-slider-wrapper,.banner-slider-wrapper .banner-swiper-wrapper,.banner-slider-wrapper .main-slider-container,.banner-slider-wrapper .swiper-wrapper,.banner-slider-wrapper .swiper-slide{min-height:280px!important;height:280px!important}.cb-home-intro{padding:50px 22px 58px}.cb-home-intro h1{font-size:40px!important;letter-spacing:-1.6px!important}.cb-home-intro__inner>p{font-size:14px!important}.cb-home-intro__actions{flex-direction:column;align-items:stretch}.cb-home-intro__actions a{justify-content:space-between}.footer-contact-area-container{padding:48px 22px!important}.footer-contact-area-item-e-bulten .input-wrapper{flex-direction:column!important}.footer-contact-area-item-e-bulten .signup-button{min-height:44px!important}}
+.cb-home-intro[dir=rtl]{direction:rtl;text-align:right}.cb-home-intro[dir=rtl] .cb-home-intro__side{border-left:0;border-right:1px solid #e8e1ed;padding:12px 32px 12px 0}.cb-home-intro[dir=rtl] .cb-home-intro__actions{justify-content:flex-start}
+@media(max-width:800px){.cb-home-intro[dir=rtl] .cb-home-intro__side{border-right:0;border-top:1px solid #e8e1ed;padding:24px 0 0}}
+</style>
 </head>
 <body>
 
@@ -236,6 +296,7 @@
         </div>
     </div>
 
+<section class="cb-home-intro" aria-labelledby="cb-home-title" dir="rtl"><div class="cb-home-intro__inner"><span class="cb-home-intro__eyebrow">البحث · التصميم · الإنتاج الرقمي</span><h1 id="cb-home-title">نحوّل الأفكار إلى <em>تأثير</em> والعلامات إلى مستقبل أفضل.</h1><p>تجمع ÇAĞBAŞ بين البحث والتصميم الإبداعي والتكنولوجيا الرقمية لتطوير حلول عملية ومستدامة للعلامات التجارية والمؤسسات.</p><div class="cb-home-intro__actions"><a href="/ar/hizmetlerimiz-ar.html">اكتشف خدماتنا <span>↗</span></a><a class="cb-home-intro__secondary" href="/ar/bize-ulasin-ar.html">لنتحدث عن مشروعك</a></div></div><div class="cb-home-intro__side"><span>01 — 03</span><strong>تبدأ<br>بالاستراتيجية<br><i>وتنمو بالأثر.</i></strong><small>ÇAĞBAŞ CREATIVE & DIGITAL</small></div></section>
 
 <!-- <div class="middle-image-text-container">
     <div class="middle-image-text-wrapper">
