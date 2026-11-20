@@ -94,6 +94,22 @@ html{scroll-behavior:smooth}body{background:#fff!important;color:var(--cb-ink)!i
 .cb-home-intro[dir=rtl]{direction:rtl;text-align:right}.cb-home-intro[dir=rtl] .cb-home-intro__side{border-left:0;border-right:1px solid #e8e1ed;padding:12px 32px 12px 0}.cb-home-intro[dir=rtl] .cb-home-intro__actions{justify-content:flex-start}
 @media(max-width:800px){.cb-home-intro[dir=rtl] .cb-home-intro__side{border-right:0;border-top:1px solid #e8e1ed;padding:24px 0 0}}
 
+
+/* Balance the Bize Ulaşın column with the newsletter column */
+.footer-contact-area-wrapper{grid-template-columns:1fr 1fr!important;gap:6%!important}
+.footer-contact-area-item{align-items:stretch!important;border-right:1px solid #ded8e3!important}
+.footer-bize-ulasin-area{width:100%!important;max-width:none!important;padding:0!important}
+.footer-bize-ulasin-area h4{margin-bottom:18px!important}
+.footer-bize-ulasin-area>p{margin:0 0 22px!important}
+.footer-bize-ulasin-area .contact-info-wrapper{display:grid!important;grid-template-columns:1fr!important;gap:14px!important;width:100%!important}
+.footer-bize-ulasin-area .phone-info-container{width:100%!important;min-height:48px!important;display:flex!important;align-items:center!important;gap:12px!important;margin:0!important}
+.footer-bize-ulasin-area .phone-info-container img{width:42px!important;height:42px!important;object-fit:contain!important;padding:9px!important;box-sizing:border-box!important}
+.footer-bize-ulasin-area .phone-info-container a{padding:0!important;font-size:14px!important;line-height:1.5!important}
+.footer-bize-ulasin-area .contact-form-arrow-wrapper{display:none!important}
+@media(max-width:800px){
+ .footer-contact-area-wrapper{grid-template-columns:1fr!important}
+ .footer-contact-area-item{border-right:0!important;border-bottom:1px solid #ded8e3!important;padding:0 0 28px!important}
+}
 /* Footer contact and newsletter proportions */
 .footer-contact-area-container{padding:72px 28px!important}
 .footer-contact-area-wrapper{grid-template-columns:.9fr 1.1fr!important;gap:7%!important;align-items:stretch!important}
