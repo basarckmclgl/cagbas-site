@@ -158,17 +158,15 @@ html{scroll-behavior:smooth}body{background:#fff!important;color:var(--cb-ink)!i
  .menu-wrapper>.menu-logo img{width:100px!important;max-width:100px!important}
 }
 
-/* Raise the homepage hero headline slightly */
-.banner-content-swiper-container{bottom:26px!important}
-@media(max-width:700px){.banner-content-swiper-container{bottom:18px!important}}
 
-/* Lift the hero headline so it sits higher over the banner image */
-.banner-content-swiper-container{bottom:55px!important}
-@media(max-width:700px){.banner-content-swiper-container{bottom:32px!important}}
 
-/* Move the actual hero text upward, not only its outer slider */
-.banner-content-swiper-container .slider-content-wrapper{transform:translateY(-85px)!important}
-@media(max-width:700px){.banner-content-swiper-container .slider-content-wrapper{transform:translateY(-48px)!important}}
+/* Final hero placement: headline anchored to the bottom-left */
+.banner-content-swiper-container{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;display:block!important;padding:0!important;box-sizing:border-box!important}
+.banner-content-swiper-container .left-down-swiper-container{position:absolute!important;left:42px!important;right:auto!important;top:auto!important;bottom:30px!important;width:min(520px,75%)!important;margin:0!important;text-align:left!important}
+.banner-content-swiper-container .left-down-swiper-container .swiper-wrapper{align-items:flex-end!important}
+.banner-content-swiper-container .slider-content-wrapper{position:relative!important;left:auto!important;right:auto!important;top:auto!important;bottom:auto!important;transform:none!important;text-align:left!important}
+@media(max-width:700px){.banner-content-swiper-container .left-down-swiper-container{left:20px!important;right:auto!important;bottom:22px!important;width:calc(100% - 40px)!important}}
+
 </style>
 </head>
 <body>
