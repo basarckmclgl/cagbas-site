@@ -73,9 +73,16 @@ export async function onRequestPost({ request, env }) {
       body: JSON.stringify(payload)
     });
     if (!brevoResponse.ok) {
-      const details = await brevoResponse.text();
-      console.error("Brevo API error:", brevoResponse.status, details.slice(0, 1000));
-      return json({ error: "Mesaj şu anda gönderilemedi. Lütfen daha sonra tekrar deneyin." }, 502);
+      const rawDetails = await brevoResponse.text();
+      console.error("Brevo API error:", brevoResponse.status, rawDetails.slice(0, 1000));
+      let providerMessage = "Brevo gönderim isteğini kabul etmedi.";
+      try {
+        const parsed = JSON.parse(rawDetails);
+        if (typeof parsed.message === "string") providerMessage = parsed.message.slice(0, 300);
+      } catch {}
+      return json({
+        error: "Brevo gönderim hatası (HTTP " + brevoResponse.status + "): " + providerMessage
+      }, 502);
     }
     return json({ success: true });
   } catch (error) {
