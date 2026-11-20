@@ -89,6 +89,14 @@
 /* Raise the homepage hero headline slightly */
 .banner-content-swiper-container{bottom:26px!important}
 @media(max-width:700px){.banner-content-swiper-container{bottom:18px!important}}
+
+/* Final hero placement: headline anchored to the bottom-left */
+.banner-content-swiper-container{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;display:block!important;padding:0!important;box-sizing:border-box!important}
+.banner-content-swiper-container .left-down-swiper-container{position:absolute!important;left:auto!important;right:42px!important;top:auto!important;bottom:30px!important;width:min(520px,75%)!important;margin:0!important;text-align:right!important}
+.banner-content-swiper-container .left-down-swiper-container .swiper-wrapper{align-items:flex-end!important}
+.banner-content-swiper-container .slider-content-wrapper{position:relative!important;left:auto!important;right:auto!important;top:auto!important;bottom:auto!important;transform:none!important;text-align:right!important}
+@media(max-width:700px){.banner-content-swiper-container .left-down-swiper-container{left:auto!important;right:20px!important;bottom:22px!important;width:calc(100% - 40px)!important}}
+
 </style>
 
 <style id="cb-homepage-redesign">
