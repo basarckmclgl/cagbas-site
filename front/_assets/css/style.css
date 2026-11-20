@@ -3760,11 +3760,14 @@ input.parsley-error, textarea.parsley-error {
 
 /* Hizmetlerimiz üst banner: fotoğraf kaldırıldı, metin alanı korunuyor */
 .aboutus-banner.cagbas-services-banner {
-  background-image: none !important;
+  background-image: url('/_assets/images/digital-uretim-araclari.webp') !important;
   background-color: #1D1D1F !important;
-  height: auto !important;
-  min-height: 300px;
-  padding: 140px 24px 48px;
+  background-size: cover !important;
+  background-repeat: no-repeat !important;
+  background-position: center center !important;
+  height: 70vh !important;
+  min-height: 400px;
+  padding: 0 24px;
 }
 .aboutus-banner.cagbas-services-banner h2 {
   margin-top: 0 !important;
