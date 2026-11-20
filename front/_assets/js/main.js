@@ -120,57 +120,55 @@ function _openUrl(url) {
     $(".video-modal").show();
 }
 
-jQuery(function ($) {
+document.addEventListener('DOMContentLoaded', function () {
+    const banner = document.querySelector('.cookie-container');
+    if (!banner) return;
 
-    checkCookie();
+    const stored = localStorage.getItem('cagbas_cookie_consent');
+    if (stored) banner.hidden = true;
+    else banner.hidden = false;
 
-    function checkCookie() {
-        var consent = getCookie("cookies_consent");
-        if (consent == null || consent == "" || consent == undefined) {
-            $('.cookie-container').show();
-        }
+    function loadAnalytics() {
+        if (window.cagbasAnalyticsLoaded) return;
+        window.cagbasAnalyticsLoaded = true;
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = function(){ window.dataLayer.push(arguments); };
+        window.gtag('js', new Date());
+        window.gtag('config', 'G-6YM7Q549C9');
+        const script = document.createElement('script');
+        script.async = true;
+        script.src = 'https://www.googletagmanager.com/gtag/js?id=G-6YM7Q549C9';
+        document.head.appendChild(script);
     }
 
-    function setCookie(c_name, value, exdays) {
-
-        var exdate = new Date();
-        exdate.setDate(exdate.getDate() + exdays);
-        var c_value = escape(value) + ((exdays == null) ? "" : "; expires=" + exdate.toUTCString());
-        document.cookie = c_name + "=" + c_value + "; path=/";
-
-        $('.cookie-container').slideUp();
-    }
-
-
-    
-    function getCookie(c_name) {
-        var i, x, y, ARRcookies = document.cookie.split(";");
-        for (i = 0; i < ARRcookies.length; i++) {
-            x = ARRcookies[i].substr(0, ARRcookies[i].indexOf("="));
-            y = ARRcookies[i].substr(ARRcookies[i].indexOf("=") + 1);
-            x = x.replace(/^\s+|\s+$/g, "");
-            if (x == c_name) {
-                return unescape(y);
-            }
-        }
-    }
-
-    $(".cookie-container .close-button, .cookie-container .ok-button").click(function () {
-        setCookie("cookies_consent", 1, 30);
+    banner.querySelector('.cookie-accept')?.addEventListener('click', function () {
+        localStorage.setItem('cagbas_cookie_consent', 'accepted');
+        banner.hidden = true;
+        loadAnalytics();
     });
-
+    banner.querySelector('.cookie-reject')?.addEventListener('click', function () {
+        localStorage.setItem('cagbas_cookie_consent', 'rejected');
+        banner.hidden = true;
+    });
 });
-
+ 
 document.addEventListener('DOMContentLoaded', function () {
     const newsletterForm = document.getElementById('newsletterForm');
     if (!newsletterForm) return;
 
     newsletterForm.addEventListener('submit', async function (event) {
         event.preventDefault();
-        const emailInput = document.getElementById('newsletterEmail');
-        const consentInput = document.getElementById('newsletterConsent');
-        const feedback = document.getElementById('newsletterFeedback');
-        const submitButton = newsletterForm.querySelector('button[type="submit"]');
+        const emailInput = newsletterForm.querySelector('#newsletterEmail, input[type="email"]');
+        const consentInput = newsletterForm.querySelector('#newsletterConsent, input[name="marketingConsent"], input[id^="a_c4ce"]');
+        let feedback = newsletterForm.querySelector('#newsletterFeedback, .newsletter-feedback');
+        if (!feedback) {
+            feedback = document.createElement('p');
+            feedback.className = 'newsletter-feedback';
+            feedback.setAttribute('role', 'status');
+            feedback.setAttribute('aria-live', 'polite');
+            newsletterForm.appendChild(feedback);
+        }
+        const submitButton = newsletterForm.querySelector('button[type="submit"], input[type="submit"]');
         const email = emailInput ? emailInput.value.trim() : '';
 
         if (!emailInput || !emailInput.checkValidity()) {
@@ -183,10 +181,11 @@ document.addEventListener('DOMContentLoaded', function () {
             return;
         }
 
-        const originalText = submitButton ? submitButton.textContent : '';
+        const originalText = submitButton ? (submitButton.tagName === 'INPUT' ? submitButton.value : submitButton.textContent) : '';
         if (submitButton) {
             submitButton.disabled = true;
-            submitButton.textContent = '...';
+            if (submitButton.tagName === 'INPUT') submitButton.value = '...';
+            else submitButton.textContent = '...';
         }
         if (feedback) feedback.textContent = '';
 
@@ -207,7 +206,8 @@ document.addEventListener('DOMContentLoaded', function () {
         } finally {
             if (submitButton) {
                 submitButton.disabled = false;
-                submitButton.textContent = originalText;
+                if (submitButton.tagName === 'INPUT') submitButton.value = originalText;
+                else submitButton.textContent = originalText;
             }
         }
     });
