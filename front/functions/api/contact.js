@@ -96,7 +96,7 @@ export async function onRequestPost({ request, env }) {
   if (fullName.length > 100 || email.length > 254 || phone.length > 40 || subject.length > 100 || message.length > 1000) {
     return json({ error: "Form alanlarından biri izin verilen uzunluğu aşıyor." }, 400);
   }
-  if (!/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(email)) {
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
     return json({ error: "Geçerli bir e-posta adresi girin." }, 400);
   }
 
