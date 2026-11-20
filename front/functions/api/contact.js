@@ -1,7 +1,3 @@
-const BREVO_API_URL = "https://api.brevo.com/v3/smtp/email";
-const SENDER_EMAIL = "cagbas.2026@gmail.com";
-const RECIPIENT_EMAIL = "cagbas.2026@gmail.com";
-
 function json(data, status = 200) {
   return new Response(JSON.stringify(data), {
     status,
@@ -9,16 +5,11 @@ function json(data, status = 200) {
   });
 }
 
-function escapeHtml(value) {
-  return value.replace(/[&<>"']/g, (char) => ({
-    "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
-  })[char]);
-}
-
 export async function onRequestPost({ request, env }) {
-  if (!env.BREVO_API_KEY) return json({ error: "E-posta hizmeti henüz yapılandırılmadı." }, 503);
-  const contentType = request.headers.get("content-type") || "";
-  if (!contentType.includes("application/json")) return json({ error: "Geçersiz istek biçimi." }, 415);
+  if (!env.DB) return json({ error: "İletişim kayıt sistemi henüz yapılandırılmadı." }, 503);
+  if (!(request.headers.get("content-type") || "").includes("application/json")) {
+    return json({ error: "Geçersiz istek biçimi." }, 415);
+  }
 
   let data;
   try { data = await request.json(); }
@@ -40,54 +31,18 @@ export async function onRequestPost({ request, env }) {
     return json({ error: "Geçerli bir e-posta adresi girin." }, 400);
   }
 
-  const safeName = escapeHtml(fullName);
-  const safeEmail = escapeHtml(email);
-  const safePhone = escapeHtml(phone);
-  const safeSubject = escapeHtml(subject);
-  const safeMessage = escapeHtml(message).replace(/\n/g, "<br>");
-
-  const payload = {
-    sender: { name: "ÇAĞBAŞ", email: SENDER_EMAIL },
-    to: [{ email: RECIPIENT_EMAIL, name: "ÇAĞBAŞ" }],
-    replyTo: { email, name: fullName },
-    subject: "ÇAĞBAŞ web sitesi iletişim: " + subject,
-    textContent: "Yeni iletişim formu mesajı\n\nAd Soyad: " + fullName +
-      "\nE-posta: " + email + "\nTelefon: " + phone +
-      "\nKonu: " + subject + "\n\nMesaj:\n" + message,
-    htmlContent: "<h2>ÇAĞBAŞ web sitesi iletişim formu</h2>" +
-      "<p><strong>Ad Soyad:</strong> " + safeName + "</p>" +
-      "<p><strong>E-posta:</strong> " + safeEmail + "</p>" +
-      "<p><strong>Telefon:</strong> " + safePhone + "</p>" +
-      "<p><strong>Konu:</strong> " + safeSubject + "</p>" +
-      "<p><strong>Mesaj:</strong><br>" + safeMessage + "</p>"
-  };
-
   try {
-    const brevoResponse = await fetch(BREVO_API_URL, {
-      method: "POST",
-      headers: {
-        "accept": "application/json",
-        "api-key": env.BREVO_API_KEY,
-        "content-type": "application/json"
-      },
-      body: JSON.stringify(payload)
-    });
-    if (!brevoResponse.ok) {
-      const rawDetails = await brevoResponse.text();
-      console.error("Brevo API error:", brevoResponse.status, rawDetails.slice(0, 1000));
-      let providerMessage = "Brevo gönderim isteğini kabul etmedi.";
-      try {
-        const parsed = JSON.parse(rawDetails);
-        if (typeof parsed.message === "string") providerMessage = parsed.message.slice(0, 300);
-      } catch {}
-      return json({
-        error: "Brevo gönderim hatası (HTTP " + brevoResponse.status + "): " + providerMessage
-      }, 502);
-    }
-    return json({ success: true });
+    await env.DB.prepare(
+      "INSERT INTO contact_submissions (full_name, email, phone, subject, message) VALUES (?, ?, ?, ?, ?)"
+    ).bind(fullName, email, phone, subject, message).run();
+
+    return json({
+      success: true,
+      message: "Mesajınız güvenli şekilde kaydedildi. E-posta bildirimi yapılandırma aşamasındadır."
+    }, 201);
   } catch (error) {
-    console.error("Brevo request failed:", error);
-    return json({ error: "E-posta hizmetine şu anda ulaşılamıyor." }, 502);
+    console.error("Contact database error:", error);
+    return json({ error: "Mesajınız şu anda kaydedilemedi. Lütfen daha sonra tekrar deneyin." }, 500);
   }
 }
 
