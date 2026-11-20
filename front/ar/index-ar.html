@@ -139,6 +139,10 @@ html{scroll-behavior:smooth}body{background:#fff!important;color:var(--cb-ink)!i
 /* Lift the hero headline so it sits higher over the banner image */
 .banner-content-swiper-container{bottom:55px!important}
 @media(max-width:700px){.banner-content-swiper-container{bottom:32px!important}}
+
+/* Move the actual hero text upward, not only its outer slider */
+.banner-content-swiper-container .slider-content-wrapper{transform:translateY(-85px)!important}
+@media(max-width:700px){.banner-content-swiper-container .slider-content-wrapper{transform:translateY(-48px)!important}}
 </style>
 </head>
 <body>
