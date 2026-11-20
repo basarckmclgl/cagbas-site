@@ -3756,3 +3756,16 @@ input.parsley-error, textarea.parsley-error {
 .about-us-middle-tab-container.cagbas-creative-heading .about-us-middle-tab-wrapper {
   padding: 0 20px !important;
 }
+
+
+/* Hizmetlerimiz üst banner: fotoğraf kaldırıldı, metin alanı korunuyor */
+.aboutus-banner.cagbas-services-banner {
+  background-image: none !important;
+  background-color: #1D1D1F !important;
+  height: auto !important;
+  min-height: 300px;
+  padding: 140px 24px 48px;
+}
+.aboutus-banner.cagbas-services-banner h2 {
+  margin-top: 0 !important;
+}
