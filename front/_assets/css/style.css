@@ -3745,3 +3745,14 @@ input.parsley-error, textarea.parsley-error {
 .cagbas-creative-title {
   margin-top: 22px !important;
 }
+
+
+/* Hizmetlerimiz kreatif açıklama alanındaki gereksiz dikey boşluğu kaldır */
+.about-us-middle-tab-container.cagbas-creative-heading {
+  min-height: auto !important;
+  height: auto !important;
+  padding: 30px 20px 34px !important;
+}
+.about-us-middle-tab-container.cagbas-creative-heading .about-us-middle-tab-wrapper {
+  padding: 0 20px !important;
+}
