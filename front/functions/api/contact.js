@@ -1,6 +1,6 @@
 const BREVO_API_URL = "https://api.brevo.com/v3/smtp/email";
-const SENDER_EMAIL = "basarcekmeclioglu6@gmail.com";
-const RECIPIENT_EMAIL = "basarcekmeclioglu6@gmail.com";
+const SENDER_EMAIL = "cagbas.2026@gmail.com";
+const RECIPIENT_EMAIL = "cagbas.2026@gmail.com";
 
 function json(data, status = 200) {
   return new Response(JSON.stringify(data), {
