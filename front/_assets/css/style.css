@@ -3782,3 +3782,7 @@ input.parsley-error, textarea.parsley-error {
 .cookie-container .cookie-accept{background:#fff;color:#21152f}
 .cookie-container .cookie-reject{background:transparent;color:#fff}
 .cookie-container .cookie-actions button:focus-visible{outline:3px solid #c9a7ff;outline-offset:3px}
+
+
+/* Ensure class-controlled mobile navigation is visible on localized pages */
+@media (max-width: 767px){.mobile-menu-links-wrapper.open{display:block!important;}}
