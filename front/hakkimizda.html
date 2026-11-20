@@ -212,8 +212,90 @@ body{margin:0;background:#fff!important;color:var(--ab-ink);font-family:'Nunito'
  <section class="cb-about-pillars"><article class="cb-about-card"><span>01</span><h3>Araştırma & içgörü</h3><p>İhtiyaçları, kullanıcıları ve fırsat alanlarını anlamlandırırız.</p></article><article class="cb-about-card"><span>02</span><h3>Strateji & tasarım</h3><p>Hedefe uygun bir yön belirler, fikirleri güçlü deneyimlere dönüştürürüz.</p></article><article class="cb-about-card"><span>03</span><h3>Dijital üretim</h3><p>Çözümleri planlı biçimde hayata geçirir, gelişimi destekleriz.</p></article></section>
  <section class="cb-about-values"><div><span class="cb-about-kicker">İLKELERİMİZ</span><h2>Çalışma anlayışımız</h2><p>İyi işin; açık iletişim, doğru planlama ve karşılıklı güvenle ortaya çıktığına inanıyoruz. Her projede özgünlüğü korur, kaliteyi önemser ve gelişime açık kalırız.</p></div><div class="cb-about-value-list"><div class="cb-about-value">Özgün düşünce</div><div class="cb-about-value">Şeffaf iletişim</div><div class="cb-about-value">Planlı çalışma</div><div class="cb-about-value">Sorumlu üretim</div></div></section>
  <section class="cb-about-cta"><div><h2>Bir fikriniz mi var?</h2><p>İhtiyacınızı ve hedefinizi birlikte değerlendirelim.</p></div><a href="/bize-ulasin.html">Bize ulaşın ↗</a></section>
- </div></main><footer class="cb-about-footer">© 2026 ÇAĞBAŞ. Tüm hakları saklıdır.</footer>
- <script src="/_assets/js/jquery-3.4.1.min.js"></script><script src="/_assets/js/swiper.min.js"></script><script>
+ </div></main><style>
+/* Ana sayfadaki Bize Ulaşın ve E-Bülten alanlarının aynı görünümü */
+.footer-contact-area-container{background:#f1eef4!important;padding:72px 28px!important}
+.footer-contact-area-wrapper{max-width:1160px!important;margin:auto!important;display:grid!important;grid-template-columns:.9fr 1.1fr!important;gap:7%!important;align-items:stretch!important}
+.footer-contact-area-item{width:auto!important;min-height:320px!important;display:flex!important;align-items:stretch!important;justify-content:center!important;border-right:1px solid #ded8e3!important;padding:30px 42px 30px 0!important}
+.footer-bize-ulasin-area{width:100%!important;max-width:none!important;padding:0!important}
+.footer-bize-ulasin-area h4,.footer-contact-area-item-e-bulten h4{font-size:23px!important;color:#211b29!important;font-weight:800!important;margin:0 0 18px!important}
+.footer-bize-ulasin-area>p,.footer-contact-area-item-e-bulten>p{font-size:14px!important;line-height:1.8!important;color:#6f6876!important}
+.footer-bize-ulasin-area>p{margin:0 0 22px!important}
+.footer-bize-ulasin-area .contact-info-wrapper{display:grid!important;grid-template-columns:1fr!important;gap:14px!important;width:100%!important}
+.footer-bize-ulasin-area .phone-info-container{width:100%!important;min-height:48px!important;display:flex!important;align-items:center!important;gap:12px!important;margin:0!important}
+.footer-bize-ulasin-area .phone-info-container img{width:42px!important;height:42px!important;object-fit:contain!important;padding:9px!important;box-sizing:border-box!important}
+.footer-bize-ulasin-area .phone-info-container a{padding:0!important;font-size:14px!important;line-height:1.5!important}
+.footer-bize-ulasin-area .contact-form-arrow-wrapper{display:none!important}
+.footer-contact-area-item-e-bulten{width:auto!important;min-height:320px!important;display:flex!important;flex-direction:column!important;justify-content:center!important;padding:30px 0 30px 8px!important}
+.footer-contact-area-item-e-bulten h5{font-size:16px!important;color:#453453!important;margin:0 0 10px!important}
+.footer-contact-area-container a{color:#67438b!important}
+.footer-contact-area-item-e-bulten .input-container,.footer-contact-area-item-e-bulten .newsletter-form{width:100%!important;max-width:none!important}
+.footer-contact-area-item-e-bulten .input-wrapper{width:100%!important;display:flex!important;align-items:stretch!important;gap:10px!important;margin:20px 0 12px!important}
+.footer-contact-area-item-e-bulten input[type=email]{height:52px!important;min-height:52px!important;min-width:0!important;flex:1!important;box-sizing:border-box!important;border:1px solid #d9d1e0!important;border-radius:5px!important;background:#fff!important;padding:13px 14px!important;color:#27212e!important}
+.footer-contact-area-item-e-bulten .signup-button{position:static!important;height:52px!important;min-height:52px!important;background:#7851a5!important;color:#fff!important;border:0!important;border-radius:5px!important;padding:0 24px!important;font-weight:800!important;white-space:nowrap!important}
+.newsletter-privacy,.checkbox-wrapper label{font-size:11px!important;line-height:1.6!important;color:#746d79!important}
+.footer-contact-area-item-e-bulten .newsletter-privacy{margin:12px 0!important}
+.footer-contact-area-item-e-bulten .checkbox-wrapper{margin-top:12px!important}
+@media(max-width:800px){
+ .footer-contact-area-container{padding:48px 22px!important}
+ .footer-contact-area-wrapper{grid-template-columns:1fr!important;gap:24px!important}
+ .footer-contact-area-item{min-height:0!important;border-right:0!important;border-bottom:1px solid #ded8e3!important;padding:0 0 28px!important}
+ .footer-contact-area-item-e-bulten{min-height:0!important;padding:28px 0 0!important;border-top:1px solid #ded8e3!important}
+ .footer-contact-area-item-e-bulten .input-wrapper{flex-direction:column!important}
+ .footer-contact-area-item-e-bulten .signup-button{width:100%!important}
+}
+</style>
+<div class="footer-contact-area-container">
+    <div class="footer-contact-area-wrapper">
+        <div class="footer-contact-area-item">
+            <div class="footer-bize-ulasin-area">
+                <h4 id="footer-banner-text-wrapper-title">Bize Ulaşın</h4>
+                <p>Çekmece Mahallesi, Defne / Hatay</p>
+                <div class="contact-info-wrapper">
+                    <div class="phone-info-container">
+                        <img src="/_assets/images/phone.png" alt="ÇAĞBAŞ">
+                        <a href="">+90 538 448 3866</a>
+                    </div>
+                    <!-- <div class="phone-info-container">
+                        <img src="/_assets/images/fax.png" alt="ÇAĞBAŞ">
+                        <a href=""></a>
+                    </div> -->
+                    <div class="phone-info-container">
+                        <a href="/bize-ulasin.html" class="contact-form-link" id="contact-form-link">İletişim Formu</a>
+                        <div class="contact-form-arrow-wrapper">
+                            <i class="icono-arrow1-left"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="footer-contact-area-item-e-bulten">
+    <h4>E-Bülten</h4>
+    <h5>ÇAĞBAŞ'tan haberdar olun</h5>
+    <p>Yeni projelerimiz, hizmetlerimiz ve duyurularımızdan haberdar olmak için e-posta listemize katılın.</p>
+    <div class="input-container">
+        <form id="newsletterForm" class="newsletter-form" novalidate>
+            <div class="input-wrapper">
+                <input type="email" name="email" id="newsletterEmail" placeholder="E-posta adresinizi girin..." required maxlength="254" autocomplete="email">
+                <button type="submit" class="signup-button">ABONE OL</button>
+            </div>
+            <p class="newsletter-privacy">E-posta adresiniz, <a href="/yasal-bilgilendirme.html#kisisel-veriler" target="_blank" rel="noopener">Kişisel Verilerin Korunması Aydınlatma Metni</a> kapsamında e-bülten gönderimi için işlenir.</p>
+            <div class="checkbox-wrapper">
+                <input type="checkbox" id="newsletterConsent" name="marketingConsent" value="yes" required>
+                <label for="newsletterConsent">E-bülten ve duyuru e-postaları almayı kabul ediyorum.</label>
+            </div>
+            <p class="newsletter-feedback" id="newsletterFeedback" role="status" aria-live="polite"></p>
+        </form>
+    </div>
+</div>
+
+    </div>
+</div>
+
+<footer class="cb-about-footer">© 2026 ÇAĞBAŞ. Tüm hakları saklıdır.</footer>
+ <script src="/_assets/js/jquery-3.4.1.min.js"></script><script src="/_assets/js/main.js"></script><script src="/_assets/js/swiper.min.js"></script><script>
  document.querySelectorAll('.langSelectorHeader').forEach(el=>el.addEventListener('click',e=>{e.preventDefault();const b=el.parentElement.querySelector('.langSelectorBody');if(b)b.classList.toggle('open')}));
  const menu=document.getElementById('menu-icon');if(menu)menu.addEventListener('click',()=>{const links=document.querySelector('.mobile-menu-links-wrapper');if(links)links.classList.toggle('open')});
  </script></body></html>
