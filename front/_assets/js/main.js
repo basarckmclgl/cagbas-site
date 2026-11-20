@@ -187,39 +187,49 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 document.addEventListener('DOMContentLoaded', function() {
-    document.getElementById('contact-form').addEventListener('submit', function (e) {
-        e.preventDefault(); // Formun otomatik olarak gönderilmesini engeller
-    
-        // Form verilerini topla
+    const contactForm = document.getElementById('contact-form');
+    if (!contactForm) return;
+
+    contactForm.addEventListener('submit', async function (event) {
+        event.preventDefault();
+        if (window.jQuery && !window.jQuery(contactForm).parsley().isValid()) return;
+
+        const submitButton = contactForm.querySelector('button[type="submit"]');
+        const originalButtonText = submitButton ? submitButton.textContent : '';
+        if (submitButton) {
+            submitButton.disabled = true;
+            submitButton.textContent = 'GÖNDERİLİYOR...';
+        }
+
         const formData = {
-            FullName: document.getElementById('FullName').value,
-            Email: document.getElementById('Email').value,
-            Phone: document.getElementById('Phone').value,
-            Subject: document.getElementById('Subject').value,
-            Message: document.getElementById('Message').value,
+            fullName: document.getElementById('FullName').value.trim(),
+            email: document.getElementById('Email').value.trim(),
+            phone: document.getElementById('Phone').value.trim(),
+            subject: document.getElementById('Subject').value.trim(),
+            message: document.getElementById('Message').value.trim()
         };
-    
-        // Fetch API ile POST isteği gönder 
-        fetch('http://localhost:3000/send-email', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(formData),
-        })
-        .then(response => {
-            if (response.ok) {
-                _success('Mesajınız başarıyla gönderildi.');
-            } else {
-                _error('Mesaj gönderilirken bir hata oluştu.');
+
+        try {
+            const response = await fetch('/api/contact', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(formData)
+            });
+            const result = await response.json().catch(() => ({}));
+            if (!response.ok) throw new Error(result.error || 'Mesaj gönderilemedi.');
+            contactForm.reset();
+            _success('Mesajınız başarıyla gönderildi.');
+        } catch (error) {
+            console.error('İletişim formu hatası:', error);
+            _error(error.message || 'Mesaj gönderilirken bir hata oluştu.');
+        } finally {
+            if (submitButton) {
+                submitButton.disabled = false;
+                submitButton.textContent = originalButtonText;
             }
-        })
-        .catch(error => {
-            console.error('Hata:', error);
-            _error('Mesaj gönderilirken bir hata oluştu.');
-        });
+        }
     });
-})
+});
 
 // document.addEventListener('DOMContentLoaded', function () {
 //     const langSelectorLinks = document.querySelectorAll('.langSelectorListItem a');
