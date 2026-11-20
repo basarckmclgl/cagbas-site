@@ -130,7 +130,7 @@ const sendWelcomeEmail = (email) => {
             <h2 style="color: #333; text-align: center;">ÇAĞBAŞ e-bültenine hoş geldiniz!</h2>
             <p style="color: #555; text-align: center;">Merhaba,</p>
             <p style="color: #555; text-align: center;">E-bültenimize abone olduğunuz için teşekkür ederiz. Sizleri en son haberler, güncellemeler ve özel teklifler hakkında bilgilendireceğiz.</p>
-            <p style="color: #555; text-align: center;">Güncellemeler için takipte kalın. Herhangi bir sorunuz varsa, <a href="mailto:basarcekmecelioglu6@gmail.com" style="color: #3498db;">bizimle iletişime geçin</a>.</p>
+            <p style="color: #555; text-align: center;">Güncellemeler için takipte kalın. Herhangi bir sorunuz varsa, <a href="mailto:cagbas.2026@gmail.com" style="color: #3498db;">bizimle iletişime geçin</a>.</p>
             <p style="color: #777; text-align: center; font-size: 12px;">Bu mesajı istemiyorsanız <a href="https://cagbas-site.pages.dev/unsubscribe.html?email=${encodeURIComponent(email)}" style="color: #3498db;">abonelikten çıkabilirsiniz</a>.</p>
         </div>
         `
@@ -183,7 +183,7 @@ app.post('/send-email', (req, res) => {
 
     let mailOptions = {
         from: Email,
-        to: 'basarcekmecelioglu6@gmail.com',
+        to: 'cagbas.2026@gmail.com',
         //cc:'firmanın ikinci maili veya sahibinin maili yazılabilir. ikinci alıcı.',
         subject: `Yeni İletişim Formu: ${Subject}`,
         text: `İsim Soyisim: ${FullName}\nEmail: ${Email}\nTelefon: ${Phone}\n\nMesaj:\n${Message}`
