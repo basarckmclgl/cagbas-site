@@ -3794,7 +3794,7 @@ input.parsley-error, textarea.parsley-error {
 .cookie-container .cookie-actions{display:flex;gap:8px;flex-wrap:wrap}
 .cookie-container .cookie-actions button{min-height:40px}
 .cookie-container .cookie-preferences{background:transparent!important;color:#fff!important;border:1px solid rgba(255,255,255,.72)!important}
-.cagbas-cookie-launcher{position:fixed;z-index:9997;inset-inline-start:18px;bottom:18px;border:1px solid #d8cde3;border-radius:999px;background:#fff;color:#38264b;padding:10px 16px;font:600 12px/1.2 inherit;box-shadow:0 8px 28px rgba(25,18,35,.16);cursor:pointer}
+.cagbas-cookie-launcher{position:fixed;z-index:9997;inset-inline-start:18px;bottom:18px;border:1px solid #d8cde3;border-radius:999px;background:#fff;color:#38264b;padding:10px 16px;font-family:inherit;font-weight:600;font-size:12px;line-height:1.2;box-shadow:0 8px 28px rgba(25,18,35,.16);cursor:pointer}
 .cagbas-cookie-dialog{position:fixed;z-index:10000;inset:0;display:grid;place-items:center;padding:20px;background:rgba(18,14,24,.58)}
 .cagbas-cookie-dialog__panel{position:relative;width:min(100%,540px);max-height:min(88vh,720px);overflow:auto;background:#fff;color:#211b29;border-radius:16px;padding:30px;box-shadow:0 24px 80px rgba(0,0,0,.25)}
 .cagbas-cookie-dialog__panel h2{margin:0 36px 12px 0;font-size:23px;line-height:1.25}
@@ -3805,7 +3805,7 @@ input.parsley-error, textarea.parsley-error {
 .cagbas-cookie-option p,.cagbas-cookie-option small{display:block;margin:5px 0 0;color:#766f7c;font-size:12px;line-height:1.5}
 .cagbas-cookie-option input{width:19px;height:19px;flex:0 0 auto;accent-color:#7851a5}
 .cagbas-cookie-dialog__actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:22px}
-.cagbas-cookie-dialog__actions button{min-height:42px;padding:10px 14px;border:1px solid #d8cde3;border-radius:7px;background:#fff;color:#38264b;font:600 12px/1.2 inherit;cursor:pointer}
+.cagbas-cookie-dialog__actions button{min-height:42px;padding:10px 14px;border:1px solid #d8cde3;border-radius:7px;background:#fff;color:#38264b;font-family:inherit;font-weight:600;font-size:12px;line-height:1.2;cursor:pointer}
 .cagbas-cookie-dialog__actions .cagbas-cookie-accept{background:#7851a5;color:#fff;border-color:#7851a5}
 .cagbas-cookie-dialog__actions .cagbas-cookie-save{background:#f3eef8}
 .cookie-container button:focus-visible,.cagbas-cookie-dialog button:focus-visible,.cagbas-cookie-launcher:focus-visible,.cagbas-cookie-option input:focus-visible{outline:3px solid #a98bc8;outline-offset:3px}
