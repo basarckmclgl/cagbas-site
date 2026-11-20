@@ -3723,3 +3723,21 @@ input.parsley-error, textarea.parsley-error {
   line-height: 1.8;
   text-shadow: 0 1px 8px rgba(0, 0, 0, 0.28);
 }
+
+
+/* ÇAĞBAŞ kreatif çözümler başlık ve açıklama hiyerarşisi */
+.cagbas-creative-title {
+  color: #ffffff !important;
+  font-weight: 800 !important;
+  text-align: center;
+  margin: 0 0 22px !important;
+  line-height: 1.35;
+}
+.cagbas-creative-description {
+  color: #ffffff !important;
+  font-weight: 700 !important;
+  text-align: center;
+  line-height: 1.8;
+  margin: 0 auto !important;
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.28);
+}
