@@ -131,6 +131,17 @@ html{scroll-behavior:smooth}body{background:#fff!important;color:var(--cb-ink)!i
  .footer-contact-area-item-e-bulten .input-wrapper{flex-direction:column!important}
  .footer-contact-area-item-e-bulten .signup-button{width:100%!important}
 }
+
+/* Keep the brand logo visible beside the navigation */
+.menu-wrapper{display:flex!important;align-items:center!important;gap:18px!important}
+.menu-wrapper>.menu-logo{display:flex!important;flex:0 0 120px!important;width:120px!important;min-width:120px!important;max-width:120px!important;align-items:center!important;justify-content:flex-start!important;margin:0!important;padding:5px 0!important;visibility:visible!important;opacity:1!important}
+.menu-wrapper>.menu-logo img{display:block!important;visibility:visible!important;opacity:1!important;width:120px!important;max-width:120px!important;height:auto!important;max-height:42px!important;object-fit:contain!important}
+.menu-wrapper>.menu-bar-links{flex:1 1 auto!important;width:auto!important;min-width:0!important}
+.menu-wrapper>.langSelector{flex:0 0 auto!important}
+@media(max-width:900px){
+ .menu-wrapper>.menu-logo{flex-basis:100px!important;width:100px!important;min-width:100px!important;max-width:100px!important}
+ .menu-wrapper>.menu-logo img{width:100px!important;max-width:100px!important}
+}
 </style>
 </head>
 <body>
