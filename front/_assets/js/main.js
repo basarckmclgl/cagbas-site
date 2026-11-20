@@ -196,12 +196,16 @@ document.addEventListener('DOMContentLoaded', function () {
                 ad_user_data: 'denied', ad_personalization: 'denied'
             });
         }
+        const hostParts = location.hostname.split('.');
+        const rootDomain = hostParts.length > 1 ? hostParts.slice(-2).join('.') : location.hostname;
         document.cookie.split(';').forEach(function (part) {
             const name = part.split('=')[0].trim();
             if (/^(_ga|_gid|_gat)/.test(name)) {
                 document.cookie = name + '=; Max-Age=0; path=/; SameSite=Lax';
                 document.cookie = name + '=; Max-Age=0; path=/; domain=' + location.hostname + '; SameSite=Lax';
                 document.cookie = name + '=; Max-Age=0; path=/; domain=.' + location.hostname + '; SameSite=Lax';
+                document.cookie = name + '=; Max-Age=0; path=/; domain=' + rootDomain + '; SameSite=Lax';
+                document.cookie = name + '=; Max-Age=0; path=/; domain=.' + rootDomain + '; SameSite=Lax';
             }
         });
     }
@@ -223,7 +227,6 @@ document.addEventListener('DOMContentLoaded', function () {
         banner.setAttribute('role', 'region');
         document.body.appendChild(banner);
     }
-    banner.hidden = !banner.hidden && false;
     banner.innerHTML = '<p>' + copy.intro + ' <a href="' + (lang === 'ar' ? '/ar/legal-information-ar.html#cookies' : lang === 'en' ? '/en/legal-information-en.html#cookies' : '/yasal-bilgilendirme.html#cerezler') + '">' + copy.policy + '</a></p><div class="cookie-actions"><button type="button" class="cookie-reject">' + copy.reject + '</button><button type="button" class="cookie-preferences">' + copy.manage + '</button><button type="button" class="cookie-accept">' + copy.accept + '</button></div>';
 
     const dialog = document.createElement('section');
