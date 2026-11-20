@@ -3741,3 +3741,7 @@ input.parsley-error, textarea.parsley-error {
   margin: 0 auto !important;
   text-shadow: 0 1px 8px rgba(0, 0, 0, 0.28);
 }
+
+.cagbas-creative-title {
+  margin-top: 22px !important;
+}
