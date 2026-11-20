@@ -138,12 +138,12 @@ html{scroll-behavior:smooth}body{background:#fff!important;color:var(--cb-ink)!i
 @media(max-width:700px){.cb-map-compass{width:clamp(86px,24vw,126px)!important;bottom:18px!important}}
 
 
-/* Keep the slogan directly to the left of the compass, on one shared baseline */
+/* Slogan at the map's bottom-left; compass remains centered and unchanged */
 .banner-content-swiper-container .left-down-swiper-container{display:none!important}
 .banner-content-swiper-container .swiper-pagination,.banner-content-swiper-container .swiper-button-wrapper{display:none!important}
 .cb-map-compass{left:50%!important;bottom:clamp(16px,3.2vw,34px)!important;transform:translateX(-50%)!important;width:clamp(104px,15vw,184px)!important}
-.cb-map-slogan{position:absolute!important;z-index:5!important;left:calc(50% - clamp(104px,15vw,184px)/2 - 22px - clamp(150px,23vw,280px))!important;bottom:clamp(16px,3.2vw,34px)!important;width:clamp(150px,23vw,280px)!important;min-height:clamp(104px,15vw,184px)!important;display:flex!important;align-items:flex-end!important;justify-content:flex-end!important;padding-bottom:clamp(5px,1vw,12px)!important;box-sizing:border-box!important;color:#fff!important;font-size:clamp(14px,1.8vw,24px)!important;line-height:1.2!important;font-weight:850!important;text-align:right!important;text-shadow:0 2px 16px rgba(0,0,0,.78)!important;pointer-events:none!important}
-@media(max-width:700px){.cb-map-compass{width:clamp(82px,22vw,112px)!important;bottom:18px!important}.cb-map-slogan{left:calc(50% - clamp(82px,22vw,112px)/2 - 12px - 42vw)!important;bottom:18px!important;width:42vw!important;min-height:clamp(82px,22vw,112px)!important;padding-bottom:4px!important;font-size:clamp(12px,3.3vw,16px)!important;line-height:1.18!important}}
+.cb-map-slogan{position:absolute!important;z-index:5!important;left:42px!important;right:auto!important;bottom:clamp(16px,3.2vw,34px)!important;width:min(32%,360px)!important;min-height:clamp(104px,15vw,184px)!important;display:flex!important;align-items:flex-end!important;justify-content:flex-start!important;padding-bottom:clamp(5px,1vw,12px)!important;box-sizing:border-box!important;color:#fff!important;font-size:clamp(14px,1.8vw,24px)!important;line-height:1.2!important;font-weight:850!important;text-align:left!important;text-shadow:0 2px 16px rgba(0,0,0,.78)!important;pointer-events:none!important}
+@media(max-width:700px){.cb-map-compass{width:clamp(82px,22vw,112px)!important;bottom:18px!important}.cb-map-slogan{left:20px!important;right:auto!important;bottom:18px!important;width:34vw!important;min-height:clamp(82px,22vw,112px)!important;padding-bottom:4px!important;font-size:clamp(12px,3.3vw,16px)!important;line-height:1.18!important}}
 
 </style>
 </head>
