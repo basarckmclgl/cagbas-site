@@ -343,28 +343,25 @@
 
         </div>
 
-        <div class="footer-contact-area-item-e-bulten">
-            <h4 id="footer-contact-area-item-e-bulten-title-1">النشرة الإلكترونية</h4>
-            <h5 id="footer-contact-area-item-e-bulten-title-2">ابق على اطلاع حول ÇAĞBAŞ للتجارة</h5>
-            <p id="footer-contact-area-item-e-bulten-content">اشترك في نشرتنا الإلكترونية عن طريق إدخال عنوان بريدك الإلكتروني وترقب أخبار ÇAĞBAŞ وجميع الأخبار الأخرى.</p>
-            <div class="input-container">
-                <form method="post" data-parsley-validate="true" id="newsletterForm">
-                    <input type="hidden" name="Path" value="/" />
-                    <div class="input-wrapper">
-                        <input type="email" placeholder="E-posta adresi girin..." required="required" maxlength="250" data-val="true" data-val-required="The Email field is required." id="Email" name="Email" value="">
-                        <input type="submit" class="signup-button" value="ÜYE OL" />
-                    </div>
-                    <div class="checkbox-wrapper">
-                        <input id="c4ce7ad9-4105-4e97-83e4-7419cc9fdcec" name="c4ce7ad9-4105-4e97-83e4-7419cc9fdcec" type="checkbox" required="required" data-parsley-mincheck="1" />
-                        <label for="c4ce7ad9-4105-4e97-83e4-7419cc9fdcec"><a href="/_assets/documents/kvkk-aydinlatma-metni.pdf" target="_blank">قانون حماية البيانات الشخصية</a><label id="kvkk">لقد قرأت وقبلت.</label></label>
-                    </div>
-                    <div class="checkbox-wrapper">
-                        <input id="a_c4ce7ad9-4105-4e97-83e4-7419cc9fdcec" name="a_c4ce7ad9-4105-4e97-83e4-7419cc9fdcec" type="checkbox" required="required" data-parsley-mincheck="1" />
-                        <label for="a_c4ce7ad9-4105-4e97-83e4-7419cc9fdcec" id="onay">أوافق على إرسال النشرات الإلكترونية</label>
-                    </div>
-                <input name="__RequestVerificationToken" type="hidden" value="CfDJ8FlZ77duDWpDkB61Dg4lNqdfjsn6ZcTc74i-zFtshb8eYFMTEjs5jtkdZgSxDzbcXOcLm0sHGN-50e8fa1lbU5kRAdh5jqpjU1VrypiuT3nvRgPo5JsT4ucRUy2d4a7D-OEzxgPxVd-SfBqNqcLFMR4" /></form>
+        <div class="footer-contact-area-item-e-bulten" dir="rtl">
+    <h4>النشرة البريدية</h4>
+    <h5>ابقَ على اطلاع بأخبار ÇAĞBAŞ</h5>
+    <p>انضم إلى قائمتنا البريدية لتصلك آخر أخبار مشاريعنا وخدماتنا وإعلاناتنا.</p>
+    <div class="input-container">
+        <form id="newsletterForm" class="newsletter-form" novalidate>
+            <div class="input-wrapper">
+                <input type="email" name="email" id="newsletterEmail" placeholder="أدخل بريدك الإلكتروني..." required maxlength="254" autocomplete="email">
+                <button type="submit" class="signup-button">اشتراك</button>
             </div>
-        </div>
+            <p class="newsletter-privacy">سيتم استخدام بريدك الإلكتروني لإرسال النشرة وفقًا لـ <a href="/yasal-bilgilendirme.html#kisisel-veriler" target="_blank" rel="noopener">إشعار حماية البيانات الشخصية</a>.</p>
+            <div class="checkbox-wrapper">
+                <input type="checkbox" id="newsletterConsent" name="marketingConsent" value="yes" required>
+                <label for="newsletterConsent">أوافق على تلقي رسائل النشرة البريدية والإعلانات.</label>
+            </div>
+            <p class="newsletter-feedback" id="newsletterFeedback" role="status" aria-live="polite"></p>
+        </form>
+    </div>
+</div>
 
     </div>
 </div>
