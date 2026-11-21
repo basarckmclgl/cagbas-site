@@ -4494,3 +4494,30 @@ img, video, iframe { max-width: 100%; }
  .menu-wrapper>.menu-bar-links a{font-size:11px!important;min-height:38px!important}
  .menu-wrapper>.menu-logo img{max-width:128px!important}
 }
+
+
+/* ÇAĞBAŞ mobile hamburger navigation */
+@media(max-width:767px){
+ .menu-container{display:block!important;position:sticky!important;top:0!important;left:auto!important;right:auto!important;width:100%!important;height:auto!important;min-height:0!important;padding:0!important;margin:0!important;z-index:5000!important;background:rgba(255,255,255,.98)!important;backdrop-filter:blur(14px)!important;border-bottom:1px solid #eee8f2!important;box-shadow:0 4px 18px rgba(25,18,35,.06)!important}
+ .menu-container>.menu-wrapper{display:none!important}
+ .menu-container>.mobile-menu-container{display:flex!important;position:relative!important;inset:auto!important;width:100%!important;height:64px!important;min-height:64px!important;margin:0!important;padding:0 16px!important;align-items:center!important;justify-content:space-between!important;gap:12px!important;background:transparent!important;border:0!important;box-shadow:none!important}
+ .mobile-menu-icon-wrapper{display:flex!important;position:relative!important;flex:0 0 42px!important;width:42px!important;height:42px!important;min-width:42px!important;min-height:42px!important;padding:0!important;margin:0!important;align-items:center!important;justify-content:center!important;cursor:pointer!important;border-radius:8px!important;z-index:5002!important}
+ .mobile-menu-icon-wrapper img{display:none!important}
+ .mobile-menu-icon-wrapper:before{content:""!important;display:block!important;width:24px!important;height:18px!important;background:linear-gradient(#292432,#292432) 0 0/24px 2px no-repeat,linear-gradient(#292432,#292432) 0 8px/24px 2px no-repeat,linear-gradient(#292432,#292432) 0 16px/24px 2px no-repeat!important}
+ .mobile-menu-container>.menu-logo{display:flex!important;position:absolute!important;left:50%!important;top:50%!important;transform:translate(-50%,-50%)!important;align-items:center!important;justify-content:center!important;width:auto!important;max-width:calc(100% - 140px)!important;margin:0!important;padding:0!important;z-index:5001!important}
+ .mobile-menu-container>.menu-logo img{display:block!important;width:auto!important;max-width:145px!important;height:auto!important;max-height:38px!important}
+ .mobile-menu-container>.langSelector{display:block!important;position:relative!important;flex:0 0 auto!important;margin:0!important;z-index:5003!important}
+ .mobile-menu-container .langSelectorHeader{padding:7px 9px!important;margin:0!important;border:1px solid #eee8f2!important;border-radius:7px!important;background:#faf9fc!important}
+ .mobile-menu-container .langSelectorBody{z-index:5010!important}
+ .menu-container>.mobile-menu-links-wrapper{display:none!important;position:absolute!important;top:64px!important;left:0!important;right:0!important;width:100%!important;height:auto!important;max-height:calc(100dvh - 64px)!important;overflow-y:auto!important;padding:10px 16px 18px!important;margin:0!important;background:#fff!important;border-bottom:1px solid #eee8f2!important;box-shadow:0 14px 22px rgba(25,18,35,.12)!important;z-index:5001!important}
+ .menu-container>.mobile-menu-links-wrapper.open{display:block!important}
+ .mobile-menu-links-wrapper ul{display:block!important;width:100%!important;padding:0!important;margin:0!important;list-style:none!important}
+ .mobile-menu-links-wrapper li{display:block!important;width:100%!important;margin:0!important;padding:0!important}
+ .mobile-menu-links-wrapper a{display:flex!important;align-items:center!important;min-height:48px!important;width:100%!important;padding:12px 10px!important;border-bottom:1px solid #f0ebf3!important;color:#292432!important;font-size:14px!important;font-weight:700!important;line-height:1.35!important;text-decoration:none!important;white-space:normal!important}
+ .mobile-menu-links-wrapper a:active,.mobile-menu-links-wrapper a:focus{color:#7851a5!important;background:#faf7fd!important}
+ body.mobile-nav-open{overflow:hidden!important}
+}
+@media(max-width:380px){
+ .menu-container>.mobile-menu-container{padding-left:10px!important;padding-right:10px!important}
+ .mobile-menu-container>.menu-logo img{max-width:125px!important}
+}
