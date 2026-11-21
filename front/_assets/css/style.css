@@ -4565,3 +4565,8 @@ img, video, iframe { max-width: 100%; }
  .cb-map-service-intro h1,.cb-map-service-intro p,.cb-map-service-intro__tags span{color:#fff!important;text-shadow:0 2px 7px rgba(0,0,0,.72)!important}
  .cb-map-service-intro h1 em{color:#e0baff!important}
 }
+
+/* Slightly inset the mobile hamburger from the screen edge */
+@media(max-width:767px){
+ .mobile-menu-icon-wrapper{transform:translateX(12px)!important}
+}
