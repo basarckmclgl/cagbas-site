@@ -4664,9 +4664,44 @@ img, video, iframe { max-width: 100%; }
 }
 
 
-/* Mobile: lower the footer-banner heading and copy slightly */
+
+/* Mobile footer banner: keep the heading and copy fully on the world-map image */
 @media (max-width: 767px) {
+  .footer-banner {
+    position: relative !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    min-height: 400px !important;
+    height: auto !important;
+    padding: 36px 0 !important;
+    box-sizing: border-box !important;
+    background-position: center center !important;
+    background-size: cover !important;
+    overflow: hidden !important;
+  }
   .footer-banner-text-wrapper {
-    top: calc(50% + 24px) !important;
+    position: relative !important;
+    top: auto !important;
+    right: auto !important;
+    bottom: auto !important;
+    left: auto !important;
+    transform: none !important;
+    width: 88% !important;
+    max-width: 560px !important;
+    margin: 0 auto !important;
+    padding: 0 !important;
+    z-index: 2 !important;
+    text-align: center !important;
+  }
+  .footer-banner-text-wrapper h4 {
+    margin: 0 0 16px !important;
+    font-size: 22px !important;
+    line-height: 1.3 !important;
+  }
+  .footer-banner-text-wrapper p {
+    margin: 0 !important;
+    font-size: 16px !important;
+    line-height: 1.65 !important;
   }
 }
