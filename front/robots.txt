@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://cagbas-site.pages.dev/sitemap.xml
+Sitemap: https://cagbas.com/sitemap.xml
