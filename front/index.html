@@ -207,6 +207,40 @@ html{scroll-behavior:smooth}body{background:#fff!important;color:var(--cb-ink)!i
 .cb-home-service-card__content i{display:inline-flex;align-items:center;gap:18px;font-size:12px;font-style:normal;font-weight:800;color:#fff;border-bottom:1px solid rgba(255,255,255,.55);padding-bottom:9px}
 .cb-home-service-card__content i b{font-size:17px;color:#d8bafa}
 @media(max-width:760px){.cb-home-services{padding:62px 20px 68px}.cb-home-services__head{grid-template-columns:1fr;gap:17px;margin-bottom:25px}.cb-home-services__head h2{font-size:39px}.cb-home-services__head>p{font-size:14px}.cb-home-services__grid{grid-template-columns:1fr;gap:14px}.cb-home-service-card{min-height:390px;padding:22px 20px 24px;border-radius:15px}.cb-home-service-card__content h3{font-size:36px}}
+
+<style id="cb-home-services-balance">
+/* Align the homepage intro and service showcase to one consistent grid */
+.cb-home-intro{width:min(1240px,calc(100% - 64px))!important;max-width:1240px!important;margin:0 auto!important;padding:76px 0 78px!important;grid-template-columns:minmax(0,1.45fr) minmax(280px,.7fr)!important;gap:8%!important;box-sizing:border-box!important}
+.cb-home-intro__inner,.cb-home-intro__side{min-width:0!important}
+.cb-home-intro h1{font-size:clamp(44px,5vw,68px)!important;line-height:1.04!important;max-width:780px!important;margin:16px 0 18px!important}
+.cb-home-intro__inner>p{font-size:16px!important;line-height:1.8!important;max-width:680px!important}
+.cb-home-intro__side{padding-left:28px!important;gap:20px!important}
+.cb-home-services{display:block!important;width:min(1240px,calc(100% - 64px))!important;max-width:1240px!important;margin:0 auto!important;padding:66px 0 82px!important;box-sizing:border-box!important}
+.cb-home-services__head{width:100%!important;max-width:none!important;display:grid!important;grid-template-columns:minmax(0,1.2fr) minmax(260px,.8fr)!important;gap:8%!important;align-items:end!important;margin:0 0 30px!important;padding:0!important}
+.cb-home-services__head>div{min-width:0!important}
+.cb-home-services__head>div>span{display:block!important;font-size:11px!important;letter-spacing:2px!important;margin:0 0 12px!important}
+.cb-home-services__head h2{font-size:clamp(38px,4.4vw,56px)!important;line-height:1.06!important;letter-spacing:-1.8px!important;margin:0!important}
+.cb-home-services__head>p{font-size:15px!important;line-height:1.8!important;max-width:430px!important;margin:0 0 4px auto!important}
+.cb-home-services__grid{width:100%!important;display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:22px!important;align-items:stretch!important}
+.cb-home-service-card{width:100%!important;min-width:0!important;min-height:430px!important;height:430px!important;padding:26px 30px 30px!important;border-radius:18px!important;box-sizing:border-box!important}
+.cb-home-service-card__top span{font-size:11px!important;letter-spacing:1.5px!important}
+.cb-home-service-card__content{max-width:470px!important}
+.cb-home-service-card__content>span{font-size:11px!important}
+.cb-home-service-card__content h3{font-size:clamp(34px,3.5vw,46px)!important;line-height:1.05!important;margin:12px 0 14px!important}
+.cb-home-service-card__content p{font-size:15px!important;line-height:1.75!important;max-width:410px!important}
+.cb-home-service-card__content i{font-size:13px!important}
+@media(max-width:760px){
+ .cb-home-intro{width:calc(100% - 40px)!important;padding:54px 0 58px!important;grid-template-columns:1fr!important;gap:30px!important}
+ .cb-home-intro__side{border-left:0!important;border-top:1px solid #e8e1ed!important;padding:22px 0 0!important}
+ .cb-home-services{width:calc(100% - 40px)!important;padding:48px 0 58px!important}
+ .cb-home-services__head{grid-template-columns:1fr!important;gap:16px!important;margin-bottom:23px!important}
+ .cb-home-services__head h2{font-size:clamp(34px,9vw,43px)!important}
+ .cb-home-services__head>p{margin:0!important;font-size:14px!important}
+ .cb-home-services__grid{grid-template-columns:1fr!important;gap:15px!important}
+ .cb-home-service-card{height:auto!important;min-height:380px!important;padding:22px 20px 24px!important}
+ .cb-home-service-card__content h3{font-size:36px!important}
+}
+</style>
 </style>
 </style>
 <link rel="canonical" href="https://cagbas.com/">
