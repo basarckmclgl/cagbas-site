@@ -528,6 +528,27 @@ html{scroll-behavior:smooth}body{background:#fff!important;color:var(--cb-ink)!i
 @media(max-width:760px){.cb-home-services--visual-only{width:calc(100% - 32px)!important;padding:20px 0 26px!important}.cb-home-services--visual-only .cb-home-services__grid{grid-template-columns:1fr!important;gap:14px!important}.cb-home-services--visual-only .cb-home-service-card{height:clamp(230px,62vw,290px)!important;min-height:230px!important;padding:18px 19px 20px!important}.cb-home-services--visual-only .cb-home-service-card__content h3{font-size:29px!important}}
 @media(min-width:761px) and (max-width:1050px){.cb-home-services--visual-only{width:calc(100% - 40px)!important}.cb-home-services--visual-only .cb-home-service-card{height:280px!important;padding:18px 20px!important}}
 </style>
+
+<style id="cb-map-service-intro-style">
+.cb-map-slogan,.banner-content-swiper-container{display:none!important}
+.cb-map-service-intro{position:absolute;z-index:5;left:clamp(28px,8vw,116px);top:50%;transform:translateY(-43%);width:min(690px,68%);color:#fff;text-align:left}
+.cb-map-service-intro__eyebrow{display:inline-block;color:#e1c7ff;font-size:10px;font-weight:800;letter-spacing:3px;margin-bottom:16px}
+.cb-map-service-intro h1{font-size:clamp(34px,4.2vw,58px);line-height:1.08;letter-spacing:-1.7px;font-weight:800;color:#fff;margin:0 0 14px;text-shadow:0 2px 18px rgba(0,0,0,.38)}
+.cb-map-service-intro h1 em{font-family:Georgia,serif;font-weight:400;color:#d2a9ff}
+.cb-map-service-intro p{max-width:590px;font-size:15px;line-height:1.75;color:rgba(255,255,255,.91);margin:0 0 20px;text-shadow:0 1px 9px rgba(0,0,0,.5)}
+.cb-map-service-intro__tags{display:flex;align-items:center;gap:15px}
+.cb-map-service-intro__tags span{font-size:10px;font-weight:850;letter-spacing:1.8px;color:#fff}
+.cb-map-service-intro__tags i{width:4px;height:4px;border-radius:50%;background:#c99cf4}
+.banner-slider-wrapper:after{background:linear-gradient(90deg,rgba(12,10,20,.72) 0%,rgba(12,10,20,.43) 54%,rgba(12,10,20,.16) 100%)!important}
+@media(max-width:760px){
+ .cb-map-service-intro{left:22px;right:22px;top:53%;transform:translateY(-35%);width:auto}
+ .cb-map-service-intro__eyebrow{font-size:8px;letter-spacing:2px;margin-bottom:10px}
+ .cb-map-service-intro h1{font-size:clamp(27px,7.8vw,38px);line-height:1.08;letter-spacing:-.8px;margin-bottom:10px}
+ .cb-map-service-intro p{font-size:12px;line-height:1.55;margin-bottom:14px;max-width:460px}
+ .cb-map-service-intro__tags{gap:10px;flex-wrap:wrap}
+ .cb-map-service-intro__tags span{font-size:8px;letter-spacing:1.2px}
+}
+</style>
 </head>
 <body>
 
@@ -672,6 +693,12 @@ html{scroll-behavior:smooth}body{background:#fff!important;color:var(--cb-ink)!i
             </div>
         </div>
         <div class="cb-map-slogan" lang="tr">Güvenilir Ortak, Küresel Başarı!</div>
+        <div class="cb-map-service-intro">
+          <span class="cb-map-service-intro__eyebrow">ÇAĞBAŞ CREATIVE STUDIO</span>
+          <h1>Markanızın dijital kimliğini <em>birlikte tasarlıyoruz.</em></h1>
+          <p>Web tasarım ve grafik tasarım çözümlerimizle markanızın dijital vitrini, görsel dili ve kullanıcı deneyimini tek bir tutarlı çizgide buluşturuyoruz.</p>
+          <div class="cb-map-service-intro__tags"><span>WEB TASARIM</span><i></i><span>GRAFİK TASARIM</span></div>
+        </div>
         <div class="cb-map-compass" aria-hidden="true"><img src="https://cdn.pixabay.com/photo/2012/04/18/20/47/compass-37840_1280.png" alt=""><span></span></div>
         <div class="banner-content-swiper-container">
             <div class="swiper-container left-down-swiper-container">
