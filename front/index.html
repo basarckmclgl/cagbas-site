@@ -432,6 +432,73 @@ html{scroll-behavior:smooth}body{background:#fff!important;color:var(--cb-ink)!i
  .cb-home-process__foot{width:100%!important}
 }
 </style>
+
+<style id="cb-home-one-screen-compact">
+/* Desktop: fit the homepage's three main content bands into a compact viewport */
+@media(min-width:761px){
+ .cb-home-intro{
+  width:min(1160px,calc(100% - 64px))!important;max-width:1160px!important;
+  padding:25px 0 28px!important;min-height:0!important;
+  grid-template-columns:minmax(0,1.35fr) minmax(230px,.65fr)!important;gap:6%!important
+ }
+ .cb-home-intro__eyebrow{font-size:9px!important}
+ .cb-home-intro h1{font-size:clamp(34px,3.2vw,44px)!important;line-height:1.04!important;max-width:600px!important;margin:8px 0 9px!important;letter-spacing:-1.2px!important}
+ .cb-home-intro__inner>p{font-size:13px!important;line-height:1.55!important;max-width:520px!important}
+ .cb-home-intro__actions{margin-top:13px!important;gap:9px!important}
+ .cb-home-intro__actions a{padding:9px 13px!important;font-size:11px!important}
+ .cb-home-intro__side{padding:6px 0 6px 18px!important;gap:10px!important;max-width:250px!important}
+ .cb-home-intro__side>span{font-size:9px!important}
+ .cb-home-intro__side strong{font-size:21px!important;line-height:1.12!important}
+ .cb-home-intro__side small{font-size:8px!important}
+ .cb-home-services{
+  width:min(1160px,calc(100% - 64px))!important;max-width:1160px!important;
+  padding:24px 0 27px!important;margin:0 auto!important
+ }
+ .cb-home-services__head{
+  max-width:1080px!important;margin:0 auto 14px!important;
+  grid-template-columns:minmax(0,1fr) minmax(220px,.55fr)!important;gap:6%!important;align-items:end!important
+ }
+ .cb-home-services__head>div>span{font-size:9px!important}
+ .cb-home-services__head h2{font-size:clamp(27px,2.7vw,35px)!important;line-height:1.04!important;max-width:480px!important;margin:8px 0 0!important}
+ .cb-home-services__head>p{font-size:12px!important;line-height:1.5!important;max-width:300px!important}
+ .cb-home-services__grid{max-width:1080px!important;gap:14px!important}
+ .cb-home-service-card{height:190px!important;min-height:190px!important;padding:13px 17px!important;border-radius:12px!important}
+ .cb-home-service-card__top span{font-size:8px!important;padding:5px 7px!important}
+ .cb-home-service-card__top>b{font-size:17px!important}
+ .cb-home-service-card__content>span{font-size:8px!important}
+ .cb-home-service-card__content h3{font-size:24px!important;line-height:1.03!important;margin:5px 0 5px!important}
+ .cb-home-service-card__content p{font-size:10px!important;line-height:1.35!important;margin:0 0 6px!important;max-width:300px!important}
+ .cb-home-service-card__content i{font-size:10px!important;padding-bottom:3px!important}
+ .cb-home-process{
+  padding:25px 30px 22px!important;max-width:none!important
+ }
+ .cb-home-process__head{
+  width:min(1080px,100%)!important;max-width:1080px!important;
+  grid-template-columns:minmax(0,1fr) minmax(230px,.58fr)!important;
+  gap:6%!important;margin:0 auto 13px!important;align-items:end!important
+ }
+ .cb-home-process__eyebrow{font-size:9px!important}
+ .cb-home-process__head h2{font-size:clamp(29px,2.9vw,38px)!important;line-height:1.02!important;letter-spacing:-1px!important;margin:8px 0 0!important}
+ .cb-home-process__head>p{font-size:12px!important;line-height:1.5!important;max-width:320px!important}
+ .cb-home-process__grid{width:min(1080px,100%)!important;max-width:1080px!important;margin:0 auto!important}
+ .cb-home-process__item{min-height:145px!important;padding:12px 17px 13px!important}
+ .cb-home-process__item:not(:first-child){padding-left:17px!important}
+ .cb-home-process__number{font-size:10px!important}
+ .cb-home-process__label{font-size:8px!important;letter-spacing:1px!important}
+ .cb-home-process__item h3{font-size:15px!important;margin:7px 0 5px!important;line-height:1.2!important}
+ .cb-home-process__item p{font-size:10px!important;line-height:1.45!important;max-width:280px!important}
+ .cb-home-process__arrow{top:12px!important;right:14px!important;font-size:14px!important}
+ .cb-home-process__foot{width:min(1080px,100%)!important;max-width:1080px!important;margin:9px auto 0!important;font-size:8px!important;gap:10px!important}
+}
+@media(max-width:760px){
+ .cb-home-intro{padding:34px 0 35px!important}
+ .cb-home-services{padding:30px 0 34px!important}
+ .cb-home-service-card{min-height:250px!important;height:auto!important}
+ .cb-home-process{padding:32px 18px!important}
+ .cb-home-process__head{margin-bottom:16px!important}
+ .cb-home-process__item{min-height:0!important}
+}
+</style>
 </head>
 <body>
 
