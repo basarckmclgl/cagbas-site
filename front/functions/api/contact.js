@@ -101,7 +101,8 @@ async function sendGmailNotification(env, submission) {
 export async function onRequestPost({ request, env }) {
   if (!env.DB) return json({ error: "İletişim kayıt sistemi henüz yapılandırılmadı." }, 503);
   const security = await enforceRequestSecurity(request, env, "contact", 5, 10 * 60 * 1000);
-  if (!security.ok) return json({ error: security.message }, security.status);\n  if (!(request.headers.get("content-type") || "").includes("application/json")) {
+  if (!security.ok) return json({ error: security.message }, security.status);
+  if (!(request.headers.get("content-type") || "").includes("application/json")) {
     return json({ error: "Geçersiz istek biçimi." }, 415);
   }
 
