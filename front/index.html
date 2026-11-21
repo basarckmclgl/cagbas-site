@@ -12,6 +12,7 @@
     <meta name="msapplication-TileColor" content="#ffffff" />
     <meta name="theme-color" content="#ffffff" />
     <meta name="format-detection" content="telephone=no" />
+    <link id="cagbas-lcp-banner1-preload" rel="preload" as="image" href="/medium/Banner/Image/banner1.webp" fetchpriority="high" />
 
     <link rel="shortcut icon" type="image/x-icon" sizes="32x32" href="/_assets/images/cagbas-logo.svg" />
     <link rel="shortcut icon" type="image/x-icon" sizes="16x16" href="/_assets/images/cagbas-logo.svg" />
@@ -695,6 +696,11 @@ html{scroll-behavior:smooth}body{background:#fff!important;color:var(--cb-ink)!i
  .mobile-menu-container .langSelectorHeader img{display:block!important;width:24px!important;height:auto!important}
  .menu-container>.mobile-menu-links-wrapper{top:64px!important;background:#171421!important}
 }
+</style>
+
+<style id="cagbas-lcp-banner-priority">
+/* LCP: ana sayfanın ilk banner görselini Swiper başlamadan önce de tanımla. */
+.banner-slider-wrapper .swiper-slide:first-child{background-image:url("/medium/Banner/Image/banner1.webp")!important;background-size:cover!important;background-position:center 68%!important}
 </style>
 </head>
 <body>
