@@ -499,6 +499,13 @@ html{scroll-behavior:smooth}body{background:#fff!important;color:var(--cb-ink)!i
  .cb-home-process__item{min-height:0!important}
 }
 </style>
+
+<style id="cb-home-visual-only">
+.cb-home-services--visual-only{width:min(1160px,calc(100% - 64px))!important;max-width:1160px!important;margin:0 auto!important;padding:24px 0 30px!important}
+.cb-home-services--visual-only .cb-home-services__grid{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:16px!important}
+.cb-home-services--visual-only .cb-home-service-card{display:block!important;height:230px!important;min-height:230px!important;padding:0!important;border-radius:13px!important}
+@media(max-width:760px){.cb-home-services--visual-only{width:calc(100% - 36px)!important;padding:18px 0 24px!important}.cb-home-services--visual-only .cb-home-services__grid{grid-template-columns:1fr!important}.cb-home-services--visual-only .cb-home-service-card{height:210px!important;min-height:210px!important}}
+</style>
 </head>
 <body>
 
@@ -672,23 +679,13 @@ html{scroll-behavior:smooth}body{background:#fff!important;color:var(--cb-ink)!i
         </div>
     </div>
 
-<section class="cb-home-intro" aria-labelledby="cb-home-title"><div class="cb-home-intro__inner"><span class="cb-home-intro__eyebrow">WEB TASARIM · GRAFİK TASARIM</span><h1 id="cb-home-title">Markanızın dijital yüzünü <em>birlikte tasarlayalım.</em></h1><p>Markanız için işlevsel web siteleri ve akılda kalan grafik tasarımlar hazırlıyoruz.</p><div class="cb-home-intro__actions"><a href="/hizmetlerimiz.html">Hizmetlerimizi keşfedin <span>↗</span></a><a class="cb-home-intro__secondary" href="/bize-ulasin.html">Projenizi konuşalım</a></div></div><div class="cb-home-intro__side"><span>ÇAĞBAŞ / TASARIM ODAĞI</span><strong>Güçlü bir<br>ilk izlenim.<br><i>Kalıcı bir etki.</i></strong><small>WEB · GÖRSEL KİMLİK · DİJİTAL DENEYİM</small></div></section>
 
 
-<section class="cb-home-services" aria-labelledby="cb-home-services-title">
-  <div class="cb-home-services__head">
-    <div><span>ÇAĞBAŞ / HİZMETLERİMİZ</span><h2 id="cb-home-services-title">İki uzmanlık alanı, <em>tek bir tasarım dili.</em></h2></div>
-    <p>Web ve grafik tasarımı ortak bir marka diliyle buluşturuyoruz.</p>
-  </div>
+
+<section class="cb-home-services cb-home-services--visual-only" aria-label="Hizmet görselleri">
   <div class="cb-home-services__grid">
-    <a class="cb-home-service-card cb-home-service-card--web" href="/hizmetlerimiz.html#web-tasarim">
-      <div class="cb-home-service-card__top"><span>01 / DİJİTAL DENEYİM</span><b>↗</b></div>
-      <div class="cb-home-service-card__content"><span>WEB TASARIM</span><h3>Dijitalde<br>yerinizi alın.</h3><p>Markanıza özel, hızlı ve mobil uyumlu web siteleri.</p><i>Hizmeti keşfet <b>↗</b></i></div>
-    </a>
-    <a class="cb-home-service-card cb-home-service-card--graphic" href="/hizmetlerimiz.html#grafik-tasarim">
-      <div class="cb-home-service-card__top"><span>02 / GÖRSEL İLETİŞİM</span><b>✳</b></div>
-      <div class="cb-home-service-card__content"><span>GRAFİK TASARIM</span><h3>Markanızın<br>görsel dili.</h3><p>Özgün, tutarlı ve akılda kalan grafik tasarımlar.</p><i>Hizmeti keşfet <b>↗</b></i></div>
-    </a>
+    <a class="cb-home-service-card cb-home-service-card--web" href="/hizmetlerimiz.html#web-tasarim" aria-label="Web Tasarım"></a>
+    <a class="cb-home-service-card cb-home-service-card--graphic" href="/hizmetlerimiz.html#grafik-tasarim" aria-label="Grafik Tasarım"></a>
   </div>
 </section>
 
@@ -724,31 +721,7 @@ html{scroll-behavior:smooth}body{background:#fff!important;color:var(--cb-ink)!i
     </div>
 </div> -->
 
-<section class="cb-home-process" aria-labelledby="cb-process-title">
-  <div class="cb-home-process__head"><div><span class="cb-home-process__eyebrow">ÇAĞBAŞ / TASARIM SÜRECİ</span><h2 id="cb-process-title">Fikirden <em>güçlü bir görünüme.</em></h2></div><p>İyi bir marka deneyimi, birbiriyle uyumlu tasarım kararlarıyla oluşur. Markanızı tanıyor, doğru görsel dili kuruyor ve dijitalde etkili bir şekilde hayata geçiriyoruz.</p></div>
-  <div class="cb-home-process__grid"><article class="cb-home-process__item"><span class="cb-home-process__number">01</span><div><span class="cb-home-process__label">MARKA & İHTİYAÇ</span><h3>Önce sizi tanıyoruz.</h3><p>Markanızın karakterini, hedef kitlenizi ve beklentilerinizi dinliyor; tasarımın yönünü birlikte belirliyoruz.</p></div><span class="cb-home-process__arrow">↗</span></article><article class="cb-home-process__item"><span class="cb-home-process__number">02</span><div><span class="cb-home-process__label">GÖRSEL DİL & TASARIM</span><h3>Kimliğinizi tasarlıyoruz.</h3><p>Web arayüzünüzü ve grafik çalışmalarınızı aynı görsel dilde buluşturarak tutarlı bir marka deneyimi oluşturuyoruz.</p></div><span class="cb-home-process__arrow">↗</span></article><article class="cb-home-process__item"><span class="cb-home-process__number">03</span><div><span class="cb-home-process__label">DİJİTAL UYGULAMA</span><h3>Tasarımı hayata geçiriyoruz.</h3><p>Mobil uyumlu web sitenizi ve markanıza özel görsel materyalleri özenle hazırlıyor, kullanıma hazır şekilde teslim ediyoruz.</p></div><span class="cb-home-process__arrow">↗</span></article></div>
-  <div class="cb-home-process__foot"><span>WEB TASARIM</span><i></i><span>GÖRSEL KİMLİK</span><i></i><span>GRAFİK TASARIM</span><i></i><span>DİJİTAL DENEYİM</span></div>
-</section>
-<style>
-.cb-home-process{--cbp-ink:#19161f;--cbp-muted:#77717c;--cbp-accent:#7952a5;max-width:1240px;margin:0 auto;padding:105px 30px 90px;color:var(--cbp-ink)}
-.cb-home-process *{box-sizing:border-box}.cb-home-process__head{display:grid;grid-template-columns:1fr .72fr;gap:10%;align-items:end;margin-bottom:58px}
-.cb-home-process__eyebrow{font-size:10px;font-weight:800;letter-spacing:2px;color:var(--cbp-accent)}
-.cb-home-process__head h2{font-size:clamp(40px,5.5vw,68px);letter-spacing:-2.8px;line-height:1;margin:20px 0 0;font-weight:800}
-.cb-home-process__head h2 em{font-family:Georgia,serif;font-weight:400;color:var(--cbp-accent)}
-.cb-home-process__head>p{font-size:15px;line-height:1.9;color:var(--cbp-muted);margin:0 0 4px;max-width:470px}
-.cb-home-process__grid{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid #e6e1e9;border-bottom:1px solid #e6e1e9}
-.cb-home-process__item{position:relative;min-height:280px;padding:27px 28px 30px 0;display:flex;flex-direction:column;justify-content:space-between;border-right:1px solid #e6e1e9}
-.cb-home-process__item:not(:first-child){padding-left:28px}.cb-home-process__item:last-child{border-right:0}
-.cb-home-process__number{font-size:13px;font-weight:800;color:var(--cbp-accent);letter-spacing:1px}
-.cb-home-process__label{font-size:9px;letter-spacing:1.6px;font-weight:800;color:#918997}
-.cb-home-process__item h3{font-size:clamp(20px,2vw,25px);letter-spacing:-.6px;margin:14px 0 12px}
-.cb-home-process__item p{font-size:13px;line-height:1.85;color:var(--cbp-muted);max-width:330px;margin:0}
-.cb-home-process__arrow{position:absolute;right:25px;top:24px;color:#b4a3c5;font-size:18px}
-.cb-home-process__foot{display:flex;align-items:center;gap:15px;margin-top:24px;color:#827b88;font-size:9px;letter-spacing:1.7px;font-weight:800}
-.cb-home-process__foot i{width:4px;height:4px;border-radius:50%;background:#a48bb9}
-.cb-home-process[dir=rtl]{text-align:right}.cb-home-process[dir=rtl] .cb-home-process__item{padding:27px 0 30px 28px;border-right:0;border-left:1px solid #e6e1e9}.cb-home-process[dir=rtl] .cb-home-process__item:not(:first-child){padding-right:28px;padding-left:0}.cb-home-process[dir=rtl] .cb-home-process__item:last-child{border-left:0}.cb-home-process[dir=rtl] .cb-home-process__arrow{right:auto;left:25px}.cb-home-process[dir=rtl] .cb-home-process__head{direction:rtl}
-@media(max-width:760px){.cb-home-process{padding:68px 24px}.cb-home-process__head{grid-template-columns:1fr;gap:22px;margin-bottom:35px}.cb-home-process__head h2{font-size:44px;letter-spacing:-1.8px}.cb-home-process__grid{grid-template-columns:1fr}.cb-home-process__item,.cb-home-process__item:not(:first-child),.cb-home-process[dir=rtl] .cb-home-process__item,.cb-home-process[dir=rtl] .cb-home-process__item:not(:first-child){min-height:0;padding:23px 0 27px;border-right:0;border-left:0;border-bottom:1px solid #e6e1e9}.cb-home-process__item:last-child{border-bottom:0}.cb-home-process__item h3{margin-top:13px}.cb-home-process__arrow{right:4px;top:21px}.cb-home-process[dir=rtl] .cb-home-process__arrow{right:auto;left:4px}.cb-home-process__foot{gap:8px;font-size:7px;letter-spacing:.8px;justify-content:space-between}}
-</style>
+
 <div class="footer-banner">
     <div class="footer-banner-text-wrapper" data-aos="fade-up" data-aos-delay="400">
         <h4 id="footer-banner-text-wrapper-title">Markanız için güçlü bir dijital görünüm</h4>
