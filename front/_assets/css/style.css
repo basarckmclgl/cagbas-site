@@ -4665,42 +4665,44 @@ img, video, iframe { max-width: 100%; }
 
 
 
-/* Mobile footer banner: keep the heading and copy fully on the world-map image */
+/* Mobile footer banner: place complete title and copy inside the map image */
 @media (max-width: 767px) {
   .footer-banner {
     position: relative !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
+    display: block !important;
     min-height: 400px !important;
-    height: auto !important;
-    padding: 36px 0 !important;
+    height: 400px !important;
+    padding: 0 !important;
     box-sizing: border-box !important;
     background-position: center center !important;
     background-size: cover !important;
     overflow: hidden !important;
   }
   .footer-banner-text-wrapper {
-    position: relative !important;
-    top: auto !important;
+    position: absolute !important;
+    top: 20% !important;
     right: auto !important;
     bottom: auto !important;
-    left: auto !important;
+    left: 6% !important;
     transform: none !important;
     width: 88% !important;
-    max-width: 560px !important;
-    margin: 0 auto !important;
+    max-width: none !important;
+    margin: 0 !important;
     padding: 0 !important;
     z-index: 2 !important;
-    text-align: center !important;
+    text-align: left !important;
   }
   .footer-banner-text-wrapper h4 {
+    display: block !important;
     margin: 0 0 16px !important;
+    padding: 0 !important;
     font-size: 22px !important;
     line-height: 1.3 !important;
   }
   .footer-banner-text-wrapper p {
+    display: block !important;
     margin: 0 !important;
+    padding: 0 !important;
     font-size: 16px !important;
     line-height: 1.65 !important;
   }
