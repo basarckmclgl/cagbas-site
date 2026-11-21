@@ -3811,3 +3811,95 @@ input.parsley-error, textarea.parsley-error {
 .cookie-container button:focus-visible,.cagbas-cookie-dialog button:focus-visible,.cagbas-cookie-launcher:focus-visible,.cagbas-cookie-option input:focus-visible{outline:3px solid #a98bc8;outline-offset:3px}
 html[dir="rtl"] .cagbas-cookie-dialog__panel h2{margin-right:0;margin-left:36px}
 @media(max-width:600px){.cagbas-cookie-dialog{padding:12px}.cagbas-cookie-dialog__panel{padding:24px 18px}.cagbas-cookie-dialog__actions{display:grid;grid-template-columns:1fr}.cagbas-cookie-dialog__actions button{width:100%}.cagbas-cookie-launcher{inset-inline-start:10px;bottom:10px}}
+
+
+/* ÇAĞBAŞ responsive navigation and mobile layout correction */
+@media (max-width: 767px) {
+  .menu-container { display:none !important; }
+  .mobile-menu-container {
+    display:flex !important; position:absolute !important; top:0 !important; left:0 !important; right:0 !important;
+    z-index:1500 !important; width:100% !important; min-height:72px !important; height:72px !important;
+    padding:10px 16px !important; margin:0 !important; align-items:center !important;
+    justify-content:space-between !important; gap:12px !important; box-sizing:border-box !important;
+    background:rgba(18,16,27,.38) !important; backdrop-filter:blur(8px) !important;
+  }
+  .mobile-menu-container .mobile-menu-icon-wrapper {
+    display:flex !important; width:42px !important; height:42px !important; flex:0 0 42px !important;
+    align-items:center !important; justify-content:center !important; cursor:pointer !important;
+  }
+  .mobile-menu-container .mobile-menu-icon-wrapper img {
+    display:block !important; width:25px !important; height:25px !important; object-fit:contain !important;
+    filter:brightness(0) invert(1) !important;
+  }
+  .mobile-menu-container > .menu-logo {
+    display:flex !important; flex:1 1 auto !important; min-width:0 !important;
+    align-items:center !important; justify-content:center !important; margin:0 !important;
+  }
+  .mobile-menu-container > .menu-logo img {
+    display:block !important; width:118px !important; max-width:100% !important; height:auto !important;
+    max-height:40px !important; object-fit:contain !important; filter:brightness(0) invert(1) !important;
+  }
+  .mobile-menu-container > .langSelector {
+    display:block !important; flex:0 0 auto !important; position:relative !important; width:auto !important;
+    min-width:76px !important; margin:0 !important; z-index:1600 !important;
+  }
+  .mobile-menu-container .langSelectorHeader {
+    display:flex !important; min-height:42px !important; align-items:center !important;
+    justify-content:center !important; padding:7px 10px !important; border-radius:6px !important;
+    background:rgba(255,255,255,.96) !important; color:#211b29 !important;
+  }
+  .mobile-menu-container .langSelectorTitle { display:flex !important; align-items:center !important; gap:6px !important; }
+  .mobile-menu-container .langSelectorListNameFlag img { width:23px !important; height:auto !important; }
+  .mobile-menu-container .langSelectorBody {
+    display:none; position:absolute !important; top:calc(100% + 8px) !important; right:0 !important; left:auto !important;
+    width:150px !important; max-width:calc(100vw - 32px) !important; background:#fff !important;
+    border:1px solid #e7e1eb !important; border-radius:8px !important; box-shadow:0 12px 30px rgba(0,0,0,.2) !important;
+    overflow:hidden !important; z-index:1700 !important;
+  }
+  .mobile-menu-container .langSelectorBody.open { display:block !important; }
+  .mobile-menu-container .langSelectorList { display:block !important; margin:0 !important; padding:0 !important; list-style:none !important; }
+  .mobile-menu-container .langSelectorListItem { display:block !important; margin:0 !important; padding:0 !important; }
+  .mobile-menu-container .langSelectorListName {
+    display:flex !important; align-items:center !important; gap:12px !important; padding:11px 14px !important;
+    color:#211b29 !important; text-decoration:none !important; border-bottom:1px solid #eee !important;
+  }
+  .mobile-menu-container .mobile-menu-links-wrapper {
+    display:none; position:absolute !important; top:72px !important; left:0 !important; right:0 !important;
+    width:100% !important; padding:10px 18px 18px !important; margin:0 !important;
+    background:rgba(17,24,39,.97) !important; box-shadow:0 12px 24px rgba(0,0,0,.18) !important;
+    z-index:1550 !important; box-sizing:border-box !important;
+  }
+  .mobile-menu-container .mobile-menu-links-wrapper ul {
+    display:flex !important; flex-direction:column !important; gap:0 !important;
+    width:100% !important; margin:0 !important; padding:0 !important; list-style:none !important;
+  }
+  .mobile-menu-container .mobile-menu-links-wrapper li { display:block !important; width:100% !important; margin:0 !important; }
+  .mobile-menu-container .mobile-menu-links-wrapper a {
+    display:block !important; width:100% !important; padding:13px 8px !important;
+    color:#fff !important; font-size:15px !important; line-height:1.4 !important;
+    text-align:left !important; text-decoration:none !important; border-bottom:1px solid rgba(255,255,255,.12) !important;
+  }
+  .banner-slider-wrapper, .banner-slider-wrapper .banner-swiper-wrapper,
+  .banner-slider-wrapper .main-slider-container, .banner-slider-wrapper .swiper-wrapper,
+  .banner-slider-wrapper .swiper-slide {
+    min-height:370px !important; height:370px !important;
+  }
+  .banner-slider-wrapper .swiper-slide { background-position:center center !important; }
+  .cb-map-slogan {
+    left:18px !important; bottom:20px !important; width:42% !important;
+    min-height:100px !important; font-size:clamp(12px,3.2vw,16px) !important;
+  }
+  .cb-map-compass { width:clamp(78px,21vw,112px) !important; left:72% !important; bottom:18px !important; }
+  .cb-home-services { padding:48px 20px 56px !important; }
+  .cb-home-services__head { display:block !important; margin-bottom:24px !important; }
+  .cb-home-services__head > div + div { margin-top:14px !important; }
+  .cb-home-services__grid { grid-template-columns:1fr !important; }
+  .cb-home-intro { padding:44px 20px 52px !important; }
+  .footer-contact-area-container { padding:42px 20px !important; }
+  #cagbas-whatsapp-float { right:14px !important; bottom:16px !important; width:58px !important; height:58px !important; }
+  .cagbas-cookie-launcher { left:14px !important; bottom:16px !important; max-width:calc(100vw - 100px) !important; }
+  .cookie-container { left:12px !important; right:12px !important; bottom:12px !important; width:auto !important; }
+}
+@media (min-width: 768px) {
+  .mobile-menu-container { display:none !important; }
+}
