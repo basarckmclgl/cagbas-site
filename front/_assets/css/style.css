@@ -3922,3 +3922,22 @@ html[dir="rtl"] .cagbas-cookie-dialog__panel h2{margin-right:0;margin-left:36px}
     text-align:left !important; text-decoration:none !important; border-bottom:1px solid rgba(255,255,255,.12) !important;
   }
 }
+
+/* Fix: mobile menu links are a sibling of .mobile-menu-container in the HTML */
+@media (max-width: 767px) {
+  .mobile-menu-links-wrapper {
+    display:none; position:absolute !important; top:72px !important; left:0 !important; right:0 !important;
+    width:100% !important; max-height:calc(100vh - 90px) !important; overflow-y:auto !important;
+    padding:8px 18px 18px !important; margin:0 !important; box-sizing:border-box !important;
+    background:rgba(17,24,39,.98) !important; box-shadow:0 14px 28px rgba(0,0,0,.22) !important; z-index:1550 !important;
+  }
+  .mobile-menu-links-wrapper ul { display:flex !important; flex-direction:column !important; align-items:stretch !important; gap:0 !important; width:100% !important; margin:0 !important; padding:0 !important; list-style:none !important; }
+  .mobile-menu-links-wrapper li { display:block !important; width:100% !important; margin:0 !important; padding:0 !important; }
+  .mobile-menu-links-wrapper a {
+    display:flex !important; align-items:center !important; width:100% !important; min-height:48px !important;
+    padding:12px 8px !important; box-sizing:border-box !important; color:#fff !important; font-size:15px !important;
+    line-height:1.4 !important; font-weight:700 !important; text-align:left !important; text-decoration:none !important;
+    border-bottom:1px solid rgba(255,255,255,.14) !important;
+  }
+  .mobile-menu-links-wrapper a:active, .mobile-menu-links-wrapper a:focus { color:#d7b4ff !important; outline:2px solid #b98ae8 !important; outline-offset:-2px !important; }
+}
