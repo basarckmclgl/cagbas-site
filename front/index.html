@@ -506,6 +506,27 @@ html{scroll-behavior:smooth}body{background:#fff!important;color:var(--cb-ink)!i
 .cb-home-services--visual-only .cb-home-service-card{display:block!important;height:230px!important;min-height:230px!important;padding:0!important;border-radius:13px!important}
 @media(max-width:760px){.cb-home-services--visual-only{width:calc(100% - 36px)!important;padding:18px 0 24px!important}.cb-home-services--visual-only .cb-home-services__grid{grid-template-columns:1fr!important}.cb-home-services--visual-only .cb-home-service-card{height:210px!important;min-height:210px!important}}
 </style>
+
+<style id="cb-home-service-cards-restored">
+.cb-home-services--visual-only{width:min(1240px,calc(100% - 64px))!important;max-width:1240px!important;margin:0 auto!important;padding:34px 0 42px!important}
+.cb-home-services--visual-only .cb-home-services__grid{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:20px!important}
+.cb-home-services--visual-only .cb-home-service-card{position:relative!important;display:flex!important;flex-direction:column!important;justify-content:space-between!important;box-sizing:border-box!important;width:100%!important;height:360px!important;min-height:360px!important;padding:24px 28px 27px!important;border-radius:16px!important;overflow:hidden!important;color:#fff!important;text-decoration:none!important}
+.cb-home-services--visual-only .cb-home-service-card:before{content:"";position:absolute;inset:0;z-index:-2;background-size:cover;background-position:center;transition:transform .6s ease}
+.cb-home-services--visual-only .cb-home-service-card:after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(17,12,26,.30),rgba(17,12,26,.18) 35%,rgba(17,12,26,.88))}
+.cb-home-services--visual-only .cb-home-service-card--web:before{background-image:url('/_assets/images/web-design-bg.jpg')}
+.cb-home-services--visual-only .cb-home-service-card--graphic:before{background-image:url('/_assets/images/graphic-design-bg.jpg')}
+.cb-home-services--visual-only .cb-home-service-card__top{display:flex;justify-content:space-between;align-items:center;gap:12px;position:relative;z-index:1}
+.cb-home-services--visual-only .cb-home-service-card__top span{font-size:10px;letter-spacing:1.5px;font-weight:800;padding:8px 10px;border:1px solid rgba(255,255,255,.4);border-radius:4px;background:rgba(20,14,30,.48)}
+.cb-home-services--visual-only .cb-home-service-card__top>b{font-size:23px;color:#d9bafa;font-weight:400}
+.cb-home-services--visual-only .cb-home-service-card__content{position:relative;z-index:1;max-width:430px}
+.cb-home-services--visual-only .cb-home-service-card__content>span{font-size:10px;letter-spacing:1.8px;font-weight:800;color:#dfc4ff}
+.cb-home-services--visual-only .cb-home-service-card__content h3{font-size:clamp(30px,3vw,40px);line-height:1.05;letter-spacing:-1px;margin:9px 0 10px;color:#fff}
+.cb-home-services--visual-only .cb-home-service-card__content p{max-width:370px;font-size:13px;line-height:1.65;color:rgba(255,255,255,.9);margin:0 0 14px}
+.cb-home-services--visual-only .cb-home-service-card__content i{display:inline-flex;align-items:center;gap:14px;font-size:11px;font-style:normal;font-weight:800;color:#fff;border-bottom:1px solid rgba(255,255,255,.65);padding-bottom:6px}
+.cb-home-services--visual-only .cb-home-service-card__content i b{font-size:16px;color:#dfc4ff}
+.cb-home-services--visual-only .cb-home-service-card:hover:before{transform:scale(1.04)}
+@media(max-width:760px){.cb-home-services--visual-only{width:calc(100% - 36px)!important;padding:24px 0 30px!important}.cb-home-services--visual-only .cb-home-services__grid{grid-template-columns:1fr!important;gap:15px!important}.cb-home-services--visual-only .cb-home-service-card{height:300px!important;min-height:300px!important;padding:19px 20px 22px!important}.cb-home-services--visual-only .cb-home-service-card__content h3{font-size:31px!important}}
+</style>
 </head>
 <body>
 
@@ -682,10 +703,16 @@ html{scroll-behavior:smooth}body{background:#fff!important;color:var(--cb-ink)!i
 
 
 
-<section class="cb-home-services cb-home-services--visual-only" aria-label="Hizmet görselleri">
+<section class="cb-home-services cb-home-services--visual-only" aria-label="Hizmetlerimiz">
   <div class="cb-home-services__grid">
-    <a class="cb-home-service-card cb-home-service-card--web" href="/hizmetlerimiz.html#web-tasarim" aria-label="Web Tasarım"></a>
-    <a class="cb-home-service-card cb-home-service-card--graphic" href="/hizmetlerimiz.html#grafik-tasarim" aria-label="Grafik Tasarım"></a>
+    <a class="cb-home-service-card cb-home-service-card--web" href="/hizmetlerimiz.html#web-tasarim">
+      <div class="cb-home-service-card__top"><span>01 / DİJİTAL DENEYİM</span><b>↗</b></div>
+      <div class="cb-home-service-card__content"><span>WEB TASARIM</span><h3>Dijitalde<br>yerinizi alın.</h3><p>Markanıza özel, hızlı ve mobil uyumlu web siteleri.</p><i>Hizmeti keşfet <b>↗</b></i></div>
+    </a>
+    <a class="cb-home-service-card cb-home-service-card--graphic" href="/hizmetlerimiz.html#grafik-tasarim">
+      <div class="cb-home-service-card__top"><span>02 / GÖRSEL İLETİŞİM</span><b>✳</b></div>
+      <div class="cb-home-service-card__content"><span>GRAFİK TASARIM</span><h3>Markanızın<br>görsel dili.</h3><p>Özgün, tutarlı ve akılda kalan grafik tasarımlar.</p><i>Hizmeti keşfet <b>↗</b></i></div>
+    </a>
   </div>
 </section>
 
