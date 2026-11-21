@@ -181,6 +181,33 @@ html{scroll-behavior:smooth}body{background:#fff!important;color:var(--cb-ink)!i
 .cb-map-slogan{position:absolute!important;z-index:5!important;left:42px!important;right:auto!important;bottom:clamp(16px,3.2vw,34px)!important;width:min(32%,360px)!important;min-height:clamp(104px,15vw,184px)!important;display:flex!important;align-items:flex-end!important;justify-content:flex-start!important;padding-bottom:clamp(5px,1vw,12px)!important;box-sizing:border-box!important;color:#fff!important;font-size:clamp(14px,1.8vw,24px)!important;line-height:1.2!important;font-weight:850!important;text-align:left!important;text-shadow:0 2px 16px rgba(0,0,0,.78)!important;pointer-events:none!important}
 @media(max-width:700px){.cb-map-compass{width:clamp(82px,22vw,112px)!important;bottom:18px!important}.cb-map-slogan{left:20px!important;right:auto!important;bottom:18px!important;width:34vw!important;min-height:clamp(82px,22vw,112px)!important;padding-bottom:4px!important;font-size:clamp(12px,3.3vw,16px)!important;line-height:1.18!important}}
 
+
+<style id="cb-home-services-design">
+.cb-home-services{--hs-ink:#191521;--hs-purple:#8056a9;max-width:1320px;margin:0 auto;padding:88px 34px 96px}
+.cb-home-services__head{display:grid;grid-template-columns:1fr .62fr;gap:9%;align-items:end;margin-bottom:34px}
+.cb-home-services__head>div>span{font-size:10px;letter-spacing:2px;font-weight:850;color:var(--hs-purple)}
+.cb-home-services__head h2{font-size:clamp(34px,4.5vw,57px);line-height:1.05;letter-spacing:-2px;color:var(--hs-ink);margin:16px 0 0}
+.cb-home-services__head h2 em{font-family:Georgia,serif;font-weight:400;color:var(--hs-purple)}
+.cb-home-services__head>p{font-size:15px;line-height:1.85;color:#77717e;margin:0 0 4px;max-width:440px}
+.cb-home-services__grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.cb-home-service-card{position:relative;isolation:isolate;overflow:hidden;display:flex;flex-direction:column;justify-content:space-between;min-height:450px;padding:26px 30px 30px;border-radius:18px;color:#fff!important;text-decoration:none!important;background:#171321;box-shadow:0 18px 48px rgba(26,17,38,.12);transition:transform .35s ease,box-shadow .35s ease}
+.cb-home-service-card:before{content:"";position:absolute;inset:0;z-index:-2;background-size:cover;background-position:center;transition:transform .7s cubic-bezier(.2,.7,.2,1)}
+.cb-home-service-card:after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(16,12,25,.22) 0%,rgba(16,12,25,.38) 34%,rgba(16,12,25,.92) 100%)}
+.cb-home-service-card--web:before{background-image:url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1600&q=88')}
+.cb-home-service-card--graphic:before{background-image:url('https://images.unsplash.com/photo-1541961017774-22349e4a1262?auto=format&fit=crop&w=1600&q=88')}
+.cb-home-service-card:hover{transform:translateY(-5px);box-shadow:0 24px 58px rgba(26,17,38,.2)}
+.cb-home-service-card:hover:before{transform:scale(1.045)}
+.cb-home-service-card__top{display:flex;justify-content:space-between;align-items:center;gap:15px}
+.cb-home-service-card__top span{font-size:10px;letter-spacing:1.8px;font-weight:850;padding:9px 12px;border:1px solid rgba(255,255,255,.38);border-radius:4px;background:rgba(20,14,30,.42);backdrop-filter:blur(8px)}
+.cb-home-service-card__top>b{font-size:26px;color:#d7b9fa;font-weight:400}
+.cb-home-service-card__content{max-width:500px}
+.cb-home-service-card__content>span{font-size:10px;letter-spacing:2px;font-weight:850;color:#d8bafa}
+.cb-home-service-card__content h3{font-size:clamp(32px,3.8vw,48px);line-height:1.04;letter-spacing:-1.5px;margin:12px 0 14px;color:#fff}
+.cb-home-service-card__content p{font-size:14px;line-height:1.8;color:rgba(255,255,255,.82);max-width:410px;margin:0 0 24px}
+.cb-home-service-card__content i{display:inline-flex;align-items:center;gap:18px;font-size:12px;font-style:normal;font-weight:800;color:#fff;border-bottom:1px solid rgba(255,255,255,.55);padding-bottom:9px}
+.cb-home-service-card__content i b{font-size:17px;color:#d8bafa}
+@media(max-width:760px){.cb-home-services{padding:62px 20px 68px}.cb-home-services__head{grid-template-columns:1fr;gap:17px;margin-bottom:25px}.cb-home-services__head h2{font-size:39px}.cb-home-services__head>p{font-size:14px}.cb-home-services__grid{grid-template-columns:1fr;gap:14px}.cb-home-service-card{min-height:390px;padding:22px 20px 24px;border-radius:15px}.cb-home-service-card__content h3{font-size:36px}}
+</style>
 </style>
 <link rel="canonical" href="https://cagbas.com/">
 <link rel="alternate" hreflang="tr" href="https://cagbas.com/">
@@ -363,6 +390,24 @@ html{scroll-behavior:smooth}body{background:#fff!important;color:var(--cb-ink)!i
 
 <section class="cb-home-intro" aria-labelledby="cb-home-title"><div class="cb-home-intro__inner"><span class="cb-home-intro__eyebrow">WEB TASARIM · GRAFİK TASARIM</span><h1 id="cb-home-title">Markanızın dijital yüzünü <em>birlikte tasarlayalım.</em></h1><p>İlk bakışta güven veren web siteleri, akılda kalan görsel kimlikler ve markanızla bütünleşen yaratıcı tasarımlar üretiyoruz. Fikrinizi güçlü bir dijital deneyime dönüştürüyoruz.</p><div class="cb-home-intro__actions"><a href="/hizmetlerimiz.html">Hizmetlerimizi keşfedin <span>↗</span></a><a class="cb-home-intro__secondary" href="/bize-ulasin.html">Projenizi konuşalım</a></div></div><div class="cb-home-intro__side"><span>ÇAĞBAŞ / TASARIM ODAĞI</span><strong>Güçlü bir<br>ilk izlenim.<br><i>Kalıcı bir etki.</i></strong><small>WEB · GÖRSEL KİMLİK · DİJİTAL DENEYİM</small></div></section>
 
+
+<section class="cb-home-services" aria-labelledby="cb-home-services-title">
+  <div class="cb-home-services__head">
+    <div><span>ÇAĞBAŞ / HİZMETLERİMİZ</span><h2 id="cb-home-services-title">İki uzmanlık alanı,<br><em>tek bir yaratıcı bakış.</em></h2></div>
+    <p>Markanızın dijitaldeki duruşunu güçlendiren iki temel alanı, aynı tasarım anlayışıyla bir araya getiriyoruz.</p>
+  </div>
+  <div class="cb-home-services__grid">
+    <a class="cb-home-service-card cb-home-service-card--web" href="/hizmetlerimiz.html#web-tasarim">
+      <div class="cb-home-service-card__top"><span>01 / DİJİTAL DENEYİM</span><b>↗</b></div>
+      <div class="cb-home-service-card__content"><span>WEB TASARIM</span><h3>Dijital dünyadaki<br>yerinizi tasarlıyoruz.</h3><p>Markanızı yansıtan, kullanıcı dostu ve her ekranda kusursuz çalışan web deneyimleri.</p><i>Hizmeti keşfet <b>↗</b></i></div>
+    </a>
+    <a class="cb-home-service-card cb-home-service-card--graphic" href="/hizmetlerimiz.html#grafik-tasarim">
+      <div class="cb-home-service-card__top"><span>02 / GÖRSEL İLETİŞİM</span><b>✳</b></div>
+      <div class="cb-home-service-card__content"><span>GRAFİK TASARIM</span><h3>Fikirlerinize<br>güçlü bir görünüm.</h3><p>Marka kimliğinizi tamamlayan, akılda kalan ve tutarlı görsel tasarımlar.</p><i>Hizmeti keşfet <b>↗</b></i></div>
+    </a>
+  </div>
+</section>
+
 <!-- <div class="middle-image-text-container">
     <div class="middle-image-text-wrapper">
         <div class="middle-image-wrapper">
@@ -422,8 +467,8 @@ html{scroll-behavior:smooth}body{background:#fff!important;color:var(--cb-ink)!i
 </style>
 <div class="footer-banner">
     <div class="footer-banner-text-wrapper" data-aos="fade-up" data-aos-delay="400">
-        <h4 id="footer-banner-text-wrapper-title">Markanız İçin Sınırsız Tasarım Olanakları</h4>
-        <p id="footer-banner-text-wrapper-content">ÇAĞBAŞ, markanızın dijital kimliğini güçlendirmek için web tasarım, grafik tasarım, sosyal medya yönetimi ve dijital pazarlama çözümleri sunar.</p>
+        <h4 id="footer-banner-text-wrapper-title">Markanız için güçlü bir dijital görünüm</h4>
+        <p id="footer-banner-text-wrapper-content">Web tasarım ve grafik tasarımı bir araya getirerek markanız için tutarlı, güçlü ve akılda kalıcı bir dijital kimlik oluşturuyoruz.</p>
     </div>
 </div>          
 
@@ -552,13 +597,13 @@ html{scroll-behavior:smooth}body{background:#fff!important;color:var(--cb-ink)!i
   <div class="cagbas-footer-grid">
     <div class="cagbas-footer-brand">
       <a class="cagbas-footer-name" href="/index.html">ÇAĞBAŞ</a>
-      <p>Fikirleri araştırma, tasarım ve dijital teknolojiyle anlamlı, işlevsel ve sürdürülebilir çözümlere dönüştürüyoruz.</p>
+      <p>Fikirleri web tasarım ve grafik tasarımla güçlü, işlevsel ve akılda kalıcı marka deneyimlerine dönüştürüyoruz.</p>
       <div class="cagbas-footer-socials" aria-label="Sosyal medya bağlantıları">
         <a href="https://www.linkedin.com/in/basarckmclgl/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn – Başar Çekmecelioğlu"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5A2.5 2.5 0 1 1 5 8.5a2.5 2.5 0 0 1-.02-5ZM3.5 9.5h3V21h-3zM9 9.5h2.9v1.57h.04c.4-.76 1.39-1.57 2.87-1.57 3.07 0 3.64 2.02 3.64 4.65V21h-3v-6.08c0-1.45-.03-3.31-2.02-3.31-2.02 0-2.33 1.58-2.33 3.2V21H9z"/></svg><span>LinkedIn</span></a>
         <a href="https://github.com/basarckmclgl" target="_blank" rel="noopener noreferrer" aria-label="GitHub – basarckmclgl"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .9a11.1 11.1 0 0 0-3.51 21.63c.55.1.76-.24.76-.53v-2.08c-3.1.67-3.76-1.32-3.76-1.32-.5-1.28-1.23-1.62-1.23-1.62-1.01-.69.08-.68.08-.68 1.12.08 1.71 1.15 1.71 1.15.99 1.7 2.59 1.21 3.22.92.1-.72.39-1.21.7-1.49-2.47-.28-5.07-1.24-5.07-5.5 0-1.22.44-2.21 1.15-2.99-.12-.28-.5-1.42.11-2.95 0 0 .94-.3 3.05 1.14a10.6 10.6 0 0 1 5.55 0c2.11-1.44 3.05-1.14 3.05-1.14.61 1.53.11 2.67.11 2.95.72.78 1.15 1.77 1.15 2.99 0 4.27-2.6 5.22-5.08 5.49.4.35.75 1.02.75 2.06V22c0 .29.2.63.77.52A11.1 11.1 0 0 0 12 .9Z"/></svg><span>GitHub</span></a>
       </div>
     </div>
-    <div><h3>Hizmet Alanlarımız</h3><ul><li><a href="/hizmetlerimiz.html#arge">AR-GE ve teknoloji geliştirme</a></li><li><a href="/hizmetlerimiz.html#tasarim">Tasarım</a></li><li><a href="/hizmetlerimiz.html#pazarlama">Dijital pazarlama</a></li><li><a href="/hizmetlerimiz.html#danismanlik">Kurumsal danışmanlık</a></li></ul></div>
+    <div><h3>Hizmet Alanlarımız</h3><ul><li><a href="/hizmetlerimiz.html#web-tasarim">Web tasarım</a></li><li><a href="/hizmetlerimiz.html#grafik-tasarim">Grafik tasarım</a></li></ul></div>
     <div><h3>Kurumsal</h3><ul><li><a href="/hakkimizda.html">Hakkımızda</a></li><li><a href="/hizmetlerimiz.html">Hizmetlerimiz</a></li><li><a href="/bize-ulasin.html">Bize ulaşın</a></li></ul></div>
     <div><h3>Yasal Bilgilendirme</h3><ul><li><a href="/lisans.html">Lisans ve telif</a></li><li><a href="/yasal-bilgilendirme.html#kisisel-veriler">Kişisel verilerin korunması</a></li><li><a href="/yasal-bilgilendirme.html#cerezler">Çerez politikası</a></li><li><a href="/yasal-bilgilendirme.html#yasal">Yasal bilgilendirme</a></li></ul></div>
   </div>
