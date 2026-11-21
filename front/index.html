@@ -507,26 +507,37 @@ html{scroll-behavior:smooth}body{background:#fff!important;color:var(--cb-ink)!i
 @media(max-width:760px){.cb-home-services--visual-only{width:calc(100% - 36px)!important;padding:18px 0 24px!important}.cb-home-services--visual-only .cb-home-services__grid{grid-template-columns:1fr!important}.cb-home-services--visual-only .cb-home-service-card{height:210px!important;min-height:210px!important}}
 </style>
 
-<style id="cb-home-service-cards-restored">
-.cb-home-services--visual-only{width:min(1240px,calc(100% - 56px))!important;max-width:1240px!important;margin:0 auto!important;padding:28px 0 34px!important;box-sizing:border-box!important}
-.cb-home-services--visual-only .cb-home-services__grid{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:18px!important;align-items:stretch!important}
-.cb-home-services--visual-only .cb-home-service-card{position:relative!important;display:flex!important;flex-direction:column!important;justify-content:space-between!important;box-sizing:border-box!important;width:100%!important;height:clamp(250px,25vw,320px)!important;min-height:250px!important;padding:22px 24px 24px!important;border-radius:15px!important;overflow:hidden!important;color:#fff!important;text-decoration:none!important}
-.cb-home-services--visual-only .cb-home-service-card:before{content:"";position:absolute;inset:0;z-index:-2;background-size:cover;background-position:center;transition:transform .6s ease}
-.cb-home-services--visual-only .cb-home-service-card:after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(17,12,26,.24),rgba(17,12,26,.20) 34%,rgba(17,12,26,.88))}
-.cb-home-services--visual-only .cb-home-service-card--web:before{background-image:url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1600&q=88')}
-.cb-home-services--visual-only .cb-home-service-card--graphic:before{background-image:url('https://images.unsplash.com/photo-1541961017774-22349e4a1262?auto=format&fit=crop&w=1600&q=88')}
-.cb-home-services--visual-only .cb-home-service-card__top{display:flex;justify-content:space-between;align-items:center;gap:12px;position:relative;z-index:1}
-.cb-home-services--visual-only .cb-home-service-card__top span{font-size:10px;letter-spacing:1.5px;font-weight:800;padding:8px 10px;border:1px solid rgba(255,255,255,.4);border-radius:4px;background:rgba(20,14,30,.48)}
-.cb-home-services--visual-only .cb-home-service-card__top>b{font-size:23px;color:#d9bafa;font-weight:400}
-.cb-home-services--visual-only .cb-home-service-card__content{position:relative;z-index:1;max-width:430px}
-.cb-home-services--visual-only .cb-home-service-card__content>span{font-size:10px;letter-spacing:1.8px;font-weight:800;color:#dfc4ff}
-.cb-home-services--visual-only .cb-home-service-card__content h3{font-size:clamp(30px,3vw,40px);line-height:1.05;letter-spacing:-1px;margin:9px 0 10px;color:#fff}
-.cb-home-services--visual-only .cb-home-service-card__content p{max-width:370px;font-size:13px;line-height:1.65;color:rgba(255,255,255,.9);margin:0 0 14px}
-.cb-home-services--visual-only .cb-home-service-card__content i{display:inline-flex;align-items:center;gap:14px;font-size:11px;font-style:normal;font-weight:800;color:#fff;border-bottom:1px solid rgba(255,255,255,.65);padding-bottom:6px}
-.cb-home-services--visual-only .cb-home-service-card__content i b{font-size:16px;color:#dfc4ff}
-.cb-home-services--visual-only .cb-home-service-card:hover:before{transform:scale(1.04)}
-@media(max-width:760px){.cb-home-services--visual-only{width:calc(100% - 32px)!important;padding:20px 0 26px!important}.cb-home-services--visual-only .cb-home-services__grid{grid-template-columns:1fr!important;gap:14px!important}.cb-home-services--visual-only .cb-home-service-card{height:clamp(230px,62vw,290px)!important;min-height:230px!important;padding:18px 19px 20px!important}.cb-home-services--visual-only .cb-home-service-card__content h3{font-size:29px!important}}
-@media(min-width:761px) and (max-width:1050px){.cb-home-services--visual-only{width:calc(100% - 40px)!important}.cb-home-services--visual-only .cb-home-service-card{height:280px!important;padding:18px 20px!important}}
+
+<style id="cb-home-alternating-service-layout">
+.cb-home-services--alternating{width:min(1240px,calc(100% - 64px))!important;max-width:1240px!important;margin:0 auto!important;padding:38px 0 48px!important;display:flex!important;flex-direction:column!important;gap:34px!important}
+.cb-home-service-row{display:grid!important;grid-template-columns:minmax(0,1.12fr) minmax(300px,.88fr)!important;gap:clamp(28px,5vw,70px)!important;align-items:center!important;min-width:0!important}
+.cb-home-service-row--graphic{grid-template-columns:minmax(300px,.88fr) minmax(0,1.12fr)!important}
+.cb-home-service-image{position:relative!important;display:block!important;width:100%!important;height:clamp(260px,29vw,390px)!important;min-height:260px!important;border-radius:18px!important;overflow:hidden!important;background:#21182b!important;box-shadow:0 18px 48px rgba(31,21,43,.12)!important}
+.cb-home-service-image img{display:block!important;width:100%!important;height:100%!important;object-fit:cover!important;object-position:center!important;transition:transform .65s ease!important}
+.cb-home-service-image:hover img{transform:scale(1.045)!important}
+.cb-home-service-image:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(15,10,24,.36),transparent 42%,rgba(15,10,24,.12));pointer-events:none}
+.cb-home-service-image>span{position:absolute;z-index:1;top:18px;left:18px;padding:8px 11px;border:1px solid rgba(255,255,255,.55);border-radius:4px;background:rgba(18,13,25,.48);color:#fff;font-size:9px;font-weight:850;letter-spacing:1.5px}
+.cb-home-service-copy{max-width:490px!important;padding:10px 0!important}
+.cb-home-service-kicker{display:inline-block;color:#7950a4;font-size:10px;font-weight:850;letter-spacing:2.2px;margin-bottom:13px}
+.cb-home-service-copy h2{color:#1c1824!important;font-size:clamp(34px,3.4vw,48px)!important;line-height:1.05!important;letter-spacing:-1.5px!important;font-weight:800!important;margin:0 0 15px!important}
+.cb-home-service-copy p{color:#6f6876!important;font-size:15px!important;line-height:1.75!important;margin:0 0 18px!important;max-width:460px!important}
+.cb-home-service-copy ul{list-style:none!important;padding:0!important;margin:0 0 22px!important;display:grid!important;gap:10px!important}
+.cb-home-service-copy li{position:relative!important;padding-left:23px!important;color:#393241!important;font-size:13px!important;line-height:1.5!important}
+.cb-home-service-copy li:before{content:"✓";position:absolute;left:0;top:0;color:#8156aa;font-weight:900;font-size:15px}
+.cb-home-service-link{display:inline-flex!important;align-items:center!important;gap:20px!important;padding:11px 16px!important;border:1px solid #8054aa!important;border-radius:5px!important;color:#704496!important;text-decoration:none!important;font-size:12px!important;font-weight:850!important;transition:all .2s ease!important}
+.cb-home-service-link span{font-size:17px!important}
+.cb-home-service-link:hover{background:#7851a5!important;color:#fff!important}
+@media(max-width:760px){
+ .cb-home-services--alternating{width:calc(100% - 36px)!important;padding:25px 0 34px!important;gap:28px!important}
+ .cb-home-service-row,.cb-home-service-row--graphic{grid-template-columns:1fr!important;gap:17px!important}
+ .cb-home-service-row--graphic .cb-home-service-copy{order:2!important}
+ .cb-home-service-row--graphic .cb-home-service-image{order:1!important}
+ .cb-home-service-image{height:clamp(220px,62vw,310px)!important;min-height:220px!important;border-radius:13px!important}
+ .cb-home-service-copy{max-width:100%!important;padding:0 2px!important}
+ .cb-home-service-copy h2{font-size:32px!important}
+ .cb-home-service-copy p{font-size:13px!important;line-height:1.65!important}
+ .cb-home-service-copy li{font-size:12px!important}
+}
 </style>
 
 <style id="cb-map-service-intro-style">
@@ -731,15 +742,31 @@ html{scroll-behavior:smooth}body{background:#fff!important;color:var(--cb-ink)!i
 
 
 
-<section class="cb-home-services cb-home-services--visual-only" aria-label="Hizmetlerimiz">
-  <div class="cb-home-services__grid">
-    <a class="cb-home-service-card cb-home-service-card--web" href="/hizmetlerimiz.html#web-tasarim">
-      <div class="cb-home-service-card__top"><span>01 / DİJİTAL DENEYİM</span><b>↗</b></div>
-      <div class="cb-home-service-card__content"><span>WEB TASARIM</span><h3>Dijitalde<br>yerinizi alın.</h3><p>Markanıza özel, hızlı ve mobil uyumlu web siteleri.</p><i>Hizmeti keşfet <b>↗</b></i></div>
+<section class="cb-home-services cb-home-services--alternating" aria-label="Hizmetlerimiz">
+  <div class="cb-home-service-row cb-home-service-row--web">
+    <a class="cb-home-service-image" href="/hizmetlerimiz.html#web-tasarim" aria-label="Web Tasarım hizmetini keşfet">
+      <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1800&q=88" alt="Modern web sitesi tasarımı ve dijital arayüz ekranı" loading="lazy">
+      <span>01 / WEB TASARIM</span>
     </a>
-    <a class="cb-home-service-card cb-home-service-card--graphic" href="/hizmetlerimiz.html#grafik-tasarim">
-      <div class="cb-home-service-card__top"><span>02 / GÖRSEL İLETİŞİM</span><b>✳</b></div>
-      <div class="cb-home-service-card__content"><span>GRAFİK TASARIM</span><h3>Markanızın<br>görsel dili.</h3><p>Özgün, tutarlı ve akılda kalan grafik tasarımlar.</p><i>Hizmeti keşfet <b>↗</b></i></div>
+    <div class="cb-home-service-copy">
+      <span class="cb-home-service-kicker">DİJİTAL DENEYİM</span>
+      <h2>Web Tasarım</h2>
+      <p>Markanızın dijital dünyadaki yüzünü; estetik, hızlı ve tüm cihazlarda kusursuz çalışan web deneyimleriyle tasarlıyoruz.</p>
+      <ul><li>Kurumsal ve özgün web siteleri</li><li>Mobil uyumlu kullanıcı deneyimi</li><li>SEO odaklı, güçlü altyapı</li></ul>
+      <a class="cb-home-service-link" href="/hizmetlerimiz.html#web-tasarim">Hizmeti keşfet <span>↗</span></a>
+    </div>
+  </div>
+  <div class="cb-home-service-row cb-home-service-row--graphic">
+    <div class="cb-home-service-copy">
+      <span class="cb-home-service-kicker">GÖRSEL İLETİŞİM</span>
+      <h2>Grafik Tasarım</h2>
+      <p>Markanızın karakterini güçlü bir görsel dile dönüştürüyor; akılda kalan, tutarlı ve etkili tasarımlar üretiyoruz.</p>
+      <ul><li>Kurumsal kimlik ve marka dili</li><li>Dijital ve sosyal medya görselleri</li><li>Basılı ve tanıtım materyalleri</li></ul>
+      <a class="cb-home-service-link" href="/hizmetlerimiz.html#grafik-tasarim">Hizmeti keşfet <span>↗</span></a>
+    </div>
+    <a class="cb-home-service-image" href="/hizmetlerimiz.html#grafik-tasarim" aria-label="Grafik Tasarım hizmetini keşfet">
+      <img src="https://images.unsplash.com/photo-1541961017774-22349e4a1262?auto=format&fit=crop&w=1800&q=88" alt="Renkli grafik tasarım ve yaratıcı görsel üretim çalışması" loading="lazy">
+      <span>02 / GRAFİK TASARIM</span>
     </a>
   </div>
 </section>
