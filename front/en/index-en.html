@@ -195,7 +195,7 @@ html{scroll-behavior:smooth}body{background:#fff!important;color:var(--cb-ink)!i
                 <div class="langSelectorBody">
                     <ul class="langSelectorList">
                         <li class="langSelectorListItem" data-lang="tr">
-                            <a href="/en/index-en.html" class="langSelectorListName">
+                            <a href="/" class="langSelectorListName">
                                 <span class="langSelectorListNameFlag">
                                     <img src="/_assets/images/tr-flag.png" alt="Türkçe" />
                                 </span>
@@ -245,7 +245,7 @@ html{scroll-behavior:smooth}body{background:#fff!important;color:var(--cb-ink)!i
             <div class="langSelectorBody">
                 <ul class="langSelectorList">
                     <li class="langSelectorListItem" data-lang="tr">
-                        <a href="/en/index-en.html" class="langSelectorListName">
+                        <a href="/" class="langSelectorListName">
                             <span class="langSelectorListNameFlag">
                                 <img src="/_assets/images/tr-flag.png" alt="Türkçe" />
                             </span>
@@ -565,13 +565,12 @@ html{scroll-behavior:smooth}body{background:#fff!important;color:var(--cb-ink)!i
 
 
 <script>
-    document.querySelector('.langSelectorHeader').addEventListener('click', function(event) {
-// Olayın sayfa yenilemesini engelle
-event.preventDefault();
-
-// Dropdown'un açılma/kapanma işlevini burada ekle
-const langSelectorBody = document.querySelector('.langSelectorBody');
-langSelectorBody.classList.toggle('open'); // Aç/kapa işlemi için 'open' class'ını kullan
+    document.querySelectorAll('.langSelectorHeader').forEach(function(header) {
+    header.addEventListener('click', function(event) {
+        event.preventDefault();
+        const body = header.parentElement.querySelector('.langSelectorBody');
+        if (body) body.classList.toggle('open');
+    });
 });
 
 </script>
