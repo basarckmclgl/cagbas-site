@@ -65,7 +65,7 @@
                     <span class="langSelectorListNameFlag">
                         <img src="/_assets/images/en-flag.png" alt="English" />
                     </span>
-                    <abbr class="langSelectorListNameLabel" title="tr">EN</abbr>
+                    <abbr class="langSelectorListNameLabel" title="en">EN</abbr>
                 </a>
                     <i class="fa fa-caret-down" aria-hidden="true"></i>
                 </b>
@@ -73,7 +73,7 @@
             <div class="langSelectorBody">
                 <ul class="langSelectorList">
                     <li class="langSelectorListItem" data-lang="tr">
-                        <a href="/en/hizmetlerimiz-en.html" class="langSelectorListName">
+                        <a href="/hizmetlerimiz.html" class="langSelectorListName">
                             <span class="langSelectorListNameFlag">
                                 <img src="/_assets/images/tr-flag.png" alt="Türkçe" />
                             </span>
@@ -112,9 +112,9 @@
                 <b class="langSelectorTitle">
                     <span id="currentLang">
                         <span class="langSelectorListNameFlag">
-                            <img src="/_assets/images/tr-flag.png" alt="Türkçe" />
+                            <img src="/_assets/images/en-flag.png" alt="English" />
                         </span>
-                        <abbr class="langSelectorListNameLabel" title="tr">TR</abbr>
+                        <abbr class="langSelectorListNameLabel" title="en">EN</abbr>
                     </span>
                     <i class="fa fa-caret-down" aria-hidden="true"></i>
                 </b>
@@ -122,7 +122,7 @@
             <div class="langSelectorBody">
                 <ul class="langSelectorList">
                     <li class="langSelectorListItem" data-lang="tr">
-                        <a href="/en/index-en.html" class="langSelectorListName">
+                        <a href="/hizmetlerimiz.html" class="langSelectorListName">
                             <span class="langSelectorListNameFlag">
                                 <img src="/_assets/images/tr-flag.png" alt="Türkçe" />
                             </span>
@@ -251,6 +251,21 @@
     <script src="/_assets/js/main.js?v=X93kExafD7lI1SN-Bq_iysPgSR6Qt5Wt34vcYAWlqDA"></script>
     <script src="/_assets/js/swiper.min.js?v=jcZI6TDGC3hzQZzrURk5iTc-vtOSbNIImAEDxQ3ZuiA"></script>
     <script src="/_assets/js/parsley.min.js?v=yRwm0kte_729S7f5lG1HqUnJ3m9Dj-vWeRhImPs9oug"></script>
+
+    <script>
+        document.querySelectorAll('.langSelectorHeader').forEach(function(header) {
+            header.addEventListener('click', function(event) {
+                event.preventDefault();
+                const body = header.parentElement.querySelector('.langSelectorBody');
+                if (body) body.classList.toggle('open');
+            });
+        });
+        const mobileMenu = document.getElementById('menu-icon');
+        if (mobileMenu) mobileMenu.addEventListener('click', function() {
+            const links = document.querySelector('.mobile-menu-links-wrapper');
+            if (links) links.classList.toggle('open');
+        });
+    </script>
 
     <button id="scrollToTopBtn" title="Go to top">↑</button>
 
