@@ -74,7 +74,8 @@ async function sendVerificationEmail(env, email, verifyUrl) {
 export async function onRequestPost({ request, env }) {
   if (!env.DB) return json({ error: "Abonelik sistemi henüz yapılandırılmadı." }, 503);
   const security = await enforceRequestSecurity(request, env, "newsletter", 3, 60 * 60 * 1000);
-  if (!security.ok) return json({ error: security.message }, security.status);\n  if (!(request.headers.get("content-type") || "").includes("application/json")) return json({ error: "Geçersiz istek biçimi." }, 415);
+  if (!security.ok) return json({ error: security.message }, security.status);
+  if (!(request.headers.get("content-type") || "").includes("application/json")) return json({ error: "Geçersiz istek biçimi." }, 415);
 
   let data;
   try { data = await request.json(); }
