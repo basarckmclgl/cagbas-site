@@ -41,7 +41,7 @@ async function sendVerificationEmail(env, email, verifyUrl) {
     "Bu talebi siz oluşturmadıysanız bu e-postayı yok sayabilirsiniz.",
     "",
     "ÇAĞBAŞ Creative Studio"
-  ].join("\\n");
+  ].join("\n");
 
   const response = await fetch("https://api.brevo.com/v3/smtp/email", {
     method: "POST",
@@ -69,6 +69,33 @@ async function sendVerificationEmail(env, email, verifyUrl) {
   const result = await response.json();
   if (!result.messageId) throw new Error("Brevo did not return a message ID.");
   return result.messageId;
+}
+
+
+async function enforceRequestSecurity(request, env, scope, limit, windowMs) {
+  const origin = request.headers.get("origin");
+  const allowedOrigins = new Set(["https://cagbas.com", "https://www.cagbas.com"]);
+  if (origin && !allowedOrigins.has(origin)) {
+    return { ok: false, status: 403, message: "Bu kaynaktan gelen isteğe izin verilmiyor." };
+  }
+  if ((request.headers.get("sec-fetch-site") || "").toLowerCase() === "cross-site") {
+    return { ok: false, status: 403, message: "Çapraz site isteğine izin verilmiyor." };
+  }
+  const ip = request.headers.get("cf-connecting-ip") || "unknown";
+  const digest = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(scope + ":" + ip));
+  const key = scope + ":" + Array.from(new Uint8Array(digest), b => b.toString(16).padStart(2, "0")).join("");
+  const now = Date.now();
+  const windowStart = Math.floor(now / windowMs) * windowMs;
+  const result = await env.DB.prepare(
+    "INSERT INTO api_rate_limits (rate_key, window_start, request_count) VALUES (?, ?, 1) ON CONFLICT(rate_key) DO UPDATE SET request_count = CASE WHEN api_rate_limits.window_start < excluded.window_start THEN 1 ELSE api_rate_limits.request_count + 1 END, window_start = CASE WHEN api_rate_limits.window_start < excluded.window_start THEN excluded.window_start ELSE api_rate_limits.window_start END RETURNING request_count"
+  ).bind(key, windowStart).first();
+  if (result && result.request_count > limit) {
+    return { ok: false, status: 429, message: "Çok fazla istek gönderildi. Lütfen daha sonra tekrar deneyin." };
+  }
+  if (Math.random() < 0.02) {
+    await env.DB.prepare("DELETE FROM api_rate_limits WHERE window_start < ?").bind(now - 24 * 60 * 60 * 1000).run();
+  }
+  return { ok: true };
 }
 
 export async function onRequestPost({ request, env }) {
