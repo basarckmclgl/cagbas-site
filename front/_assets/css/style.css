@@ -4769,3 +4769,64 @@ img, video, iframe { max-width: 100%; }
     transform: none !important;
   }
 }
+
+
+/* GLOBAL FIX — newsletter consent checkbox and label stay together on every page */
+.footer-contact-area-item-e-bulten .checkbox-wrapper {
+  display:flex !important;
+  flex-flow:row nowrap !important;
+  align-items:flex-start !important;
+  justify-content:flex-start !important;
+  gap:10px !important;
+  width:100% !important;
+  max-width:100% !important;
+  min-width:0 !important;
+  float:none !important;
+  margin:14px 0 0 !important;
+  padding:0 !important;
+  box-sizing:border-box !important;
+}
+.footer-contact-area-item-e-bulten .checkbox-wrapper input[type="checkbox"] {
+  display:block !important;
+  position:static !important;
+  float:none !important;
+  flex:0 0 18px !important;
+  width:18px !important;
+  min-width:18px !important;
+  max-width:18px !important;
+  height:18px !important;
+  min-height:18px !important;
+  margin:2px 0 0 !important;
+  padding:0 !important;
+  transform:none !important;
+  box-sizing:border-box !important;
+}
+.footer-contact-area-item-e-bulten .checkbox-wrapper label {
+  display:block !important;
+  position:static !important;
+  float:none !important;
+  flex:1 1 0 !important;
+  width:auto !important;
+  min-width:0 !important;
+  max-width:100% !important;
+  margin:0 !important;
+  padding:0 !important;
+  line-height:1.6 !important;
+  white-space:normal !important;
+  overflow-wrap:anywhere !important;
+  box-sizing:border-box !important;
+}
+@media (max-width: 767px) {
+  .footer-contact-area-item-e-bulten,
+  .footer-contact-area-item-e-bulten .input-container,
+  .footer-contact-area-item-e-bulten .newsletter-form {
+    width:100% !important;
+    max-width:100% !important;
+    min-width:0 !important;
+    box-sizing:border-box !important;
+  }
+  .footer-contact-area-item-e-bulten .checkbox-wrapper {
+    align-items:flex-start !important;
+    justify-content:flex-start !important;
+  }
+}
