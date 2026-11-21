@@ -4214,3 +4214,66 @@ img, video, iframe { max-width: 100%; }
  .mobile-menu-container > .menu-logo img { width:clamp(96px,31vw,118px) !important; }
  .mobile-menu-container > .langSelector { min-width:54px !important; }
 }
+
+/* Mobile layout repair mapped to the current ÇAĞBAŞ page markup */
+@media (max-width:767px) {
+ html,body { width:100%; max-width:100%; overflow-x:clip !important; }
+ body { margin:0 !important; }
+ .container,.main-wrapper,main { width:100% !important; max-width:100% !important; min-width:0 !important; height:auto !important; min-height:0 !important; }
+ .mobile-menu-container { position:fixed !important; top:0 !important; left:0 !important; right:0 !important; }
+ .mobile-menu-links-wrapper { position:fixed !important; top:68px !important; left:0 !important; right:0 !important; width:100vw !important; max-height:calc(100dvh - 68px) !important; overflow-y:auto !important; }
+ .mobile-menu-links-wrapper.open { display:block !important; }
+ .mobile-menu-links-wrapper:not(.open) { display:none !important; }
+ .slider-content-area-container,.slider-content-area-wrapper,.slider-content-wrapper,.banner-content-swiper-container,
+ .footer-contact-area-wrapper,.footer-link-area-wrapper,.footer-wrapper,.contact-info-wrapper,
+ .about-us-middle-tab-wrapper,.tab-container,.tab-content,.tab-links,.contactus-page-form-wrapper,.contactus-form-wrapper,.contactus-form-area-wrapper {
+  width:100% !important; max-width:100% !important; min-width:0 !important;
+ }
+ .slider-content-wrapper { padding:24px 18px 28px !important; }
+ .slider-content-wrapper span { display:block; font-size:clamp(24px,7vw,34px) !important; line-height:1.2 !important; letter-spacing:.2px !important; }
+ .slider-content-wrapper p { max-width:100% !important; font-size:14px !important; line-height:1.65 !important; }
+ .swiper-button-wrapper { position:relative !important; width:auto !important; max-width:calc(100vw - 36px) !important; margin:12px 18px !important; bottom:auto !important; }
+ .cb-home-services { padding:42px 18px !important; }
+ .cb-home-service-row,.middle-image-text-wrapper,.middle-image-text-wrapper-reverse,.wave-images .middle-image-text-item { display:flex !important; flex-direction:column !important; width:100% !important; gap:0 !important; }
+ .cb-home-service-row--graphic { flex-direction:column-reverse !important; }
+ .cb-home-service-image,.cb-home-service-copy,.middle-image-text-item,.middle-image-wrapper,.middle-image-item,.middle-image-item-right,.middle-image-text-area-wrapper {
+  width:100% !important; max-width:100% !important; min-width:0 !important; float:none !important;
+ }
+ .cb-home-service-image img { display:block; width:100% !important; height:220px !important; object-fit:cover !important; }
+ .cb-home-service-copy { padding:22px 2px 28px !important; }
+ .middle-image-text-container { padding:0 18px !important; margin-bottom:32px !important; }
+ .middle-image-text-item img,.middle-image-item img,.middle-image-item-right img { display:block !important; width:100% !important; max-width:100% !important; height:auto !important; object-fit:contain !important; margin:0 auto !important; }
+ .middle-image-text-area-wrapper,.wave-images .middle-image-text-area-wrapper { padding:18px 4px !important; align-items:flex-start !important; }
+ .middle-image-text-area-wrapper h4,.middle-image-text-area-wrapper p,.wave-images .middle-image-text-area-wrapper h4 { width:100% !important; max-width:100% !important; }
+ .cb-about-hero,.cb-about-main,.cb-about-intro,.cb-about-pillars,.cb-about-values,.cb-about-cta,.cb-services-page,.cb-service-list,.cb-services-intro,.cb-services-hero,.cb-services-method,.cb-services-cta { width:100% !important; max-width:100% !important; min-width:0 !important; }
+ .cb-about-hero { min-height:0 !important; padding:100px 18px 42px !important; }
+ .cb-about-hero__inner { width:100% !important; max-width:100% !important; padding:0 !important; }
+ .cb-about-main,.cb-about-pillars,.cb-about-value-list,.cb-services-hero__grid,.cb-services-steps { display:grid !important; grid-template-columns:minmax(0,1fr) !important; gap:16px !important; }
+ .cb-about-card { width:100% !important; min-width:0 !important; padding:22px !important; }
+ .cb-about-intro,.cb-about-values,.cb-about-cta,.cb-services-hero,.cb-services-method,.cb-services-cta { padding:30px 18px !important; }
+ .cb-services-page { padding:0 16px !important; }
+ .cb-service-row { display:flex !important; flex-direction:column !important; gap:12px !important; padding:26px 0 !important; }
+ .cb-service-row__meta,.cb-service-row__main,.cb-service-row__content,.cb-service-row__heading { width:100% !important; max-width:100% !important; min-width:0 !important; }
+ .cb-service-row__heading { display:flex !important; justify-content:space-between !important; align-items:flex-start !important; gap:10px !important; }
+ .contactus-page-form-container { padding:28px 16px !important; }
+ .contactus-form-area-wrapper,.contactus-form-area-item { display:flex !important; flex-direction:column !important; width:100% !important; max-width:100% !important; }
+ .contactus-form-area-item input,.contactus-form-area-item textarea,.contactus-form-area-item select,#contact-form input:not([type=hidden]),#contact-form textarea { display:block !important; width:100% !important; max-width:100% !important; min-width:0 !important; box-sizing:border-box !important; min-height:48px !important; font-size:16px !important; }
+ #map,.aboutus-banner #map { position:relative !important; height:300px !important; }
+ .footer-contact-area-wrapper,.footer-link-area-wrapper,.footer-wrapper,.cagbas-footer-grid { display:grid !important; grid-template-columns:minmax(0,1fr) !important; gap:20px !important; padding:24px 16px !important; }
+ .footer-contact-area-item,.footer-contact-area-item-e-bulten,.footer-item-start,.footer-item-center,.footer-item-end,.footer-links-items { width:100% !important; max-width:100% !important; padding:0 !important; border:0 !important; }
+ .contact-info-wrapper { display:flex !important; flex-direction:column !important; gap:12px !important; }
+ .phone-info-container { width:100% !important; max-width:100% !important; }
+ .newsletter-form,.input-container,.input-wrapper { width:100% !important; max-width:100% !important; }
+ .newsletter-form input,.input-wrapper input { width:100% !important; min-width:0 !important; font-size:16px !important; }
+ .signup-button { min-height:48px !important; }
+ .footer-banner-text-wrapper { left:5% !important; width:90% !important; }
+ .cookie-container { max-width:calc(100vw - 24px) !important; }
+ .modal-content { width:calc(100vw - 28px) !important; max-width:calc(100vw - 28px) !important; margin:8vh auto !important; }
+ table { display:block !important; max-width:100% !important; overflow-x:auto !important; }
+}
+@media (max-width:420px) {
+ .mobile-menu-container { padding-left:10px !important; padding-right:10px !important; gap:6px !important; }
+ .mobile-menu-icon-wrapper { flex-basis:40px !important; width:40px !important; }
+ .mobile-menu-container > .menu-logo img { width:clamp(96px,31vw,118px) !important; }
+ .mobile-menu-container > .langSelector { min-width:54px !important; }
+}
