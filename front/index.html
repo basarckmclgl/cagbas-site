@@ -508,13 +508,13 @@ html{scroll-behavior:smooth}body{background:#fff!important;color:var(--cb-ink)!i
 </style>
 
 <style id="cb-home-service-cards-restored">
-.cb-home-services--visual-only{width:min(1240px,calc(100% - 64px))!important;max-width:1240px!important;margin:0 auto!important;padding:34px 0 42px!important}
-.cb-home-services--visual-only .cb-home-services__grid{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:20px!important}
-.cb-home-services--visual-only .cb-home-service-card{position:relative!important;display:flex!important;flex-direction:column!important;justify-content:space-between!important;box-sizing:border-box!important;width:100%!important;height:360px!important;min-height:360px!important;padding:24px 28px 27px!important;border-radius:16px!important;overflow:hidden!important;color:#fff!important;text-decoration:none!important}
+.cb-home-services--visual-only{width:min(1240px,calc(100% - 56px))!important;max-width:1240px!important;margin:0 auto!important;padding:28px 0 34px!important;box-sizing:border-box!important}
+.cb-home-services--visual-only .cb-home-services__grid{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:18px!important;align-items:stretch!important}
+.cb-home-services--visual-only .cb-home-service-card{position:relative!important;display:flex!important;flex-direction:column!important;justify-content:space-between!important;box-sizing:border-box!important;width:100%!important;height:clamp(250px,25vw,320px)!important;min-height:250px!important;padding:22px 24px 24px!important;border-radius:15px!important;overflow:hidden!important;color:#fff!important;text-decoration:none!important}
 .cb-home-services--visual-only .cb-home-service-card:before{content:"";position:absolute;inset:0;z-index:-2;background-size:cover;background-position:center;transition:transform .6s ease}
-.cb-home-services--visual-only .cb-home-service-card:after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(17,12,26,.30),rgba(17,12,26,.18) 35%,rgba(17,12,26,.88))}
-.cb-home-services--visual-only .cb-home-service-card--web:before{background-image:url('/_assets/images/web-design-bg.jpg')}
-.cb-home-services--visual-only .cb-home-service-card--graphic:before{background-image:url('/_assets/images/graphic-design-bg.jpg')}
+.cb-home-services--visual-only .cb-home-service-card:after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(17,12,26,.24),rgba(17,12,26,.20) 34%,rgba(17,12,26,.88))}
+.cb-home-services--visual-only .cb-home-service-card--web:before{background-image:url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1600&q=88')}
+.cb-home-services--visual-only .cb-home-service-card--graphic:before{background-image:url('https://images.unsplash.com/photo-1541961017774-22349e4a1262?auto=format&fit=crop&w=1600&q=88')}
 .cb-home-services--visual-only .cb-home-service-card__top{display:flex;justify-content:space-between;align-items:center;gap:12px;position:relative;z-index:1}
 .cb-home-services--visual-only .cb-home-service-card__top span{font-size:10px;letter-spacing:1.5px;font-weight:800;padding:8px 10px;border:1px solid rgba(255,255,255,.4);border-radius:4px;background:rgba(20,14,30,.48)}
 .cb-home-services--visual-only .cb-home-service-card__top>b{font-size:23px;color:#d9bafa;font-weight:400}
@@ -525,7 +525,8 @@ html{scroll-behavior:smooth}body{background:#fff!important;color:var(--cb-ink)!i
 .cb-home-services--visual-only .cb-home-service-card__content i{display:inline-flex;align-items:center;gap:14px;font-size:11px;font-style:normal;font-weight:800;color:#fff;border-bottom:1px solid rgba(255,255,255,.65);padding-bottom:6px}
 .cb-home-services--visual-only .cb-home-service-card__content i b{font-size:16px;color:#dfc4ff}
 .cb-home-services--visual-only .cb-home-service-card:hover:before{transform:scale(1.04)}
-@media(max-width:760px){.cb-home-services--visual-only{width:calc(100% - 36px)!important;padding:24px 0 30px!important}.cb-home-services--visual-only .cb-home-services__grid{grid-template-columns:1fr!important;gap:15px!important}.cb-home-services--visual-only .cb-home-service-card{height:300px!important;min-height:300px!important;padding:19px 20px 22px!important}.cb-home-services--visual-only .cb-home-service-card__content h3{font-size:31px!important}}
+@media(max-width:760px){.cb-home-services--visual-only{width:calc(100% - 32px)!important;padding:20px 0 26px!important}.cb-home-services--visual-only .cb-home-services__grid{grid-template-columns:1fr!important;gap:14px!important}.cb-home-services--visual-only .cb-home-service-card{height:clamp(230px,62vw,290px)!important;min-height:230px!important;padding:18px 19px 20px!important}.cb-home-services--visual-only .cb-home-service-card__content h3{font-size:29px!important}}
+@media(min-width:761px) and (max-width:1050px){.cb-home-services--visual-only{width:calc(100% - 40px)!important}.cb-home-services--visual-only .cb-home-service-card{height:280px!important;padding:18px 20px!important}}
 </style>
 </head>
 <body>
