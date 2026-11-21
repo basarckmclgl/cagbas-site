@@ -243,6 +243,15 @@ html{scroll-behavior:smooth}body{background:#fff!important;color:var(--cb-ink)!i
  .cb-map-service-intro__tags span{font-size:8px;letter-spacing:1.2px}
 }
 </style>
+
+<style id="cb-rtl-final-fixes">
+html[dir="rtl"],html[dir="rtl"] body{max-width:100%;overflow-x:clip!important}
+html[dir="rtl"] *,html[dir="rtl"] *:before,html[dir="rtl"] *:after{box-sizing:border-box}
+html[dir="rtl"] .footer-contact-area-container,html[dir="rtl"] .footer-contact-area-wrapper,html[dir="rtl"] .footer-contact-area-item,html[dir="rtl"] .footer-contact-area-item-e-bulten{min-width:0!important;max-width:100%!important}
+html[dir="rtl"] .phone-info-container{display:flex!important;align-items:center!important;gap:12px!important;min-width:0!important;direction:rtl!important}
+html[dir="rtl"] #phone{direction:ltr!important;unicode-bidi:isolate!important;white-space:nowrap!important;display:inline-block!important;max-width:100%!important}
+html[dir="rtl"] .footer-contact-area-item-e-bulten .input-wrapper{min-width:0!important;max-width:100%!important}
+</style>
 </head>
 <body>
 
@@ -330,7 +339,7 @@ html{scroll-behavior:smooth}body{background:#fff!important;color:var(--cb-ink)!i
                         <span class="langSelectorListNameFlag">
                             <img src="/_assets/images/ar-flag.png" alt="العربية" />
                         </span>
-                        <abbr class="langSelectorListNameLabel" title="tr">AR</abbr>
+                        <abbr class="langSelectorListNameLabel" title="ar">AR</abbr>
                     </span>
                     <i class="fa fa-caret-down" aria-hidden="true"></i>
                 </b>
@@ -597,7 +606,7 @@ html{scroll-behavior:smooth}body{background:#fff!important;color:var(--cb-ink)!i
         <div class="modal-content">
             <div class="modal-header">
                 <span class="close">&times;</span>
-                <h2>Hata oluştu</h2>
+                <h2>حدث خطأ</h2>
             </div>
             <div class="modal-body">
                 <p></p>
@@ -609,7 +618,7 @@ html{scroll-behavior:smooth}body{background:#fff!important;color:var(--cb-ink)!i
         <div class="modal-content">
             <div class="modal-header">
                 <span class="close">&times;</span>
-                <h2>İşlem başarılı</h2>
+                <h2>تمت العملية بنجاح</h2>
             </div>
             <div class="modal-body">
                 <p></p>
