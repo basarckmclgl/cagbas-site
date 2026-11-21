@@ -274,7 +274,7 @@ html{scroll-behavior:smooth}body{background:#fff!important;color:var(--cb-ink)!i
                         <span class="langSelectorListNameFlag">
                             <img src="/_assets/images/ar-flag.png" alt="العربية" />
                         </span>
-                        <abbr class="langSelectorListNameLabel" title="tr">AR</abbr>
+                        <abbr class="langSelectorListNameLabel" title="ar">AR</abbr>
                     </span>
                     <i class="fa fa-caret-down" aria-hidden="true"></i>
                 </b>
@@ -470,7 +470,7 @@ html{scroll-behavior:smooth}body{background:#fff!important;color:var(--cb-ink)!i
                 <input type="email" name="email" id="newsletterEmail" placeholder="أدخل بريدك الإلكتروني..." required maxlength="254" autocomplete="email">
                 <button type="submit" class="signup-button">اشتراك</button>
             </div>
-            <p class="newsletter-privacy">سيتم استخدام بريدك الإلكتروني لإرسال النشرة وفقًا لـ <a href="/yasal-bilgilendirme.html#kisisel-veriler" target="_blank" rel="noopener">إشعار حماية البيانات الشخصية</a>.</p>
+            <p class="newsletter-privacy">سيتم استخدام بريدك الإلكتروني لإرسال النشرة وفقًا لـ <a href="/ar/legal-information-ar.html#personal-data" target="_blank" rel="noopener">إشعار حماية البيانات الشخصية</a>.</p>
             <div class="checkbox-wrapper">
                 <input type="checkbox" id="newsletterConsent" name="marketingConsent" value="yes" required>
                 <label for="newsletterConsent">أوافق على تلقي رسائل النشرة البريدية والإعلانات.</label>
@@ -538,7 +538,7 @@ html{scroll-behavior:smooth}body{background:#fff!important;color:var(--cb-ink)!i
         <div class="modal-content">
             <div class="modal-header">
                 <span class="close">&times;</span>
-                <h2>Hata oluştu</h2>
+                <h2>حدث خطأ</h2>
             </div>
             <div class="modal-body">
                 <p></p>
@@ -550,7 +550,7 @@ html{scroll-behavior:smooth}body{background:#fff!important;color:var(--cb-ink)!i
         <div class="modal-content">
             <div class="modal-header">
                 <span class="close">&times;</span>
-                <h2>İşlem başarılı</h2>
+                <h2>تمت العملية بنجاح</h2>
             </div>
             <div class="modal-body">
                 <p></p>
@@ -669,5 +669,151 @@ html{scroll-behavior:smooth}body{background:#fff!important;color:var(--cb-ink)!i
  .footer-contact-area-item-e-bulten .signup-button{width:100%!important}
 }
 </style>
+
+
+<style id="cb-ar-footer-fix">
+/* Arabic footer: isolate contact rows and prevent inherited flex overlap */
+html[lang="ar"], html[lang="ar"] body {
+  direction: rtl;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+.footer-contact-area-container,
+.footer-contact-area-wrapper,
+.footer-contact-area-item,
+.footer-bize-ulasin-area,
+.footer-contact-area-item-e-bulten {
+  direction: rtl !important;
+  text-align: right !important;
+  min-width: 0 !important;
+  box-sizing: border-box !important;
+}
+.footer-contact-area-wrapper {
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important;
+  column-gap: clamp(24px, 5vw, 64px) !important;
+}
+.footer-contact-area-item {
+  padding: 30px 0 30px 28px !important;
+}
+.footer-bize-ulasin-area .contact-info-wrapper {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: stretch !important;
+  gap: 16px !important;
+  width: 100% !important;
+}
+.footer-bize-ulasin-area .phone-info-container {
+  display: grid !important;
+  grid-template-columns: 44px minmax(0, 1fr) !important;
+  align-items: center !important;
+  justify-content: start !important;
+  gap: 12px !important;
+  width: 100% !important;
+  min-height: 48px !important;
+  margin: 0 !important;
+  direction: rtl !important;
+}
+.footer-bize-ulasin-area .phone-info-container img {
+  grid-column: 1 !important;
+  grid-row: 1 !important;
+  display: block !important;
+  width: 44px !important;
+  height: 44px !important;
+  padding: 8px !important;
+  object-fit: contain !important;
+  margin: 0 !important;
+}
+.footer-bize-ulasin-area .phone-info-container a#phone {
+  grid-column: 2 !important;
+  grid-row: 1 !important;
+  display: block !important;
+  width: auto !important;
+  min-width: 0 !important;
+  direction: ltr !important;
+  unicode-bidi: isolate !important;
+  text-align: right !important;
+  white-space: nowrap !important;
+  line-height: 1.5 !important;
+  margin: 0 !important;
+}
+.footer-bize-ulasin-area .phone-info-container:has(.contact-form-link) {
+  display: flex !important;
+  flex-direction: row !important;
+  justify-content: flex-start !important;
+  align-items: center !important;
+  gap: 10px !important;
+  min-height: 40px !important;
+}
+.footer-bize-ulasin-area .phone-info-container .contact-form-link {
+  display: inline-flex !important;
+  align-items: center !important;
+  width: auto !important;
+  white-space: normal !important;
+  direction: rtl !important;
+  text-align: right !important;
+  line-height: 1.5 !important;
+  margin: 0 !important;
+}
+.footer-bize-ulasin-area .contact-form-arrow-wrapper {
+  display: inline-flex !important;
+  position: static !important;
+  flex: 0 0 auto !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+.footer-contact-area-item-e-bulten h4,
+.footer-contact-area-item-e-bulten h5,
+.footer-contact-area-item-e-bulten > p,
+.footer-contact-area-item-e-bulten .newsletter-privacy,
+.footer-contact-area-item-e-bulten .checkbox-wrapper,
+.footer-contact-area-item-e-bulten .checkbox-wrapper label {
+  direction: rtl !important;
+  text-align: right !important;
+}
+.footer-contact-area-item-e-bulten .input-wrapper {
+  direction: rtl !important;
+}
+.footer-contact-area-item-e-bulten input[type="email"] {
+  direction: rtl !important;
+  text-align: right !important;
+}
+.footer-contact-area-item-e-bulten .signup-button {
+  direction: rtl !important;
+  white-space: nowrap !important;
+}
+.footer-contact-area-item-e-bulten .checkbox-wrapper {
+  display: flex !important;
+  align-items: flex-start !important;
+  justify-content: flex-start !important;
+  gap: 8px !important;
+}
+.footer-contact-area-item-e-bulten .checkbox-wrapper input {
+  flex: 0 0 auto !important;
+  margin: 3px 0 0 !important;
+}
+@media (max-width: 800px) {
+  .footer-contact-area-wrapper {
+    grid-template-columns: minmax(0, 1fr) !important;
+    row-gap: 28px !important;
+  }
+  .footer-contact-area-item {
+    padding: 0 0 26px !important;
+    border-left: 0 !important;
+    border-bottom: 1px solid #ded8e3 !important;
+  }
+  .footer-contact-area-item-e-bulten {
+    padding: 0 !important;
+  }
+}
+@media (max-width: 520px) {
+  .footer-contact-area-item-e-bulten .input-wrapper {
+    flex-direction: column !important;
+  }
+  .footer-contact-area-item-e-bulten .signup-button {
+    width: 100% !important;
+  }
+}
+</style>
+
 </body>
 </html>
