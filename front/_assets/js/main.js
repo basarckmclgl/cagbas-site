@@ -510,3 +510,47 @@ document.addEventListener('DOMContentLoaded', function() {
 //         });
 //     });
 // });
+
+/* Native mobile navigation fallback: works even if the legacy jQuery bundle fails. */
+(function () {
+  function bindMobileNavigation() {
+    var trigger = document.querySelector('.mobile-menu-icon-wrapper');
+    var panel = document.querySelector('.mobile-menu-links-wrapper');
+    if (!trigger || !panel || trigger.dataset.mobileNavBound === '1') return;
+    trigger.dataset.mobileNavBound = '1';
+    trigger.setAttribute('role', 'button');
+    trigger.setAttribute('tabindex', '0');
+    trigger.setAttribute('aria-label', 'Menüyü aç veya kapat');
+    trigger.setAttribute('aria-expanded', 'false');
+    panel.setAttribute('aria-hidden', 'true');
+    function toggle() {
+      var open = !panel.classList.contains('open');
+      panel.classList.toggle('open', open);
+      panel.setAttribute('aria-hidden', open ? 'false' : 'true');
+      trigger.setAttribute('aria-expanded', open ? 'true' : 'false');
+      document.body.classList.toggle('mobile-nav-open', open);
+    }
+    trigger.addEventListener('click', function (event) { event.preventDefault(); toggle(); });
+    trigger.addEventListener('keydown', function (event) {
+      if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); toggle(); }
+    });
+    panel.querySelectorAll('a').forEach(function (link) {
+      link.addEventListener('click', function () {
+        panel.classList.remove('open');
+        panel.setAttribute('aria-hidden', 'true');
+        trigger.setAttribute('aria-expanded', 'false');
+        document.body.classList.remove('mobile-nav-open');
+      });
+    });
+    document.addEventListener('keydown', function (event) {
+      if (event.key === 'Escape') {
+        panel.classList.remove('open');
+        panel.setAttribute('aria-hidden', 'true');
+        trigger.setAttribute('aria-expanded', 'false');
+        document.body.classList.remove('mobile-nav-open');
+      }
+    });
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', bindMobileNavigation);
+  else bindMobileNavigation();
+})();
