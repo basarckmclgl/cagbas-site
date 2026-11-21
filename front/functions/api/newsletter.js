@@ -73,13 +73,16 @@ async function sendVerificationEmail(env, email, verifyUrl) {
 
 export async function onRequestPost({ request, env }) {
   if (!env.DB) return json({ error: "Abonelik sistemi henüz yapılandırılmadı." }, 503);
-  const security = await enforceRequestSecurity(request, env, "newsletter", 3, 60 * 60 * 1000);\n  if (!security.ok) return json({ error: security.message }, security.status);\n  if (!(request.headers.get("content-type") || "").includes("application/json")) return json({ error: "Geçersiz istek biçimi." }, 415);
+  const security = await enforceRequestSecurity(request, env, "newsletter", 3, 60 * 60 * 1000);
+  if (!security.ok) return json({ error: security.message }, security.status);\n  if (!(request.headers.get("content-type") || "").includes("application/json")) return json({ error: "Geçersiz istek biçimi." }, 415);
 
   let data;
   try { data = await request.json(); }
   catch { return json({ error: "Gönderilen bilgiler okunamadı." }, 400); }
 
-  if (String(data.website || "").trim()) return json({ error: "Geçersiz form gönderimi." }, 400);\n\n  const email = String(data.email || "").trim().toLowerCase();
+  if (String(data.website || "").trim()) return json({ error: "Geçersiz form gönderimi." }, 400);
+
+  const email = String(data.email || "").trim().toLowerCase();
   if (!email || email.length > 254 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
     return json({ error: "Lütfen geçerli bir e-posta adresi girin." }, 400);
   }
