@@ -100,7 +100,8 @@ async function sendGmailNotification(env, submission) {
 
 export async function onRequestPost({ request, env }) {
   if (!env.DB) return json({ error: "İletişim kayıt sistemi henüz yapılandırılmadı." }, 503);
-  const security = await enforceRequestSecurity(request, env, "contact", 5, 10 * 60 * 1000);\n  if (!security.ok) return json({ error: security.message }, security.status);\n  if (!(request.headers.get("content-type") || "").includes("application/json")) {
+  const security = await enforceRequestSecurity(request, env, "contact", 5, 10 * 60 * 1000);
+  if (!security.ok) return json({ error: security.message }, security.status);\n  if (!(request.headers.get("content-type") || "").includes("application/json")) {
     return json({ error: "Geçersiz istek biçimi." }, 415);
   }
 
@@ -108,7 +109,9 @@ export async function onRequestPost({ request, env }) {
   try { data = await request.json(); }
   catch { return json({ error: "Gönderilen bilgiler okunamadı." }, 400); }
 
-  if (String(data.website || "").trim()) return json({ error: "Geçersiz form gönderimi." }, 400);\n\n  const fullName = String(data.fullName || "").trim();
+  if (String(data.website || "").trim()) return json({ error: "Geçersiz form gönderimi." }, 400);
+
+  const fullName = String(data.fullName || "").trim();
   const email = String(data.email || "").trim();
   const phone = String(data.phone || "").trim();
   const subject = String(data.subject || "").trim();
