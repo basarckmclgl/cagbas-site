@@ -4662,3 +4662,11 @@ img, video, iframe { max-width: 100%; }
  .mobile-menu-container .langSelectorHeader img{display:block!important;width:24px!important;height:auto!important}
  .menu-container>.mobile-menu-links-wrapper{top:64px!important;background:#171421!important}
 }
+
+
+/* Mobile: lower the footer-banner heading and copy slightly */
+@media (max-width: 767px) {
+  .footer-banner-text-wrapper {
+    top: calc(50% + 24px) !important;
+  }
+}
