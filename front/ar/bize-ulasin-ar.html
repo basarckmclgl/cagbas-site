@@ -64,6 +64,14 @@
 <link rel="alternate" hreflang="ar" href="https://cagbas.com/ar/bize-ulasin-ar.html">
 <link rel="alternate" hreflang="x-default" href="https://cagbas.com/bize-ulasin.html">
 <meta property="og:url" content="https://cagbas.com/ar/bize-ulasin-ar.html">
+
+<style id="cb-ar-contact-rtl-fixes">
+html[dir="rtl"],html[dir="rtl"] body{max-width:100%;overflow-x:clip!important}
+html[dir="rtl"] .aboutus-banner iframe{width:100%!important;max-width:100%!important}
+html[dir="rtl"] .footer-contact-area-wrapper,html[dir="rtl"] .footer-contact-area-item,html[dir="rtl"] .footer-contact-area-item-e-bulten{min-width:0!important;max-width:100%!important}
+html[dir="rtl"] .phone-info-container{display:flex!important;align-items:center!important;gap:12px!important;min-width:0!important;direction:rtl!important}
+html[dir="rtl"] #phone{direction:ltr!important;unicode-bidi:isolate!important;white-space:nowrap!important}
+</style>
 </head>
 <body>
 
@@ -200,9 +208,10 @@
             
 
 
-<div class="aboutus-banner">
-    <div id="map"></div>
-</div>
+<section class="aboutus-banner" aria-label="خريطة موقع ÇAĞBAŞ – هاتاي / دفنة" style="position:relative;width:100%;overflow:hidden;min-height:450px;">
+    <div style="position:absolute;z-index:2;top:24px;right:max(20px,calc((100% - 1140px)/2));padding:12px 18px;background:rgba(255,255,255,.94);color:#24213b;border-radius:8px;font-weight:600;box-shadow:0 4px 18px rgba(0,0,0,.12);">هاتاي / دفنة</div>
+    <iframe title="خريطة موقع ÇAĞBAŞ – هاتاي / دفنة" src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d804.8851233617105!2d36.13482086190184!3d36.20205561928992!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1str!2str!4v1795114697366!5m2!1str!2str" width="100%" height="450" style="border:0;display:block;" allowfullscreen loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+</section>
 
 <div class="contactus-page-form-container">
     <div class="contactus-page-form-wrapper" data-aos="fade-up" data-aos-delay="400">
@@ -345,7 +354,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <span class="close">&times;</span>
-                <h2>Hata oluştu</h2>
+                <h2>حدث خطأ</h2>
             </div>
             <div class="modal-body">
                 <p></p>
@@ -357,7 +366,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <span class="close">&times;</span>
-                <h2>İşlem başarılı</h2>
+                <h2>تمت العملية بنجاح</h2>
             </div>
             <div class="modal-body">
                 <p></p>
