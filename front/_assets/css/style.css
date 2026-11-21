@@ -4830,3 +4830,10 @@ img, video, iframe { max-width: 100%; }
     justify-content:flex-start !important;
   }
 }
+
+
+/* Accessibility: keyboard focus and skip navigation */
+.cb-skip-link{position:fixed;z-index:100000;top:12px;left:12px;padding:12px 18px;background:#fff;color:#241333;border:2px solid #6b35a5;border-radius:8px;font-weight:700;transform:translateY(-160%);transition:transform .15s ease}
+.cb-skip-link:focus,.cb-skip-link:focus-visible{transform:translateY(0);outline:3px solid #241333;outline-offset:3px}
+:where(a,button,input,select,textarea,[tabindex]):focus-visible{outline:3px solid #6b35a5!important;outline-offset:3px!important}
+.cb-sr-only{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}
