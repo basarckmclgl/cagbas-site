@@ -1,8 +1,25 @@
 $(document).ready(function () {
     $('.mobile-menu-icon-wrapper').on('click', function () {
-        $('.mobile-menu-links-wrapper').slideToggle();
-        $('body').toggleClass('fixed-body');
-    })
+        var $menu = $('.mobile-menu-links-wrapper').first();
+        var willOpen = !$menu.hasClass('open');
+        $menu.toggleClass('open', willOpen).attr('aria-hidden', willOpen ? 'false' : 'true');
+        $(this).attr('aria-expanded', willOpen ? 'true' : 'false');
+        $('body').toggleClass('mobile-nav-open', willOpen);
+    });
+
+    $('.mobile-menu-links-wrapper a').on('click', function () {
+        $('.mobile-menu-links-wrapper').removeClass('open').attr('aria-hidden', 'true');
+        $('.mobile-menu-icon-wrapper').attr('aria-expanded', 'false');
+        $('body').removeClass('mobile-nav-open');
+    });
+
+    $(document).on('keydown', function (event) {
+        if (event.key === 'Escape') {
+            $('.mobile-menu-links-wrapper').removeClass('open').attr('aria-hidden', 'true');
+            $('.mobile-menu-icon-wrapper').attr('aria-expanded', 'false');
+            $('body').removeClass('mobile-nav-open');
+        }
+    });
 
     $('#link-otomotiv').on('click', function () {
         if ($(this).parent().hasClass('open')) {
