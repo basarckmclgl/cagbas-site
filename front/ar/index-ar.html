@@ -26,11 +26,11 @@
     <link href="/_assets/css/aos.css" rel="stylesheet" />
     <link href="https://api.mapbox.com/mapbox-gl-js/v1.7.0/mapbox-gl.css" rel="stylesheet" />
 
-    <title>ÇAĞBAŞ | البحث والتطوير والتصميم والاستشارات المؤسسية</title>
+    <title>ÇAĞBAŞ | تصميم المواقع والتصميم الجرافيكي</title>
         <meta name="description" content="تجمع ÇAĞBAŞ بين البحث والتطوير والتصميم الإبداعي والإنتاج الرقمي والاستشارات المؤسسية." />
         <meta name="keywords" content="" />
         <meta property="og:title" content="ÇAĞBAŞ | البحث والتطوير والتصميم والاستشارات المؤسسية" />
-        <meta property="og:image" content="../_assets/images/cagbas-logo.svg" />
+        <meta property="og:image" content="https://cagbas.com/_assets/images/cagbas-logo.svg" />
 
     <style>
 /* Yazıları sağdan sola yap */
@@ -187,6 +187,71 @@ html{scroll-behavior:smooth}body{background:#fff!important;color:var(--cb-ink)!i
 <link rel="alternate" hreflang="ar" href="https://cagbas.com/ar/index-ar.html">
 <link rel="alternate" hreflang="x-default" href="https://cagbas.com/">
 <meta property="og:url" content="https://cagbas.com/ar/index-ar.html">
+<style id="cb-home-alternating-service-layout">
+.cb-home-services--alternating{width:min(1240px,calc(100% - 64px))!important;max-width:1240px!important;margin:0 auto!important;padding:38px 0 48px!important;display:flex!important;flex-direction:column!important;gap:34px!important;direction:ltr!important}
+.cb-home-service-row{display:grid!important;grid-template-columns:minmax(0,1.12fr) minmax(300px,.88fr)!important;gap:clamp(28px,5vw,70px)!important;align-items:center!important;min-width:0!important}
+.cb-home-service-row--graphic{grid-template-columns:minmax(300px,.88fr) minmax(0,1.12fr)!important}
+.cb-home-service-image{position:relative!important;display:block!important;width:100%!important;height:clamp(260px,29vw,390px)!important;min-height:260px!important;border-radius:18px!important;overflow:hidden!important;background:#21182b!important;box-shadow:0 18px 48px rgba(31,21,43,.12)!important}
+.cb-home-service-image img{display:block!important;width:100%!important;height:100%!important;object-fit:cover!important;object-position:center!important;transition:transform .65s ease!important}
+.cb-home-service-image:hover img{transform:scale(1.045)!important}
+.cb-home-service-image:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(15,10,24,.36),transparent 42%,rgba(15,10,24,.12));pointer-events:none}
+.cb-home-service-image>span{position:absolute;z-index:1;top:18px;left:18px;padding:8px 11px;border:1px solid rgba(255,255,255,.55);border-radius:4px;background:rgba(18,13,25,.48);color:#fff;font-size:9px;font-weight:850;letter-spacing:1.5px}
+.cb-home-service-copy{max-width:490px!important;padding:10px 0!important}
+.cb-home-service-kicker{display:inline-block;color:#7950a4;font-size:10px;font-weight:850;letter-spacing:2.2px;margin-bottom:13px}
+.cb-home-service-copy h2{color:#1c1824!important;font-size:clamp(34px,3.4vw,48px)!important;line-height:1.05!important;letter-spacing:-1.5px!important;font-weight:800!important;margin:0 0 15px!important}
+.cb-home-service-copy p{color:#6f6876!important;font-size:15px!important;line-height:1.75!important;margin:0 0 18px!important;max-width:460px!important}
+.cb-home-service-copy ul{list-style:none!important;padding:0!important;margin:0 0 22px!important;display:grid!important;gap:10px!important}
+.cb-home-service-copy li{position:relative!important;padding-left:23px!important;color:#393241!important;font-size:13px!important;line-height:1.5!important}
+.cb-home-service-copy li:before{content:"✓";position:absolute;left:0;top:0;color:#8156aa;font-weight:900;font-size:15px}
+.cb-home-service-link{display:inline-flex!important;align-items:center!important;gap:20px!important;padding:11px 16px!important;border:1px solid #8054aa!important;border-radius:5px!important;color:#704496!important;text-decoration:none!important;font-size:12px!important;font-weight:850!important;transition:all .2s ease!important}
+.cb-home-service-link span{font-size:17px!important}
+.cb-home-service-link:hover{background:#7851a5!important;color:#fff!important}
+.cb-map-service-intro{position:absolute;z-index:5;left:clamp(28px,8vw,116px);top:50%;transform:translateY(-43%);width:min(690px,68%);color:#fff;text-align:left}
+.cb-map-service-intro__eyebrow{display:inline-block;color:#e1c7ff;font-size:10px;font-weight:800;letter-spacing:3px;margin-bottom:16px}
+.cb-map-service-intro h1{font-size:clamp(34px,4.2vw,58px);line-height:1.08;letter-spacing:-1.7px;font-weight:800;color:#fff;margin:0 0 14px;text-shadow:0 2px 18px rgba(0,0,0,.38)}
+.cb-map-service-intro h1 em{font-family:Georgia,serif;font-weight:400;color:#d2a9ff}
+.cb-map-service-intro p{max-width:590px;font-size:15px;line-height:1.75;color:rgba(255,255,255,.91);margin:0 0 20px;text-shadow:0 1px 9px rgba(0,0,0,.5)}
+.cb-map-service-intro__tags{display:flex;align-items:center;gap:15px}
+.cb-map-service-intro__tags span{font-size:10px;font-weight:850;letter-spacing:1.8px;color:#fff}
+.cb-map-service-intro__tags i{width:4px;height:4px;border-radius:50%;background:#c99cf4}
+.banner-slider-wrapper:after{background:linear-gradient(90deg,rgba(12,10,20,.72) 0%,rgba(12,10,20,.43) 54%,rgba(12,10,20,.16) 100%)!important}
+.cb-home-services--rtl .cb-home-service-copy{direction:rtl!important;text-align:right!important;margin-left:auto!important}
+.cb-home-services--rtl .cb-home-service-copy p{margin-left:0!important;margin-right:auto!important}
+.cb-home-services--rtl .cb-home-service-copy li{padding-left:0!important;padding-right:23px!important}
+.cb-home-services--rtl .cb-home-service-copy li:before{left:auto!important;right:0!important}
+.cb-home-services--rtl .cb-home-service-link{direction:rtl!important}
+.cb-home-services--rtl .cb-home-service-kicker{letter-spacing:0!important}
+.cb-map-service-intro--rtl{left:auto!important;right:clamp(28px,8vw,116px)!important;text-align:right!important}
+.cb-map-service-intro--rtl p{margin-left:auto!important;margin-right:0!important}
+.cb-map-service-intro--rtl .cb-map-service-intro__tags{justify-content:flex-start!important;flex-direction:row-reverse!important}
+@media(max-width:760px){
+ .cb-home-services--alternating{width:calc(100% - 36px)!important;padding:25px 0 34px!important;gap:28px!important}
+ .cb-home-service-row,.cb-home-service-row--graphic{grid-template-columns:1fr!important;gap:17px!important}
+ .cb-home-service-row--graphic .cb-home-service-copy{order:2!important}
+ .cb-home-service-row--graphic .cb-home-service-image{order:1!important}
+ .cb-home-service-image{height:clamp(220px,62vw,310px)!important;min-height:220px!important;border-radius:13px!important}
+ .cb-home-service-copy{max-width:100%!important;padding:0 2px!important}
+ .cb-home-service-copy h2{font-size:32px!important}
+ .cb-home-service-copy p{font-size:13px!important;line-height:1.65!important}
+ .cb-home-service-copy li{font-size:12px!important}
+ .cb-map-service-intro{left:22px;right:22px;top:53%;transform:translateY(-35%);width:auto;text-align:left}
+ .cb-map-service-intro--rtl{left:22px!important;right:22px!important;text-align:right!important}
+ .cb-map-service-intro__eyebrow{font-size:8px;letter-spacing:2px;margin-bottom:10px}
+ .cb-map-service-intro h1{font-size:clamp(27px,7.8vw,38px);line-height:1.08;letter-spacing:-.8px;margin-bottom:10px}
+ .cb-map-service-intro p{font-size:12px;line-height:1.55;margin-bottom:14px;max-width:460px}
+ .cb-map-service-intro__tags{gap:10px;flex-wrap:wrap}
+ .cb-map-service-intro__tags span{font-size:8px;letter-spacing:1.2px}
+}
+</style>
+
+<style id="cb-rtl-final-fixes">
+html[dir="rtl"],html[dir="rtl"] body{max-width:100%;overflow-x:clip!important}
+html[dir="rtl"] *,html[dir="rtl"] *:before,html[dir="rtl"] *:after{box-sizing:border-box}
+html[dir="rtl"] .footer-contact-area-container,html[dir="rtl"] .footer-contact-area-wrapper,html[dir="rtl"] .footer-contact-area-item,html[dir="rtl"] .footer-contact-area-item-e-bulten{min-width:0!important;max-width:100%!important}
+html[dir="rtl"] .phone-info-container{display:flex!important;align-items:center!important;gap:12px!important;min-width:0!important;direction:rtl!important}
+html[dir="rtl"] #phone{direction:ltr!important;unicode-bidi:isolate!important;white-space:nowrap!important;display:inline-block!important;max-width:100%!important}
+html[dir="rtl"] .footer-contact-area-item-e-bulten .input-wrapper{min-width:0!important;max-width:100%!important}
+</style>
 </head>
 <body>
 
@@ -274,7 +339,7 @@ html{scroll-behavior:smooth}body{background:#fff!important;color:var(--cb-ink)!i
                         <span class="langSelectorListNameFlag">
                             <img src="/_assets/images/ar-flag.png" alt="العربية" />
                         </span>
-                        <abbr class="langSelectorListNameLabel" title="tr">AR</abbr>
+                        <abbr class="langSelectorListNameLabel" title="ar">AR</abbr>
                     </span>
                     <i class="fa fa-caret-down" aria-hidden="true"></i>
                 </b>
@@ -334,7 +399,7 @@ html{scroll-behavior:smooth}body{background:#fff!important;color:var(--cb-ink)!i
                 </div>
             </div>
         </div>
-        <div class="cb-map-slogan" lang="ar">شريك موثوق، نجاح عالمي!</div>
+        <div class="cb-map-service-intro cb-map-service-intro--rtl" lang="ar" dir="rtl"><span class="cb-map-service-intro__eyebrow">ÇAĞBAŞ CREATIVE STUDIO</span><h1>نصمّم الهوية الرقمية لعلامتك التجارية <em>بأسلوب يليق بها.</em></h1><p>نجمع بين تصميم المواقع والتصميم الجرافيكي لنقدّم لعلامتك حضوراً رقمياً متناسقاً، وهوية بصرية واضحة وتجربة استخدام مميزة.</p><div class="cb-map-service-intro__tags"><span>تصميم المواقع</span><i></i><span>التصميم الجرافيكي</span></div></div>
         <div class="cb-map-compass" aria-hidden="true"><img src="https://cdn.pixabay.com/photo/2012/04/18/20/47/compass-37840_1280.png" alt=""><span></span></div>
         <div class="banner-content-swiper-container">
             <div class="swiper-container left-down-swiper-container">
@@ -364,7 +429,18 @@ html{scroll-behavior:smooth}body{background:#fff!important;color:var(--cb-ink)!i
         </div>
     </div>
 
-<section class="cb-home-intro" aria-labelledby="cb-home-title" dir="rtl"><div class="cb-home-intro__inner"><span class="cb-home-intro__eyebrow">البحث · التصميم · الإنتاج الرقمي</span><h1 id="cb-home-title">نحوّل الأفكار إلى <em>تأثير</em> والعلامات إلى مستقبل أفضل.</h1><p>تجمع ÇAĞBAŞ بين البحث والتصميم الإبداعي والتكنولوجيا الرقمية لتطوير حلول عملية ومستدامة للعلامات التجارية والمؤسسات.</p><div class="cb-home-intro__actions"><a href="/ar/hizmetlerimiz-ar.html">اكتشف خدماتنا <span>↗</span></a><a class="cb-home-intro__secondary" href="/ar/bize-ulasin-ar.html">لنتحدث عن مشروعك</a></div></div><div class="cb-home-intro__side"><span>01 — 03</span><strong>تبدأ<br>بالاستراتيجية<br><i>وتنمو بالأثر.</i></strong><small>ÇAĞBAŞ CREATIVE & DIGITAL</small></div></section>
+
+
+<section class="cb-home-services cb-home-services--alternating cb-home-services--rtl" aria-label="خدماتنا" dir="ltr">
+  <div class="cb-home-service-row cb-home-service-row--web">
+    <a class="cb-home-service-image" href="/ar/hizmetlerimiz-ar.html#web-tasarim" aria-label="اكتشف تصميم المواقع"><img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1800&q=88" alt="تصميم موقع إلكتروني حديث وواجهة رقمية" loading="lazy"><span>01 / تصميم المواقع</span></a>
+    <div class="cb-home-service-copy" lang="ar" dir="rtl"><span class="cb-home-service-kicker">تجربة رقمية</span><h2>تصميم المواقع</h2><p>نصمّم حضور علامتك التجارية على الإنترنت من خلال مواقع أنيقة وسريعة ومتوافقة مع جميع الأجهزة.</p><ul><li>مواقع أعمال مميزة</li><li>تجربة استخدام متجاوبة</li><li>بنية موثوقة ومتوافقة مع SEO</li></ul><a class="cb-home-service-link" href="/ar/hizmetlerimiz-ar.html#web-tasarim">اكتشف الخدمة <span>↗</span></a></div>
+  </div>
+  <div class="cb-home-service-row cb-home-service-row--graphic">
+    <div class="cb-home-service-copy" lang="ar" dir="rtl"><span class="cb-home-service-kicker">التواصل البصري</span><h2>التصميم الجرافيكي</h2><p>نحوّل شخصية علامتك التجارية إلى لغة بصرية مميزة من خلال تصاميم متناسقة وسهلة التذكّر.</p><ul><li>الهوية البصرية وأنظمة العلامة</li><li>تصاميم رقمية ومنشورات التواصل</li><li>مواد مطبوعة وترويجية</li></ul><a class="cb-home-service-link" href="/ar/hizmetlerimiz-ar.html#grafik-tasarim">اكتشف الخدمة <span>↗</span></a></div>
+    <a class="cb-home-service-image" href="/ar/hizmetlerimiz-ar.html#grafik-tasarim" aria-label="اكتشف التصميم الجرافيكي"><img src="https://images.unsplash.com/photo-1541961017774-22349e4a1262?auto=format&fit=crop&w=1800&q=88" alt="أعمال إبداعية في التصميم الجرافيكي والفنون البصرية" loading="lazy"><span>02 / التصميم الجرافيكي</span></a>
+  </div>
+</section>
 
 <!-- <div class="middle-image-text-container">
     <div class="middle-image-text-wrapper">
@@ -398,15 +474,7 @@ html{scroll-behavior:smooth}body{background:#fff!important;color:var(--cb-ink)!i
     </div>
 </div> -->
 
-<section class="cb-home-process" aria-labelledby="cb-process-title" dir="rtl">
-  <div class="cb-home-process__head"><div><span class="cb-home-process__eyebrow">ÇAĞBAŞ / منهجية عملنا</span><h2 id="cb-process-title">من الفهم <em>إلى التأثير.</em></h2></div><p>كل نتيجة مؤثرة تبدأ بطرح الأسئلة الصحيحة. نوضح المسار معاً، ونحول الأفكار إلى استراتيجية والاستراتيجية إلى حلول عملية قابلة للتنفيذ.</p></div>
-  <div class="cb-home-process__grid">
-    <article class="cb-home-process__item"><span class="cb-home-process__number">01</span><div><span class="cb-home-process__label">الاكتشاف والتحليل</span><h3>نبدأ بالاستماع إليك.</h3><p>نطرح الأسئلة المناسبة لفهم أهدافك واحتياجاتك ووضعك الحالي، ثم نحدد الأولويات معاً.</p></div><span class="cb-home-process__arrow">↗</span></article>
-    <article class="cb-home-process__item"><span class="cb-home-process__number">02</span><div><span class="cb-home-process__label">الاستراتيجية والتصميم</span><h3>نمنح الأفكار اتجاهاً واضحاً.</h3><p>نجمع بين البحث والتفكير الإبداعي لنضع خطة عمل مميزة تتوافق مع علامتك التجارية وأهدافك.</p></div><span class="cb-home-process__arrow">↗</span></article>
-    <article class="cb-home-process__item"><span class="cb-home-process__number">03</span><div><span class="cb-home-process__label">التنفيذ والتطوير</span><h3>نحول الحلول إلى واقع.</h3><p>ننّفذ أعمال التصميم والتواصل الرقمي بعناية، ونقيّم النتائج لدعم التطوير المستمر.</p></div><span class="cb-home-process__arrow">↗</span></article>
-  </div>
-  <div class="cb-home-process__foot"><span>البحث</span><i></i><span>الاستراتيجية</span><i></i><span>الإبداع</span><i></i><span>التنفيذ</span></div>
-</section>
+
 <style>
 .cb-home-process{--cbp-ink:#19161f;--cbp-muted:#77717c;--cbp-accent:#7952a5;max-width:1240px;margin:0 auto;padding:105px 30px 90px;color:var(--cbp-ink)}
 .cb-home-process *{box-sizing:border-box}.cb-home-process__head{display:grid;grid-template-columns:1fr .72fr;gap:10%;align-items:end;margin-bottom:58px}
@@ -538,7 +606,7 @@ html{scroll-behavior:smooth}body{background:#fff!important;color:var(--cb-ink)!i
         <div class="modal-content">
             <div class="modal-header">
                 <span class="close">&times;</span>
-                <h2>Hata oluştu</h2>
+                <h2>حدث خطأ</h2>
             </div>
             <div class="modal-body">
                 <p></p>
@@ -550,7 +618,7 @@ html{scroll-behavior:smooth}body{background:#fff!important;color:var(--cb-ink)!i
         <div class="modal-content">
             <div class="modal-header">
                 <span class="close">&times;</span>
-                <h2>İşlem başarılı</h2>
+                <h2>تمت العملية بنجاح</h2>
             </div>
             <div class="modal-body">
                 <p></p>

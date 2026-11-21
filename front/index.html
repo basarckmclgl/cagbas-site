@@ -26,11 +26,11 @@
     <link href="/_assets/css/aos.css" rel="stylesheet" />
     <link href="https://api.mapbox.com/mapbox-gl-js/v1.7.0/mapbox-gl.css" rel="stylesheet" />
 
-    <title>ÇAĞBAŞ | AR-GE, Tasarım ve Kurumsal Danışmanlık</title>
-        <meta name="description" content="ÇAĞBAŞ; araştırma ve geliştirme, yaratıcı tasarım, web geliştirme, dijital üretim ve kurumsal danışmanlık çözümleri sunar." />
+    <title>ÇAĞBAŞ | Web Tasarım ve Grafik Tasarım</title>
+        <meta name="description" content="ÇAĞBAŞ; markalar için özgün web tasarım, grafik tasarım, görsel kimlik ve dijital deneyim çözümleri üretir." />
         <meta name="keywords" content="" />
-        <meta property="og:title" content="ÇAĞBAŞ | AR-GE, Tasarım ve Kurumsal Danışmanlık" />
-        <meta property="og:image" content="../_assets/images/cagbas-logo.svg" />
+        <meta property="og:title" content="ÇAĞBAŞ | Web Tasarım ve Grafik Tasarım" />
+        <meta property="og:image" content="https://cagbas.com/_assets/images/cagbas-logo.svg" />
 
 <style id="cb-homepage-redesign">
 :root{--cb-ink:#171521;--cb-paper:#f7f6f8;--cb-purple:#7851a5;--cb-lilac:#d8c3ee;--cb-muted:#77717e}
@@ -181,6 +181,67 @@ html{scroll-behavior:smooth}body{background:#fff!important;color:var(--cb-ink)!i
 .cb-map-slogan{position:absolute!important;z-index:5!important;left:42px!important;right:auto!important;bottom:clamp(16px,3.2vw,34px)!important;width:min(32%,360px)!important;min-height:clamp(104px,15vw,184px)!important;display:flex!important;align-items:flex-end!important;justify-content:flex-start!important;padding-bottom:clamp(5px,1vw,12px)!important;box-sizing:border-box!important;color:#fff!important;font-size:clamp(14px,1.8vw,24px)!important;line-height:1.2!important;font-weight:850!important;text-align:left!important;text-shadow:0 2px 16px rgba(0,0,0,.78)!important;pointer-events:none!important}
 @media(max-width:700px){.cb-map-compass{width:clamp(82px,22vw,112px)!important;bottom:18px!important}.cb-map-slogan{left:20px!important;right:auto!important;bottom:18px!important;width:34vw!important;min-height:clamp(82px,22vw,112px)!important;padding-bottom:4px!important;font-size:clamp(12px,3.3vw,16px)!important;line-height:1.18!important}}
 
+
+<style id="cb-home-services-design">
+.cb-home-services{--hs-ink:#191521;--hs-purple:#8056a9;max-width:1320px;margin:0 auto;padding:88px 34px 96px}
+.cb-home-services__head{display:grid;grid-template-columns:1fr .62fr;gap:9%;align-items:end;margin-bottom:34px}
+.cb-home-services__head>div>span{font-size:10px;letter-spacing:2px;font-weight:850;color:var(--hs-purple)}
+.cb-home-services__head h2{font-size:clamp(34px,4.5vw,57px);line-height:1.05;letter-spacing:-2px;color:var(--hs-ink);margin:16px 0 0}
+.cb-home-services__head h2 em{font-family:Georgia,serif;font-weight:400;color:var(--hs-purple)}
+.cb-home-services__head>p{font-size:15px;line-height:1.85;color:#77717e;margin:0 0 4px;max-width:440px}
+.cb-home-services__grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.cb-home-service-card{position:relative;isolation:isolate;overflow:hidden;display:flex;flex-direction:column;justify-content:space-between;min-height:450px;padding:26px 30px 30px;border-radius:18px;color:#fff!important;text-decoration:none!important;background:#171321;box-shadow:0 18px 48px rgba(26,17,38,.12);transition:transform .35s ease,box-shadow .35s ease}
+.cb-home-service-card:before{content:"";position:absolute;inset:0;z-index:-2;background-size:cover;background-position:center;transition:transform .7s cubic-bezier(.2,.7,.2,1)}
+.cb-home-service-card:after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(16,12,25,.22) 0%,rgba(16,12,25,.38) 34%,rgba(16,12,25,.92) 100%)}
+.cb-home-service-card--web:before{background-image:url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1600&q=88')}
+.cb-home-service-card--graphic:before{background-image:url('https://images.unsplash.com/photo-1541961017774-22349e4a1262?auto=format&fit=crop&w=1600&q=88')}
+.cb-home-service-card:hover{transform:translateY(-5px);box-shadow:0 24px 58px rgba(26,17,38,.2)}
+.cb-home-service-card:hover:before{transform:scale(1.045)}
+.cb-home-service-card__top{display:flex;justify-content:space-between;align-items:center;gap:15px}
+.cb-home-service-card__top span{font-size:10px;letter-spacing:1.8px;font-weight:850;padding:9px 12px;border:1px solid rgba(255,255,255,.38);border-radius:4px;background:rgba(20,14,30,.42);backdrop-filter:blur(8px)}
+.cb-home-service-card__top>b{font-size:26px;color:#d7b9fa;font-weight:400}
+.cb-home-service-card__content{max-width:500px}
+.cb-home-service-card__content>span{font-size:10px;letter-spacing:2px;font-weight:850;color:#d8bafa}
+.cb-home-service-card__content h3{font-size:clamp(32px,3.8vw,48px);line-height:1.04;letter-spacing:-1.5px;margin:12px 0 14px;color:#fff}
+.cb-home-service-card__content p{font-size:14px;line-height:1.8;color:rgba(255,255,255,.82);max-width:410px;margin:0 0 24px}
+.cb-home-service-card__content i{display:inline-flex;align-items:center;gap:18px;font-size:12px;font-style:normal;font-weight:800;color:#fff;border-bottom:1px solid rgba(255,255,255,.55);padding-bottom:9px}
+.cb-home-service-card__content i b{font-size:17px;color:#d8bafa}
+@media(max-width:760px){.cb-home-services{padding:62px 20px 68px}.cb-home-services__head{grid-template-columns:1fr;gap:17px;margin-bottom:25px}.cb-home-services__head h2{font-size:39px}.cb-home-services__head>p{font-size:14px}.cb-home-services__grid{grid-template-columns:1fr;gap:14px}.cb-home-service-card{min-height:390px;padding:22px 20px 24px;border-radius:15px}.cb-home-service-card__content h3{font-size:36px}}
+
+<style id="cb-home-services-balance">
+/* Align the homepage intro and service showcase to one consistent grid */
+.cb-home-intro{width:min(1240px,calc(100% - 64px))!important;max-width:1240px!important;margin:0 auto!important;padding:76px 0 78px!important;grid-template-columns:minmax(0,1.45fr) minmax(280px,.7fr)!important;gap:8%!important;box-sizing:border-box!important}
+.cb-home-intro__inner,.cb-home-intro__side{min-width:0!important}
+.cb-home-intro h1{font-size:clamp(44px,5vw,68px)!important;line-height:1.04!important;max-width:780px!important;margin:16px 0 18px!important}
+.cb-home-intro__inner>p{font-size:16px!important;line-height:1.8!important;max-width:680px!important}
+.cb-home-intro__side{padding-left:28px!important;gap:20px!important}
+.cb-home-services{display:block!important;width:min(1240px,calc(100% - 64px))!important;max-width:1240px!important;margin:0 auto!important;padding:66px 0 82px!important;box-sizing:border-box!important}
+.cb-home-services__head{width:100%!important;max-width:none!important;display:grid!important;grid-template-columns:minmax(0,1.2fr) minmax(260px,.8fr)!important;gap:8%!important;align-items:end!important;margin:0 0 30px!important;padding:0!important}
+.cb-home-services__head>div{min-width:0!important}
+.cb-home-services__head>div>span{display:block!important;font-size:11px!important;letter-spacing:2px!important;margin:0 0 12px!important}
+.cb-home-services__head h2{font-size:clamp(38px,4.4vw,56px)!important;line-height:1.06!important;letter-spacing:-1.8px!important;margin:0!important}
+.cb-home-services__head>p{font-size:15px!important;line-height:1.8!important;max-width:430px!important;margin:0 0 4px auto!important}
+.cb-home-services__grid{width:100%!important;display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:22px!important;align-items:stretch!important}
+.cb-home-service-card{width:100%!important;min-width:0!important;min-height:430px!important;height:430px!important;padding:26px 30px 30px!important;border-radius:18px!important;box-sizing:border-box!important}
+.cb-home-service-card__top span{font-size:11px!important;letter-spacing:1.5px!important}
+.cb-home-service-card__content{max-width:470px!important}
+.cb-home-service-card__content>span{font-size:11px!important}
+.cb-home-service-card__content h3{font-size:clamp(34px,3.5vw,46px)!important;line-height:1.05!important;margin:12px 0 14px!important}
+.cb-home-service-card__content p{font-size:15px!important;line-height:1.75!important;max-width:410px!important}
+.cb-home-service-card__content i{font-size:13px!important}
+@media(max-width:760px){
+ .cb-home-intro{width:calc(100% - 40px)!important;padding:54px 0 58px!important;grid-template-columns:1fr!important;gap:30px!important}
+ .cb-home-intro__side{border-left:0!important;border-top:1px solid #e8e1ed!important;padding:22px 0 0!important}
+ .cb-home-services{width:calc(100% - 40px)!important;padding:48px 0 58px!important}
+ .cb-home-services__head{grid-template-columns:1fr!important;gap:16px!important;margin-bottom:23px!important}
+ .cb-home-services__head h2{font-size:clamp(34px,9vw,43px)!important}
+ .cb-home-services__head>p{margin:0!important;font-size:14px!important}
+ .cb-home-services__grid{grid-template-columns:1fr!important;gap:15px!important}
+ .cb-home-service-card{height:auto!important;min-height:380px!important;padding:22px 20px 24px!important}
+ .cb-home-service-card__content h3{font-size:36px!important}
+}
+</style>
+</style>
 </style>
 <link rel="canonical" href="https://cagbas.com/">
 <link rel="alternate" hreflang="tr" href="https://cagbas.com/">
@@ -188,6 +249,317 @@ html{scroll-behavior:smooth}body{background:#fff!important;color:var(--cb-ink)!i
 <link rel="alternate" hreflang="ar" href="https://cagbas.com/ar/index-ar.html">
 <link rel="alternate" hreflang="x-default" href="https://cagbas.com/">
 <meta property="og:url" content="https://cagbas.com/">
+
+<style id="cb-home-minimal-content-width">
+/* Minimal editorial layout: constrain text measure, not legibility */
+.cb-home-intro{width:min(1080px,calc(100% - 64px))!important;max-width:1080px!important;grid-template-columns:minmax(0,1fr) minmax(210px,.48fr)!important;gap:7%!important;padding:48px 0 52px!important}
+.cb-home-intro__inner{max-width:590px!important}
+.cb-home-intro h1{max-width:470px!important;font-size:clamp(34px,3.3vw,43px)!important;line-height:1.08!important}
+.cb-home-intro__inner>p{max-width:410px!important;font-size:13px!important;line-height:1.75!important}
+.cb-home-intro__side{max-width:245px!important;justify-self:end!important}
+.cb-home-services{width:min(1080px,calc(100% - 64px))!important;max-width:1080px!important;padding:54px 0 60px!important}
+.cb-home-services__head{grid-template-columns:minmax(0,1fr) minmax(220px,.58fr)!important;gap:8%!important;max-width:900px!important;margin:0 auto 22px!important}
+.cb-home-services__head>div{max-width:450px!important}
+.cb-home-services__head h2{max-width:430px!important;font-size:clamp(29px,3vw,38px)!important}
+.cb-home-services__head>p{max-width:290px!important;font-size:12px!important;line-height:1.7!important}
+.cb-home-services__grid{max-width:1000px!important;margin:0 auto!important;gap:16px!important}
+.cb-home-service-card{min-height:285px!important;height:285px!important}
+.cb-home-service-card__content{max-width:300px!important}
+.cb-home-service-card__content h3{max-width:280px!important}
+.cb-home-service-card__content p{max-width:270px!important;font-size:11px!important;line-height:1.65!important}
+.cb-home-process{padding:58px 24px 54px!important}
+.cb-home-process__head{max-width:940px!important;grid-template-columns:minmax(0,1fr) minmax(220px,.65fr)!important;gap:8%!important;margin:0 auto 24px!important;align-items:end!important}
+.cb-home-process__head>div{max-width:470px!important}
+.cb-home-process__head h2{max-width:440px!important;font-size:clamp(32px,3.2vw,42px)!important;line-height:1.08!important}
+.cb-home-process__head>p{max-width:300px!important;font-size:12px!important;line-height:1.75!important}
+.cb-home-process__grid{max-width:940px!important;margin:0 auto!important}
+.cb-home-process__item{padding:20px 22px!important}
+.cb-home-process__item h3{font-size:16px!important;line-height:1.35!important}
+.cb-home-process__item p{max-width:250px!important;font-size:11px!important;line-height:1.7!important}
+@media(max-width:760px){
+ .cb-home-intro,.cb-home-services{width:calc(100% - 40px)!important}
+ .cb-home-intro{grid-template-columns:1fr!important}
+ .cb-home-intro__inner{max-width:100%!important}
+ .cb-home-intro h1{max-width:390px!important}
+ .cb-home-intro__inner>p{max-width:360px!important}
+ .cb-home-intro__side{justify-self:start!important;max-width:260px!important}
+ .cb-home-services__head{grid-template-columns:1fr!important;max-width:100%!important}
+ .cb-home-services__head>div,.cb-home-services__head h2,.cb-home-services__head>p{max-width:100%!important}
+ .cb-home-process__head{grid-template-columns:1fr!important;max-width:100%!important;gap:14px!important}
+ .cb-home-process__head>div,.cb-home-process__head h2,.cb-home-process__head>p{max-width:100%!important}
+ .cb-home-process__grid{max-width:100%!important}
+}
+</style>
+
+<style id="cb-home-layout-minimal-final">
+/* Compact centered composition — retain readable type, reduce occupied area */
+.cb-home-intro{
+ width:min(960px,calc(100% - 48px))!important;max-width:960px!important;
+ margin:0 auto!important;padding:36px 0 40px!important;
+ grid-template-columns:minmax(0,1.35fr) minmax(190px,.62fr)!important;
+ gap:7%!important;align-items:center!important
+}
+.cb-home-intro__inner{max-width:560px!important}
+.cb-home-intro h1{max-width:520px!important;font-size:clamp(34px,3.4vw,46px)!important;line-height:1.06!important;margin:10px 0 12px!important}
+.cb-home-intro__inner>p{max-width:440px!important;font-size:13px!important;line-height:1.7!important}
+.cb-home-intro__actions{margin-top:18px!important;gap:10px!important}
+.cb-home-intro__actions a{padding:11px 15px!important;font-size:11px!important}
+.cb-home-intro__side{max-width:230px!important;padding:8px 0 8px 20px!important;gap:14px!important}
+.cb-home-intro__side strong{font-size:21px!important;line-height:1.18!important}
+.cb-home-services{
+ width:min(960px,calc(100% - 48px))!important;max-width:960px!important;
+ margin:0 auto!important;padding:40px 0 46px!important
+}
+.cb-home-services__head{
+ max-width:850px!important;margin:0 auto 18px!important;
+ grid-template-columns:minmax(0,1fr) minmax(190px,.58fr)!important;gap:7%!important
+}
+.cb-home-services__head h2{max-width:400px!important;font-size:clamp(29px,3vw,37px)!important;line-height:1.08!important}
+.cb-home-services__head>p{max-width:270px!important;font-size:12px!important;line-height:1.65!important}
+.cb-home-services__grid{max-width:900px!important;margin:0 auto!important;gap:14px!important}
+.cb-home-service-card{height:270px!important;min-height:270px!important;padding:17px 19px!important}
+.cb-home-service-card__content{max-width:290px!important}
+.cb-home-service-card__content h3{max-width:270px!important;font-size:27px!important;line-height:1.08!important}
+.cb-home-service-card__content p{max-width:260px!important;font-size:11px!important;line-height:1.6!important}
+.cb-home-process{
+ width:100%!important;max-width:none!important;
+ padding:42px 24px 40px!important
+}
+.cb-home-process__head{
+ width:min(900px,100%)!important;max-width:900px!important;
+ margin:0 auto 18px!important;
+ display:grid!important;grid-template-columns:minmax(0,1fr) minmax(190px,.62fr)!important;
+ gap:7%!important;align-items:end!important
+}
+.cb-home-process__head>div{max-width:420px!important}
+.cb-home-process__head h2{max-width:390px!important;font-size:clamp(30px,3.1vw,39px)!important;line-height:1.08!important}
+.cb-home-process__head>p{max-width:280px!important;font-size:12px!important;line-height:1.65!important}
+.cb-home-process__grid{
+ width:min(900px,100%)!important;max-width:900px!important;
+ margin:0 auto!important;display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important
+}
+.cb-home-process__item{min-width:0!important;padding:16px 18px!important;min-height:0!important}
+.cb-home-process__item h3{font-size:16px!important;line-height:1.3!important;margin:10px 0 8px!important}
+.cb-home-process__item p{max-width:230px!important;font-size:11px!important;line-height:1.6!important;margin:0!important}
+.cb-home-process__number{font-size:10px!important}
+.cb-home-process__foot{width:min(900px,100%)!important;max-width:900px!important;margin:12px auto 0!important}
+@media(max-width:760px){
+ .cb-home-intro,.cb-home-services{width:calc(100% - 36px)!important}
+ .cb-home-intro{grid-template-columns:1fr!important;padding:32px 0!important;gap:22px!important}
+ .cb-home-intro__inner{max-width:100%!important}
+ .cb-home-intro h1{max-width:440px!important;font-size:clamp(31px,8vw,39px)!important}
+ .cb-home-intro__inner>p{max-width:390px!important}
+ .cb-home-intro__side{max-width:270px!important;justify-self:start!important;border-left:0!important;border-top:1px solid #e8e1ed!important;padding:15px 0 0!important}
+ .cb-home-services{padding:34px 0 38px!important}
+ .cb-home-services__head{grid-template-columns:1fr!important;gap:10px!important}
+ .cb-home-services__head h2,.cb-home-services__head>p{max-width:100%!important}
+ .cb-home-services__grid{grid-template-columns:1fr!important}
+ .cb-home-service-card{height:auto!important;min-height:250px!important}
+ .cb-home-process{padding:34px 18px!important}
+ .cb-home-process__head{grid-template-columns:1fr!important;gap:10px!important;width:100%!important}
+ .cb-home-process__head>div,.cb-home-process__head h2,.cb-home-process__head>p{max-width:100%!important}
+ .cb-home-process__grid{grid-template-columns:1fr!important;width:100%!important}
+ .cb-home-process__item{padding:16px 0!important;border-right:0!important;border-left:0!important}
+ .cb-home-process__item p{max-width:420px!important}
+ .cb-home-process__foot{width:100%!important}
+}
+</style>
+
+
+<style id="cb-home-readable-page-layout">
+/* Readable single-page layout: balanced width, clear text hierarchy */
+.cb-home-intro{
+ width:min(1160px,calc(100% - 72px))!important;max-width:1160px!important;
+ margin:0 auto!important;padding:58px 0 62px!important;
+ grid-template-columns:minmax(0,1.35fr) minmax(250px,.65fr)!important;
+ gap:7%!important;align-items:center!important
+}
+.cb-home-intro__inner{max-width:680px!important}
+.cb-home-intro h1{max-width:650px!important;font-size:clamp(40px,4.2vw,56px)!important;line-height:1.08!important;letter-spacing:-1.7px!important;margin:13px 0 16px!important}
+.cb-home-intro__inner>p{max-width:570px!important;font-size:15px!important;line-height:1.75!important}
+.cb-home-intro__actions{margin-top:22px!important;gap:12px!important}
+.cb-home-intro__actions a{padding:13px 18px!important;font-size:12px!important}
+.cb-home-intro__side{max-width:290px!important;padding:10px 0 10px 24px!important;gap:18px!important}
+.cb-home-intro__side strong{font-size:25px!important;line-height:1.2!important}
+.cb-home-services{
+ width:min(1160px,calc(100% - 72px))!important;max-width:1160px!important;
+ margin:0 auto!important;padding:52px 0 60px!important
+}
+.cb-home-services__head{
+ max-width:1080px!important;margin:0 auto 24px!important;
+ grid-template-columns:minmax(0,1fr) minmax(260px,.62fr)!important;gap:8%!important
+}
+.cb-home-services__head h2{max-width:510px!important;font-size:clamp(34px,3.6vw,46px)!important;line-height:1.08!important}
+.cb-home-services__head>p{max-width:360px!important;font-size:14px!important;line-height:1.75!important}
+.cb-home-services__grid{max-width:1080px!important;margin:0 auto!important;gap:18px!important}
+.cb-home-service-card{height:340px!important;min-height:340px!important;padding:22px 24px!important}
+.cb-home-service-card__content{max-width:390px!important}
+.cb-home-service-card__content h3{max-width:360px!important;font-size:34px!important;line-height:1.08!important}
+.cb-home-service-card__content p{max-width:340px!important;font-size:13px!important;line-height:1.7!important}
+.cb-home-service-card__content i{font-size:12px!important}
+.cb-home-process{width:100%!important;max-width:none!important;padding:56px 36px 52px!important}
+.cb-home-process__head{
+ width:min(1080px,100%)!important;max-width:1080px!important;margin:0 auto 24px!important;
+ display:grid!important;grid-template-columns:minmax(0,1fr) minmax(260px,.62fr)!important;
+ gap:8%!important;align-items:end!important
+}
+.cb-home-process__head>div{max-width:510px!important}
+.cb-home-process__head h2{max-width:490px!important;font-size:clamp(36px,3.7vw,48px)!important;line-height:1.08!important}
+.cb-home-process__head>p{max-width:360px!important;font-size:14px!important;line-height:1.75!important}
+.cb-home-process__grid{width:min(1080px,100%)!important;max-width:1080px!important;margin:0 auto!important;grid-template-columns:repeat(3,minmax(0,1fr))!important}
+.cb-home-process__item{padding:22px 24px!important}
+.cb-home-process__item h3{font-size:18px!important;line-height:1.35!important;margin:12px 0 10px!important}
+.cb-home-process__item p{max-width:290px!important;font-size:13px!important;line-height:1.7!important}
+.cb-home-process__foot{width:min(1080px,100%)!important;max-width:1080px!important;margin:16px auto 0!important}
+@media(max-width:760px){
+ .cb-home-intro,.cb-home-services{width:calc(100% - 36px)!important}
+ .cb-home-intro{grid-template-columns:1fr!important;padding:40px 0 42px!important;gap:24px!important}
+ .cb-home-intro h1{max-width:520px!important;font-size:clamp(34px,8.5vw,44px)!important}
+ .cb-home-intro__inner>p{max-width:480px!important;font-size:13px!important}
+ .cb-home-intro__side{max-width:300px!important;justify-self:start!important;border-left:0!important;border-top:1px solid #e8e1ed!important;padding:17px 0 0!important}
+ .cb-home-services{padding:38px 0 44px!important}
+ .cb-home-services__head{grid-template-columns:1fr!important;gap:12px!important}
+ .cb-home-services__head h2,.cb-home-services__head>p{max-width:100%!important}
+ .cb-home-services__grid{grid-template-columns:1fr!important}
+ .cb-home-service-card{height:auto!important;min-height:290px!important}
+ .cb-home-service-card__content h3{font-size:30px!important}
+ .cb-home-process{padding:38px 18px!important}
+ .cb-home-process__head{grid-template-columns:1fr!important;width:100%!important;gap:12px!important}
+ .cb-home-process__head>div,.cb-home-process__head h2,.cb-home-process__head>p{max-width:100%!important}
+ .cb-home-process__grid{grid-template-columns:1fr!important;width:100%!important}
+ .cb-home-process__item{padding:18px 0!important;border-right:0!important;border-left:0!important}
+ .cb-home-process__item p{max-width:480px!important}
+ .cb-home-process__foot{width:100%!important}
+}
+</style>
+
+<style id="cb-home-one-screen-compact">
+/* Desktop: fit the homepage's three main content bands into a compact viewport */
+@media(min-width:761px){
+ .cb-home-intro{
+  width:min(1160px,calc(100% - 64px))!important;max-width:1160px!important;
+  padding:25px 0 28px!important;min-height:0!important;
+  grid-template-columns:minmax(0,1.35fr) minmax(230px,.65fr)!important;gap:6%!important
+ }
+ .cb-home-intro__eyebrow{font-size:9px!important}
+ .cb-home-intro h1{font-size:clamp(34px,3.2vw,44px)!important;line-height:1.04!important;max-width:600px!important;margin:8px 0 9px!important;letter-spacing:-1.2px!important}
+ .cb-home-intro__inner>p{font-size:13px!important;line-height:1.55!important;max-width:520px!important}
+ .cb-home-intro__actions{margin-top:13px!important;gap:9px!important}
+ .cb-home-intro__actions a{padding:9px 13px!important;font-size:11px!important}
+ .cb-home-intro__side{padding:6px 0 6px 18px!important;gap:10px!important;max-width:250px!important}
+ .cb-home-intro__side>span{font-size:9px!important}
+ .cb-home-intro__side strong{font-size:21px!important;line-height:1.12!important}
+ .cb-home-intro__side small{font-size:8px!important}
+ .cb-home-services{
+  width:min(1160px,calc(100% - 64px))!important;max-width:1160px!important;
+  padding:24px 0 27px!important;margin:0 auto!important
+ }
+ .cb-home-services__head{
+  max-width:1080px!important;margin:0 auto 14px!important;
+  grid-template-columns:minmax(0,1fr) minmax(220px,.55fr)!important;gap:6%!important;align-items:end!important
+ }
+ .cb-home-services__head>div>span{font-size:9px!important}
+ .cb-home-services__head h2{font-size:clamp(27px,2.7vw,35px)!important;line-height:1.04!important;max-width:480px!important;margin:8px 0 0!important}
+ .cb-home-services__head>p{font-size:12px!important;line-height:1.5!important;max-width:300px!important}
+ .cb-home-services__grid{max-width:1080px!important;gap:14px!important}
+ .cb-home-service-card{height:190px!important;min-height:190px!important;padding:13px 17px!important;border-radius:12px!important}
+ .cb-home-service-card__top span{font-size:8px!important;padding:5px 7px!important}
+ .cb-home-service-card__top>b{font-size:17px!important}
+ .cb-home-service-card__content>span{font-size:8px!important}
+ .cb-home-service-card__content h3{font-size:24px!important;line-height:1.03!important;margin:5px 0 5px!important}
+ .cb-home-service-card__content p{font-size:10px!important;line-height:1.35!important;margin:0 0 6px!important;max-width:300px!important}
+ .cb-home-service-card__content i{font-size:10px!important;padding-bottom:3px!important}
+ .cb-home-process{
+  padding:25px 30px 22px!important;max-width:none!important
+ }
+ .cb-home-process__head{
+  width:min(1080px,100%)!important;max-width:1080px!important;
+  grid-template-columns:minmax(0,1fr) minmax(230px,.58fr)!important;
+  gap:6%!important;margin:0 auto 13px!important;align-items:end!important
+ }
+ .cb-home-process__eyebrow{font-size:9px!important}
+ .cb-home-process__head h2{font-size:clamp(29px,2.9vw,38px)!important;line-height:1.02!important;letter-spacing:-1px!important;margin:8px 0 0!important}
+ .cb-home-process__head>p{font-size:12px!important;line-height:1.5!important;max-width:320px!important}
+ .cb-home-process__grid{width:min(1080px,100%)!important;max-width:1080px!important;margin:0 auto!important}
+ .cb-home-process__item{min-height:145px!important;padding:12px 17px 13px!important}
+ .cb-home-process__item:not(:first-child){padding-left:17px!important}
+ .cb-home-process__number{font-size:10px!important}
+ .cb-home-process__label{font-size:8px!important;letter-spacing:1px!important}
+ .cb-home-process__item h3{font-size:15px!important;margin:7px 0 5px!important;line-height:1.2!important}
+ .cb-home-process__item p{font-size:10px!important;line-height:1.45!important;max-width:280px!important}
+ .cb-home-process__arrow{top:12px!important;right:14px!important;font-size:14px!important}
+ .cb-home-process__foot{width:min(1080px,100%)!important;max-width:1080px!important;margin:9px auto 0!important;font-size:8px!important;gap:10px!important}
+}
+@media(max-width:760px){
+ .cb-home-intro{padding:34px 0 35px!important}
+ .cb-home-services{padding:30px 0 34px!important}
+ .cb-home-service-card{min-height:250px!important;height:auto!important}
+ .cb-home-process{padding:32px 18px!important}
+ .cb-home-process__head{margin-bottom:16px!important}
+ .cb-home-process__item{min-height:0!important}
+}
+</style>
+
+<style id="cb-home-visual-only">
+.cb-home-services--visual-only{width:min(1160px,calc(100% - 64px))!important;max-width:1160px!important;margin:0 auto!important;padding:24px 0 30px!important}
+.cb-home-services--visual-only .cb-home-services__grid{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:16px!important}
+.cb-home-services--visual-only .cb-home-service-card{display:block!important;height:230px!important;min-height:230px!important;padding:0!important;border-radius:13px!important}
+@media(max-width:760px){.cb-home-services--visual-only{width:calc(100% - 36px)!important;padding:18px 0 24px!important}.cb-home-services--visual-only .cb-home-services__grid{grid-template-columns:1fr!important}.cb-home-services--visual-only .cb-home-service-card{height:210px!important;min-height:210px!important}}
+</style>
+
+
+<style id="cb-home-alternating-service-layout">
+.cb-home-services--alternating{width:min(1240px,calc(100% - 64px))!important;max-width:1240px!important;margin:0 auto!important;padding:38px 0 48px!important;display:flex!important;flex-direction:column!important;gap:34px!important}
+.cb-home-service-row{display:grid!important;grid-template-columns:minmax(0,1.12fr) minmax(300px,.88fr)!important;gap:clamp(28px,5vw,70px)!important;align-items:center!important;min-width:0!important}
+.cb-home-service-row--graphic{grid-template-columns:minmax(300px,.88fr) minmax(0,1.12fr)!important}
+.cb-home-service-image{position:relative!important;display:block!important;width:100%!important;height:clamp(260px,29vw,390px)!important;min-height:260px!important;border-radius:18px!important;overflow:hidden!important;background:#21182b!important;box-shadow:0 18px 48px rgba(31,21,43,.12)!important}
+.cb-home-service-image img{display:block!important;width:100%!important;height:100%!important;object-fit:cover!important;object-position:center!important;transition:transform .65s ease!important}
+.cb-home-service-image:hover img{transform:scale(1.045)!important}
+.cb-home-service-image:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(15,10,24,.36),transparent 42%,rgba(15,10,24,.12));pointer-events:none}
+.cb-home-service-image>span{position:absolute;z-index:1;top:18px;left:18px;padding:8px 11px;border:1px solid rgba(255,255,255,.55);border-radius:4px;background:rgba(18,13,25,.48);color:#fff;font-size:9px;font-weight:850;letter-spacing:1.5px}
+.cb-home-service-copy{max-width:490px!important;padding:10px 0!important}
+.cb-home-service-kicker{display:inline-block;color:#7950a4;font-size:10px;font-weight:850;letter-spacing:2.2px;margin-bottom:13px}
+.cb-home-service-copy h2{color:#1c1824!important;font-size:clamp(34px,3.4vw,48px)!important;line-height:1.05!important;letter-spacing:-1.5px!important;font-weight:800!important;margin:0 0 15px!important}
+.cb-home-service-copy p{color:#6f6876!important;font-size:15px!important;line-height:1.75!important;margin:0 0 18px!important;max-width:460px!important}
+.cb-home-service-copy ul{list-style:none!important;padding:0!important;margin:0 0 22px!important;display:grid!important;gap:10px!important}
+.cb-home-service-copy li{position:relative!important;padding-left:23px!important;color:#393241!important;font-size:13px!important;line-height:1.5!important}
+.cb-home-service-copy li:before{content:"✓";position:absolute;left:0;top:0;color:#8156aa;font-weight:900;font-size:15px}
+.cb-home-service-link{display:inline-flex!important;align-items:center!important;gap:20px!important;padding:11px 16px!important;border:1px solid #8054aa!important;border-radius:5px!important;color:#704496!important;text-decoration:none!important;font-size:12px!important;font-weight:850!important;transition:all .2s ease!important}
+.cb-home-service-link span{font-size:17px!important}
+.cb-home-service-link:hover{background:#7851a5!important;color:#fff!important}
+@media(max-width:760px){
+ .cb-home-services--alternating{width:calc(100% - 36px)!important;padding:25px 0 34px!important;gap:28px!important}
+ .cb-home-service-row,.cb-home-service-row--graphic{grid-template-columns:1fr!important;gap:17px!important}
+ .cb-home-service-row--graphic .cb-home-service-copy{order:2!important}
+ .cb-home-service-row--graphic .cb-home-service-image{order:1!important}
+ .cb-home-service-image{height:clamp(220px,62vw,310px)!important;min-height:220px!important;border-radius:13px!important}
+ .cb-home-service-copy{max-width:100%!important;padding:0 2px!important}
+ .cb-home-service-copy h2{font-size:32px!important}
+ .cb-home-service-copy p{font-size:13px!important;line-height:1.65!important}
+ .cb-home-service-copy li{font-size:12px!important}
+}
+</style>
+
+<style id="cb-map-service-intro-style">
+.cb-map-slogan,.banner-content-swiper-container{display:none!important}
+.cb-map-service-intro{position:absolute;z-index:5;left:clamp(28px,8vw,116px);top:50%;transform:translateY(-43%);width:min(690px,68%);color:#fff;text-align:left}
+.cb-map-service-intro__eyebrow{display:inline-block;color:#e1c7ff;font-size:10px;font-weight:800;letter-spacing:3px;margin-bottom:16px}
+.cb-map-service-intro h1{font-size:clamp(34px,4.2vw,58px);line-height:1.08;letter-spacing:-1.7px;font-weight:800;color:#fff;margin:0 0 14px;text-shadow:0 2px 18px rgba(0,0,0,.38)}
+.cb-map-service-intro h1 em{font-family:Georgia,serif;font-weight:400;color:#d2a9ff}
+.cb-map-service-intro p{max-width:590px;font-size:15px;line-height:1.75;color:rgba(255,255,255,.91);margin:0 0 20px;text-shadow:0 1px 9px rgba(0,0,0,.5)}
+.cb-map-service-intro__tags{display:flex;align-items:center;gap:15px}
+.cb-map-service-intro__tags span{font-size:10px;font-weight:850;letter-spacing:1.8px;color:#fff}
+.cb-map-service-intro__tags i{width:4px;height:4px;border-radius:50%;background:#c99cf4}
+.banner-slider-wrapper:after{background:linear-gradient(90deg,rgba(12,10,20,.72) 0%,rgba(12,10,20,.43) 54%,rgba(12,10,20,.16) 100%)!important}
+@media(max-width:760px){
+ .cb-map-service-intro{left:22px;right:22px;top:53%;transform:translateY(-35%);width:auto}
+ .cb-map-service-intro__eyebrow{font-size:8px;letter-spacing:2px;margin-bottom:10px}
+ .cb-map-service-intro h1{font-size:clamp(27px,7.8vw,38px);line-height:1.08;letter-spacing:-.8px;margin-bottom:10px}
+ .cb-map-service-intro p{font-size:12px;line-height:1.55;margin-bottom:14px;max-width:460px}
+ .cb-map-service-intro__tags{gap:10px;flex-wrap:wrap}
+ .cb-map-service-intro__tags span{font-size:8px;letter-spacing:1.2px}
+}
+</style>
 </head>
 <body>
 
@@ -332,6 +704,12 @@ html{scroll-behavior:smooth}body{background:#fff!important;color:var(--cb-ink)!i
             </div>
         </div>
         <div class="cb-map-slogan" lang="tr">Güvenilir Ortak, Küresel Başarı!</div>
+        <div class="cb-map-service-intro">
+          <span class="cb-map-service-intro__eyebrow">ÇAĞBAŞ CREATIVE STUDIO</span>
+          <h1>Markanızın dijital kimliğini <em>birlikte tasarlıyoruz.</em></h1>
+          <p>Web tasarım ve grafik tasarım çözümlerimizle markanızın dijital vitrini, görsel dili ve kullanıcı deneyimini tek bir tutarlı çizgide buluşturuyoruz.</p>
+          <div class="cb-map-service-intro__tags"><span>WEB TASARIM</span><i></i><span>GRAFİK TASARIM</span></div>
+        </div>
         <div class="cb-map-compass" aria-hidden="true"><img src="https://cdn.pixabay.com/photo/2012/04/18/20/47/compass-37840_1280.png" alt=""><span></span></div>
         <div class="banner-content-swiper-container">
             <div class="swiper-container left-down-swiper-container">
@@ -361,7 +739,37 @@ html{scroll-behavior:smooth}body{background:#fff!important;color:var(--cb-ink)!i
         </div>
     </div>
 
-<section class="cb-home-intro" aria-labelledby="cb-home-title"><div class="cb-home-intro__inner"><span class="cb-home-intro__eyebrow">ARAŞTIRMA · TASARIM · DİJİTAL ÜRETİM</span><h1 id="cb-home-title">Fikirleri <em>etkiye</em>, markaları geleceğe taşıyoruz.</h1><p>ÇAĞBAŞ; araştırma, yaratıcı tasarım ve dijital teknolojiyi bir araya getirerek markalar ve kurumlar için güçlü, işlevsel ve sürdürülebilir çözümler geliştirir.</p><div class="cb-home-intro__actions"><a href="/hizmetlerimiz.html">Hizmetlerimizi keşfedin <span>↗</span></a><a class="cb-home-intro__secondary" href="/bize-ulasin.html">Projenizi konuşalım</a></div></div><div class="cb-home-intro__side"><span>01 — 03</span><strong>Stratejiyle<br>başlar.<br><i>Etkiyle büyür.</i></strong><small>ÇAĞBAŞ CREATIVE & DIGITAL</small></div></section>
+
+
+
+<section class="cb-home-services cb-home-services--alternating" aria-label="Hizmetlerimiz">
+  <div class="cb-home-service-row cb-home-service-row--web">
+    <a class="cb-home-service-image" href="/hizmetlerimiz.html#web-tasarim" aria-label="Web Tasarım hizmetini keşfet">
+      <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1800&q=88" alt="Modern web sitesi tasarımı ve dijital arayüz ekranı" loading="lazy">
+      <span>01 / WEB TASARIM</span>
+    </a>
+    <div class="cb-home-service-copy">
+      <span class="cb-home-service-kicker">DİJİTAL DENEYİM</span>
+      <h2>Web Tasarım</h2>
+      <p>Markanızın dijital dünyadaki yüzünü; estetik, hızlı ve tüm cihazlarda kusursuz çalışan web deneyimleriyle tasarlıyoruz.</p>
+      <ul><li>Kurumsal ve özgün web siteleri</li><li>Mobil uyumlu kullanıcı deneyimi</li><li>SEO odaklı, güçlü altyapı</li></ul>
+      <a class="cb-home-service-link" href="/hizmetlerimiz.html#web-tasarim">Hizmeti keşfet <span>↗</span></a>
+    </div>
+  </div>
+  <div class="cb-home-service-row cb-home-service-row--graphic">
+    <div class="cb-home-service-copy">
+      <span class="cb-home-service-kicker">GÖRSEL İLETİŞİM</span>
+      <h2>Grafik Tasarım</h2>
+      <p>Markanızın karakterini güçlü bir görsel dile dönüştürüyor; akılda kalan, tutarlı ve etkili tasarımlar üretiyoruz.</p>
+      <ul><li>Kurumsal kimlik ve marka dili</li><li>Dijital ve sosyal medya görselleri</li><li>Basılı ve tanıtım materyalleri</li></ul>
+      <a class="cb-home-service-link" href="/hizmetlerimiz.html#grafik-tasarim">Hizmeti keşfet <span>↗</span></a>
+    </div>
+    <a class="cb-home-service-image" href="/hizmetlerimiz.html#grafik-tasarim" aria-label="Grafik Tasarım hizmetini keşfet">
+      <img src="https://images.unsplash.com/photo-1541961017774-22349e4a1262?auto=format&fit=crop&w=1800&q=88" alt="Renkli grafik tasarım ve yaratıcı görsel üretim çalışması" loading="lazy">
+      <span>02 / GRAFİK TASARIM</span>
+    </a>
+  </div>
+</section>
 
 <!-- <div class="middle-image-text-container">
     <div class="middle-image-text-wrapper">
@@ -395,39 +803,11 @@ html{scroll-behavior:smooth}body{background:#fff!important;color:var(--cb-ink)!i
     </div>
 </div> -->
 
-<section class="cb-home-process" aria-labelledby="cb-process-title">
-  <div class="cb-home-process__head"><div><span class="cb-home-process__eyebrow">ÇAĞBAŞ / ÇALIŞMA YAKLAŞIMIMIZ</span><h2 id="cb-process-title">İhtiyaçtan <em>etkiye.</em></h2></div><p>Her güçlü sonuç, doğru soruyu sormakla başlar. Süreci birlikte netleştirir, fikri stratejiye ve stratejiyi uygulanabilir çözümlere dönüştürürüz.</p></div>
-  <div class="cb-home-process__grid">
-    <article class="cb-home-process__item"><span class="cb-home-process__number">01</span><div><span class="cb-home-process__label">KEŞİF & ANALİZ</span><h3>Önce sizi dinliyoruz.</h3><p>Hedeflerinizi, ihtiyaçlarınızı ve mevcut durumunuzu anlamak için doğru soruları soruyor; öncelikleri birlikte belirliyoruz.</p></div><span class="cb-home-process__arrow">↗</span></article>
-    <article class="cb-home-process__item"><span class="cb-home-process__number">02</span><div><span class="cb-home-process__label">STRATEJİ & TASARIM</span><h3>Fikre yön kazandırıyoruz.</h3><p>Araştırma ve yaratıcı düşünceyi bir araya getirerek markanıza ve hedeflerinize uygun, özgün bir yol haritası oluşturuyoruz.</p></div><span class="cb-home-process__arrow">↗</span></article>
-    <article class="cb-home-process__item"><span class="cb-home-process__number">03</span><div><span class="cb-home-process__label">ÜRETİM & GELİŞİM</span><h3>Çözümü hayata geçiriyoruz.</h3><p>Tasarım ve dijital iletişim çalışmalarını planlı biçimde yürütüyor; sonuçları değerlendirerek sürekli gelişimi destekliyoruz.</p></div><span class="cb-home-process__arrow">↗</span></article>
-  </div>
-  <div class="cb-home-process__foot"><span>ARAŞTIRMA</span><i></i><span>STRATEJİ</span><i></i><span>YARATICILIK</span><i></i><span>UYGULAMA</span></div>
-</section>
-<style>
-.cb-home-process{--cbp-ink:#19161f;--cbp-muted:#77717c;--cbp-accent:#7952a5;max-width:1240px;margin:0 auto;padding:105px 30px 90px;color:var(--cbp-ink)}
-.cb-home-process *{box-sizing:border-box}.cb-home-process__head{display:grid;grid-template-columns:1fr .72fr;gap:10%;align-items:end;margin-bottom:58px}
-.cb-home-process__eyebrow{font-size:10px;font-weight:800;letter-spacing:2px;color:var(--cbp-accent)}
-.cb-home-process__head h2{font-size:clamp(40px,5.5vw,68px);letter-spacing:-2.8px;line-height:1;margin:20px 0 0;font-weight:800}
-.cb-home-process__head h2 em{font-family:Georgia,serif;font-weight:400;color:var(--cbp-accent)}
-.cb-home-process__head>p{font-size:15px;line-height:1.9;color:var(--cbp-muted);margin:0 0 4px;max-width:470px}
-.cb-home-process__grid{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid #e6e1e9;border-bottom:1px solid #e6e1e9}
-.cb-home-process__item{position:relative;min-height:280px;padding:27px 28px 30px 0;display:flex;flex-direction:column;justify-content:space-between;border-right:1px solid #e6e1e9}
-.cb-home-process__item:not(:first-child){padding-left:28px}.cb-home-process__item:last-child{border-right:0}
-.cb-home-process__number{font-size:13px;font-weight:800;color:var(--cbp-accent);letter-spacing:1px}
-.cb-home-process__label{font-size:9px;letter-spacing:1.6px;font-weight:800;color:#918997}
-.cb-home-process__item h3{font-size:clamp(20px,2vw,25px);letter-spacing:-.6px;margin:14px 0 12px}
-.cb-home-process__item p{font-size:13px;line-height:1.85;color:var(--cbp-muted);max-width:330px;margin:0}
-.cb-home-process__arrow{position:absolute;right:25px;top:24px;color:#b4a3c5;font-size:18px}
-.cb-home-process__foot{display:flex;align-items:center;gap:15px;margin-top:24px;color:#827b88;font-size:9px;letter-spacing:1.7px;font-weight:800}
-.cb-home-process__foot i{width:4px;height:4px;border-radius:50%;background:#a48bb9}
-.cb-home-process[dir=rtl]{text-align:right}.cb-home-process[dir=rtl] .cb-home-process__item{padding:27px 0 30px 28px;border-right:0;border-left:1px solid #e6e1e9}.cb-home-process[dir=rtl] .cb-home-process__item:not(:first-child){padding-right:28px;padding-left:0}.cb-home-process[dir=rtl] .cb-home-process__item:last-child{border-left:0}.cb-home-process[dir=rtl] .cb-home-process__arrow{right:auto;left:25px}.cb-home-process[dir=rtl] .cb-home-process__head{direction:rtl}
-@media(max-width:760px){.cb-home-process{padding:68px 24px}.cb-home-process__head{grid-template-columns:1fr;gap:22px;margin-bottom:35px}.cb-home-process__head h2{font-size:44px;letter-spacing:-1.8px}.cb-home-process__grid{grid-template-columns:1fr}.cb-home-process__item,.cb-home-process__item:not(:first-child),.cb-home-process[dir=rtl] .cb-home-process__item,.cb-home-process[dir=rtl] .cb-home-process__item:not(:first-child){min-height:0;padding:23px 0 27px;border-right:0;border-left:0;border-bottom:1px solid #e6e1e9}.cb-home-process__item:last-child{border-bottom:0}.cb-home-process__item h3{margin-top:13px}.cb-home-process__arrow{right:4px;top:21px}.cb-home-process[dir=rtl] .cb-home-process__arrow{right:auto;left:4px}.cb-home-process__foot{gap:8px;font-size:7px;letter-spacing:.8px;justify-content:space-between}}
-</style>
+
 <div class="footer-banner">
     <div class="footer-banner-text-wrapper" data-aos="fade-up" data-aos-delay="400">
-        <h4 id="footer-banner-text-wrapper-title">Markanız İçin Sınırsız Tasarım Olanakları</h4>
-        <p id="footer-banner-text-wrapper-content">ÇAĞBAŞ, markanızın dijital kimliğini güçlendirmek için web tasarım, grafik tasarım, sosyal medya yönetimi ve dijital pazarlama çözümleri sunar.</p>
+        <h4 id="footer-banner-text-wrapper-title">Markanız için güçlü bir dijital görünüm</h4>
+        <p id="footer-banner-text-wrapper-content">Web tasarım ve grafik tasarımı bir araya getirerek markanız için tutarlı, güçlü ve akılda kalıcı bir dijital kimlik oluşturuyoruz.</p>
     </div>
 </div>          
 
@@ -556,13 +936,13 @@ html{scroll-behavior:smooth}body{background:#fff!important;color:var(--cb-ink)!i
   <div class="cagbas-footer-grid">
     <div class="cagbas-footer-brand">
       <a class="cagbas-footer-name" href="/index.html">ÇAĞBAŞ</a>
-      <p>Fikirleri araştırma, tasarım ve dijital teknolojiyle anlamlı, işlevsel ve sürdürülebilir çözümlere dönüştürüyoruz.</p>
+      <p>Fikirleri web tasarım ve grafik tasarımla güçlü, işlevsel ve akılda kalıcı marka deneyimlerine dönüştürüyoruz.</p>
       <div class="cagbas-footer-socials" aria-label="Sosyal medya bağlantıları">
         <a href="https://www.linkedin.com/in/basarckmclgl/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn – Başar Çekmecelioğlu"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5A2.5 2.5 0 1 1 5 8.5a2.5 2.5 0 0 1-.02-5ZM3.5 9.5h3V21h-3zM9 9.5h2.9v1.57h.04c.4-.76 1.39-1.57 2.87-1.57 3.07 0 3.64 2.02 3.64 4.65V21h-3v-6.08c0-1.45-.03-3.31-2.02-3.31-2.02 0-2.33 1.58-2.33 3.2V21H9z"/></svg><span>LinkedIn</span></a>
         <a href="https://github.com/basarckmclgl" target="_blank" rel="noopener noreferrer" aria-label="GitHub – basarckmclgl"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .9a11.1 11.1 0 0 0-3.51 21.63c.55.1.76-.24.76-.53v-2.08c-3.1.67-3.76-1.32-3.76-1.32-.5-1.28-1.23-1.62-1.23-1.62-1.01-.69.08-.68.08-.68 1.12.08 1.71 1.15 1.71 1.15.99 1.7 2.59 1.21 3.22.92.1-.72.39-1.21.7-1.49-2.47-.28-5.07-1.24-5.07-5.5 0-1.22.44-2.21 1.15-2.99-.12-.28-.5-1.42.11-2.95 0 0 .94-.3 3.05 1.14a10.6 10.6 0 0 1 5.55 0c2.11-1.44 3.05-1.14 3.05-1.14.61 1.53.11 2.67.11 2.95.72.78 1.15 1.77 1.15 2.99 0 4.27-2.6 5.22-5.08 5.49.4.35.75 1.02.75 2.06V22c0 .29.2.63.77.52A11.1 11.1 0 0 0 12 .9Z"/></svg><span>GitHub</span></a>
       </div>
     </div>
-    <div><h3>Hizmet Alanlarımız</h3><ul><li><a href="/hizmetlerimiz.html#arge">AR-GE ve teknoloji geliştirme</a></li><li><a href="/hizmetlerimiz.html#tasarim">Tasarım</a></li><li><a href="/hizmetlerimiz.html#pazarlama">Dijital pazarlama</a></li><li><a href="/hizmetlerimiz.html#danismanlik">Kurumsal danışmanlık</a></li></ul></div>
+    <div><h3>Hizmet Alanlarımız</h3><ul><li><a href="/hizmetlerimiz.html#web-tasarim">Web tasarım</a></li><li><a href="/hizmetlerimiz.html#grafik-tasarim">Grafik tasarım</a></li></ul></div>
     <div><h3>Kurumsal</h3><ul><li><a href="/hakkimizda.html">Hakkımızda</a></li><li><a href="/hizmetlerimiz.html">Hizmetlerimiz</a></li><li><a href="/bize-ulasin.html">Bize ulaşın</a></li></ul></div>
     <div><h3>Yasal Bilgilendirme</h3><ul><li><a href="/lisans.html">Lisans ve telif</a></li><li><a href="/yasal-bilgilendirme.html#kisisel-veriler">Kişisel verilerin korunması</a></li><li><a href="/yasal-bilgilendirme.html#cerezler">Çerez politikası</a></li><li><a href="/yasal-bilgilendirme.html#yasal">Yasal bilgilendirme</a></li></ul></div>
   </div>
@@ -694,7 +1074,81 @@ document.getElementById("scrollToTopBtn").addEventListener("click", function () 
     background-color: #3A3A3A;
     background-size: contain !important;
 }*/
+
+<style id="cb-home-services-compact">
+.cb-home-intro{padding:54px 0 58px!important;grid-template-columns:minmax(0,1.25fr) minmax(230px,.65fr)!important;gap:6%!important}
+.cb-home-intro h1{font-size:clamp(36px,4.1vw,54px)!important;line-height:1.05!important;max-width:650px!important;margin:10px 0 13px!important;letter-spacing:-1.7px!important}
+.cb-home-intro__eyebrow{font-size:9px!important;letter-spacing:1.6px!important}
+.cb-home-intro__inner>p{font-size:14px!important;line-height:1.65!important;max-width:560px!important;margin-bottom:16px!important}
+.cb-home-intro__side{padding-left:22px!important}
+.cb-home-intro__side strong{font-size:clamp(19px,2vw,25px)!important;line-height:1.2!important}
+.cb-home-services{padding:48px 0 58px!important}
+.cb-home-services__head{grid-template-columns:minmax(0,1fr) minmax(220px,.65fr)!important;gap:6%!important;margin-bottom:22px!important}
+.cb-home-services__head>div>span{font-size:9px!important;margin-bottom:8px!important}
+.cb-home-services__head h2{font-size:clamp(29px,3.2vw,41px)!important;line-height:1.08!important;letter-spacing:-1.2px!important}
+.cb-home-services__head>p{font-size:13px!important;line-height:1.6!important;max-width:340px!important}
+.cb-home-services__grid{gap:16px!important}
+.cb-home-service-card{height:320px!important;min-height:320px!important;padding:20px 22px 22px!important;border-radius:14px!important}
+.cb-home-service-card__top span{font-size:9px!important;letter-spacing:1.2px!important;padding:7px 9px!important}
+.cb-home-service-card__top>b{font-size:21px!important}
+.cb-home-service-card__content>span{font-size:9px!important;letter-spacing:1.5px!important}
+.cb-home-service-card__content h3{font-size:clamp(26px,2.7vw,35px)!important;line-height:1.06!important;letter-spacing:-.8px!important;margin:8px 0 9px!important}
+.cb-home-service-card__content p{font-size:12px!important;line-height:1.55!important;max-width:330px!important;margin-bottom:14px!important}
+.cb-home-service-card__content i{font-size:11px!important;padding-bottom:6px!important}
+@media(max-width:760px){
+ .cb-home-intro{padding:42px 0 44px!important;gap:22px!important}
+ .cb-home-intro h1{font-size:clamp(34px,8.5vw,43px)!important}
+ .cb-home-intro__inner>p{font-size:13px!important}
+ .cb-home-services{padding:38px 0 46px!important}
+ .cb-home-services__head h2{font-size:32px!important}
+ .cb-home-services__head>p{font-size:13px!important}
+ .cb-home-service-card{height:auto!important;min-height:280px!important;padding:18px!important}
+ .cb-home-service-card__content h3{font-size:30px!important}
+ .cb-home-service-card__content p{font-size:12px!important}
+}
 </style>
+<style id="cb-home-typography-scale">
+/* Refined desktop typography: compact, editorial hierarchy */
+.cb-home-intro{padding:44px 0 48px!important;grid-template-columns:minmax(0,1.2fr) minmax(220px,.62fr)!important;gap:6%!important}
+.cb-home-intro__eyebrow{font-size:8px!important;letter-spacing:1.45px!important}
+.cb-home-intro h1{font-size:clamp(32px,3.35vw,44px)!important;line-height:1.08!important;letter-spacing:-1.2px!important;max-width:610px!important;margin:9px 0 11px!important}
+.cb-home-intro__inner>p{font-size:12px!important;line-height:1.65!important;max-width:490px!important;margin:0 0 14px!important;letter-spacing:.7px!important}
+.cb-home-intro__actions a{font-size:11px!important;padding:11px 16px!important}
+.cb-home-intro__side{padding-left:18px!important}
+.cb-home-intro__side>span{font-size:8px!important;letter-spacing:1.25px!important}
+.cb-home-intro__side strong{font-size:19px!important;line-height:1.18!important}
+.cb-home-intro__side small{font-size:8px!important;letter-spacing:1.2px!important}
+.cb-home-services__head h2{font-size:clamp(27px,2.8vw,36px)!important;line-height:1.1!important;letter-spacing:-.9px!important}
+.cb-home-services__head>div>span{font-size:8px!important;letter-spacing:1.5px!important}
+.cb-home-services__head>p{font-size:11px!important;line-height:1.65!important;max-width:300px!important}
+.cb-home-services__head{margin-bottom:18px!important}
+.cb-home-service-card{height:285px!important;min-height:285px!important;padding:17px 19px 19px!important}
+.cb-home-service-card__top span{font-size:8px!important;padding:6px 8px!important;letter-spacing:1px!important}
+.cb-home-service-card__top>b{font-size:18px!important}
+.cb-home-service-card__content>span{font-size:8px!important;letter-spacing:1.25px!important}
+.cb-home-service-card__content h3{font-size:clamp(23px,2.2vw,29px)!important;line-height:1.08!important;letter-spacing:-.5px!important;margin:7px 0 8px!important}
+.cb-home-service-card__content p{font-size:10px!important;line-height:1.55!important;max-width:290px!important;margin-bottom:11px!important}
+.cb-home-service-card__content i{font-size:10px!important;padding-bottom:5px!important}
+.cb-home-process__head h2{font-size:clamp(30px,3.2vw,42px)!important;line-height:1.08!important;letter-spacing:-1px!important}
+.cb-home-process__head>p{font-size:12px!important;line-height:1.7!important;max-width:390px!important}
+.cb-home-process__eyebrow,.cb-home-process__item .cb-home-process__label{font-size:8px!important;letter-spacing:1.3px!important}
+.cb-home-process__item h3{font-size:17px!important;line-height:1.25!important}
+.cb-home-process__item p{font-size:11px!important;line-height:1.65!important}
+.cb-home-process__number{font-size:11px!important}
+.cb-home-process__foot{font-size:8px!important;letter-spacing:1.3px!important}
+@media(max-width:760px){
+ .cb-home-intro{padding:38px 0 40px!important}
+ .cb-home-intro h1{font-size:clamp(29px,7.4vw,36px)!important}
+ .cb-home-intro__inner>p{font-size:11px!important}
+ .cb-home-intro__side strong{font-size:18px!important}
+ .cb-home-services__head h2{font-size:28px!important}
+ .cb-home-service-card{height:auto!important;min-height:255px!important}
+ .cb-home-service-card__content h3{font-size:25px!important}
+ .cb-home-service-card__content p{font-size:10px!important}
+ .cb-home-process__head h2{font-size:30px!important}
+ .cb-home-process__item h3{font-size:16px!important}
+}
+</style></style>
 
 <a id="cagbas-whatsapp-float" href="https://wa.me/905384483866?text=Merhaba%20%C3%87A%C4%9EBA%C5%9E%2C%20web%20siteniz%20%C3%BCzerinden%20ula%C5%9F%C4%B1yorum." target="_blank" rel="noopener noreferrer" aria-label="WhatsApp üzerinden ÇAĞBAŞ ile iletişime geçin" title="WhatsApp ile iletişime geçin"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16.02 3C8.86 3 3.04 8.8 3.04 15.94c0 2.28.6 4.5 1.75 6.47L3 29l6.76-1.77a13.05 13.05 0 0 0 6.25 1.59h.01c7.15 0 12.97-5.81 12.98-12.96A12.9 12.9 0 0 0 25.2 6.7 12.9 12.9 0 0 0 16.02 3Zm0 23.62h-.01c-1.9 0-3.77-.51-5.4-1.48l-.39-.23-4.01 1.05 1.07-3.91-.25-.4a10.75 10.75 0 0 1-1.65-5.71c0-5.91 4.82-10.72 10.74-10.72 2.86 0 5.55 1.12 7.57 3.14a10.66 10.66 0 0 1 3.13 7.59c0 5.91-4.82 10.72-10.8 10.72Zm5.9-8.03c-.32-.16-1.9-.94-2.2-1.05-.3-.11-.51-.16-.73.16-.21.32-.84 1.05-1.03 1.27-.19.21-.38.24-.7.08-.32-.16-1.35-.5-2.57-1.6-.95-.85-1.6-1.9-1.79-2.22-.19-.32-.02-.49.14-.65.14-.14.32-.38.48-.57.16-.19.21-.32.32-.54.11-.21.05-.4-.03-.56-.08-.16-.73-1.75-1-2.4-.26-.63-.53-.54-.73-.55h-.62c-.21 0-.56.08-.86.4-.3.32-1.13 1.1-1.13 2.68s1.16 3.1 1.32 3.31c.16.21 2.28 3.48 5.52 4.88.77.33 1.37.53 1.84.68.77.24 1.47.21 2.02.13.62-.09 1.9-.78 2.17-1.53.27-.75.27-1.4.19-1.53-.08-.13-.29-.21-.62-.38Z"/></svg><span>WhatsApp</span></a>
 </body>
