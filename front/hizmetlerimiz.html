@@ -136,6 +136,7 @@
  .menu-container>.mobile-menu-links-wrapper{top:64px!important;background:#171421!important}
 }
 </style>
+<style id="newsletter-action-menu-style">.footer-contact-area-item-e-bulten .newsletter-action-label{display:block;font-size:12px;color:#746d79;margin:12px 0 6px}.footer-contact-area-item-e-bulten .newsletter-action-select,.newsletter-missing-footer select{width:100%;min-height:42px;border:1px solid #d9d1e0;border-radius:5px;background:#fff;color:#27212e;padding:9px 12px;margin:0 0 12px}.newsletter-missing-footer{background:#f1eef4;padding:44px 24px}.newsletter-missing-footer .footer-contact-area-wrapper{max-width:1160px;margin:auto}.newsletter-missing-footer .footer-contact-area-item-e-bulten{max-width:620px;margin:auto}.newsletter-missing-footer .newsletter-feedback{min-height:20px}</style>
 </head>
     <body><a class="cb-skip-link" href="#page-title">İçeriğe geç</a>
 
@@ -478,6 +479,9 @@ section.cagbas-site-footer-content > div.cagbas-footer-bottom{position:static!im
     <p>Yeni projelerimiz, hizmetlerimiz ve duyurularımızdan haberdar olmak için e-posta listemize katılın.</p>
     <div class="input-container">
         <form id="newsletterForm" class="newsletter-form" novalidate>
+<label class="newsletter-action-label" for="newsletterAction">İşlem seçin</label>
+<select id="newsletterAction" name="action" class="newsletter-action-select" aria-label="İşlem seçin"><option value="subscribe">Abone Ol</option><option value="unsubscribe">Abonelik İptali</option></select>
+
             <div class="input-wrapper">
                 <input type="email" name="email" id="newsletterEmail" placeholder="E-posta adresinizi girin..." required maxlength="254" autocomplete="email" aria-label="E-posta adresi">
                 <button type="submit" class="signup-button">ABONE OL</button>
