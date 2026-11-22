@@ -458,13 +458,16 @@ document.addEventListener('DOMContentLoaded', function () {
     document.querySelectorAll('#newsletterAction').forEach(function (select) {
         const form = select.closest('form');
         if (!form) return;
-        const consent = form.querySelector('#newsletterConsent, input[name="marketingConsent"], input[id^="a_c4ce"]');
-        const consentWrap = consent ? consent.closest('.checkbox-wrapper') : null;
+        const checkboxes = Array.from(form.querySelectorAll('.checkbox-wrapper input[type="checkbox"]'));
         const button = form.querySelector('button[type="submit"], input[type="submit"]');
         function updateMode() {
             const subscribing = select.value !== 'unsubscribe';
-            if (consentWrap) { consentWrap.hidden = !subscribing; consentWrap.style.display = subscribing ? '' : 'none'; }
-            if (consent) { consent.required = subscribing; if (!subscribing) consent.checked = false; }
+            checkboxes.forEach(function (checkbox) {
+                const wrapper = checkbox.closest('.checkbox-wrapper');
+                if (wrapper) { wrapper.hidden = !subscribing; wrapper.style.display = subscribing ? '' : 'none'; }
+                checkbox.required = subscribing;
+                if (!subscribing) checkbox.checked = false;
+            });
             if (button) { const label = select.options[select.selectedIndex].text; if (button.tagName === 'INPUT') button.value = label; else button.textContent = label; }
         }
         select.addEventListener('change', updateMode);
@@ -479,6 +482,7 @@ document.addEventListener('DOMContentLoaded', function () {
         event.preventDefault();
         const emailInput = newsletterForm.querySelector('#newsletterEmail, input[type="email"]');
         const consentInput = newsletterForm.querySelector('#newsletterConsent, input[name="marketingConsent"], input[id^="a_c4ce"]');
+        const requiredCheckboxes = Array.from(newsletterForm.querySelectorAll('.checkbox-wrapper input[type="checkbox"]'));
         const actionInput = newsletterForm.querySelector('#newsletterAction');
         const action = actionInput ? actionInput.value : 'subscribe';
         let feedback = newsletterForm.querySelector('#newsletterFeedback, .newsletter-feedback');
@@ -496,9 +500,10 @@ document.addEventListener('DOMContentLoaded', function () {
             if (emailInput) emailInput.reportValidity();
             return;
         }
-        if (action === 'subscribe' && (!consentInput || !consentInput.checked)) {
-            if (feedback) feedback.textContent = 'Lütfen e-bülten gönderimi için onayınızı verin.';
-            if (consentInput) consentInput.focus();
+        if (action === 'subscribe' && requiredCheckboxes.some(function (checkbox) { return !checkbox.checked; })) {
+            if (feedback) feedback.textContent = 'Lütfen KVKK bilgilendirmesini ve e-bülten gönderim onayını işaretleyin.';
+            const firstUnchecked = requiredCheckboxes.find(function (checkbox) { return !checkbox.checked; });
+            if (firstUnchecked) firstUnchecked.focus();
             return;
         }
 
@@ -519,6 +524,8 @@ document.addEventListener('DOMContentLoaded', function () {
             const result = await response.json();
             if (!response.ok) throw new Error(result.error || 'Abonelik kaydedilemedi.');
             newsletterForm.reset();
+            const resetAction = newsletterForm.querySelector('#newsletterAction');
+            if (resetAction) resetAction.dispatchEvent(new Event('change', { bubbles: true }));
             if (feedback) feedback.textContent = result.message || 'Abonelik talebiniz alındı.';
             else if (typeof _success === 'function') _success(result.message || 'Abonelik talebiniz alındı.');
         } catch (error) {
