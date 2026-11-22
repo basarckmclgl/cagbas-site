@@ -21,7 +21,7 @@ export async function onRequestGet({ request, env }) {
   try {
     const sub = await env.DB.prepare("SELECT id, email, status FROM newsletter_subscribers WHERE id = ?").bind(id).first();
     if (!sub) return htmlPage("Kayıt bulunamadı", "Bu bağlantıyla eşleşen bir abonelik kaydı bulunamadı.", "", 404);
-    if (sub.status !== "active") return htmlPage("Abonelik zaten aktif değil", "Bu e-posta adresi için etkin bir e-bülten aboneliği bulunmuyor.");
+    if (!["active", "pending"].includes(sub.status)) return htmlPage("Abonelik zaten aktif değil", "Bu e-posta adresi için etkin bir e-bülten aboneliği veya bekleyen abonelik talebi bulunmuyor.");
     if (token !== await makeToken(env, sub.id, sub.email)) return htmlPage("Bağlantı geçersiz", "Güvenlik doğrulaması yapılamadı.", "", 400);
     // GET only shows confirmation; email security scanners cannot unsubscribe by prefetching.
     return htmlPage("Abonelikten çıkmak üzeresiniz", "ÇAĞBAŞ e-bülten aboneliğinizi durdurmak istediğinizi onaylayın.", formMarkup(id, token));
@@ -36,8 +36,8 @@ export async function onRequestPost({ request, env }) {
     const sub = await env.DB.prepare("SELECT id, email, status FROM newsletter_subscribers WHERE id = ?").bind(id).first();
     if (!sub) return htmlPage("Kayıt bulunamadı", "Bu bağlantıyla eşleşen bir abonelik kaydı bulunamadı.", "", 404);
     if (token !== await makeToken(env, sub.id, sub.email)) return htmlPage("Bağlantı geçersiz", "Güvenlik doğrulaması yapılamadı.", "", 400);
-    if (sub.status !== "active") return htmlPage("Abonelik zaten sonlandırılmış", "Bu e-posta adresi için etkin bir e-bülten aboneliği bulunmuyor.");
-    const result = await env.DB.prepare("UPDATE newsletter_subscribers SET status = 'unsubscribed', marketing_consent = 0, unsubscribed_at = CURRENT_TIMESTAMP, updated_at = CURRENT_TIMESTAMP WHERE id = ? AND status = 'active'").bind(id).run();
+    if (!["active", "pending"].includes(sub.status)) return htmlPage("Abonelik zaten sonlandırılmış", "Bu e-posta adresi için etkin bir e-bülten aboneliği veya bekleyen talep bulunmuyor.");
+    const result = await env.DB.prepare("UPDATE newsletter_subscribers SET status = 'unsubscribed', marketing_consent = 0, verification_token_hash = NULL, verification_expires_at = NULL, unsubscribed_at = CURRENT_TIMESTAMP, updated_at = CURRENT_TIMESTAMP WHERE id = ? AND status IN ('active', 'pending')").bind(id).run();
     if (!result.meta || result.meta.changes !== 1) return htmlPage("İşlem tamamlanamadı", "Abonelik durumu değişmedi. Lütfen tekrar deneyin.", "", 409);
     return htmlPage("Aboneliğiniz sonlandırıldı", "Talebiniz alındı. Bu e-posta adresine artık ÇAĞBAŞ e-bültenleri gönderilmeyecek.");
   } catch (error) { console.error("Newsletter unsubscribe error:", error); return htmlPage("Bir hata oluştu", "Abonelikten çıkış işlemi tamamlanamadı. Lütfen daha sonra tekrar deneyin.", "", 500); }
