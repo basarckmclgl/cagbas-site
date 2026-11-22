@@ -75,7 +75,12 @@ async function sendVerificationEmail(env, email, verifyUrl) {
 async function enforceRequestSecurity(request, env, scope, limit, windowMs) {
   const origin = request.headers.get("origin");
   const allowedOrigins = new Set(["https://cagbas.com", "https://www.cagbas.com"]);
-  if (origin && !allowedOrigins.has(origin)) {
+  let normalizedOrigin = null;
+  if (origin) {
+    try { normalizedOrigin = new URL(origin).origin; } catch { normalizedOrigin = ""; }
+  }
+  if (origin && !allowedOrigins.has(normalizedOrigin)) {
+    console.warn("Newsletter request rejected: unexpected Origin", origin);
     return { ok: false, status: 403, message: "Bu kaynaktan gelen isteğe izin verilmiyor." };
   }
   if ((request.headers.get("sec-fetch-site") || "").toLowerCase() === "cross-site") {
