@@ -59,5 +59,37 @@ body{background:#f6f4f8;color:#24212b;font-family:Arial,sans-serif;min-height:10
 <a class="nl-back" href="/">← Ana sayfaya dön</a>
 </section></main>
 <footer class="nl-footer">© 2026 ÇAĞBAŞ. Tüm hakları saklıdır.</footer>
-<script src="/_assets/js/main.js" defer></script>
+<script>
+(function(){
+ const form=document.getElementById('newsletterForm'); if(!form) return;
+ const action=document.getElementById('newsletterAction');
+ const email=document.getElementById('newsletterEmail');
+ const button=form.querySelector('button[type="submit"]');
+ const feedback=document.getElementById('newsletterFeedback');
+ const boxes=Array.from(form.querySelectorAll('.checkbox-wrapper'));
+ const checks=boxes.map(x=>x.querySelector('input[type="checkbox"]')).filter(Boolean);
+ function setMode(){
+  const subscribing=action.value==='subscribe';
+  boxes.forEach((box,i)=>{box.hidden=!subscribing;box.style.display=subscribing?'flex':'none';});
+  checks.forEach(ch=>{ch.required=subscribing;if(!subscribing)ch.checked=false;});
+  button.textContent=subscribing?'ABONE OL':'ABONELİK İPTALİ';
+  feedback.textContent='';
+ }
+ action.addEventListener('change',setMode);setMode();
+ form.addEventListener('submit',async function(e){
+  e.preventDefault();
+  if(!email.value.trim()||!email.checkValidity()){feedback.textContent='Lütfen geçerli bir e-posta adresi girin.';email.focus();return;}
+  const subscribing=action.value==='subscribe';
+  if(subscribing&&checks.some(ch=>!ch.checked)){feedback.textContent='Lütfen KVKK bilgilendirmesini ve e-bülten gönderim onayını işaretleyin.';return;}
+  const old=button.textContent;button.disabled=true;button.textContent='İsteğiniz gönderiliyor…';feedback.textContent='İsteğiniz gönderiliyor…';
+  try{
+   const response=await fetch('/api/newsletter',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:email.value.trim(),action:action.value,marketingConsent:subscribing&&!!checks[checks.length-1]?.checked})});
+   let result={};try{result=await response.json();}catch(_){}
+   if(!response.ok)throw new Error(result.error||'İşleminiz şu anda tamamlanamadı. Lütfen tekrar deneyin.');
+   form.reset();setMode();feedback.textContent=result.message||'İşleminiz şu anda tamamlanamadı. Lütfen tekrar deneyin.';
+  }catch(err){feedback.textContent=err.message||'İşleminiz şu anda tamamlanamadı. Lütfen tekrar deneyin.';}
+  finally{button.disabled=false;button.textContent=old;setMode();}
+ });
+})();
+</script>
 </body></html>
