@@ -455,6 +455,23 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('#newsletterAction').forEach(function (select) {
+        const form = select.closest('form');
+        if (!form) return;
+        const consent = form.querySelector('#newsletterConsent, input[name="marketingConsent"], input[id^="a_c4ce"]');
+        const consentWrap = consent ? consent.closest('.checkbox-wrapper') : null;
+        const button = form.querySelector('button[type="submit"], input[type="submit"]');
+        function updateMode() {
+            const subscribing = select.value !== 'unsubscribe';
+            if (consentWrap) consentWrap.hidden = !subscribing;
+            if (consent) consent.required = subscribing;
+            if (button) { const label = select.options[select.selectedIndex].text; if (button.tagName === 'INPUT') button.value = label; else button.textContent = label; }
+        }
+        select.addEventListener('change', updateMode);
+        updateMode();
+    });
+});
+document.addEventListener('DOMContentLoaded', function () {
     const newsletterForm = document.getElementById('newsletterForm');
     if (!newsletterForm) return;
 
@@ -462,6 +479,8 @@ document.addEventListener('DOMContentLoaded', function () {
         event.preventDefault();
         const emailInput = newsletterForm.querySelector('#newsletterEmail, input[type="email"]');
         const consentInput = newsletterForm.querySelector('#newsletterConsent, input[name="marketingConsent"], input[id^="a_c4ce"]');
+        const actionInput = newsletterForm.querySelector('#newsletterAction');
+        const action = actionInput ? actionInput.value : 'subscribe';
         let feedback = newsletterForm.querySelector('#newsletterFeedback, .newsletter-feedback');
         if (!feedback) {
             feedback = document.createElement('p');
@@ -477,7 +496,7 @@ document.addEventListener('DOMContentLoaded', function () {
             if (emailInput) emailInput.reportValidity();
             return;
         }
-        if (!consentInput || !consentInput.checked) {
+        if (action === 'subscribe' && (!consentInput || !consentInput.checked)) {
             if (feedback) feedback.textContent = 'Lütfen e-bülten gönderimi için onayınızı verin.';
             if (consentInput) consentInput.focus();
             return;
@@ -495,7 +514,7 @@ document.addEventListener('DOMContentLoaded', function () {
             const response = await fetch('/api/newsletter', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ email, marketingConsent: true })
+                body: JSON.stringify({ email, action, marketingConsent: action === 'subscribe' && !!(consentInput && consentInput.checked) })
             });
             const result = await response.json();
             if (!response.ok) throw new Error(result.error || 'Abonelik kaydedilemedi.');
