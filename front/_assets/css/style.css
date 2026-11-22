@@ -4857,3 +4857,17 @@ img, video, iframe { max-width: 100%; }
  .cagbas-site-footer-content .cagbas-footer-socials{margin:24px auto 0!important;justify-content:center!important}
  .cagbas-site-footer-content .cagbas-footer-bottom{margin-top:18px!important;padding:14px 8px 0!important;text-align:center!important}
 }
+
+/* COPYRIGHT CENTERING — all language pages */
+section.cagbas-site-footer-content > .cagbas-footer-bottom{
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  width:100%!important;
+  max-width:none!important;
+  box-sizing:border-box!important;
+  margin-left:auto!important;
+  margin-right:auto!important;
+  text-align:center!important;
+  direction:ltr!important;
+}
