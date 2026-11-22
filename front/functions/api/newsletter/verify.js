@@ -46,7 +46,13 @@ export async function onRequestGet({ request, env }) {
 export async function onRequestPost({ request, env }) {
   if (!env.DB) return htmlPage("Sistem kullanılamıyor", "Abonelik doğrulama sistemi şu anda hizmet veremiyor.", "", 503);
   const origin = request.headers.get("origin");
-  if (origin && !["https://cagbas.com", "https://www.cagbas.com"].includes(origin)) {
+  const allowedOrigins = new Set(["https://cagbas.com", "https://www.cagbas.com"]);
+  let normalizedOrigin = null;
+  if (origin) {
+    try { normalizedOrigin = new URL(origin).origin; } catch { normalizedOrigin = ""; }
+  }
+  if (origin && !allowedOrigins.has(normalizedOrigin)) {
+    console.warn("Newsletter verification rejected: unexpected Origin", origin);
     return htmlPage("İstek reddedildi", "Bu kaynaktan gelen isteğe izin verilmiyor.", "", 403);
   }
   if ((request.headers.get("sec-fetch-site") || "").toLowerCase() === "cross-site") {
