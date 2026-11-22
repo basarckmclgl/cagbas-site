@@ -463,8 +463,8 @@ document.addEventListener('DOMContentLoaded', function () {
         const button = form.querySelector('button[type="submit"], input[type="submit"]');
         function updateMode() {
             const subscribing = select.value !== 'unsubscribe';
-            if (consentWrap) consentWrap.hidden = !subscribing;
-            if (consent) consent.required = subscribing;
+            if (consentWrap) { consentWrap.hidden = !subscribing; consentWrap.style.display = subscribing ? '' : 'none'; }
+            if (consent) { consent.required = subscribing; if (!subscribing) consent.checked = false; }
             if (button) { const label = select.options[select.selectedIndex].text; if (button.tagName === 'INPUT') button.value = label; else button.textContent = label; }
         }
         select.addEventListener('change', updateMode);
