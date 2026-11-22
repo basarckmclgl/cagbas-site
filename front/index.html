@@ -704,6 +704,69 @@ html{scroll-behavior:smooth}body{background:#fff!important;color:var(--cb-ink)!i
 .banner-slider-wrapper::before,.banner-slider-wrapper::after{display:none!important;background:none!important;opacity:0!important}
 </style>
 
+
+<style id="cb-home-services-four-production">
+/* Four service rows: integrated editorial layout, alternating image/text */
+.cb-home-services.cb-home-services--four{
+ width:min(1240px,calc(100% - 64px))!important;max-width:1240px!important;
+ margin:0 auto!important;padding:18px 0 64px!important;gap:18px!important;
+}
+.cb-home-services--four .cb-home-service-row{
+ display:grid!important;grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;
+ gap:28px!important;align-items:center!important;min-width:0!important;
+}
+.cb-home-services--four .cb-home-service-image{
+ display:block!important;width:100%!important;height:auto!important;min-height:0!important;
+ aspect-ratio:2.25/1!important;overflow:hidden!important;border:0!important;
+ border-radius:0!important;box-shadow:none!important;background:transparent!important;
+}
+.cb-home-services--four .cb-home-service-image img{
+ width:100%!important;height:100%!important;object-fit:cover!important;
+ object-position:center!important;border:0!important;border-radius:0!important;
+}
+.cb-home-services--four .cb-home-service-image:after,
+.cb-home-services--four .cb-home-service-image>span{display:none!important}
+.cb-home-services--four .cb-home-service-copy{
+ max-width:100%!important;padding:2px 0!important;min-width:0!important;
+}
+.cb-home-services--four .cb-home-service-copy h2{
+ font-size:clamp(21px,2vw,29px)!important;line-height:1.12!important;
+ letter-spacing:-.6px!important;margin:4px 0 7px!important;
+}
+.cb-home-services--four .cb-home-service-kicker{
+ font-size:8px!important;letter-spacing:1.4px!important;margin-bottom:4px!important;
+}
+.cb-home-services--four .cb-home-service-copy p{
+ font-size:11px!important;line-height:1.55!important;margin:0 0 7px!important;
+}
+.cb-home-services--four .cb-home-service-copy ul{
+ gap:3px!important;margin:0 0 8px!important;
+}
+.cb-home-services--four .cb-home-service-copy li{
+ font-size:9px!important;line-height:1.4!important;padding-left:13px!important;
+}
+.cb-home-services--four .cb-home-service-copy li:before{font-size:10px!important}
+.cb-home-services--four .cb-home-service-link{
+ font-size:9px!important;padding:5px 8px!important;gap:10px!important;border:0!important;
+ border-bottom:1px solid #8054aa!important;border-radius:0!important;
+}
+@media(max-width:760px){
+ .cb-home-services.cb-home-services--four{width:calc(100% - 32px)!important;padding:18px 0 42px!important;gap:24px!important}
+ .cb-home-services--four .cb-home-service-row,
+ .cb-home-services--four .cb-home-service-row--graphic,
+ .cb-home-services--four .cb-home-service-row--urge{
+  grid-template-columns:minmax(0,1fr)!important;gap:10px!important;
+ }
+ .cb-home-services--four .cb-home-service-row--graphic .cb-home-service-copy,
+ .cb-home-services--four .cb-home-service-row--urge .cb-home-service-copy{order:2!important}
+ .cb-home-services--four .cb-home-service-row--graphic .cb-home-service-image,
+ .cb-home-services--four .cb-home-service-row--urge .cb-home-service-image{order:1!important}
+ .cb-home-services--four .cb-home-service-image{aspect-ratio:2.15/1!important}
+ .cb-home-services--four .cb-home-service-copy h2{font-size:24px!important}
+ .cb-home-services--four .cb-home-service-copy p{font-size:12px!important}
+ .cb-home-services--four .cb-home-service-copy li{font-size:10px!important}
+}
+</style>
 </head>
 <body><a class="cb-skip-link" href="#page-title">İçeriğe geç</a>
 
@@ -878,14 +941,13 @@ html{scroll-behavior:smooth}body{background:#fff!important;color:var(--cb-ink)!i
 
 
 
-<section class="cb-home-services cb-home-services--alternating" aria-label="Hizmetlerimiz">
+<section class="cb-home-services cb-home-services--alternating cb-home-services--four" aria-label="Hizmetlerimiz">
   <div class="cb-home-service-row cb-home-service-row--web">
     <a class="cb-home-service-image" href="/hizmetlerimiz.html#web-tasarim" aria-label="Web Tasarım hizmetini keşfet">
-      <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1800&q=88" alt="Modern web sitesi tasarımı ve dijital arayüz ekranı" loading="lazy">
-      <span>01 / WEB TASARIM</span>
+      <img src="/_assets/images/cagbas-service-tasarim.jpg" alt="Web tasarım ve dijital arayüz çalışması" loading="lazy">
     </a>
     <div class="cb-home-service-copy">
-      <span class="cb-home-service-kicker">DİJİTAL DENEYİM</span>
+      <span class="cb-home-service-kicker">ÇAĞBAŞ / DİJİTAL DENEYİM</span>
       <h2>Web Tasarım</h2>
       <p>Markanızın dijital dünyadaki yüzünü; estetik, hızlı ve tüm cihazlarda kusursuz çalışan web deneyimleriyle tasarlıyoruz.</p>
       <ul><li>Kurumsal ve özgün web siteleri</li><li>Mobil uyumlu kullanıcı deneyimi</li><li>SEO odaklı, güçlü altyapı</li></ul>
@@ -894,15 +956,38 @@ html{scroll-behavior:smooth}body{background:#fff!important;color:var(--cb-ink)!i
   </div>
   <div class="cb-home-service-row cb-home-service-row--graphic">
     <div class="cb-home-service-copy">
-      <span class="cb-home-service-kicker">GÖRSEL İLETİŞİM</span>
+      <span class="cb-home-service-kicker">ÇAĞBAŞ / GÖRSEL İLETİŞİM</span>
       <h2>Grafik Tasarım</h2>
       <p>Markanızın karakterini güçlü bir görsel dile dönüştürüyor; akılda kalan, tutarlı ve etkili tasarımlar üretiyoruz.</p>
       <ul><li>Kurumsal kimlik ve marka dili</li><li>Dijital ve sosyal medya görselleri</li><li>Basılı ve tanıtım materyalleri</li></ul>
       <a class="cb-home-service-link" href="/hizmetlerimiz.html#grafik-tasarim">Hizmeti keşfet <span>↗</span></a>
     </div>
     <a class="cb-home-service-image" href="/hizmetlerimiz.html#grafik-tasarim" aria-label="Grafik Tasarım hizmetini keşfet">
-      <img src="https://images.unsplash.com/photo-1541961017774-22349e4a1262?auto=format&fit=crop&w=1800&q=88" alt="Renkli grafik tasarım ve yaratıcı görsel üretim çalışması" loading="lazy">
-      <span>02 / GRAFİK TASARIM</span>
+      <img src="/_assets/images/cagbas-service-tasarim.jpg" alt="Grafik tasarım ve yaratıcı görsel üretim çalışması" loading="lazy">
+    </a>
+  </div>
+  <div class="cb-home-service-row cb-home-service-row--arge">
+    <a class="cb-home-service-image" href="/hizmetlerimiz.html#arge" aria-label="Ar-Ge Danışmanlığı hizmetini keşfet">
+      <img src="/_assets/images/cagbas-service-arge.jpg" alt="Ar-Ge ve ürün geliştirme çalışmaları" loading="lazy">
+    </a>
+    <div class="cb-home-service-copy">
+      <span class="cb-home-service-kicker">ÇAĞBAŞ / ARAŞTIRMA VE GELİŞTİRME</span>
+      <h2>Ar-Ge Danışmanlığı</h2>
+      <p>Yenilikçi fikirleri, araştırma ve geliştirme süreçleriyle projeye dönüştürmenize; teknik ve stratejik yol haritanızı oluşturmanıza destek oluyoruz.</p>
+      <ul><li>Fikir ve ihtiyaç analizi</li><li>Proje geliştirme ve teknik değerlendirme</li><li>Yenilikçi çözüm ve süreç tasarımı</li></ul>
+      <a class="cb-home-service-link" href="/hizmetlerimiz.html#arge">Hizmeti keşfet <span>↗</span></a>
+    </div>
+  </div>
+  <div class="cb-home-service-row cb-home-service-row--urge">
+    <div class="cb-home-service-copy">
+      <span class="cb-home-service-kicker">ÇAĞBAŞ / ULUSLARARASI PAZAR GELİŞTİRME</span>
+      <h2>UR-GE Danışmanlığı</h2>
+      <p>İşletmelerin uluslararası pazarlara açılma süreçlerini; ihtiyaç analizi, kümelenme ve ihracat odaklı gelişim adımlarıyla destekliyoruz.</p>
+      <ul><li>İhtiyaç analizi ve yol haritası</li><li>Kümelenme ve iş birliği süreçleri</li><li>İhracat kapasitesi ve pazar geliştirme</li></ul>
+      <a class="cb-home-service-link" href="/hizmetlerimiz.html#urge">Hizmeti keşfet <span>↗</span></a>
+    </div>
+    <a class="cb-home-service-image" href="/hizmetlerimiz.html#urge" aria-label="UR-GE Danışmanlığı hizmetini keşfet">
+      <img src="/_assets/images/cagbas-service-danismanlik.jpg" alt="UR-GE danışmanlığı ve işletmeler arası proje toplantısı" loading="lazy">
     </a>
   </div>
 </section>
