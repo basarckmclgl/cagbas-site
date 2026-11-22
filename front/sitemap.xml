@@ -119,5 +119,26 @@
   </url>
   <url>
     <loc>https://www.cagbas.com/lisans</loc>
+    <lastmod>2026-11-22</lastmod>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://www.cagbas.com/lisans"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.cagbas.com/en/licensing-and-copyright"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.cagbas.com/ar/licensing-and-copyright-ar"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.cagbas.com/lisans"/>
+  </url>
+  <url>
+    <loc>https://www.cagbas.com/en/licensing-and-copyright</loc>
+    <lastmod>2026-11-22</lastmod>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://www.cagbas.com/lisans"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.cagbas.com/en/licensing-and-copyright"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.cagbas.com/ar/licensing-and-copyright-ar"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.cagbas.com/lisans"/>
+  </url>
+  <url>
+    <loc>https://www.cagbas.com/ar/licensing-and-copyright-ar</loc>
+    <lastmod>2026-11-22</lastmod>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://www.cagbas.com/lisans"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.cagbas.com/en/licensing-and-copyright"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.cagbas.com/ar/licensing-and-copyright-ar"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.cagbas.com/lisans"/>
   </url>
 </urlset>
