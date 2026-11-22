@@ -173,3 +173,32 @@ body:has(.cb-home-services--alternating) .banner-content-swiper-container{displa
   .cb-home-services--alternating .cb-home-service-copy{max-width:none!important;padding:8px 0!important}
   .cb-home-services--alternating .cb-home-service-copy h2{font-size:34px!important}
 }
+
+/* Selected concept 2: neon technology artwork framed by the dark brand area */
+body:has(.cb-neon-brand-banner) .menu-container,
+body:has(.cb-neon-brand-banner) .mobile-menu-container{
+  background:#191a22!important;border:0!important;box-shadow:none!important;
+}
+body:has(.cb-neon-brand-banner) .menu-container{border-bottom:1px solid rgba(255,255,255,.12)!important}
+body:has(.cb-neon-brand-banner) .menu-bar-links a{color:#f7f7fb!important}
+body:has(.cb-neon-brand-banner) .menu-bar-links a:hover{color:#bdeeff!important}
+body:has(.cb-neon-brand-banner) .menu-logo img{
+  width:124px!important;max-width:124px!important;height:auto!important;max-height:48px!important;
+  filter:none!important;object-fit:contain!important;
+}
+body:has(.cb-neon-brand-banner) .langSelector,
+body:has(.cb-neon-brand-banner) .langSelectorHeader{color:#fff!important}
+.cb-neon-brand-banner{
+  width:100%!important;margin:0!important;padding:26px clamp(18px,5vw,68px) 32px!important;
+  display:flex!important;justify-content:center!important;align-items:center!important;
+  background:#191a22!important;overflow:hidden!important;
+}
+.cb-neon-brand-banner img{
+  display:block!important;width:min(100%,1440px)!important;height:auto!important;
+  aspect-ratio:16/9!important;object-fit:contain!important;object-position:center!important;
+  margin:0 auto!important;border:0!important;border-radius:0!important;box-shadow:none!important;
+}
+@media(max-width:760px){
+  .cb-neon-brand-banner{padding:14px 12px 20px!important}
+  body:has(.cb-neon-brand-banner) .menu-logo img{width:108px!important;max-width:108px!important}
+}
