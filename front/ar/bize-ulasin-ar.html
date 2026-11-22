@@ -75,7 +75,7 @@ html[dir="rtl"] #phone{direction:ltr!important;unicode-bidi:isolate!important;wh
 /* TRUE CENTER copyright */
 section.cagbas-site-footer-content > div.cagbas-footer-bottom{position:static!important;display:block!important;float:none!important;width:100%!important;max-width:none!important;min-width:0!important;box-sizing:border-box!important;margin:22px auto 0!important;padding:16px 12px 0!important;text-align:center!important;text-indent:0!important;direction:ltr!important}
 </style>
-</head>
+<style id="newsletter-action-menu-style">.footer-contact-area-item-e-bulten .newsletter-action-label{display:block;font-size:12px;color:#746d79;margin:12px 0 6px}.footer-contact-area-item-e-bulten .newsletter-action-select,.newsletter-missing-footer select{width:100%;min-height:42px;border:1px solid #d9d1e0;border-radius:5px;background:#fff;color:#27212e;padding:9px 12px;margin:0 0 12px}.newsletter-missing-footer{background:#f1eef4;padding:44px 24px}.newsletter-missing-footer .footer-contact-area-wrapper{max-width:1160px;margin:auto}.newsletter-missing-footer .footer-contact-area-item-e-bulten{max-width:620px;margin:auto}</style></head>
 <body><a class="cb-skip-link" href="#contact-form">انتقل إلى المحتوى</a>
 
 
@@ -252,6 +252,8 @@ section.cagbas-site-footer-content > div.cagbas-footer-bottom{position:static!im
             <p id="footer-contact-area-item-e-bulten-content">اشترك في نشرتنا الإلكترونية عن طريق إدخال عنوان بريدك الإلكتروني وترقب أخبار ÇAĞBAŞ وجميع الأخبار الأخرى.</p>
             <div class="input-container">
                 <form method="post" data-parsley-validate="true" id="newsletterForm">
+<label class="newsletter-action-label" for="newsletterAction">اختر العملية</label><select id="newsletterAction" name="action" class="newsletter-action-select"><option value="subscribe">اشترك</option><option value="unsubscribe">إلغاء الاشتراك</option></select>
+
                     <input type="hidden" name="Path" value="/" />
                     <div class="input-wrapper">
                         <input type="email" placeholder="E-posta adresi girin..." required="required" maxlength="250" data-val="true" data-val-required="The Email field is required." id="Email" name="Email" value="" aria-label="النشرة البريدية - البريد الإلكتروني">
