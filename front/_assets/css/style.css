@@ -4839,36 +4839,21 @@ img, video, iframe { max-width: 100%; }
 .cb-sr-only{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}
 
 
-/* ÇAĞBAŞ footer alignment: social buttons above the divider, copyright below */
-.cagbas-site-footer-content{
-  position:relative!important;
-  padding-bottom:94px!important;
-}
-.cagbas-footer-brand .cagbas-footer-socials{
-  position:absolute!important;
-  left:50%!important;
-  bottom:48px!important;
-  transform:translateX(-50%)!important;
-  margin:0!important;
-  justify-content:center!important;
-  white-space:nowrap!important;
-  z-index:2!important;
+/* FINAL FOOTER LAYOUT — socials centered above divider, copyright centered below */
+.cagbas-site-footer-content{position:relative!important;padding:48px clamp(20px,5vw,72px) 22px!important}
+.cagbas-site-footer-content .cagbas-footer-socials{
+ position:static!important;left:auto!important;bottom:auto!important;transform:none!important;
+ display:flex!important;width:100%!important;justify-content:center!important;align-items:center!important;
+ flex-wrap:wrap!important;gap:10px!important;margin:30px auto 0!important;padding:0!important;
 }
 .cagbas-site-footer-content .cagbas-footer-bottom{
-  position:absolute!important;
-  left:0!important;
-  right:0!important;
-  bottom:10px!important;
-  margin:0!important;
-  padding:10px 20px 0!important;
-  border-top:1px solid rgba(216,180,255,.20)!important;
-  text-align:center!important;
-  color:rgba(255,255,255,.72)!important;
-  font-size:12px!important;
-  line-height:1.5!important;
+ position:static!important;left:auto!important;right:auto!important;bottom:auto!important;
+ display:block!important;width:min(1240px,100%)!important;margin:22px auto 0!important;
+ padding:16px 12px 0!important;border-top:1px solid rgba(216,180,255,.20)!important;
+ text-align:center!important;color:rgba(255,255,255,.78)!important;font-size:12px!important;line-height:1.6!important;
 }
 @media(max-width:760px){
-  .cagbas-site-footer-content{padding-bottom:92px!important}
-  .cagbas-footer-brand .cagbas-footer-socials{left:50%!important;bottom:48px!important}
-  .cagbas-site-footer-content .cagbas-footer-bottom{bottom:8px!important;padding-top:9px!important}
+ .cagbas-site-footer-content{padding:38px 20px 20px!important}
+ .cagbas-site-footer-content .cagbas-footer-socials{margin:24px auto 0!important;justify-content:center!important}
+ .cagbas-site-footer-content .cagbas-footer-bottom{margin-top:18px!important;padding:14px 8px 0!important;text-align:center!important}
 }
