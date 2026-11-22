@@ -86,9 +86,11 @@ async function sendVerificationEmail(env, email, verifyUrl, unsubscribeUrl) {
 async function sendUnsubscribeConfirmationEmail(env, email, unsubscribeUrl) {
   const senderEmail = env.BREVO_SENDER_EMAIL || "basarcekmecelioglu@cagbas.com";
   const senderName = env.BREVO_SENDER_NAME || "ÇAĞBAŞ Creative Studio";
-  const subject = "ÇAĞBAŞ e-bülten abonelik iptali talebiniz";
-  const htmlContent = '<!doctype html><html lang="tr"><body style="margin:0;padding:32px 16px;background:#f5f4f8;color:#24212b;font-family:Arial,sans-serif"><main style="max-width:560px;margin:0 auto;padding:36px;background:#fff;border-radius:16px"><p style="font-size:13px;letter-spacing:3px;color:#7750a8;font-weight:bold">ÇAĞBAŞ CREATIVE STUDIO</p><h1 style="font-size:25px">Abonelik iptalini onaylayın</h1><p>E-bülten aboneliğinizi iptal etmek için aşağıdaki bağlantıyı açıp işlemi onaylayın.</p><p style="margin:28px 0"><a href="' + unsubscribeUrl + '" style="display:inline-block;padding:14px 22px;background:#7750a8;color:#fff;text-decoration:none;border-radius:8px;font-weight:bold">Abonelikten çık</a></p><p style="font-size:13px;color:#777">Bu talebi siz oluşturmadıysanız e-postayı yok sayabilirsiniz.</p></main></body></html>';
-  const response = await fetch("https://api.brevo.com/v3/smtp/email", { method: "POST", headers: { "accept": "application/json", "api-key": env.BREVO_API_KEY, "content-type": "application/json" }, body: JSON.stringify({ sender: { name: senderName, email: senderEmail }, to: [{ email }], subject, htmlContent, textContent: "Abonelik iptalini onaylamak için: " + unsubscribeUrl, tags: ["cagbas-newsletter-unsubscribe"] }) });
+  if (!env.BREVO_API_KEY) throw new Error("BREVO_API_KEY is not configured.");
+  const subject = "ÇAĞBAŞ e-bülten iptal talebiniz alındı – Onay gerekli";
+  const htmlContent = '<!doctype html><html lang="tr"><body style="margin:0;padding:32px 16px;background:#f5f4f8;color:#24212b;font-family:Arial,sans-serif"><main style="max-width:560px;margin:0 auto;padding:36px;background:#fff;border-radius:16px"><p style="font-size:13px;letter-spacing:3px;color:#7750a8;font-weight:bold">ÇAĞBAŞ CREATIVE STUDIO</p><h1 style="font-size:25px">İptal talebinizi aldık</h1><p>ÇAĞBAŞ e-bülten aboneliğinizi iptal etme talebiniz bize ulaştı.</p><p><strong>Önemli:</strong> Aboneliğiniz henüz iptal edilmedi. İptal işlemini tamamlamak için aşağıdaki onay düğmesine basın.</p><p style="margin:28px 0"><a href="' + unsubscribeUrl + '" style="display:inline-block;padding:14px 22px;background:#7752a6;color:#fff;text-decoration:none;border-radius:8px;font-weight:bold">İptali onayla</a></p><p>Onay bağlantısını açtıktan sonra gelen sayfada “Abonelikten çıkışı onayla” düğmesine de basmanız gerekir.</p><p style="font-size:13px;color:#777">Bu talebi siz oluşturmadıysanız hiçbir işlem yapmayın; aboneliğiniz devam eder.</p></main></body></html>';
+  const textContent = "ÇAĞBAŞ e-bülten aboneliğinizi iptal etme talebiniz bize ulaştı.\n\nAboneliğiniz henüz iptal edilmedi. İptal işlemini tamamlamak için bu bağlantıyı açın ve gelen sayfada onay düğmesine basın:\n" + unsubscribeUrl + "\n\nBu talebi siz oluşturmadıysanız e-postayı yok sayabilirsiniz.";
+  const response = await fetch("https://api.brevo.com/v3/smtp/email", { method: "POST", headers: { "accept": "application/json", "api-key": env.BREVO_API_KEY, "content-type": "application/json" }, body: JSON.stringify({ sender: { name: senderName, email: senderEmail }, to: [{ email }], subject, htmlContent, textContent, tags: ["cagbas-newsletter-unsubscribe"] }) });
   if (!response.ok) throw new Error("Brevo unsubscribe confirmation email failed: " + response.status);
   const result = await response.json();
   if (!result.messageId) throw new Error("Brevo did not return a message ID.");
@@ -151,7 +153,7 @@ export async function onRequestPost({ request, env }) {
         url.searchParams.set("token", signature);
         await sendUnsubscribeConfirmationEmail(env, email, url.toString());
       }
-      return json({ success: true, status: "unsubscribe_pending", message: "İptal talebinizi doğrulamak için, kayıtlıysa e-posta adresinize bir onay bağlantısı gönderdik. Lütfen gelen kutunuzu kontrol edin." });
+      return json({ success: true, status: "unsubscribe_pending", message: "İptal talebiniz alındı. E-posta adresiniz sistemimizde kayıtlıysa, iptal işlemini tamamlamak için onay bağlantısını gönderdik. Gelen kutunuzu ve spam klasörünüzü kontrol edin. Onay bağlantısına basmadan aboneliğiniz iptal edilmez." });
     } catch (error) {
       console.error("Newsletter unsubscribe request error:", error);
       return json({ error: "İptal doğrulama e-postası şu anda gönderilemedi. Lütfen daha sonra tekrar deneyin." }, 503);
