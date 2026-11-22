@@ -765,7 +765,26 @@ section.cagbas-site-footer-content > div.cagbas-footer-bottom{position:static!im
  .mobile-menu-container>.menu-logo img{max-width:125px!important}
 }
 </style>
-<script src="/_assets/js/accessibility.js" defer></script></body></html>
+<script src="/_assets/js/accessibility.js" defer></script>
+<style id="cb-about-compact-desktop-header">
+/* Hakkımızda: reduce oversized desktop navigation band */
+@media(min-width:761px){
+ body.cb-about-page .menu-container{
+  height:78px!important;min-height:78px!important;max-height:78px!important;
+  margin:0!important;padding:0!important;overflow:visible!important;
+ }
+ body.cb-about-page .menu-container>.menu-wrapper{
+  display:flex!important;align-items:center!important;justify-content:space-between!important;
+  width:100%!important;height:78px!important;min-height:78px!important;max-height:78px!important;
+  margin:0 auto!important;padding:0 30px!important;box-sizing:border-box!important;
+ }
+ body.cb-about-page .menu-container>.menu-wrapper .menu-logo img{
+  max-height:42px!important;width:auto!important;object-fit:contain!important;
+ }
+}
+</style>
+
+</body></html>
 <style id="cagbas-mobile-navigation-final">
 @media(max-width:767px){
  html,body{width:100%!important;max-width:100%!important;overflow-x:hidden!important}
