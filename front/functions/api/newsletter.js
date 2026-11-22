@@ -96,7 +96,7 @@ async function sendUnsubscribeConfirmationEmail(env, email, unsubscribeUrl) {
 
 async function enforceRequestSecurity(request, env, scope, limit, windowMs) {
   const origin = request.headers.get("origin");
-  const allowedOrigins = new Set(["https://cagbas.com", "https://www.cagbas.com"]);
+  const allowedOrigins = new Set(["https://cagbas.com", "https://www.cagbas.com", "https://cagbas-site.pages.dev"]);
   let normalizedOrigin = null;
   if (origin) {
     try { normalizedOrigin = new URL(origin).origin; } catch { normalizedOrigin = ""; }
