@@ -26,7 +26,7 @@ async function sendVerificationEmail(env, email, verifyUrl) {
     throw new Error("BREVO_API_KEY is not configured.");
   }
 
-  const senderEmail = env.BREVO_SENDER_EMAIL || "cagbas.2026@gmail.com";
+  const senderEmail = env.BREVO_SENDER_EMAIL || "basarcekmecelioglu@cagbas.com";
   const senderName = env.BREVO_SENDER_NAME || "ÇAĞBAŞ Creative Studio";
   const subject = "ÇAĞBAŞ e-bülten aboneliğinizi doğrulayın";
   const htmlContent = `<!doctype html><html lang="tr"><body style="margin:0;padding:32px 16px;background:#f5f4f8;color:#24212b;font-family:Arial,sans-serif"><main style="max-width:560px;margin:0 auto;padding:36px;background:#fff;border-radius:16px"><p style="font-size:13px;letter-spacing:3px;color:#7750a8;font-weight:bold">ÇAĞBAŞ CREATIVE STUDIO</p><h1 style="font-size:25px;line-height:1.3">E-bülten aboneliğinizi doğrulayın</h1><p>Merhaba,</p><p>ÇAĞBAŞ e-bültenine abone olma talebinizi aldık. Aboneliğinizi etkinleştirmek için aşağıdaki bağlantıyı 24 saat içinde kullanın.</p><p style="margin:28px 0"><a href="${verifyUrl}" style="display:inline-block;padding:14px 22px;background:#7750a8;color:#fff;text-decoration:none;border-radius:8px;font-weight:bold">E-posta adresimi doğrula</a></p><p style="font-size:13px;color:#666">Buton çalışmazsa bu bağlantıyı tarayıcınıza kopyalayın:<br><a href="${verifyUrl}" style="color:#7750a8;word-break:break-all">${verifyUrl}</a></p><p style="font-size:13px;color:#777">Bu talebi siz oluşturmadıysanız e-postayı yok sayabilirsiniz.</p></main></body></html>`;
