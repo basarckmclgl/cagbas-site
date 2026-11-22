@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="tr" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,follow">
+  <meta name="theme-color" content="#21162d">
+  <title>404 | Sayfa Bulunamadı | ÇAĞBAŞ</title>
+  <style>
+    *{box-sizing:border-box}
+    body{margin:0;min-height:100vh;display:grid;place-items:center;padding:28px;background:linear-gradient(135deg,#17111f,#352044);color:#fff;font-family:Arial,Helvetica,sans-serif}
+    main{width:min(680px,100%);padding:clamp(28px,6vw,58px);border:1px solid rgba(255,255,255,.16);border-radius:26px;background:rgba(255,255,255,.07);box-shadow:0 24px 80px rgba(0,0,0,.22);text-align:center}
+    .brand{display:inline-block;margin-bottom:34px;color:#fff;text-decoration:none;font-size:22px;font-weight:800;letter-spacing:4px}
+    .code{display:block;color:#cda8f1;font-size:clamp(68px,14vw,112px);font-weight:900;line-height:1;letter-spacing:-5px}
+    h1{margin:20px 0 12px;font-size:clamp(25px,5vw,38px);line-height:1.15}
+    p{max-width:480px;margin:0 auto 28px;color:#ded5e7;font-size:16px;line-height:1.7}
+    .actions{display:flex;justify-content:center;gap:12px;flex-wrap:wrap}
+    .actions a{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:0 22px;border-radius:999px;text-decoration:none;font-size:14px;font-weight:700}
+    .primary{background:#cda8f1;color:#24172f}
+    .secondary{border:1px solid rgba(255,255,255,.35);color:#fff}
+    [hidden]{display:none!important}
+  </style>
+</head>
+<body>
+  <main>
+    <a class="brand" href="/">ÇAĞBAŞ</a>
+    <span class="code">404</span>
+    <section data-lang="tr">
+      <h1>Aradığınız sayfa bulunamadı.</h1>
+      <p>Bağlantı değişmiş, sayfa kaldırılmış veya adres yanlış yazılmış olabilir. Çalışmalarımıza ana sayfadan devam edebilirsiniz.</p>
+      <div class="actions"><a class="primary" href="/">Ana sayfaya dön</a><a class="secondary" href="/bize-ulasin">İletişim</a></div>
+    </section>
+    <section data-lang="en" hidden>
+      <h1>The page you are looking for could not be found.</h1>
+      <p>The link may have changed, the page may have been removed, or the address may be incorrect. Continue from our homepage.</p>
+      <div class="actions"><a class="primary" href="/en/index-en">Back to homepage</a><a class="secondary" href="/en/bize-ulasin-en">Contact</a></div>
+    </section>
+    <section data-lang="ar" dir="rtl" hidden>
+      <h1>لم يتم العثور على الصفحة المطلوبة.</h1>
+      <p>ربما تم تغيير الرابط أو حذف الصفحة أو كتابة العنوان بشكل غير صحيح. يمكنك متابعة التصفح من الصفحة الرئيسية.</p>
+      <div class="actions"><a class="primary" href="/ar/index-ar">العودة إلى الرئيسية</a><a class="secondary" href="/ar/bize-ulasin-ar">اتصل بنا</a></div>
+    </section>
+  </main>
+  <script>
+    (function(){
+      var path=window.location.pathname;
+      var lang=path.indexOf('/en/')===0?'en':path.indexOf('/ar/')===0?'ar':'tr';
+      document.documentElement.lang=lang;
+      document.querySelectorAll('[data-lang]').forEach(function(section){section.hidden=section.getAttribute('data-lang')!==lang;});
+      if(lang==='ar')document.documentElement.dir='rtl';
+    })();
+  </script>
+</body>
+</html>
