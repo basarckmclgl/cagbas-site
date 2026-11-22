@@ -99,3 +99,77 @@ body{background:var(--cr-paper)!important;color:var(--cr-ink)!important;font-fam
 .cb-home-additional-services__grid>a span{color:var(--cr-purple)!important;font-size:12px!important;font-weight:900!important;margin-top:auto!important}
 @media(max-width:900px){.cb-home-additional-services__grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
 @media(max-width:600px){.cb-home-additional-services{padding:0 18px 58px!important}.cb-home-additional-services__grid{grid-template-columns:1fr!important}.cb-home-additional-services__grid>a{min-height:175px!important}}
+
+/* Homepage: replace the purple hero with four integrated, alternating service stories */
+body:has(.cb-home-services--alternating) .banner-slider-wrapper,
+body:has(.cb-home-services--alternating) .cb-map-service-intro,
+body:has(.cb-home-services--alternating) .banner-content-swiper-container{display:none!important}
+.cb-home-services.cb-home-services--alternating{
+  width:min(1320px,100%)!important;max-width:1320px!important;
+  margin:0 auto!important;padding:38px clamp(22px,4vw,54px) 78px!important;
+  display:grid!important;gap:clamp(58px,7vw,100px)!important;
+  background:transparent!important;
+}
+.cb-home-services--alternating .cb-home-service-row{
+  display:grid!important;grid-template-columns:minmax(0,1.08fr) minmax(300px,.92fr)!important;
+  gap:clamp(30px,5.5vw,78px)!important;align-items:center!important;
+  min-width:0!important;margin:0!important;padding:0!important;
+  background:transparent!important;border:0!important;box-shadow:none!important;
+}
+.cb-home-services--alternating .cb-home-service-row--graphic,
+.cb-home-services--alternating .cb-home-service-row--urge{
+  grid-template-columns:minmax(300px,.92fr) minmax(0,1.08fr)!important;
+}
+.cb-home-services--alternating .cb-home-service-image{
+  display:block!important;position:relative!important;width:100%!important;
+  height:clamp(260px,30vw,390px)!important;min-height:0!important;
+  margin:0!important;padding:0!important;border:0!important;border-radius:0!important;
+  overflow:hidden!important;background:transparent!important;box-shadow:none!important;
+}
+.cb-home-services--alternating .cb-home-service-image:after{display:none!important}
+.cb-home-services--alternating .cb-home-service-image img{
+  display:block!important;width:100%!important;height:100%!important;
+  object-fit:cover!important;object-position:center!important;
+  border:0!important;border-radius:0!important;box-shadow:none!important;
+  -webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 8%,#000 92%,transparent 100%);
+  mask-image:linear-gradient(90deg,transparent 0%,#000 8%,#000 92%,transparent 100%);
+}
+.cb-home-services--alternating .cb-home-service-copy{
+  width:100%!important;max-width:510px!important;margin:0!important;
+  padding:16px 0!important;background:transparent!important;border:0!important;
+  box-shadow:none!important;
+}
+.cb-home-services--alternating .cb-home-service-copy h2{
+  margin:0 0 17px!important;font-size:clamp(34px,3.5vw,49px)!important;
+  letter-spacing:-1.8px!important;line-height:1.04!important;
+}
+.cb-home-services--alternating .cb-home-service-copy p{
+  max-width:470px!important;font-size:15px!important;line-height:1.9!important;
+}
+.cb-home-services--alternating .cb-home-service-copy ul{
+  gap:11px!important;margin:0 0 24px!important;
+}
+.cb-home-services--alternating .cb-home-service-link{
+  border-radius:0!important;border-width:0 0 1px!important;
+  padding:9px 0!important;background:transparent!important;
+}
+.cb-home-services--alternating .cb-home-service-link:hover{
+  color:#8050b5!important;background:transparent!important;
+}
+@media(max-width:760px){
+  .cb-home-services.cb-home-services--alternating{
+    padding:22px 20px 54px!important;gap:44px!important;
+  }
+  .cb-home-services--alternating .cb-home-service-row,
+  .cb-home-services--alternating .cb-home-service-row--graphic,
+  .cb-home-services--alternating .cb-home-service-row--urge{
+    grid-template-columns:minmax(0,1fr)!important;gap:16px!important;
+  }
+  .cb-home-services--alternating .cb-home-service-row--graphic .cb-home-service-copy,
+  .cb-home-services--alternating .cb-home-service-row--urge .cb-home-service-copy{order:2!important}
+  .cb-home-services--alternating .cb-home-service-row--graphic .cb-home-service-image,
+  .cb-home-services--alternating .cb-home-service-row--urge .cb-home-service-image{order:1!important}
+  .cb-home-services--alternating .cb-home-service-image{height:clamp(210px,62vw,310px)!important}
+  .cb-home-services--alternating .cb-home-service-copy{max-width:none!important;padding:8px 0!important}
+  .cb-home-services--alternating .cb-home-service-copy h2{font-size:34px!important}
+}
