@@ -59,5 +59,37 @@ body{background:#f6f4f8;color:#24212b;font-family:Arial,sans-serif;min-height:10
 <a class="nl-back" href="/en/index-en.html">← Back to home</a>
 </section></main>
 <footer class="nl-footer">© 2026 ÇAĞBAŞ. All rights reserved.</footer>
-<script src="/_assets/js/main.js" defer></script>
+<script>
+(function(){
+ const form=document.getElementById('newsletterForm'); if(!form) return;
+ const action=document.getElementById('newsletterAction');
+ const email=document.getElementById('newsletterEmail');
+ const button=form.querySelector('button[type="submit"]');
+ const feedback=document.getElementById('newsletterFeedback');
+ const boxes=Array.from(form.querySelectorAll('.checkbox-wrapper'));
+ const checks=boxes.map(x=>x.querySelector('input[type="checkbox"]')).filter(Boolean);
+ function setMode(){
+  const subscribing=action.value==='subscribe';
+  boxes.forEach((box,i)=>{box.hidden=!subscribing;box.style.display=subscribing?'flex':'none';});
+  checks.forEach(ch=>{ch.required=subscribing;if(!subscribing)ch.checked=false;});
+  button.textContent=subscribing?'SUBSCRIBE':'UNSUBSCRIBE';
+  feedback.textContent='';
+ }
+ action.addEventListener('change',setMode);setMode();
+ form.addEventListener('submit',async function(e){
+  e.preventDefault();
+  if(!email.value.trim()||!email.checkValidity()){feedback.textContent='Please enter a valid email address.';email.focus();return;}
+  const subscribing=action.value==='subscribe';
+  if(subscribing&&checks.some(ch=>!ch.checked)){feedback.textContent='Please confirm the privacy notice and newsletter consent.';return;}
+  const old=button.textContent;button.disabled=true;button.textContent='Submitting your request…';feedback.textContent='Submitting your request…';
+  try{
+   const response=await fetch('/api/newsletter',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:email.value.trim(),action:action.value,marketingConsent:subscribing&&!!checks[checks.length-1]?.checked})});
+   let result={};try{result=await response.json();}catch(_){}
+   if(!response.ok)throw new Error(result.error||'Your request could not be completed. Please try again.');
+   form.reset();setMode();feedback.textContent=result.message||'Your request could not be completed. Please try again.';
+  }catch(err){feedback.textContent=err.message||'Your request could not be completed. Please try again.';}
+  finally{button.disabled=false;button.textContent=old;setMode();}
+ });
+})();
+</script>
 </body></html>
