@@ -255,7 +255,7 @@ html[dir="rtl"] .footer-contact-area-item-e-bulten .input-wrapper{min-width:0!im
 <style id="cb-homepage-remove-banner-dark-overlay">
 .banner-slider-wrapper::before,.banner-slider-wrapper::after{display:none!important;background:none!important;opacity:0!important}
 </style>
-</head>
+<style id="newsletter-action-menu-style">.footer-contact-area-item-e-bulten .newsletter-action-label{display:block;font-size:12px;color:#746d79;margin:12px 0 6px}.footer-contact-area-item-e-bulten .newsletter-action-select,.newsletter-missing-footer select{width:100%;min-height:42px;border:1px solid #d9d1e0;border-radius:5px;background:#fff;color:#27212e;padding:9px 12px;margin:0 0 12px}.newsletter-missing-footer{background:#f1eef4;padding:44px 24px}.newsletter-missing-footer .footer-contact-area-wrapper{max-width:1160px;margin:auto}.newsletter-missing-footer .footer-contact-area-item-e-bulten{max-width:620px;margin:auto}</style></head>
 <body><a class="cb-skip-link" href="#page-title">انتقل إلى المحتوى</a>
 
 
@@ -517,6 +517,8 @@ section.cagbas-site-footer-content > div.cagbas-footer-bottom{position:static!im
     <p>انضم إلى قائمتنا البريدية لتصلك آخر أخبار مشاريعنا وخدماتنا وإعلاناتنا.</p>
     <div class="input-container">
         <form id="newsletterForm" class="newsletter-form" novalidate>
+<label class="newsletter-action-label" for="newsletterAction">اختر العملية</label><select id="newsletterAction" name="action" class="newsletter-action-select"><option value="subscribe">اشترك</option><option value="unsubscribe">إلغاء الاشتراك</option></select>
+
             <div class="input-wrapper">
                 <input type="email" name="email" id="newsletterEmail" placeholder="أدخل بريدك الإلكتروني..." required maxlength="254" autocomplete="email" aria-label="النشرة البريدية - البريد الإلكتروني">
                 <button type="submit" class="signup-button">اشتراك</button>
