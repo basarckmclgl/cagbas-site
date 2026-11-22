@@ -4837,3 +4837,38 @@ img, video, iframe { max-width: 100%; }
 .cb-skip-link:focus,.cb-skip-link:focus-visible{transform:translateY(0);outline:3px solid #241333;outline-offset:3px}
 :where(a,button,input,select,textarea,[tabindex]):focus-visible{outline:3px solid #6b35a5!important;outline-offset:3px!important}
 .cb-sr-only{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}
+
+
+/* ÇAĞBAŞ footer alignment: social buttons above the divider, copyright below */
+.cagbas-site-footer-content{
+  position:relative!important;
+  padding-bottom:94px!important;
+}
+.cagbas-footer-brand .cagbas-footer-socials{
+  position:absolute!important;
+  left:50%!important;
+  bottom:48px!important;
+  transform:translateX(-50%)!important;
+  margin:0!important;
+  justify-content:center!important;
+  white-space:nowrap!important;
+  z-index:2!important;
+}
+.cagbas-site-footer-content .cagbas-footer-bottom{
+  position:absolute!important;
+  left:0!important;
+  right:0!important;
+  bottom:10px!important;
+  margin:0!important;
+  padding:10px 20px 0!important;
+  border-top:1px solid rgba(216,180,255,.20)!important;
+  text-align:center!important;
+  color:rgba(255,255,255,.72)!important;
+  font-size:12px!important;
+  line-height:1.5!important;
+}
+@media(max-width:760px){
+  .cagbas-site-footer-content{padding-bottom:92px!important}
+  .cagbas-footer-brand .cagbas-footer-socials{left:50%!important;bottom:48px!important}
+  .cagbas-site-footer-content .cagbas-footer-bottom{bottom:8px!important;padding-top:9px!important}
+}
