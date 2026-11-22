@@ -2,7 +2,8 @@ function json(data, status = 200) {
   return new Response(JSON.stringify(data), { status, headers: { "Content-Type": "application/json; charset=utf-8", "Cache-Control": "no-store" } });
 }
 async function unsubscribeToken(env, id, email) {
-  const key = await crypto.subtle.importKey("raw", new TextEncoder().encode(env.BREVO_API_KEY), { name: "HMAC", hash: "SHA-256" }, false, ["sign"]);
+  const secret = env.NEWSLETTER_UNSUBSCRIBE_SECRET || env.BREVO_API_KEY;
+  const key = await crypto.subtle.importKey("raw", new TextEncoder().encode(secret), { name: "HMAC", hash: "SHA-256" }, false, ["sign"]);
   const data = "cagbas-newsletter-unsubscribe-v1:" + id + ":" + email.toLowerCase();
   const sig = await crypto.subtle.sign("HMAC", key, new TextEncoder().encode(data));
   return Array.from(new Uint8Array(sig), b => b.toString(16).padStart(2, "0")).join("");
