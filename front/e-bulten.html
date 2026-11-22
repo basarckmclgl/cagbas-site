@@ -88,7 +88,7 @@ body{background:#f6f4f8;color:#24212b;font-family:Arial,sans-serif;min-height:10
    if(!response.ok)throw new Error(result.error||'İşleminiz şu anda tamamlanamadı. Lütfen tekrar deneyin.');
    form.reset();setMode();feedback.textContent=result.message||'İşleminiz şu anda tamamlanamadı. Lütfen tekrar deneyin.';
   }catch(err){feedback.textContent=err.message||'İşleminiz şu anda tamamlanamadı. Lütfen tekrar deneyin.';}
-  finally{button.disabled=false;button.textContent=old;setMode();}
+  finally{button.disabled=false;button.textContent=action.value==='subscribe'?'ABONE OL':'ABONELİK İPTALİ';}
  });
 })();
 </script>
