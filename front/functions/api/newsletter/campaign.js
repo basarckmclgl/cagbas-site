@@ -26,7 +26,7 @@ export async function onRequestPost({ request, env }) {
   try {
     const subscribers = await env.DB.prepare("SELECT id, email FROM newsletter_subscribers WHERE status = 'active' AND marketing_consent = 1 ORDER BY id").all();
     const rows = subscribers.results || [];
-    const senderEmail = env.BREVO_SENDER_EMAIL || "cagbas.2026@gmail.com";
+    const senderEmail = env.BREVO_SENDER_EMAIL || "basarcekmecelioglu@cagbas.com";
     const senderName = env.BREVO_SENDER_NAME || "ÇAĞBAŞ Creative Studio";
     let sent = 0;
     const failures = [];
