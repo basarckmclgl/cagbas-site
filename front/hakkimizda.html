@@ -128,6 +128,7 @@
  .menu-container>.mobile-menu-links-wrapper{top:64px!important;background:#171421!important}
 }
 </style>
+<style id="newsletter-action-menu-style">.footer-contact-area-item-e-bulten .newsletter-action-label{display:block;font-size:12px;color:#746d79;margin:12px 0 6px}.footer-contact-area-item-e-bulten .newsletter-action-select,.newsletter-missing-footer select{width:100%;min-height:42px;border:1px solid #d9d1e0;border-radius:5px;background:#fff;color:#27212e;padding:9px 12px;margin:0 0 12px}.newsletter-missing-footer{background:#f1eef4;padding:44px 24px}.newsletter-missing-footer .footer-contact-area-wrapper{max-width:1160px;margin:auto}.newsletter-missing-footer .footer-contact-area-item-e-bulten{max-width:620px;margin:auto}.newsletter-missing-footer .newsletter-feedback{min-height:20px}</style>
 </head><style id="cb-about-page">
 :root{--ab-ink:#21182d;--ab-muted:#625a6c;--ab-purple:#7628c9;--ab-violet:#a54be8;--ab-lilac:#f1e7fb;--ab-paper:#fbf9fd;--ab-line:#e9def2}
 html,body{margin:0!important;background:#fff!important;color:var(--ab-ink);font-family:'Nunito',sans-serif;overflow-x:hidden}
@@ -619,6 +620,9 @@ html,body{margin:0!important;background:#fff!important;color:var(--ab-ink);font-
     <p>Yeni projelerimiz, hizmetlerimiz ve duyurularımızdan haberdar olmak için e-posta listemize katılın.</p>
     <div class="input-container">
         <form id="newsletterForm" class="newsletter-form" novalidate>
+<label class="newsletter-action-label" for="newsletterAction">İşlem seçin</label>
+<select id="newsletterAction" name="action" class="newsletter-action-select" aria-label="İşlem seçin"><option value="subscribe">Abone Ol</option><option value="unsubscribe">Abonelik İptali</option></select>
+
             <div class="input-wrapper">
                 <input type="email" name="email" id="newsletterEmail" placeholder="E-posta adresinizi girin..." required maxlength="254" autocomplete="email" aria-label="E-posta adresi">
                 <button type="submit" class="signup-button">ABONE OL</button>
