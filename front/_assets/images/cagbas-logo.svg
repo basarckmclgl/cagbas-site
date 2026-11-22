@@ -1,5 +1,9 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 260" role="img" aria-labelledby="title">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 350" role="img" aria-labelledby="title">
 <title id="title">ÇAĞBAŞ</title>
-<defs><linearGradient id="violet" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#d946ef"/><stop offset=".48" stop-color="#7c3aed"/><stop offset="1" stop-color="#312e81"/></linearGradient><linearGradient id="ink" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#101326"/><stop offset="1" stop-color="#252044"/></linearGradient></defs>
-<g transform="translate(16 22)"><path d="M180 18C94 -5 22 50 22 126c0 74 70 120 150 96 25-7 43-22 59-42l-38-28c-13 17-29 26-49 26-42 0-73-22-73-55 0-37 30-64 72-64 23 0 42 8 56 25l38-31c-16-19-34-30-57-35z" fill="url(#ink)"/><path d="M18 170C71 123 143 85 267 43c-31 31-61 62-88 91 57-28 98-43 145-52-68 53-158 101-267 126 22-18 43-35 62-52-39 9-70 14-101 14z" fill="url(#violet)"/><path d="M85 207l-29 28 42-6 18-25z" fill="#7c3aed"/></g>
-<path d="M330 38v184" stroke="#8b5cf6" stroke-width="3" opacity=".8"/><text x="370" y="165" font-family="Arial, Helvetica, sans-serif" font-size="126" font-weight="800" letter-spacing="1" fill="url(#ink)">ÇAĞBAŞ</text><path d="M493 72l21-25 21 25M704 72l21-25 21 25" fill="none" stroke="#8b5cf6" stroke-width="9" stroke-linecap="square"/></svg>
+<g fill="none" stroke-linecap="square" stroke-linejoin="miter" stroke-width="24">
+<path d="M300 35 180 105 180 180 265 230 335 190 265 150 265 95 205 130 205 165 300 220 300 315 180 245 180 175 300 105" stroke="#171717"/>
+<path d="M340 35 460 105 460 180 375 230 305 190 375 150 375 95 435 130 435 165 340 220 340 315 460 245 460 175 340 105" stroke="#B8794D"/>
+<path d="M300 105 340 130M300 220 340 195" stroke="#171717"/>
+</g>
+<text x="520" y="225" font-family="Arial, Helvetica, sans-serif" font-size="142" font-weight="700" letter-spacing="2" fill="#171717">ÇAĞBAŞ</text>
+</svg>
