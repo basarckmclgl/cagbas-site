@@ -82,14 +82,23 @@ async function runCleanup(env) {
   }
 
   // Rate-limit counters are short-lived operational data, not contact records.
-  const rateLimit = await env.DB.prepare(
-    "DELETE FROM api_rate_limits WHERE window_start < ?"
-  ).bind(Math.floor((Date.now() - 2 * DAY_MS) / 1000)).run();
+  const rateLimitCutoff = Math.floor((Date.now() - 2 * DAY_MS) / 1000);
+  const rateLimitCount = await env.DB.prepare(
+    "SELECT COUNT(*) AS total FROM api_rate_limits WHERE window_start < ?"
+  ).bind(rateLimitCutoff).first();
+  let rateLimitDeleted = 0;
+  if (!dryRun) {
+    const rateLimit = await env.DB.prepare(
+      "DELETE FROM api_rate_limits WHERE window_start < ?"
+    ).bind(rateLimitCutoff).run();
+    rateLimitDeleted = Number(rateLimit?.meta?.changes || 0);
+  }
 
   results.push({
     category: "old API rate-limit counters",
-    status: dryRun ? "not_deleted_dry_run" : "deleted",
-    deleted: dryRun ? 0 : Number(rateLimit?.meta?.changes || 0)
+    status: dryRun ? "dry_run" : "deleted",
+    eligible: Number(rateLimitCount?.total || 0),
+    deleted: rateLimitDeleted
   });
 
   console.log(JSON.stringify({
