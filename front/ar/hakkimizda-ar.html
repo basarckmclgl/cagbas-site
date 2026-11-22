@@ -319,7 +319,7 @@ html,body{margin:0!important;background:#fff!important;color:var(--ab-ink);font-
     </div>
     <div class="mobile-menu-container">
         <div class="mobile-menu-icon-wrapper" id="menu-icon">
-            <img src="/_assets/images/menu-icon.png" width="24px" alt="ÇAĞBAŞ">
+            <span class="cagbas-hamburger-lines" aria-hidden="true"><span></span><span></span><span></span></span>
         </div>
         <a class="menu-logo" href="/ar/index-ar.html"><img src="/_assets/images/cagbas-logo.svg" width="120" height="35" alt="ÇAĞBAŞ"></a>
 
@@ -634,4 +634,45 @@ html,body{margin:0!important;background:#fff!important;color:var(--ab-ink);font-
  body.cb-about-page[dir=rtl] .mobile-menu-container .langSelectorBody{right:auto!important;left:0!important}
 }
 @media(max-width:380px){body.cb-about-page .menu-container>.mobile-menu-container{padding-left:12px!important;padding-right:12px!important}body.cb-about-page .cb-about-hero{padding-top:180px!important;padding-left:20px!important;padding-right:20px!important}}
+</style>
+
+<style id="cagbas-about-mobile-header-visibility-fix">
+@media (max-width: 767px) {
+  .menu-container {
+    display:block!important; position:relative!important; width:100%!important;
+    height:70px!important; min-height:70px!important; margin:0!important; padding:0!important;
+    overflow:visible!important; z-index:10000!important;
+    background:#fff!important; background-color:#fff!important;
+    opacity:1!important; visibility:visible!important; filter:none!important;
+    -webkit-backdrop-filter:none!important; backdrop-filter:none!important;
+    box-shadow:0 3px 14px rgba(35,20,48,.07)!important;
+  }
+  .menu-container>.mobile-menu-container {
+    display:flex!important; position:relative!important; width:100%!important;
+    height:70px!important; min-height:70px!important; max-height:70px!important;
+    box-sizing:border-box!important; margin:0!important; padding:0 16px!important;
+    align-items:center!important; justify-content:space-between!important;
+    background:#fff!important; background-color:#fff!important;
+    opacity:1!important; visibility:visible!important; filter:none!important;
+    -webkit-backdrop-filter:none!important; backdrop-filter:none!important;
+  }
+  .mobile-menu-icon-wrapper {
+    display:flex!important; width:42px!important; height:42px!important;
+    min-width:42px!important; min-height:42px!important; flex:0 0 42px!important;
+    align-items:center!important; justify-content:center!important;
+    opacity:1!important; visibility:visible!important; z-index:10002!important;
+  }
+  .mobile-menu-icon-wrapper img {display:none!important}
+  .mobile-menu-icon-wrapper .cagbas-hamburger-lines {
+    display:flex!important; flex-direction:column!important; justify-content:space-between!important;
+    width:27px!important; height:20px!important; opacity:1!important; visibility:visible!important;
+  }
+  .mobile-menu-icon-wrapper .cagbas-hamburger-lines>span {
+    display:block!important; width:27px!important; height:2px!important; min-height:2px!important;
+    margin:0!important; border:0!important; border-radius:2px!important;
+    background:#21182d!important; opacity:1!important; visibility:visible!important;
+  }
+  .mobile-menu-container>.menu-logo {visibility:visible!important; opacity:1!important; z-index:10001!important}
+  .mobile-menu-container>.langSelector {z-index:10003!important}
+}
 </style>
