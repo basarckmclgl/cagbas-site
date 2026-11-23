@@ -816,7 +816,62 @@ html[dir="rtl"] .menu-bar-links{direction:rtl!important}
 .cb-home-services-entry a{display:inline-flex;align-items:center;gap:22px;padding:14px 20px;background:#241b31;color:#fff!important;border-radius:5px;text-decoration:none!important;font-size:13px;font-weight:800}
 .cb-home-services-entry a b{font-size:18px}
 @media(max-width:700px){.cb-home-welcome{margin:0 16px 25px!important;padding:22px!important;max-width:calc(100% - 32px)!important}.cb-home-welcome h1{font-size:32px!important}.cb-home-welcome p{font-size:13px!important}.cb-home-services-entry{padding:55px 22px}}
-</style></head>
+</style>
+<style id="cb-homepage-impact-redesign">
+:root{--cbx-ink:#171321;--cbx-purple:#9b70ca;--cbx-lilac:#d9b9ff;--cbx-muted:#aaa2b5}
+.banner-slider-wrapper{height:min(790px,86svh)!important;min-height:650px!important;background:#100d18!important;isolation:isolate!important}
+.banner-slider-wrapper .banner-swiper-wrapper,.banner-slider-wrapper .main-slider-container,.banner-slider-wrapper .swiper-wrapper,.banner-slider-wrapper .swiper-slide{height:100%!important;min-height:650px!important}
+.banner-slider-wrapper .swiper-slide{background-position:center 54%!important;filter:saturate(.82)!important;transform:scale(1.015)}
+.banner-slider-wrapper:before{content:"";position:absolute;z-index:1;inset:0;pointer-events:none;background:linear-gradient(90deg,rgba(12,9,20,.9) 0%,rgba(18,12,29,.74) 42%,rgba(18,12,29,.18) 100%),linear-gradient(0deg,rgba(12,9,20,.45),transparent 40%)!important}
+.banner-slider-wrapper:after{content:"";position:absolute;z-index:1;pointer-events:none;inset:0;background:radial-gradient(ellipse at 78% 42%,rgba(155,112,202,.26),transparent 34%),linear-gradient(110deg,transparent 60%,rgba(255,255,255,.035) 60.2%,transparent 60.6%)!important}
+.cb-map-slogan,.banner-content-swiper-container{display:none!important}
+.cb-map-service-intro{left:clamp(24px,8.5vw,138px)!important;top:49%!important;transform:translateY(-43%)!important;width:min(790px,72%)!important;padding:0!important;border:0!important;border-radius:0!important;background:transparent!important;backdrop-filter:none!important;box-shadow:none!important;text-align:left!important;z-index:5!important}
+.cb-map-service-intro__eyebrow{display:flex!important;align-items:center!important;gap:10px!important;color:#e1c6ff!important;font-size:10px!important;letter-spacing:2.8px!important;margin:0 0 27px!important}
+.cb-map-service-intro__eyebrow i{width:7px;height:7px;border-radius:50%;background:#bd8cf0;box-shadow:0 0 18px #bd8cf0}
+.cb-map-service-intro__eyebrow b{color:rgba(255,255,255,.45)!important}
+.cb-map-service-intro h1{max-width:790px!important;font-size:clamp(48px,6.2vw,88px)!important;line-height:.99!important;letter-spacing:-4.5px!important;font-weight:780!important;margin:0 0 26px!important;text-shadow:none!important}
+.cb-map-service-intro h1 em{display:inline;color:#d8b6ff!important;font-family:Georgia,serif!important;font-weight:400!important}
+.cb-map-service-intro p{max-width:570px!important;font-size:17px!important;line-height:1.8!important;color:rgba(255,255,255,.78)!important;margin:0 0 27px!important;text-shadow:none!important}
+.cb-map-service-intro__tags{gap:10px 22px!important;margin-bottom:30px!important}
+.cb-map-service-intro__tags span{font-size:9px!important;letter-spacing:1.2px!important;color:rgba(255,255,255,.78)!important}
+.cb-home-welcome__actions{display:flex;align-items:center;gap:27px;flex-wrap:wrap}
+.cb-home-welcome__button{display:inline-flex!important;align-items:center!important;justify-content:space-between!important;gap:32px!important;min-width:220px!important;padding:17px 20px!important;border:1px solid #a77ad5!important;border-radius:3px!important;background:#8d5fba!important;color:#fff!important;text-decoration:none!important;font-size:13px!important;font-weight:800!important;box-shadow:0 12px 34px rgba(95,54,132,.28)!important;transition:all .25s ease!important}
+.cb-home-welcome__button:hover{background:#a477d0!important;transform:translateY(-3px)!important;box-shadow:0 18px 40px rgba(95,54,132,.4)!important}
+.cb-home-welcome__button span{font-size:20px!important}
+.cb-home-welcome__textlink{color:#fff!important;text-decoration:none!important;font-size:13px!important;font-weight:700!important;border-bottom:1px solid rgba(255,255,255,.35);padding:0 0 7px}
+.cb-home-welcome__textlink span{margin-left:12px;color:#d7b6f5}
+.cb-home-welcome__note{display:flex;align-items:center;gap:10px;margin-top:43px;color:rgba(255,255,255,.58);font-size:11px;letter-spacing:.2px}
+.cb-home-welcome__note span{width:27px;height:1px;background:#bd8cf0}
+.cb-home-services-entry{position:relative!important;overflow:hidden!important;background:#f4f1f7!important;padding:42px max(24px,calc((100% - 1280px)/2)) 62px!important;text-align:left!important}
+.cb-home-services-entry:before{content:"";position:absolute;right:-170px;top:-220px;width:480px;height:480px;border:1px solid rgba(132,88,177,.13);border-radius:50%;box-shadow:0 0 0 42px rgba(132,88,177,.025),0 0 0 86px rgba(132,88,177,.02);pointer-events:none}
+.cb-hs-topline{display:flex;justify-content:space-between;max-width:1280px;margin:0 auto 55px;padding-bottom:15px;border-bottom:1px solid #ded6e7;color:#8a7a98;font-size:9px;font-weight:850;letter-spacing:2px}
+.cb-home-services-entry__inner{max-width:1280px!important;margin:0 auto!important}
+.cb-hs-heading{display:grid;grid-template-columns:1.1fr .7fr;gap:9%;align-items:end;margin-bottom:38px}
+.cb-hs-kicker{color:#8655ae;font-size:10px;font-weight:850;letter-spacing:2px}
+.cb-hs-heading h2{max-width:720px;font-size:clamp(38px,5vw,65px)!important;line-height:1.02!important;letter-spacing:-2.8px!important;color:#211a2a!important;margin:17px 0 0!important}
+.cb-hs-heading h2 em{font-family:Georgia,serif;font-weight:400;color:#895bb0}
+.cb-hs-heading>p{max-width:420px;color:#716a79;font-size:14px;line-height:1.9;margin:0 0 5px}
+.cb-hs-cards{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:1px solid #dcd4e4;border-bottom:1px solid #dcd4e4}
+.cb-hs-card{position:relative;display:flex;flex-direction:column;justify-content:space-between;min-height:280px;padding:23px 23px 25px;border-right:1px solid #dcd4e4;color:#211a2a!important;text-decoration:none!important;transition:background .25s,transform .25s}
+.cb-hs-card:first-child{border-left:1px solid #dcd4e4}
+.cb-hs-card:hover{background:#fff;transform:translateY(-5px);box-shadow:0 18px 36px rgba(37,23,49,.08);z-index:2}
+.cb-hs-card__no{font-family:Georgia,serif;font-size:17px;color:#a17ac2}
+.cb-hs-card small{font-size:8px;letter-spacing:1.35px;font-weight:850;color:#9274a8}
+.cb-hs-card h3{font-size:25px;letter-spacing:-.8px;margin:9px 0 10px;color:#211a2a}
+.cb-hs-card p{font-size:12px;line-height:1.75;color:#77717e;margin:0;max-width:240px}
+.cb-hs-card>b{align-self:flex-end;display:grid;place-items:center;width:37px;height:37px;border:1px solid #d8c9e3;border-radius:50%;font-size:18px;color:#8053a7;font-weight:400;transition:all .25s}
+.cb-hs-card:hover>b{background:#8053a7;color:#fff;border-color:#8053a7}
+.cb-hs-bottom{display:flex;align-items:center;justify-content:space-between;gap:20px;padding-top:22px}
+.cb-hs-bottom>span{font-size:9px;letter-spacing:1.7px;color:#897d91;font-weight:800}
+.cb-hs-bottom a{color:#5d3c7b;text-decoration:none;font-size:12px;font-weight:850}
+.cb-hs-bottom a b{margin-left:15px;font-size:18px}
+.footer-banner{margin-top:0!important}
+@media(max-width:900px){.cb-hs-cards{grid-template-columns:repeat(2,minmax(0,1fr))}.cb-hs-card:nth-child(3){border-left:1px solid #dcd4e4}.cb-hs-card:nth-child(n+3){border-top:1px solid #dcd4e4}.cb-hs-heading{gap:5%}}
+@media(max-width:760px){.banner-slider-wrapper{height:680px!important;min-height:680px!important}.banner-slider-wrapper .banner-swiper-wrapper,.banner-slider-wrapper .main-slider-container,.banner-slider-wrapper .swiper-wrapper,.banner-slider-wrapper .swiper-slide{min-height:680px!important}.cb-map-service-intro{left:22px!important;right:22px!important;top:48%!important;transform:translateY(-42%)!important;width:auto!important}.cb-map-service-intro__eyebrow{font-size:8px!important;letter-spacing:1.7px!important;margin-bottom:21px!important}.cb-map-service-intro h1{font-size:clamp(43px,10vw,64px)!important;line-height:1.02!important;letter-spacing:-2.4px!important;margin-bottom:20px!important}.cb-map-service-intro p{font-size:14px!important;line-height:1.7!important}.cb-map-service-intro__tags{gap:12px 15px!important;margin-bottom:24px!important}.cb-map-service-intro__tags span{font-size:8px!important}.cb-home-welcome__actions{gap:18px}.cb-home-welcome__button{min-width:205px!important;padding:15px 17px!important}.cb-home-welcome__note{margin-top:28px!important;font-size:10px}.cb-home-services-entry{padding:34px 22px 44px!important}.cb-hs-topline{margin-bottom:35px;font-size:8px;letter-spacing:1px}.cb-hs-heading{grid-template-columns:1fr;gap:16px;margin-bottom:25px}.cb-hs-heading h2{font-size:42px!important;letter-spacing:-1.8px!important}.cb-hs-heading>p{font-size:13px}.cb-hs-cards{grid-template-columns:1fr 1fr}.cb-hs-card{min-height:245px;padding:17px 14px}.cb-hs-card h3{font-size:21px}.cb-hs-card p{font-size:11px}.cb-hs-bottom{align-items:flex-start;flex-direction:column;gap:13px}}
+@media(max-width:420px){.banner-slider-wrapper{height:690px!important;min-height:690px!important}.banner-slider-wrapper .banner-swiper-wrapper,.banner-slider-wrapper .main-slider-container,.banner-slider-wrapper .swiper-wrapper,.banner-slider-wrapper .swiper-slide{min-height:690px!important}.cb-map-service-intro__tags{gap:10px!important}.cb-home-welcome__actions{align-items:stretch;flex-direction:column}.cb-home-welcome__button{width:100%!important;box-sizing:border-box}.cb-hs-cards{grid-template-columns:1fr}.cb-hs-card{min-height:205px;border-left:1px solid #dcd4e4!important;border-top:1px solid #dcd4e4}.cb-hs-card:first-child{border-top:0}.cb-hs-card p{max-width:290px}.cb-hs-bottom>span{font-size:8px}}
+</style>
+
+</head>
 <body><a class="cb-skip-link" href="#page-title">İçeriğe geç</a>
 
 
@@ -952,13 +1007,17 @@ html[dir="rtl"] .menu-bar-links{direction:rtl!important}
                 </div>
             </div>
         </div>
-        <div class="cb-map-slogan" lang="tr">Güvenilir Ortak, Küresel Başarı!</div>
+        <div class="cb-map-slogan" lang="tr">Fikirden dijital çözüme.</div>
         <div class="cb-map-service-intro cb-home-welcome">
-          <span class="cb-map-service-intro__eyebrow">ÇAĞBAŞ CREATIVE STUDIO</span>
-          <h1 id="page-title">Dijital dünyada ihtiyacınız olan <em>çözümler burada.</em></h1>
-          <p>Web sitenizden özel yazılımınıza, e-ticaret altyapınızdan iş süreçlerinize kadar işletmenizin dijital ihtiyaçları için geliştirdiğimiz hizmetleri keşfedin.</p>
-          <div class="cb-map-service-intro__tags"><span>WEB TASARIMI</span><i></i><span>E-TİCARET</span><i></i><span>WEB UYGULAMALARI</span><i></i><span>ÖZEL YAZILIM</span></div>
-          <a class="cb-home-welcome__button" href="/hizmetlerimiz.html">Hizmetlerimizi Keşfedin <span>↗</span></a>
+          <span class="cb-map-service-intro__eyebrow"><i></i> ÇAĞBAŞ CREATIVE STUDIO <b>•</b> TASARIM & TEKNOLOJİ</span>
+          <h1 id="page-title">Dijitalde fark yaratmak, <em>doğru fikirle başlar.</em></h1>
+          <p>Markanızın ihtiyaçlarını anlayan, işinizi büyütmeye odaklanan web tasarım ve yazılım çözümleri geliştiriyoruz.</p>
+          <div class="cb-map-service-intro__tags"><span>01 / WEB TASARIMI</span><span>02 / E-TİCARET</span><span>03 / ÖZEL YAZILIM</span></div>
+          <div class="cb-home-welcome__actions">
+            <a class="cb-home-welcome__button" href="/hizmetlerimiz.html">Hizmetleri Keşfet <span>↗</span></a>
+            <a class="cb-home-welcome__textlink" href="/bize-ulasin.html">Projenizi konuşalım <span>→</span></a>
+          </div>
+          <div class="cb-home-welcome__note"><span></span> Fikirlerinizi çalışan dijital deneyimlere dönüştürelim.</div>
         </div>
         <div class="banner-content-swiper-container">
             <div class="swiper-container left-down-swiper-container">
@@ -992,11 +1051,19 @@ html[dir="rtl"] .menu-bar-links{direction:rtl!important}
 
 
 <section class="cb-home-services-entry" aria-label="ÇAĞBAŞ hizmetlerine giriş">
+  <div class="cb-hs-topline"><span>NEYE İHTİYACINIZ VAR?</span><span>ÇAĞBAŞ / HİZMETLER</span></div>
   <div class="cb-home-services-entry__inner">
-    <span>İHTİYACINIZA UYGUN ÇÖZÜMÜ BULUN</span>
-    <h2>İşletmeniz için neler yapabileceğimizi keşfedin.</h2>
-    <p>Her hizmetin kapsamını, sunduğumuz çözümleri ve projenize nasıl katkı sağlayabileceğimizi inceleyin.</p>
-    <a href="/hizmetlerimiz.html">Tüm Hizmetlerimizi Görüntüle <b>↗</b></a>
+    <div class="cb-hs-heading">
+      <div><span class="cb-hs-kicker">FİKRİNİZİ BİRLİKTE BÜYÜTELİM</span><h2>İşiniz için doğru dijital çözüm <em>burada.</em></h2></div>
+      <p>İhtiyacınızı seçin, nasıl değer katabileceğimizi keşfedin. Her proje için amaca uygun, ölçeklenebilir çözümler.</p>
+    </div>
+    <div class="cb-hs-cards">
+      <a href="/hizmetlerimiz.html" class="cb-hs-card"><span class="cb-hs-card__no">01</span><div><small>GÖRÜNÜRLÜK & DENEYİM</small><h3>Web Tasarım</h3><p>Markanızı güçlü biçimde temsil eden, kullanıcı odaklı web deneyimleri.</p></div><b>↗</b></a>
+      <a href="/hizmetlerimiz.html" class="cb-hs-card"><span class="cb-hs-card__no">02</span><div><small>ONLINE TİCARET</small><h3>E-Ticaret</h3><p>Ürünlerinizi dijitalde buluşturan, satışa odaklı altyapılar.</p></div><b>↗</b></a>
+      <a href="/hizmetlerimiz.html" class="cb-hs-card"><span class="cb-hs-card__no">03</span><div><small>İŞİNİZE ÖZEL TEKNOLOJİ</small><h3>Özel Yazılım</h3><p>İş süreçlerinize ve ihtiyaçlarınıza göre geliştirilen uygulamalar.</p></div><b>↗</b></a>
+      <a href="/hizmetlerimiz.html" class="cb-hs-card"><span class="cb-hs-card__no">04</span><div><small>VERİMLİLİK & OTOMASYON</small><h3>Dijital Süreçler</h3><p>Tekrarlayan işleri sadeleştiren, zaman kazandıran sistemler.</p></div><b>↗</b></a>
+    </div>
+    <div class="cb-hs-bottom"><span>08 UZMANLIK ALANI · TEK ÇÖZÜM ORTAĞI</span><a href="/hizmetlerimiz.html">Tüm hizmetleri incele <b>↗</b></a></div>
   </div>
 </section>
 
