@@ -1399,7 +1399,47 @@ document.getElementById("scrollToTopBtn").addEventListener("click", function () 
  .mobile-menu-container>.menu-logo img{max-width:125px!important}
 }
 </style>
-<script src="/_assets/js/accessibility.js" defer></script></body>
+<script src="/_assets/js/accessibility.js" defer></script>
+<style id="cb-desktop-services-horizontal">
+/* Desktop only: place the Digital Solutions copy in a wide horizontal layout.
+   Mobile and tablet layouts remain governed by their existing breakpoints. */
+@media (min-width: 1001px) {
+  .cb-home-services__intro {
+    display: grid !important;
+    width: 100% !important;
+    grid-template-columns: minmax(280px, .88fr) minmax(0, 1.12fr) !important;
+    grid-template-areas:
+      "heading description"
+      "subtitle description"
+      ". action" !important;
+    column-gap: clamp(36px, 6vw, 88px) !important;
+    row-gap: 8px !important;
+    align-items: start !important;
+    margin-bottom: 34px !important;
+  }
+  .cb-home-services__intro h2 {
+    grid-area: heading !important;
+    margin: 0 0 4px !important;
+  }
+  .cb-home-services__intro > strong {
+    grid-area: subtitle !important;
+    margin: 0 !important;
+  }
+  .cb-home-services__intro p {
+    grid-area: description !important;
+    max-width: none !important;
+    margin: 0 !important;
+    align-self: center !important;
+  }
+  .cb-home-services__intro .cb-home-services__all {
+    grid-area: action !important;
+    justify-self: start !important;
+    margin-top: 12px !important;
+  }
+}
+</style>
+
+</body>
 </html><style id="cagbas-mobile-home-production">@media(max-width:767px){.menu-container{display:block!important}.mobile-menu-container{display:none!important}.mobile-menu-links-wrapper{display:none!important}.mobile-menu-links-wrapper.open{display:block!important}.banner-slider-wrapper,.banner-slider-wrapper .banner-swiper-wrapper,.banner-slider-wrapper .main-slider-container,.banner-slider-wrapper .swiper-wrapper,.banner-slider-wrapper .swiper-slide{height:390px!important;min-height:390px!important;max-height:68svh!important}.banner-content-swiper-container{position:absolute!important;inset:0!important;padding:0 20px 22px!important}.cb-map-slogan{left:20px!important;right:20px!important;bottom:20px!important;width:calc(100% - 40px)!important;max-width:330px!important;min-height:0!important;font-size:clamp(14px,4vw,18px)!important;line-height:1.25!important}.cb-home-intro{grid-template-columns:minmax(0,1fr)!important;padding:48px 22px 54px!important;gap:28px!important}.cb-home-intro h1{font-size:clamp(34px,9vw,44px)!important;line-height:1.12!important;letter-spacing:-1.2px!important;overflow-wrap:normal!important;word-break:normal!important}.cb-home-intro__side{border-left:0!important;border-top:1px solid #e8e1ed!important;padding:22px 0 0!important}}</style>
 
 <style id="cagbas-mobile-navigation-final">
