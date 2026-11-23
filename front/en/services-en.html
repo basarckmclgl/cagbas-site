@@ -197,25 +197,14 @@ html[dir="rtl"] .menu-bar-links{direction:rtl!important}
             </div>
         
             <div class="langSelector">
-                <div class="langSelectorHeader">
-                    <b class="langSelectorTitle">
-                    <a href="/en/index-en.html" id="currentLang">
-                        <span class="langSelectorListNameFlag">
-                            <img src="/_assets/images/tr-flag.png" alt="Türkçe" />
-                        </span>
-                        <abbr class="langSelectorListNameLabel" title="en">EN</abbr>
-                    </a>
-                        <i class="fa fa-caret-down" aria-hidden="true"></i>
-                    </b>
-                </div>
-                <div class="langSelectorBody">
-                    <ul class="langSelectorList">
-                        <li class="langSelectorListItem" data-lang="tr"><a href="/hizmetlerimiz.html" class="langSelectorListName"><abbr class="langSelectorListNameLabel" title="en">EN</abbr></a></li>
-                        <li class="langSelectorListItem" data-lang="en"><a href="/en/services-en.html" class="langSelectorListName"><abbr class="langSelectorListNameLabel" title="en">EN</abbr></a></li>
-                        
-                    </ul>
-                </div>
-            </div> 
+  <div class="langSelectorHeader" role="button" tabindex="0" aria-label="Select language">
+    <b class="langSelectorTitle"><span id="currentLang"><abbr class="langSelectorListNameLabel" title="en">EN</abbr></span><i class="fa fa-caret-down" aria-hidden="true"></i></b>
+  </div>
+  <div class="langSelectorBody"><ul class="langSelectorList">
+    <li class="langSelectorListItem" data-lang="tr"><a href="/hizmetlerimiz.html" class="langSelectorListName"><abbr class="langSelectorListNameLabel" title="tr">TR</abbr></a></li>
+    <li class="langSelectorListItem" data-lang="en"><a href="/en/services-en.html" class="langSelectorListName"><abbr class="langSelectorListNameLabel" title="en">EN</abbr></a></li>
+  </ul></div>
+</div> 
         </div>
         <div class="mobile-menu-container">
             <div class="mobile-menu-icon-wrapper" id="menu-icon">
@@ -225,25 +214,14 @@ html[dir="rtl"] .menu-bar-links{direction:rtl!important}
 
 
             <div class="langSelector">
-                <div class="langSelectorHeader">
-                    <b class="langSelectorTitle">
-                        <span id="currentLang">
-                            <span class="langSelectorListNameFlag">
-                                <img src="/_assets/images/tr-flag.png" alt="Türkçe" />
-                            </span>
-                            <abbr class="langSelectorListNameLabel" title="en">EN</abbr>
-                        </span>
-                        <i class="fa fa-caret-down" aria-hidden="true"></i>
-                    </b>
-                </div>
-                <div class="langSelectorBody">
-                    <ul class="langSelectorList">
-                        <li class="langSelectorListItem" data-lang="tr"><a href="/hizmetlerimiz.html" class="langSelectorListName"><abbr class="langSelectorListNameLabel" title="en">EN</abbr></a></li>
-                        <li class="langSelectorListItem" data-lang="en"><a href="/en/services-en.html" class="langSelectorListName"><abbr class="langSelectorListNameLabel" title="en">EN</abbr></a></li>
-                        
-                    </ul>
-                </div>
-            </div>
+  <div class="langSelectorHeader" role="button" tabindex="0" aria-label="Select language">
+    <b class="langSelectorTitle"><span id="currentLang"><abbr class="langSelectorListNameLabel" title="en">EN</abbr></span><i class="fa fa-caret-down" aria-hidden="true"></i></b>
+  </div>
+  <div class="langSelectorBody"><ul class="langSelectorList">
+    <li class="langSelectorListItem" data-lang="tr"><a href="/hizmetlerimiz.html" class="langSelectorListName"><abbr class="langSelectorListNameLabel" title="tr">TR</abbr></a></li>
+    <li class="langSelectorListItem" data-lang="en"><a href="/en/services-en.html" class="langSelectorListName"><abbr class="langSelectorListNameLabel" title="en">EN</abbr></a></li>
+  </ul></div>
+</div>
             
         </div>
         <div class="mobile-menu-links-wrapper">
@@ -816,7 +794,35 @@ document.getElementById('cb-prod-cards').innerHTML=cardOrder.map(i=>{const s=ser
 function openDetail(i){const s=services[i];document.getElementById('cb-prod-dimg').src=detailImages[i];document.getElementById('cb-prod-dimg').alt=s.title+' detay görseli';document.getElementById('cb-prod-dmeta').textContent='ÇAĞBAŞ / HİZMET 0'+(i+1);document.getElementById('cb-prod-dtitle').textContent=s.title;document.getElementById('cb-prod-ddesc').textContent=s.desc;document.getElementById('cb-prod-df').innerHTML=s.features.map(x=>'<div class="cb-prod-detail-item"><b>'+x[0]+'</b><span>'+x[1]+'</span></div>').join('');document.getElementById('cb-prod-du').innerHTML=s.uses.map(x=>'<div class="cb-prod-detail-item"><b>'+x[0]+'</b><span>'+x[1]+'</span></div>').join('');document.getElementById('cb-prod-detail').classList.add('open');document.body.style.overflow='hidden'}function closeDetail(){document.getElementById('cb-prod-detail').classList.remove('open');document.body.style.overflow=''}
 function openServiceFromHash(){const m=location.hash.match(/^#cb-service-([0-7])$/);if(!m)return;const n=Number(m[1]);if(n>=0&&n<services.length){openDetail(n);const card=document.getElementById('cb-service-'+n);if(card)card.scrollIntoView({block:'center'});}}
 window.addEventListener('hashchange',openServiceFromHash);
-openServiceFromHash();</script></body>
+openServiceFromHash();</script><style id="cb-language-switcher-fix">
+.langSelector{position:relative!important}
+.langSelectorHeader{cursor:pointer!important;user-select:none}
+.langSelectorBody{display:none!important;position:absolute!important;top:calc(100% + 7px)!important;right:0!important;z-index:99999!important;min-width:92px!important;padding:7px!important;background:#fff!important;border:1px solid #eee7f3!important;border-radius:12px!important;box-shadow:0 12px 30px rgba(20,10,30,.16)!important}
+.langSelectorBody.open{display:block!important}
+.langSelectorBody .langSelectorList{display:flex!important;flex-direction:column!important;gap:3px!important;margin:0!important;padding:0!important;list-style:none!important}
+.langSelectorBody .langSelectorListItem{display:block!important;margin:0!important;padding:0!important}
+.langSelectorBody .langSelectorListName{display:flex!important;align-items:center!important;padding:9px 12px!important;text-decoration:none!important;border-radius:8px!important;color:#21182d!important}
+.langSelectorBody .langSelectorListName:hover{background:#f4eff9!important}
+.langSelectorBody .langSelectorListNameLabel{color:#21182d!important}
+</style>
+<script id="cb-language-switcher-fix-js">
+(function(){
+ function init(){
+  document.querySelectorAll('.langSelector').forEach(function(selector){
+   var header=selector.querySelector('.langSelectorHeader');
+   var body=selector.querySelector('.langSelectorBody');
+   if(!header||!body||header.dataset.bound==='1') return;
+   header.dataset.bound='1';
+   function toggle(e){e.preventDefault();e.stopPropagation();document.querySelectorAll('.langSelectorBody.open').forEach(function(el){if(el!==body)el.classList.remove('open')});body.classList.toggle('open');}
+   header.addEventListener('click',toggle);
+   header.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){toggle(e)}});
+  });
+  document.addEventListener('click',function(e){if(!e.target.closest('.langSelector'))document.querySelectorAll('.langSelectorBody.open').forEach(function(el){el.classList.remove('open')})});
+ }
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
+})();
+</script>
+</body>
 </html>
 
 
