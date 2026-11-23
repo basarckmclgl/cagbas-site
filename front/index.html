@@ -2083,3 +2083,42 @@ body.mobile-nav-open{overflow:hidden!important}body[dir=rtl] .mobile-menu-links-
   else mountHeroArtwork();
 })();
 </script>
+
+<style id="cagbas-hero-artwork-size-lock-20261123">
+/* Keep the hero artwork independent from the hero container's responsive scaling. */
+.banner-slider-wrapper{
+  position:relative!important;
+  overflow:hidden!important;
+}
+.cb-hero-artwork-independent{
+  position:absolute!important;
+  display:block!important;
+  width:560px!important;
+  min-width:560px!important;
+  max-width:none!important;
+  height:auto!important;
+  top:50%!important;
+  right:7%!important;
+  left:auto!important;
+  bottom:auto!important;
+  transform:translate3d(0,-50%,0)!important;
+  object-fit:contain!important;
+  flex:none!important;
+}
+@media (max-width:1100px) and (min-width:768px){
+  .cb-hero-artwork-independent{
+    width:480px!important;
+    min-width:480px!important;
+    right:2%!important;
+  }
+}
+@media (max-width:767px){
+  .cb-hero-artwork-independent{
+    width:360px!important;
+    min-width:360px!important;
+    right:-55px!important;
+    top:50%!important;
+  }
+}
+</style>
+
