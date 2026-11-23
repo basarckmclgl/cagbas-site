@@ -380,5 +380,13 @@ body, .container, .main-wrapper {
 }
 </style>
 
+
+<!-- Language page vertical-flow fix: keep services before footer -->
+<style id="cagbas-language-services-flow-fix">
+html, body { height:auto!important; min-height:100%!important; }
+.container, .main-wrapper { height:auto!important; min-height:100vh!important; }
+main.cb-services-page { display:block!important; position:relative!important; float:none!important; clear:both!important; width:100%!important; height:auto!important; min-height:0!important; }
+.cagbas-site-footer-content { display:block!important; position:relative!important; float:none!important; clear:both!important; width:100%!important; margin:0!important; }
+</style>
 </body>
 </html>
