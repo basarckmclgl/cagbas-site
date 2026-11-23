@@ -113,11 +113,17 @@
 </style>
 
 <style id="cb-homepage-redesign">
-/* White content band — existing footer banner and contact area remain untouched */
-.cb-home-service-row{background:#fff!important;color:#171521!important}
-.cb-home-service-copy h2,.cb-home-service-copy h3{color:#171521!important}
-.cb-home-service-copy p,.cb-home-service-copy li{color:#625c69!important}
-.cb-home-service-copy{background:#fff!important}
+/* White content band: starts beneath the brand-value strip and ends before the existing footer banner */
+.cb-home-proof{background:#fff!important;color:#171521!important;border-color:#e9e5ed!important}
+.cb-home-proof span{color:#25212c!important;border-color:#e9e5ed!important}
+.cb-home-proof b{color:#8b35c9!important}
+.cb-home-services{background:#fff!important;color:#171521!important}
+.cb-home-services__intro h2,.cb-home-service__text strong{color:#171521!important}
+.cb-home-services__intro p,.cb-home-service__text small{color:#686270!important}
+.cb-home-service{background:#fff!important;border-color:#e8e2ed!important;box-shadow:0 5px 20px rgba(31,20,43,.045)!important}
+.cb-home-service:hover{background:#fbf9fd!important;border-color:#a65bd5!important}
+.cb-home-service__art{background:radial-gradient(circle at 50% 40%,rgba(174,73,255,.24),transparent 48%),linear-gradient(135deg,#f2eafa,#fff)!important}
+.cb-home-service__icon,.cb-home-service__arrow{color:#8b35c9!important}
 
 :root{--cb-ink:#171521;--cb-paper:#f7f6f8;--cb-purple:#7851a5;--cb-lilac:#d8c3ee;--cb-muted:#77717e}
 html{scroll-behavior:smooth}body{background:#fff!important;color:var(--cb-ink)!important}
@@ -178,13 +184,154 @@ html{scroll-behavior:smooth}body{background:#fff!important;color:var(--cb-ink)!i
 .cb-home-intro[dir=rtl]{direction:rtl;text-align:right}.cb-home-intro[dir=rtl] .cb-home-intro__side{border-left:0;border-right:1px solid #e8e1ed;padding:12px 32px 12px 0}.cb-home-intro[dir=rtl] .cb-home-intro__actions{justify-content:flex-start}
 @media(max-width:800px){.cb-home-intro[dir=rtl] .cb-home-intro__side{border-right:0;border-top:1px solid #e8e1ed;padding:24px 0 0}}
 
-/* Lift the hero headline so it sits higher over the banner image */
-.banner-content-swiper-container{bottom:55px!important}
-@media(max-width:700px){.banner-content-swiper-container{bottom:32px!important}}
 
-/* Move the actual hero text upward, not only its outer slider */
-.banner-content-swiper-container .slider-content-wrapper{transform:translateY(-85px)!important}
-@media(max-width:700px){.banner-content-swiper-container .slider-content-wrapper{transform:translateY(-48px)!important}}
+/* Balance the Bize Ulaşın column with the newsletter column */
+.footer-contact-area-wrapper{grid-template-columns:1fr 1fr!important;gap:6%!important}
+.footer-contact-area-item{align-items:stretch!important;border-right:1px solid #ded8e3!important}
+.footer-bize-ulasin-area{width:100%!important;max-width:none!important;padding:0!important}
+.footer-bize-ulasin-area h4{margin-bottom:18px!important}
+.footer-bize-ulasin-area>p{margin:0 0 22px!important}
+.footer-bize-ulasin-area .contact-info-wrapper{display:grid!important;grid-template-columns:1fr!important;gap:14px!important;width:100%!important}
+.footer-bize-ulasin-area .phone-info-container{width:100%!important;min-height:48px!important;display:flex!important;align-items:center!important;gap:12px!important;margin:0!important}
+.footer-bize-ulasin-area .phone-info-container img{width:42px!important;height:42px!important;object-fit:contain!important;padding:9px!important;box-sizing:border-box!important}
+.footer-bize-ulasin-area .phone-info-container a{padding:0!important;font-size:14px!important;line-height:1.5!important}
+.footer-bize-ulasin-area .contact-form-arrow-wrapper{display:none!important}
+@media(max-width:800px){
+ .footer-contact-area-wrapper{grid-template-columns:1fr!important}
+ .footer-contact-area-item{border-right:0!important;border-bottom:1px solid #ded8e3!important;padding:0 0 28px!important}
+}
+/* Footer contact and newsletter proportions */
+.footer-contact-area-container{padding:72px 28px!important}
+.footer-contact-area-wrapper{grid-template-columns:.9fr 1.1fr!important;gap:7%!important;align-items:stretch!important}
+.footer-contact-area-item{width:auto!important;min-height:320px!important;justify-content:center!important;padding:30px 42px 30px 0!important}
+.footer-contact-area-item-e-bulten{width:auto!important;min-height:320px!important;justify-content:center!important;padding:30px 0 30px 8px!important}
+.footer-contact-area-item-e-bulten .input-container,.footer-contact-area-item-e-bulten .newsletter-form{width:100%!important;max-width:none!important}
+.footer-contact-area-item-e-bulten .input-wrapper{width:100%!important;display:flex!important;align-items:stretch!important;gap:10px!important;margin:20px 0 12px!important}
+.footer-contact-area-item-e-bulten input[type=email]{height:52px!important;min-height:52px!important;box-sizing:border-box!important}
+.footer-contact-area-item-e-bulten .signup-button{position:static!important;height:52px!important;min-height:52px!important;white-space:nowrap!important;padding:0 24px!important}
+.footer-contact-area-item-e-bulten .newsletter-privacy{margin:12px 0!important}
+.footer-contact-area-item-e-bulten .checkbox-wrapper{margin-top:12px!important}
+@media(max-width:800px){
+ .footer-contact-area-container{padding:48px 22px!important}
+ .footer-contact-area-wrapper{grid-template-columns:1fr!important;gap:24px!important}
+ .footer-contact-area-item{min-height:0!important;padding:0 0 28px!important}
+ .footer-contact-area-item-e-bulten{min-height:0!important;padding:28px 0 0!important;border-top:1px solid #ded8e3!important}
+}
+@media(max-width:520px){
+ .footer-contact-area-item-e-bulten .input-wrapper{flex-direction:column!important}
+ .footer-contact-area-item-e-bulten .signup-button{width:100%!important}
+}
+
+/* Integrate the world-map hero to the very top; remove the white strip above it */
+.menu-container{position:absolute!important;top:0!important;left:0!important;right:0!important;width:100%!important;background:transparent!important;border:0!important;box-shadow:none!important;backdrop-filter:none!important}
+.menu-wrapper{background:transparent!important}
+.menu-bar-links a{color:#fff!important;text-shadow:0 1px 8px rgba(0,0,0,.65)!important}
+.mobile-menu-container{background:rgba(23,21,33,.35)!important;border:0!important}
+.banner-slider-wrapper{margin-top:0!important}
+
+/* White ÇAĞBAŞ brand mark and bottom-left hero slogan */
+.menu-wrapper .menu-logo img{filter:none!important}
+.banner-content-swiper-container{bottom:0!important;left:0!important;right:0!important;width:100%!important;height:100%!important;display:flex!important;align-items:flex-end!important;justify-content:flex-start!important;padding:0 0 30px 42px!important;box-sizing:border-box!important}
+.banner-content-swiper-container .left-down-swiper-container{position:absolute!important;left:42px!important;right:auto!important;bottom:30px!important;width:min(520px,75%)!important;text-align:left!important}
+.banner-content-swiper-container .slider-content-wrapper{position:relative!important;left:auto!important;right:auto!important;bottom:auto!important;transform:none!important;text-align:left!important}
+.banner-content-swiper-container .slider-content-wrapper span{display:block!important;color:#fff!important;text-align:left!important;font-size:clamp(20px,2.5vw,34px)!important;font-weight:800!important;text-shadow:0 2px 18px rgba(0,0,0,.7)!important}
+@media(max-width:700px){.banner-content-swiper-container{padding:0 0 22px 20px!important}.banner-content-swiper-container .left-down-swiper-container{left:20px!important;right:auto!important;bottom:22px!important;width:calc(100% - 40px)!important}}
+
+/* Keep the brand logo visible beside the navigation */
+.menu-wrapper{display:flex!important;align-items:center!important;gap:18px!important}
+.menu-wrapper>.menu-logo{display:flex!important;flex:0 0 120px!important;width:120px!important;min-width:120px!important;max-width:120px!important;align-items:center!important;justify-content:flex-start!important;margin:0!important;padding:5px 0!important;visibility:visible!important;opacity:1!important}
+.menu-wrapper>.menu-logo img{display:block!important;visibility:visible!important;opacity:1!important;width:120px!important;max-width:120px!important;height:auto!important;max-height:42px!important;object-fit:contain!important}
+.menu-wrapper>.menu-bar-links{flex:1 1 auto!important;width:auto!important;min-width:0!important}
+.menu-wrapper>.langSelector{flex:0 0 auto!important}
+@media(max-width:900px){
+ .menu-wrapper>.menu-logo{flex-basis:100px!important;width:100px!important;min-width:100px!important;max-width:100px!important}
+ .menu-wrapper>.menu-logo img{width:100px!important;max-width:100px!important}
+}
+
+
+
+/* Final hero placement: headline anchored to the bottom-left */
+.banner-content-swiper-container{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;display:block!important;padding:0!important;box-sizing:border-box!important}
+.banner-content-swiper-container .left-down-swiper-container{position:absolute!important;left:42px!important;right:auto!important;top:auto!important;bottom:30px!important;width:min(520px,75%)!important;margin:0!important;text-align:left!important}
+.banner-content-swiper-container .left-down-swiper-container .swiper-wrapper{align-items:flex-end!important}
+.banner-content-swiper-container .slider-content-wrapper{position:relative!important;left:auto!important;right:auto!important;top:auto!important;bottom:auto!important;transform:none!important;text-align:left!important}
+@media(max-width:700px){.banner-content-swiper-container .left-down-swiper-container{left:20px!important;right:auto!important;bottom:22px!important;width:calc(100% - 40px)!important}}
+
+
+
+.banner-slider-wrapper{position:relative!important;isolation:isolate}
+
+
+
+
+
+
+/* Slogan at the map's bottom-left */
+.banner-content-swiper-container .left-down-swiper-container{display:none!important}
+.banner-content-swiper-container .swiper-pagination,.banner-content-swiper-container .swiper-button-wrapper{display:none!important}
+
+.cb-map-slogan{position:absolute!important;z-index:5!important;left:42px!important;right:auto!important;bottom:clamp(16px,3.2vw,34px)!important;width:min(32%,360px)!important;min-height:clamp(104px,15vw,184px)!important;display:flex!important;align-items:flex-end!important;justify-content:flex-start!important;padding-bottom:clamp(5px,1vw,12px)!important;box-sizing:border-box!important;color:#fff!important;font-size:clamp(14px,1.8vw,24px)!important;line-height:1.2!important;font-weight:850!important;text-align:left!important;text-shadow:0 2px 16px rgba(0,0,0,.78)!important;pointer-events:none!important}
+@media(max-width:700px){.cb-map-slogan{left:20px!important;right:auto!important;bottom:18px!important;width:34vw!important;min-height:clamp(82px,22vw,112px)!important;padding-bottom:4px!important;font-size:clamp(12px,3.3vw,16px)!important;line-height:1.18!important}}
+
+
+<style id="cb-home-services-design">
+.cb-home-services{--hs-ink:#191521;--hs-purple:#8056a9;max-width:1320px;margin:0 auto;padding:88px 34px 96px}
+.cb-home-services__head{display:grid;grid-template-columns:1fr .62fr;gap:9%;align-items:end;margin-bottom:34px}
+.cb-home-services__head>div>span{font-size:10px;letter-spacing:2px;font-weight:850;color:var(--hs-purple)}
+.cb-home-services__head h2{font-size:clamp(34px,4.5vw,57px);line-height:1.05;letter-spacing:-2px;color:var(--hs-ink);margin:16px 0 0}
+.cb-home-services__head h2 em{font-family:Georgia,serif;font-weight:400;color:var(--hs-purple)}
+.cb-home-services__head>p{font-size:15px;line-height:1.85;color:#77717e;margin:0 0 4px;max-width:440px}
+.cb-home-services__grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.cb-home-service-card{position:relative;isolation:isolate;overflow:hidden;display:flex;flex-direction:column;justify-content:space-between;min-height:450px;padding:26px 30px 30px;border-radius:18px;color:#fff!important;text-decoration:none!important;background:#171321;box-shadow:0 18px 48px rgba(26,17,38,.12);transition:transform .35s ease,box-shadow .35s ease}
+.cb-home-service-card:before{content:"";position:absolute;inset:0;z-index:-2;background-size:cover;background-position:center;transition:transform .7s cubic-bezier(.2,.7,.2,1)}
+.cb-home-service-card:after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(16,12,25,.22) 0%,rgba(16,12,25,.38) 34%,rgba(16,12,25,.92) 100%)}
+.cb-home-service-card--web:before{background-image:url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1600&q=88')}
+.cb-home-service-card--graphic:before{background-image:url('https://images.unsplash.com/photo-1541961017774-22349e4a1262?auto=format&fit=crop&w=1600&q=88')}
+.cb-home-service-card:hover{transform:translateY(-5px);box-shadow:0 24px 58px rgba(26,17,38,.2)}
+.cb-home-service-card:hover:before{transform:scale(1.045)}
+.cb-home-service-card__top{display:flex;justify-content:space-between;align-items:center;gap:15px}
+.cb-home-service-card__top span{font-size:10px;letter-spacing:1.8px;font-weight:850;padding:9px 12px;border:1px solid rgba(255,255,255,.38);border-radius:4px;background:rgba(20,14,30,.42);backdrop-filter:blur(8px)}
+.cb-home-service-card__top>b{font-size:26px;color:#d7b9fa;font-weight:400}
+.cb-home-service-card__content{max-width:500px}
+.cb-home-service-card__content>span{font-size:10px;letter-spacing:2px;font-weight:850;color:#d8bafa}
+.cb-home-service-card__content h3{font-size:clamp(32px,3.8vw,48px);line-height:1.04;letter-spacing:-1.5px;margin:12px 0 14px;color:#fff}
+.cb-home-service-card__content p{font-size:14px;line-height:1.8;color:rgba(255,255,255,.82);max-width:410px;margin:0 0 24px}
+.cb-home-service-card__content i{display:inline-flex;align-items:center;gap:18px;font-size:12px;font-style:normal;font-weight:800;color:#fff;border-bottom:1px solid rgba(255,255,255,.55);padding-bottom:9px}
+.cb-home-service-card__content i b{font-size:17px;color:#d8bafa}
+@media(max-width:760px){.cb-home-services{padding:62px 20px 68px}.cb-home-services__head{grid-template-columns:1fr;gap:17px;margin-bottom:25px}.cb-home-services__head h2{font-size:39px}.cb-home-services__head>p{font-size:14px}.cb-home-services__grid{grid-template-columns:1fr;gap:14px}.cb-home-service-card{min-height:390px;padding:22px 20px 24px;border-radius:15px}.cb-home-service-card__content h3{font-size:36px}}
+
+<style id="cb-home-services-balance">
+/* Align the homepage intro and service showcase to one consistent grid */
+.cb-home-intro{width:min(1240px,calc(100% - 64px))!important;max-width:1240px!important;margin:0 auto!important;padding:76px 0 78px!important;grid-template-columns:minmax(0,1.45fr) minmax(280px,.7fr)!important;gap:8%!important;box-sizing:border-box!important}
+.cb-home-intro__inner,.cb-home-intro__side{min-width:0!important}
+.cb-home-intro h1{font-size:clamp(44px,5vw,68px)!important;line-height:1.04!important;max-width:780px!important;margin:16px 0 18px!important}
+.cb-home-intro__inner>p{font-size:16px!important;line-height:1.8!important;max-width:680px!important}
+.cb-home-intro__side{padding-left:28px!important;gap:20px!important}
+.cb-home-services{display:block!important;width:min(1240px,calc(100% - 64px))!important;max-width:1240px!important;margin:0 auto!important;padding:66px 0 82px!important;box-sizing:border-box!important}
+.cb-home-services__head{width:100%!important;max-width:none!important;display:grid!important;grid-template-columns:minmax(0,1.2fr) minmax(260px,.8fr)!important;gap:8%!important;align-items:end!important;margin:0 0 30px!important;padding:0!important}
+.cb-home-services__head>div{min-width:0!important}
+.cb-home-services__head>div>span{display:block!important;font-size:11px!important;letter-spacing:2px!important;margin:0 0 12px!important}
+.cb-home-services__head h2{font-size:clamp(38px,4.4vw,56px)!important;line-height:1.06!important;letter-spacing:-1.8px!important;margin:0!important}
+.cb-home-services__head>p{font-size:15px!important;line-height:1.8!important;max-width:430px!important;margin:0 0 4px auto!important}
+.cb-home-services__grid{width:100%!important;display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:22px!important;align-items:stretch!important}
+.cb-home-service-card{width:100%!important;min-width:0!important;min-height:430px!important;height:430px!important;padding:26px 30px 30px!important;border-radius:18px!important;box-sizing:border-box!important}
+.cb-home-service-card__top span{font-size:11px!important;letter-spacing:1.5px!important}
+.cb-home-service-card__content{max-width:470px!important}
+.cb-home-service-card__content>span{font-size:11px!important}
+.cb-home-service-card__content h3{font-size:clamp(34px,3.5vw,46px)!important;line-height:1.05!important;margin:12px 0 14px!important}
+.cb-home-service-card__content p{font-size:15px!important;line-height:1.75!important;max-width:410px!important}
+.cb-home-service-card__content i{font-size:13px!important}
+@media(max-width:760px){
+ .cb-home-intro{width:calc(100% - 40px)!important;padding:54px 0 58px!important;grid-template-columns:1fr!important;gap:30px!important}
+ .cb-home-intro__side{border-left:0!important;border-top:1px solid #e8e1ed!important;padding:22px 0 0!important}
+ .cb-home-services{width:calc(100% - 40px)!important;padding:48px 0 58px!important}
+ .cb-home-services__head{grid-template-columns:1fr!important;gap:16px!important;margin-bottom:23px!important}
+ .cb-home-services__head h2{font-size:clamp(34px,9vw,43px)!important}
+ .cb-home-services__head>p{margin:0!important;font-size:14px!important}
+ .cb-home-services__grid{grid-template-columns:1fr!important;gap:15px!important}
+ .cb-home-service-card{height:auto!important;min-height:380px!important;padding:22px 20px 24px!important}
+ .cb-home-service-card__content h3{font-size:36px!important}
+}
 </style>
 
 
@@ -271,8 +418,168 @@ html[dir="rtl"] .footer-contact-area-item-e-bulten .input-wrapper{min-width:0!im
 <link rel="alternate" hreflang="x-default" href="https://www.cagbas.com/">
 <meta property="og:url" content="https://www.cagbas.com/ar/index-ar" />
 <style id="cb-home-services-title-position">
-.cb-home-services--alternating{padding-top:14px!important;margin-top:0!important}
-.cb-home-services-title-localized{margin:0 auto 22px!important;width:min(960px,calc(100% - 48px))!important;font-size:clamp(29px,3vw,37px)!important;line-height:1.08!important;color:#8b35c9!important;font-weight:800!important}
+.cb-home-services{padding-top:12px!important;margin-top:0!important}
+.cb-home-services__intro{margin-top:0!important;padding-top:0!important}
+.cb-home-services__intro h2{margin-top:0!important;margin-bottom:14px!important}
+</style>
+<style id="cb-home-services-four-production">
+/* Four service rows: integrated editorial layout, alternating image/text */
+.cb-home-services.cb-home-services--four{
+ width:min(1240px,calc(100% - 64px))!important;max-width:1240px!important;
+ margin:0 auto!important;padding:18px 0 64px!important;gap:18px!important;
+}
+.cb-home-services--four .cb-home-service-row{
+ display:grid!important;grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;
+ gap:28px!important;align-items:center!important;min-width:0!important;
+}
+.cb-home-services--four .cb-home-service-image{
+ display:block!important;width:100%!important;height:auto!important;min-height:0!important;
+ aspect-ratio:2.25/1!important;overflow:hidden!important;border:0!important;
+ border-radius:0!important;box-shadow:none!important;background:transparent!important;
+}
+.cb-home-services--four .cb-home-service-image img{
+ width:100%!important;height:100%!important;object-fit:cover!important;
+ object-position:center!important;border:0!important;border-radius:0!important;
+}
+.cb-home-services--four .cb-home-service-image:after,
+.cb-home-services--four .cb-home-service-image>span{display:none!important}
+.cb-home-services--four .cb-home-service-copy{
+ max-width:100%!important;padding:2px 0!important;min-width:0!important;
+}
+.cb-home-services--four .cb-home-service-copy h2{
+ font-size:clamp(25px,2.35vw,34px)!important;line-height:1.12!important;
+ letter-spacing:-.6px!important;margin:4px 0 7px!important;
+}
+.cb-home-services--four .cb-home-service-kicker{
+ font-size:10px!important;letter-spacing:1.5px!important;margin-bottom:4px!important;
+}
+.cb-home-services--four .cb-home-service-copy p{
+ font-size:14px!important;line-height:1.65!important;margin:0 0 7px!important;
+}
+.cb-home-services--four .cb-home-service-copy ul{
+ gap:3px!important;margin:0 0 8px!important;
+}
+.cb-home-services--four .cb-home-service-copy li{
+ font-size:12px!important;line-height:1.5!important;padding-left:13px!important;
+}
+.cb-home-services--four .cb-home-service-copy li:before{font-size:10px!important}
+.cb-home-services--four .cb-home-service-link{
+ font-size:11px!important;padding:6px 9px!important;gap:10px!important;border:0!important;
+ border-bottom:1px solid #8054aa!important;border-radius:0!important;
+}
+@media(max-width:760px){
+ .cb-home-services.cb-home-services--four{width:calc(100% - 32px)!important;padding:18px 0 42px!important;gap:24px!important}
+ .cb-home-services--four .cb-home-service-row,
+ .cb-home-services--four .cb-home-service-row--graphic,
+ .cb-home-services--four .cb-home-service-row--urge{
+  grid-template-columns:minmax(0,1fr)!important;gap:10px!important;
+ }
+ .cb-home-services--four .cb-home-service-row--graphic .cb-home-service-copy,
+ .cb-home-services--four .cb-home-service-row--urge .cb-home-service-copy{order:2!important}
+ .cb-home-services--four .cb-home-service-row--graphic .cb-home-service-image,
+ .cb-home-services--four .cb-home-service-row--urge .cb-home-service-image{order:1!important}
+ .cb-home-services--four .cb-home-service-image{aspect-ratio:2.15/1!important}
+ .cb-home-services--four .cb-home-service-copy h2{font-size:27px!important}
+ .cb-home-services--four .cb-home-service-copy p{font-size:14px!important}
+ .cb-home-services--four .cb-home-service-copy li{font-size:12px!important}
+}
+</style>
+<style id="cb-desktop-services-horizontal">
+/* Desktop only: place the Digital Solutions copy in a wide horizontal layout.
+   Mobile and tablet layouts remain governed by their existing breakpoints. */
+@media (min-width: 1001px) {
+  .cb-home-services__intro {
+    display: grid !important;
+    width: 100% !important;
+    grid-template-columns: minmax(280px, .88fr) minmax(0, 1.12fr) !important;
+    grid-template-areas:
+      "heading description"
+      "subtitle description"
+      ". action" !important;
+    column-gap: clamp(36px, 6vw, 88px) !important;
+    row-gap: 8px !important;
+    align-items: start !important;
+    margin-bottom: 34px !important;
+  }
+  .cb-home-services__intro h2 {
+    grid-area: heading !important;
+    margin: 0 0 4px !important;
+  }
+  .cb-home-services__intro > strong {
+    grid-area: subtitle !important;
+    margin: 0 !important;
+  }
+  .cb-home-services__intro p {
+    grid-area: description !important;
+    max-width: none !important;
+    margin: 0 !important;
+    align-self: center !important;
+  }
+  .cb-home-services__intro .cb-home-services__all {
+    grid-area: action !important;
+    justify-self: start !important;
+    margin-top: 12px !important;
+  }
+}
+</style>
+<style id="cb-services-copy-tighten">
+/* Compact the Digital Solutions introduction and improve text legibility.
+   All copy and service cards remain unchanged. */
+@media (min-width: 761px) {
+  .cb-home-services {
+    padding-top: 34px !important;
+    padding-bottom: 44px !important;
+  }
+  .cb-home-services__intro {
+    row-gap: 2px !important;
+    margin-bottom: 20px !important;
+  }
+  .cb-home-services__intro h2 {
+    font-size: clamp(34px, 3.5vw, 46px) !important;
+    line-height: 1.08 !important;
+    margin: 0 0 2px !important;
+  }
+  .cb-home-services__intro > strong {
+    font-size: clamp(19px, 1.8vw, 23px) !important;
+    line-height: 1.3 !important;
+    margin: 0 !important;
+  }
+  .cb-home-services__intro p {
+    font-size: clamp(16px, 1.35vw, 18px) !important;
+    line-height: 1.62 !important;
+    max-width: none !important;
+  }
+  .cb-home-services__intro .cb-home-services__all {
+    font-size: 13px !important;
+    margin-top: 9px !important;
+    padding: 12px 19px !important;
+  }
+}
+@media (max-width: 760px) {
+  .cb-home-services {
+    padding-top: 30px !important;
+    padding-bottom: 38px !important;
+  }
+  .cb-home-services__intro h2 {
+    font-size: clamp(30px, 7vw, 38px) !important;
+    line-height: 1.12 !important;
+    margin-bottom: 7px !important;
+  }
+  .cb-home-services__intro > strong {
+    display: block !important;
+    font-size: 19px !important;
+    line-height: 1.35 !important;
+    margin-bottom: 9px !important;
+  }
+  .cb-home-services__intro p {
+    font-size: 15.5px !important;
+    line-height: 1.65 !important;
+  }
+  .cb-home-services__intro .cb-home-services__all {
+    margin-top: 12px !important;
+    font-size: 13px !important;
+  }
+}
 </style>
 </head>
 <body><a class="cb-skip-link" href="#page-title">انتقل إلى المحتوى</a>
@@ -515,10 +822,7 @@ section.cagbas-site-footer-content > div.cagbas-footer-bottom{
 section.cagbas-site-footer-content > div.cagbas-footer-bottom{position:static!important;display:block!important;float:none!important;width:100%!important;max-width:none!important;min-width:0!important;box-sizing:border-box!important;margin:22px auto 0!important;padding:16px 12px 0!important;text-align:center!important;text-indent:0!important;direction:ltr!important}
 </style>
 <div class="footer-banner">
-    <div class="footer-banner-text-wrapper" data-aos="fade-up" data-aos-delay="400">
-        <h4 id="footer-banner-text-wrapper-title">إمكانات تداول غير محدودة</h4>
-        <p id="footer-banner-text-wrapper-content">تتواجد شركة ÇAĞBAŞ معك للترويج لمنتجاتك بشكل فعال في الأسواق الدولية، وتحسين عمليات التجارة الخارجية، وتوفير الدعم الاحترافي في تركيبات المنشآت الصناعية.</p>
-    </div>
+    <div class="footer-banner-text-wrapper" id="cb-mobile-footer-banner-copy"><h4 id="footer-banner-text-wrapper-title">حضور رقمي قوي لعلامتك التجارية</h4><p id="footer-banner-text-wrapper-content">نجمع بين تصميم المواقع والتصميم البصري لنصنع لعلامتك هوية رقمية متسقة ومميزة ولا تُنسى.</p></div>
 </div>          
 
 <div class="footer-contact-area-container">
@@ -1244,9 +1548,7 @@ section.cagbas-site-footer-content > div.cagbas-footer-bottom{position:static!im
 }
 
 </style>
-<style id="cagbas-mobile-home-production">
-@media(max-width:767px){.menu-container{display:block!important}.mobile-menu-container{display:none!important}.mobile-menu-links-wrapper{display:none!important}.mobile-menu-links-wrapper.open{display:block!important}.banner-slider-wrapper,.banner-slider-wrapper .banner-swiper-wrapper,.banner-slider-wrapper .main-slider-container,.banner-slider-wrapper .swiper-wrapper,.banner-slider-wrapper .swiper-slide{height:390px!important;min-height:390px!important;max-height:68svh!important}.banner-content-swiper-container{position:absolute!important;inset:0!important;padding:0 20px 22px!important}.cb-map-slogan{left:20px!important;right:20px!important;bottom:20px!important;width:calc(100% - 40px)!important;max-width:330px!important;min-height:0!important;font-size:clamp(14px,4vw,18px)!important;line-height:1.25!important}.cb-home-intro{grid-template-columns:minmax(0,1fr)!important;padding:48px 22px 54px!important;gap:28px!important}.cb-home-intro h1{font-size:clamp(34px,9vw,44px)!important;line-height:1.12!important;letter-spacing:-1.2px!important;overflow-wrap:normal!important;word-break:normal!important}.cb-home-intro__side{border-left:0!important;border-top:1px solid #e8e1ed!important;padding:22px 0 0!important}}
-</style>
+<style id="cagbas-mobile-home-production">@media(max-width:767px){.menu-container{display:block!important}.mobile-menu-container{display:none!important}.mobile-menu-links-wrapper{display:none!important}.mobile-menu-links-wrapper.open{display:block!important}.banner-slider-wrapper,.banner-slider-wrapper .banner-swiper-wrapper,.banner-slider-wrapper .main-slider-container,.banner-slider-wrapper .swiper-wrapper,.banner-slider-wrapper .swiper-slide{height:390px!important;min-height:390px!important;max-height:68svh!important}.banner-content-swiper-container{position:absolute!important;inset:0!important;padding:0 20px 22px!important}.cb-map-slogan{left:20px!important;right:20px!important;bottom:20px!important;width:calc(100% - 40px)!important;max-width:330px!important;min-height:0!important;font-size:clamp(14px,4vw,18px)!important;line-height:1.25!important}.cb-home-intro{grid-template-columns:minmax(0,1fr)!important;padding:48px 22px 54px!important;gap:28px!important}.cb-home-intro h1{font-size:clamp(34px,9vw,44px)!important;line-height:1.12!important;letter-spacing:-1.2px!important;overflow-wrap:normal!important;word-break:normal!important}.cb-home-intro__side{border-left:0!important;border-top:1px solid #e8e1ed!important;padding:22px 0 0!important}}</style>
 <style id="cb-home-alternating-service-layout-language-override">
 
 .cb-home-services--alternating{width:min(1240px,calc(100% - 64px))!important;max-width:1240px!important;margin:0 auto!important;padding:38px 0 48px!important;display:flex!important;flex-direction:column!important;gap:34px!important;direction:ltr!important}
