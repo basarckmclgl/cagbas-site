@@ -907,10 +907,9 @@ html[dir="rtl"] .menu-bar-links{direction:rtl!important}
 
                     </div>
                     <div class="langSelector">
-  <div class="langSelectorHeader"><b class="langSelectorTitle">
-    <a href="/index.html" id="currentLang"><abbr class="langSelectorListNameLabel" title="tr">TR</abbr></a>
-    <i class="fa fa-caret-down" aria-hidden="true"></i>
-  </b></div>
+  <div class="langSelectorHeader" role="button" tabindex="0" aria-label="Select language">
+    <b class="langSelectorTitle"><span id="currentLang"><abbr class="langSelectorListNameLabel" title="tr">TR</abbr></span><i class="fa fa-caret-down" aria-hidden="true"></i></b>
+  </div>
   <div class="langSelectorBody"><ul class="langSelectorList">
     <li class="langSelectorListItem" data-lang="tr"><a href="/index.html" class="langSelectorListName"><abbr class="langSelectorListNameLabel" title="tr">TR</abbr></a></li>
     <li class="langSelectorListItem" data-lang="en"><a href="/en/index-en.html" class="langSelectorListName"><abbr class="langSelectorListNameLabel" title="en">EN</abbr></a></li>
@@ -923,10 +922,9 @@ html[dir="rtl"] .menu-bar-links{direction:rtl!important}
         </div>
         <a class="menu-logo" href="/index.html"><img src="/_assets/images/cagbas-logo.svg" width="120" height="35" alt="ÇAĞBAŞ"></a>
         <div class="langSelector">
-  <div class="langSelectorHeader"><b class="langSelectorTitle">
-    <span id="currentLang"><abbr class="langSelectorListNameLabel" title="tr">TR</abbr></span>
-    <i class="fa fa-caret-down" aria-hidden="true"></i>
-  </b></div>
+  <div class="langSelectorHeader" role="button" tabindex="0" aria-label="Select language">
+    <b class="langSelectorTitle"><span id="currentLang"><abbr class="langSelectorListNameLabel" title="tr">TR</abbr></span><i class="fa fa-caret-down" aria-hidden="true"></i></b>
+  </div>
   <div class="langSelectorBody"><ul class="langSelectorList">
     <li class="langSelectorListItem" data-lang="tr"><a href="/index.html" class="langSelectorListName"><abbr class="langSelectorListNameLabel" title="tr">TR</abbr></a></li>
     <li class="langSelectorListItem" data-lang="en"><a href="/en/index-en.html" class="langSelectorListName"><abbr class="langSelectorListNameLabel" title="en">EN</abbr></a></li>
@@ -1273,17 +1271,7 @@ document.getElementById("scrollToTopBtn").addEventListener("click", function () 
     </script>
 
 
-    <script>
-        document.querySelector('.langSelectorHeader').addEventListener('click', function(event) {
-    // Olayın sayfa yenilemesini engelle
-    event.preventDefault();
-
-    // Dropdown'un açılma/kapanma işlevini burada ekle
-    const langSelectorBody = document.querySelector('.langSelectorBody');
-    langSelectorBody.classList.toggle('open'); // Aç/kapa işlemi için 'open' class'ını kullan
-});
-
-    </script>
+    
 
 
 
@@ -1507,6 +1495,34 @@ document.getElementById("scrollToTopBtn").addEventListener("click", function () 
 }
 </style>
 
+<style id="cb-language-switcher-fix">
+.langSelector{position:relative!important}
+.langSelectorHeader{cursor:pointer!important;user-select:none}
+.langSelectorBody{display:none!important;position:absolute!important;top:calc(100% + 7px)!important;right:0!important;z-index:99999!important;min-width:92px!important;padding:7px!important;background:#fff!important;border:1px solid #eee7f3!important;border-radius:12px!important;box-shadow:0 12px 30px rgba(20,10,30,.16)!important}
+.langSelectorBody.open{display:block!important}
+.langSelectorBody .langSelectorList{display:flex!important;flex-direction:column!important;gap:3px!important;margin:0!important;padding:0!important;list-style:none!important}
+.langSelectorBody .langSelectorListItem{display:block!important;margin:0!important;padding:0!important}
+.langSelectorBody .langSelectorListName{display:flex!important;align-items:center!important;padding:9px 12px!important;text-decoration:none!important;border-radius:8px!important;color:#21182d!important}
+.langSelectorBody .langSelectorListName:hover{background:#f4eff9!important}
+.langSelectorBody .langSelectorListNameLabel{color:#21182d!important}
+</style>
+<script id="cb-language-switcher-fix-js">
+(function(){
+ function init(){
+  document.querySelectorAll('.langSelector').forEach(function(selector){
+   var header=selector.querySelector('.langSelectorHeader');
+   var body=selector.querySelector('.langSelectorBody');
+   if(!header||!body||header.dataset.bound==='1') return;
+   header.dataset.bound='1';
+   function toggle(e){e.preventDefault();e.stopPropagation();document.querySelectorAll('.langSelectorBody.open').forEach(function(el){if(el!==body)el.classList.remove('open')});body.classList.toggle('open');}
+   header.addEventListener('click',toggle);
+   header.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){toggle(e)}});
+  });
+  document.addEventListener('click',function(e){if(!e.target.closest('.langSelector'))document.querySelectorAll('.langSelectorBody.open').forEach(function(el){el.classList.remove('open')})});
+ }
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
+})();
+</script>
 </body>
 </html><style id="cagbas-mobile-home-production">@media(max-width:767px){.menu-container{display:block!important}.mobile-menu-container{display:none!important}.mobile-menu-links-wrapper{display:none!important}.mobile-menu-links-wrapper.open{display:block!important}.banner-slider-wrapper,.banner-slider-wrapper .banner-swiper-wrapper,.banner-slider-wrapper .main-slider-container,.banner-slider-wrapper .swiper-wrapper,.banner-slider-wrapper .swiper-slide{height:390px!important;min-height:390px!important;max-height:68svh!important}.banner-content-swiper-container{position:absolute!important;inset:0!important;padding:0 20px 22px!important}.cb-map-slogan{left:20px!important;right:20px!important;bottom:20px!important;width:calc(100% - 40px)!important;max-width:330px!important;min-height:0!important;font-size:clamp(14px,4vw,18px)!important;line-height:1.25!important}.cb-home-intro{grid-template-columns:minmax(0,1fr)!important;padding:48px 22px 54px!important;gap:28px!important}.cb-home-intro h1{font-size:clamp(34px,9vw,44px)!important;line-height:1.12!important;letter-spacing:-1.2px!important;overflow-wrap:normal!important;word-break:normal!important}.cb-home-intro__side{border-left:0!important;border-top:1px solid #e8e1ed!important;padding:22px 0 0!important}}</style>
 
