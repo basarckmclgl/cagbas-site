@@ -1046,6 +1046,11 @@ html[dir="rtl"] .menu-bar-links{direction:rtl!important}
             </div>
         </div>
     </div>
+<div class="cb-hero-concept-switch" aria-label="Görsel konsept seçimi">
+  <span>GÖRSEL YÖN</span>
+  <a href="?concept=2" data-concept="2">02 · Teknoloji</a>
+  <a href="?concept=3" data-concept="3">03 · Editoryal</a>
+</div>
 
 
 
@@ -1557,6 +1562,54 @@ body{font-size:16px!important;background:#f6f3f8!important}
  .cb-hs-card{min-height:205px!important;border-left:1px solid #d9cfe2!important;border-top:1px solid #d9cfe2!important}
  .cb-hs-card:first-child{border-top:0!important}
 }
+</style>
+
+
+<script id="cb-hero-concept-choice">
+(function(){var q=new URLSearchParams(location.search).get("concept");var v=q==="3"?"3":"2";document.documentElement.classList.add("cb-concept-"+v);})();
+</script>
+<style id="cb-hero-concept-comparison">
+.cb-hero-concept-switch{position:absolute;z-index:10001;top:112px;right:clamp(22px,5vw,76px);display:flex;align-items:center;gap:7px;padding:7px;border:1px solid rgba(255,255,255,.28);border-radius:30px;background:rgba(22,17,31,.64);backdrop-filter:blur(15px);color:#fff}
+.cb-hero-concept-switch>span{font-size:8px;letter-spacing:1.4px;font-weight:800;padding:0 8px;color:rgba(255,255,255,.6)}
+.cb-hero-concept-switch a{font-size:10px;font-weight:750;text-decoration:none!important;color:rgba(255,255,255,.75)!important;padding:9px 12px;border-radius:22px;white-space:nowrap}
+.cb-hero-concept-switch a:hover{background:rgba(255,255,255,.12)}
+.cb-concept-2 .cb-hero-concept-switch a[data-concept="2"],.cb-concept-3 .cb-hero-concept-switch a[data-concept="3"]{background:#a77ad5;color:#fff!important}
+.cb-concept-2 .banner-slider-wrapper,.cb-concept-3 .banner-slider-wrapper{background:#15111d!important}
+.cb-concept-2 .banner-slider-wrapper .swiper-slide,.cb-concept-3 .banner-slider-wrapper .swiper-slide{background-image:none!important}
+.cb-concept-2 .banner-slider-wrapper:before{z-index:2!important;inset:0!important;background:linear-gradient(90deg,rgba(13,10,20,.98),rgba(19,14,29,.84) 48%,rgba(16,12,25,.58))!important}
+.cb-concept-2 .banner-slider-wrapper:after{z-index:3!important;inset:0!important;background:
+radial-gradient(ellipse at 78% 46%,rgba(132,88,186,.23),transparent 33%),
+repeating-linear-gradient(128deg,transparent 0 95px,rgba(194,160,230,.12) 96px,transparent 98px),
+linear-gradient(120deg,transparent 56%,rgba(255,255,255,.035) 56.2%,transparent 56.6%)!important}
+.cb-concept-2 .banner-slider-wrapper{background-image:radial-gradient(circle at 76% 48%,rgba(132,88,186,.19),transparent 29%),linear-gradient(120deg,#100d17,#21172c 68%,#17111f)!important}
+.cb-concept-2 .banner-slider-wrapper .banner-swiper-wrapper{opacity:0!important}
+.cb-concept-2 .cb-map-service-intro{z-index:5!important}
+.cb-concept-2 .cb-map-service-intro:after{content:"";position:absolute;z-index:-1;right:-34vw;top:-20vh;width:54vw;height:70vh;border:1px solid rgba(206,177,237,.18);border-radius:48% 52% 60% 40%;transform:rotate(-24deg);box-shadow:0 0 0 34px rgba(206,177,237,.025),0 0 0 90px rgba(206,177,237,.018),inset 0 0 90px rgba(155,112,202,.07);pointer-events:none}
+.cb-concept-2 .cb-map-service-intro h1 em{color:#d6b0fa!important}
+.cb-concept-3 .banner-slider-wrapper{background:#e9e3eb!important}
+.cb-concept-3 .banner-slider-wrapper:before{z-index:2!important;inset:0!important;background:linear-gradient(90deg,rgba(246,242,247,.98) 0%,rgba(239,233,241,.94) 50%,rgba(226,216,231,.76) 100%)!important}
+.cb-concept-3 .banner-slider-wrapper:after{z-index:3!important;inset:0!important;background:
+radial-gradient(ellipse at 82% 40%,rgba(151,111,175,.15),transparent 30%),
+linear-gradient(90deg,transparent 0 69%,rgba(110,77,131,.09) 69.1%,transparent 69.3%),
+repeating-linear-gradient(0deg,transparent 0 79px,rgba(90,69,103,.045) 80px,transparent 81px)!important}
+.cb-concept-3 .banner-slider-wrapper .banner-swiper-wrapper{opacity:0!important}
+.cb-concept-3 .cb-map-service-intro{color:#21182b!important}
+.cb-concept-3 .cb-map-service-intro__eyebrow{color:#76508f!important}
+.cb-concept-3 .cb-map-service-intro__eyebrow i{background:#8d5eaa!important;box-shadow:0 0 14px rgba(141,94,170,.35)!important}
+.cb-concept-3 .cb-map-service-intro__eyebrow b{color:#a995b3!important}
+.cb-concept-3 .cb-map-service-intro h1{color:#201827!important;text-shadow:none!important}
+.cb-concept-3 .cb-map-service-intro h1 em{color:#8759a1!important}
+.cb-concept-3 .cb-map-service-intro p{color:#625769!important;text-shadow:none!important}
+.cb-concept-3 .cb-map-service-intro__tags span{color:#54465c!important}
+.cb-concept-3 .cb-home-welcome__button{background:#2b2032!important;border-color:#2b2032!important;box-shadow:0 12px 28px rgba(37,24,45,.16)!important}
+.cb-concept-3 .cb-home-welcome__textlink{color:#30223a!important;border-color:rgba(48,34,58,.3)!important}
+.cb-concept-3 .cb-home-welcome__textlink span{color:#80539b!important}
+.cb-concept-3 .cb-home-welcome__note{color:#75677a!important}
+.cb-concept-3 .cb-home-welcome__note span{background:#8b62a4!important}
+.cb-concept-3 .cb-map-service-intro:after{content:"";position:absolute;z-index:-1;right:-35vw;top:-22vh;width:55vw;height:70vh;border:1px solid rgba(110,77,131,.19);border-radius:48% 52% 60% 40%;transform:rotate(-24deg);box-shadow:0 0 0 34px rgba(110,77,131,.035),0 0 0 90px rgba(110,77,131,.025);pointer-events:none}
+.cb-concept-3 .cb-home-services-entry{background:#f4eff5!important}
+.cb-concept-3 .cb-hs-card{background:rgba(255,255,255,.5)!important}
+@media(max-width:767px){.cb-hero-concept-switch{top:82px;right:14px;gap:2px;padding:5px}.cb-hero-concept-switch>span{display:none}.cb-hero-concept-switch a{font-size:9px;padding:8px 10px}.cb-concept-2 .cb-map-service-intro:after,.cb-concept-3 .cb-map-service-intro:after{right:-20vw;top:-10vh;width:75vw;height:48vh}.cb-concept-3 .banner-slider-wrapper:before{background:linear-gradient(90deg,rgba(246,242,247,.97),rgba(239,233,241,.88))!important}}
 </style>
 
 </html><style id="cagbas-mobile-home-production">@media(max-width:767px){.menu-container{display:block!important}.mobile-menu-container{display:none!important}.mobile-menu-links-wrapper{display:none!important}.mobile-menu-links-wrapper.open{display:block!important}.banner-slider-wrapper,.banner-slider-wrapper .banner-swiper-wrapper,.banner-slider-wrapper .main-slider-container,.banner-slider-wrapper .swiper-wrapper,.banner-slider-wrapper .swiper-slide{height:390px!important;min-height:390px!important;max-height:68svh!important}.banner-content-swiper-container{position:absolute!important;inset:0!important;padding:0 20px 22px!important}.cb-map-slogan{left:20px!important;right:20px!important;bottom:20px!important;width:calc(100% - 40px)!important;max-width:330px!important;min-height:0!important;font-size:clamp(14px,4vw,18px)!important;line-height:1.25!important}.cb-home-intro{grid-template-columns:minmax(0,1fr)!important;padding:48px 22px 54px!important;gap:28px!important}.cb-home-intro h1{font-size:clamp(34px,9vw,44px)!important;line-height:1.12!important;letter-spacing:-1.2px!important;overflow-wrap:normal!important;word-break:normal!important}.cb-home-intro__side{border-left:0!important;border-top:1px solid #e8e1ed!important;padding:22px 0 0!important}}</style>
