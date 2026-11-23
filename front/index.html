@@ -829,6 +829,61 @@ html[dir="rtl"] .menu-bar-links{direction:rtl!important}
 .cb-home-services__intro{margin-top:0!important;padding-top:0!important}
 .cb-home-services__intro h2{margin-top:0!important;margin-bottom:14px!important}
 </style>
+<style id="cb-digital-solutions-glass-balance">
+/* Desktop: balanced two-column glass panel for the Digital Solutions introduction */
+@media (min-width: 761px) {
+  .cb-home-services__intro {
+    display: grid !important;
+    width: min(1160px, calc(100% - 96px)) !important;
+    max-width: 1160px !important;
+    box-sizing: border-box !important;
+    margin: 0 auto 30px !important;
+    padding: clamp(30px, 3.5vw, 48px) clamp(32px, 4vw, 58px) !important;
+    grid-template-columns: minmax(0, .92fr) minmax(0, 1.08fr) !important;
+    grid-template-areas:
+      "heading description"
+      "subtitle description"
+      "action description" !important;
+    column-gap: clamp(42px, 5.2vw, 76px) !important;
+    row-gap: 10px !important;
+    align-items: center !important;
+    background: rgba(255,255,255,.70) !important;
+    border: 1px solid rgba(145,105,180,.18) !important;
+    border-radius: 22px !important;
+    box-shadow: 0 14px 42px rgba(45,25,65,.075), inset 0 1px 0 rgba(255,255,255,.9) !important;
+    -webkit-backdrop-filter: blur(18px) saturate(145%) !important;
+    backdrop-filter: blur(18px) saturate(145%) !important;
+  }
+  .cb-home-services__intro h2 {
+    grid-area: heading !important;
+    justify-self: start !important;
+    width: 100% !important;
+    margin: 0 0 2px !important;
+    text-align: left !important;
+  }
+  .cb-home-services__intro > strong {
+    grid-area: subtitle !important;
+    justify-self: start !important;
+    width: 100% !important;
+    margin: 0 !important;
+    text-align: left !important;
+  }
+  .cb-home-services__intro p {
+    grid-area: description !important;
+    width: 100% !important;
+    max-width: 620px !important;
+    justify-self: stretch !important;
+    align-self: center !important;
+    margin: 0 !important;
+    text-align: left !important;
+  }
+  .cb-home-services__intro .cb-home-services__all {
+    grid-area: action !important;
+    justify-self: start !important;
+    margin: 8px 0 0 !important;
+  }
+}
+</style>
 </head>
 <body><a class="cb-skip-link" href="#page-title">İçeriğe geç</a>
 
