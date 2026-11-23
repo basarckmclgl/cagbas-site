@@ -2038,3 +2038,48 @@ body.mobile-nav-open{overflow:hidden!important}body[dir=rtl] .mobile-menu-links-
   }
 }
 </style>
+
+
+<style id="cagbas-hero-artwork-independent-layer">
+/* The artwork is now an independent element, not a responsive background layer. */
+.banner-slider-wrapper{
+  background-image:
+    linear-gradient(90deg,rgba(4,13,29,.96) 0%,rgba(5,17,36,.91) 34%,rgba(6,22,45,.60) 57%,rgba(5,18,38,.18) 100%),
+    linear-gradient(0deg,rgba(4,13,28,.62) 0%,rgba(4,13,28,.02) 38%,rgba(4,13,28,.12) 100%)!important;
+}
+.cb-hero-artwork-independent{
+  position:absolute!important;
+  z-index:0!important;
+  top:50%!important;
+  right:7%!important;
+  width:560px!important;
+  height:auto!important;
+  max-width:none!important;
+  display:block!important;
+  transform:translateY(-50%)!important;
+  object-fit:contain!important;
+  pointer-events:none!important;
+}
+@media(max-width:1100px) and (min-width:768px){
+  .cb-hero-artwork-independent{width:480px!important;right:2%!important}
+}
+@media(max-width:767px){
+  .cb-hero-artwork-independent{width:360px!important;right:-55px!important}
+}
+</style>
+<script id="cagbas-hero-artwork-independent-layer-script">
+(function(){
+  function mountHeroArtwork(){
+    var hero=document.querySelector('.banner-slider-wrapper');
+    if(!hero || hero.querySelector('.cb-hero-artwork-independent')) return;
+    var img=document.createElement('img');
+    img.className='cb-hero-artwork-independent';
+    img.src='/_assets/images/hero-network.png';
+    img.alt='';
+    img.setAttribute('aria-hidden','true');
+    hero.insertBefore(img,hero.firstChild);
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',mountHeroArtwork);
+  else mountHeroArtwork();
+})();
+</script>
