@@ -168,6 +168,13 @@ html[dir="rtl"] .menu-bar-links{direction:rtl!important}
 .mobile-menu-container .langSelectorHeader img,
 .mobile-menu-container .langSelectorBody img { display:none!important; }
 </style>
+
+<style id="cagbas-remove-language-selector">
+/* Remove the entire language switcher control from the visible header on production pages. */
+.langSelector,
+.menu-wrapper > .langSelector,
+.mobile-menu-container > .langSelector { display:none!important; }
+</style>
 </head><style id="cb-about-page">
 :root{--ab-ink:#21182d;--ab-muted:#625a6c;--ab-purple:#7628c9;--ab-violet:#a54be8;--ab-lilac:#f1e7fb;--ab-paper:#fbf9fd;--ab-line:#e9def2}
 html,body{margin:0!important;background:#fff!important;color:var(--ab-ink);font-family:'Nunito',sans-serif;overflow-x:hidden}
