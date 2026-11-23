@@ -2,122 +2,60 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://cagbas.com/</loc>
-    <lastmod>2026-11-22</lastmod>
+    <lastmod>2026-11-23</lastmod>
     <xhtml:link rel="alternate" hreflang="tr" href="https://cagbas.com/"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://cagbas.com/en/index-en"/>
-    <xhtml:link rel="alternate" hreflang="ar" href="https://cagbas.com/ar/index-ar"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://cagbas.com/en/index-en.html"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://cagbas.com/"/>
   </url>
   <url>
-    <loc>https://cagbas.com/en/index-en</loc>
-    <lastmod>2026-11-22</lastmod>
+    <loc>https://cagbas.com/en/index-en.html</loc>
+    <lastmod>2026-11-23</lastmod>
     <xhtml:link rel="alternate" hreflang="tr" href="https://cagbas.com/"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://cagbas.com/en/index-en"/>
-    <xhtml:link rel="alternate" hreflang="ar" href="https://cagbas.com/ar/index-ar"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://cagbas.com/"/>
-  </url>
-  <url>
-    <loc>https://cagbas.com/ar/index-ar</loc>
-    <lastmod>2026-11-22</lastmod>
-    <xhtml:link rel="alternate" hreflang="tr" href="https://cagbas.com/"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://cagbas.com/en/index-en"/>
-    <xhtml:link rel="alternate" hreflang="ar" href="https://cagbas.com/ar/index-ar"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://cagbas.com/en/index-en.html"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://cagbas.com/"/>
   </url>
   <url>
     <loc>https://cagbas.com/hakkimizda</loc>
-    <lastmod>2026-11-22</lastmod>
+    <lastmod>2026-11-23</lastmod>
     <xhtml:link rel="alternate" hreflang="tr" href="https://cagbas.com/hakkimizda"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://cagbas.com/en/hakkimizda-en"/>
-    <xhtml:link rel="alternate" hreflang="ar" href="https://cagbas.com/ar/hakkimizda-ar"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://cagbas.com/en/hakkimizda-en.html"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://cagbas.com/hakkimizda"/>
   </url>
   <url>
-    <loc>https://cagbas.com/en/hakkimizda-en</loc>
-    <lastmod>2026-11-22</lastmod>
+    <loc>https://cagbas.com/en/hakkimizda-en.html</loc>
+    <lastmod>2026-11-23</lastmod>
     <xhtml:link rel="alternate" hreflang="tr" href="https://cagbas.com/hakkimizda"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://cagbas.com/en/hakkimizda-en"/>
-    <xhtml:link rel="alternate" hreflang="ar" href="https://cagbas.com/ar/hakkimizda-ar"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://cagbas.com/hakkimizda"/>
-  </url>
-  <url>
-    <loc>https://cagbas.com/ar/hakkimizda-ar</loc>
-    <lastmod>2026-11-22</lastmod>
-    <xhtml:link rel="alternate" hreflang="tr" href="https://cagbas.com/hakkimizda"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://cagbas.com/en/hakkimizda-en"/>
-    <xhtml:link rel="alternate" hreflang="ar" href="https://cagbas.com/ar/hakkimizda-ar"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://cagbas.com/en/hakkimizda-en.html"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://cagbas.com/hakkimizda"/>
   </url>
   <url>
     <loc>https://cagbas.com/hizmetlerimiz</loc>
-    <lastmod>2026-11-22</lastmod>
+    <lastmod>2026-11-23</lastmod>
     <xhtml:link rel="alternate" hreflang="tr" href="https://cagbas.com/hizmetlerimiz"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://cagbas.com/en/hizmetlerimiz-en"/>
-    <xhtml:link rel="alternate" hreflang="ar" href="https://cagbas.com/ar/hizmetlerimiz-ar"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://cagbas.com/en/hizmetlerimiz-en.html"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://cagbas.com/hizmetlerimiz"/>
   </url>
   <url>
-    <loc>https://cagbas.com/en/hizmetlerimiz-en</loc>
-    <lastmod>2026-11-22</lastmod>
+    <loc>https://cagbas.com/en/hizmetlerimiz-en.html</loc>
+    <lastmod>2026-11-23</lastmod>
     <xhtml:link rel="alternate" hreflang="tr" href="https://cagbas.com/hizmetlerimiz"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://cagbas.com/en/hizmetlerimiz-en"/>
-    <xhtml:link rel="alternate" hreflang="ar" href="https://cagbas.com/ar/hizmetlerimiz-ar"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://cagbas.com/hizmetlerimiz"/>
-  </url>
-  <url>
-    <loc>https://cagbas.com/ar/hizmetlerimiz-ar</loc>
-    <lastmod>2026-11-22</lastmod>
-    <xhtml:link rel="alternate" hreflang="tr" href="https://cagbas.com/hizmetlerimiz"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://cagbas.com/en/hizmetlerimiz-en"/>
-    <xhtml:link rel="alternate" hreflang="ar" href="https://cagbas.com/ar/hizmetlerimiz-ar"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://cagbas.com/en/hizmetlerimiz-en.html"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://cagbas.com/hizmetlerimiz"/>
   </url>
   <url>
     <loc>https://cagbas.com/bize-ulasin</loc>
-    <lastmod>2026-11-22</lastmod>
+    <lastmod>2026-11-23</lastmod>
     <xhtml:link rel="alternate" hreflang="tr" href="https://cagbas.com/bize-ulasin"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://cagbas.com/en/bize-ulasin-en"/>
-    <xhtml:link rel="alternate" hreflang="ar" href="https://cagbas.com/ar/bize-ulasin-ar"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://cagbas.com/en/bize-ulasin-en.html"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://cagbas.com/bize-ulasin"/>
   </url>
   <url>
-    <loc>https://cagbas.com/en/bize-ulasin-en</loc>
-    <lastmod>2026-11-22</lastmod>
+    <loc>https://cagbas.com/en/bize-ulasin-en.html</loc>
+    <lastmod>2026-11-23</lastmod>
     <xhtml:link rel="alternate" hreflang="tr" href="https://cagbas.com/bize-ulasin"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://cagbas.com/en/bize-ulasin-en"/>
-    <xhtml:link rel="alternate" hreflang="ar" href="https://cagbas.com/ar/bize-ulasin-ar"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://cagbas.com/en/bize-ulasin-en.html"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://cagbas.com/bize-ulasin"/>
   </url>
-  <url>
-    <loc>https://cagbas.com/ar/bize-ulasin-ar</loc>
-    <lastmod>2026-11-22</lastmod>
-    <xhtml:link rel="alternate" hreflang="tr" href="https://cagbas.com/bize-ulasin"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://cagbas.com/en/bize-ulasin-en"/>
-    <xhtml:link rel="alternate" hreflang="ar" href="https://cagbas.com/ar/bize-ulasin-ar"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://cagbas.com/bize-ulasin"/>
-  </url>
-  <url>
-    <loc>https://cagbas.com/yasal-bilgilendirme</loc>
-    <xhtml:link rel="alternate" hreflang="tr" href="https://cagbas.com/yasal-bilgilendirme"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://cagbas.com/en/legal-information-en"/>
-    <xhtml:link rel="alternate" hreflang="ar" href="https://cagbas.com/ar/legal-information-ar"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://cagbas.com/yasal-bilgilendirme"/>
-  </url>
-  <url>
-    <loc>https://cagbas.com/en/legal-information-en</loc>
-    <xhtml:link rel="alternate" hreflang="tr" href="https://cagbas.com/yasal-bilgilendirme"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://cagbas.com/en/legal-information-en"/>
-    <xhtml:link rel="alternate" hreflang="ar" href="https://cagbas.com/ar/legal-information-ar"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://cagbas.com/yasal-bilgilendirme"/>
-  </url>
-  <url>
-    <loc>https://cagbas.com/ar/legal-information-ar</loc>
-    <xhtml:link rel="alternate" hreflang="tr" href="https://cagbas.com/yasal-bilgilendirme"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://cagbas.com/en/legal-information-en"/>
-    <xhtml:link rel="alternate" hreflang="ar" href="https://cagbas.com/ar/legal-information-ar"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://cagbas.com/yasal-bilgilendirme"/>
-  </url>
-  <url>
-    <loc>https://cagbas.com/lisans</loc>
-  </url>
+  <url><loc>https://cagbas.com/yasal-bilgilendirme</loc></url>
+  <url><loc>https://cagbas.com/lisans</loc></url>
 </urlset>
