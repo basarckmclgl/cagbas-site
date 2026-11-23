@@ -395,12 +395,17 @@ body, .container, .main-wrapper {
 </style>
 
 
-<!-- Language page vertical-flow fix: keep services before footer -->
-<style id="cagbas-language-services-flow-fix">
+
+
+<!-- EN/AR services page: force natural vertical document flow -->
+<style id="cagbas-services-natural-flow">
 html, body { height:auto!important; min-height:100%!important; }
-.container, .main-wrapper { height:auto!important; min-height:100vh!important; }
-main.cb-services-page { display:block!important; position:relative!important; float:none!important; clear:both!important; width:100%!important; height:auto!important; min-height:0!important; }
-.cagbas-site-footer-content { display:block!important; position:relative!important; float:none!important; clear:both!important; width:100%!important; margin:0!important; }
+body { display:block!important; }
+body > .container { height:auto!important; min-height:100vh!important; }
+body > .container > .main-wrapper { height:auto!important; min-height:100vh!important; display:flex!important; flex-direction:column!important; justify-content:flex-start!important; }
+body > .container > .main-wrapper > .menu-container, body > .container > .main-wrapper > .mobile-menu-container, body > .container > .main-wrapper > .mobile-menu-links-wrapper { flex:0 0 auto!important; }
+body > .container > .main-wrapper > main.cb-services-page { display:block!important; position:relative!important; inset:auto!important; float:none!important; clear:both!important; order:10!important; flex:0 0 auto!important; width:100%!important; height:auto!important; min-height:0!important; margin:0!important; transform:none!important; }
+body > .container > .main-wrapper > .cagbas-site-footer-content { display:block!important; position:relative!important; inset:auto!important; float:none!important; clear:both!important; order:20!important; flex:0 0 auto!important; width:100%!important; height:auto!important; min-height:0!important; margin:0!important; transform:none!important; }
 </style>
 </body>
 </html>
