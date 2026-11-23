@@ -545,7 +545,24 @@ document.getElementById("scrollToTopBtn").addEventListener("click", function () 
  .mobile-menu-container>.menu-logo img{max-width:125px!important}
 }
 </style>
-<script src="/_assets/js/accessibility.js" defer></script></body>
+<script src="/_assets/js/accessibility.js" defer></script>
+<style id="cagbas-contact-desktop-logo-fix">
+/* İletişim sayfası: masaüstü kapsül menüde marka logosunu görünür tut. */
+@media (min-width: 768px){
+  body .menu-container>.menu-wrapper>.menu-logo{
+    display:flex!important;position:relative!important;visibility:visible!important;
+    opacity:1!important;flex:0 0 auto!important;width:auto!important;min-width:120px!important;
+    max-width:160px!important;margin:0!important;padding:0!important;
+    align-items:center!important;justify-content:flex-start!important;
+  }
+  body .menu-container>.menu-wrapper>.menu-logo img{
+    display:block!important;visibility:visible!important;opacity:1!important;
+    width:auto!important;max-width:142px!important;height:auto!important;max-height:42px!important;
+    object-fit:contain!important;
+  }
+}
+</style>
+</body>
 </html>
 <style id="cagbas-mobile-contact-production">
 @media(max-width:767px){
