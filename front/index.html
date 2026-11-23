@@ -923,125 +923,84 @@ html[dir="rtl"] .menu-bar-links{direction:rtl!important}
 </div>
 
 
-    <div class="banner-slider-wrapper">
-        <div class="banner-swiper-wrapper">
-            <div class="swiper-container main-slider-container">
-                <div class="swiper-wrapper">
-                        <div class="swiper-slide" style="background-image: url(/medium/Banner/Image/banner1.webp);"></div>
-                        <div class="swiper-slide" style="background-image: url(/medium/Banner/Image/banner2.webp);"></div>
-                        <div class="swiper-slide" style="background-image: url(/medium/Banner/Image/banner3.webp);"></div>
-                </div>
-            </div>
-        </div>
-        <div class="cb-map-slogan" lang="tr">Güvenilir Ortak, Küresel Başarı!</div>
-        <div class="cb-map-service-intro">
-          <span class="cb-map-service-intro__eyebrow">ÇAĞBAŞ CREATIVE STUDIO</span>
-          <h1 id="page-title">Markanızın dijital kimliğini <em>birlikte tasarlıyoruz.</em></h1>
-          <p>Web tasarım, grafik tasarım, sosyal medya yönetimi ve dijital pazarlama çözümlerini bir araya getirerek markanızın dijital kimliğini tutarlı ve güçlü bir deneyime dönüştürüyoruz.</p>
-          <div class="cb-map-service-intro__tags"><span>WEB TASARIM</span><i></i><span>GRAFİK TASARIM</span><i></i><span>AR-GE DANIŞMANLIĞI</span><i></i><span>UR-GE DANIŞMANLIĞI</span></div>
-        </div>
-        <div class="banner-content-swiper-container">
-            <div class="swiper-container left-down-swiper-container">
-                <div class="swiper-wrapper left-down-section-swiper">
-                        <div class="swiper-slide">
-                            <div class="slider-content-wrapper">
-                                <span id="slider-content-wrapper-1">Güvenilir Ortak, Küresel Başarı!</span>
-                            </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="slider-content-wrapper">
-                                <span id="slider-content-wrapper-2">Fikirlerinizi Dijitalde Güçlendirin</span>
-                            </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="slider-content-wrapper">
-                                <span id="slider-content-wrapper-3">Global Çözümlerle Her Zaman Bir Adım Önde!</span>
-                            </div>
-                        </div>
-                </div>
-            </div>
-            <div class="swiper-pagination"></div>
-            <div class="swiper-button-wrapper">
-                <div class="swiper-button-next"></div>
-                <div class="swiper-button-prev"></div>
-            </div>
-        </div>
-    </div>
-
-
-
-
-<section class="cb-home-services cb-home-services--alternating cb-home-services--four" aria-label="Hizmetlerimiz">
-  <div class="cb-home-service-row cb-home-service-row--web">
-    <a class="cb-home-service-image" href="/hizmetlerimiz.html#web-tasarim" aria-label="Web Tasarım hizmetini keşfet">
-      <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=2200&q=95" alt="Web tasarım ve dijital arayüz çalışması" loading="lazy">
-    </a>
-    <div class="cb-home-service-copy">
-      <span class="cb-home-service-kicker">ÇAĞBAŞ / DİJİTAL DENEYİM</span>
-      <h2>Web Tasarım</h2>
-      <p>Markanızın dijital dünyadaki yüzünü; estetik, hızlı ve tüm cihazlarda kusursuz çalışan web deneyimleriyle tasarlıyoruz.</p>
-      <ul><li>Kurumsal ve özgün web siteleri</li><li>Mobil uyumlu kullanıcı deneyimi</li><li>SEO odaklı, güçlü altyapı</li></ul>
-      <a class="cb-home-service-link" href="/hizmetlerimiz.html#web-tasarim">Hizmeti keşfet <span>↗</span></a>
-    </div>
+<style>
+/* ÇAĞBAŞ homepage refresh — production */
+.cb-home-v2{background:#09080e;color:#fff;overflow:hidden}
+.cb-home-v2 *{box-sizing:border-box}
+.cb-home-hero{min-height:350px;position:relative;display:grid;grid-template-columns:1fr 1fr;align-items:center;max-width:1600px;margin:auto;padding:54px clamp(28px,5.5vw,86px);isolation:isolate}
+.cb-home-hero:before{content:"";position:absolute;z-index:-2;inset:0;background:radial-gradient(ellipse at 72% 58%,rgba(126,32,229,.42),transparent 43%),linear-gradient(105deg,#09080e 0%,#100c19 55%,#09080e 100%)}
+.cb-home-hero:after{content:"";position:absolute;z-index:-1;right:0;top:0;width:58%;height:100%;background:linear-gradient(90deg,#09080e 0%,rgba(9,8,14,.1) 35%,rgba(9,8,14,.08)),url('/medium/Banner/Image/banner1.webp') center/cover no-repeat;opacity:.58;mask-image:linear-gradient(90deg,transparent 0%,#000 28%)}
+.cb-home-hero__copy{max-width:700px;position:relative;z-index:1}
+.cb-home-hero__eyebrow{display:inline-flex;align-items:center;gap:9px;border:1px solid rgba(177,93,255,.28);border-radius:30px;background:rgba(126,32,229,.16);padding:9px 15px;color:#e8d8ff;font-size:12px;font-weight:700}
+.cb-home-hero__eyebrow:before{content:"✦";color:#c66cff}
+.cb-home-hero h1{font-size:clamp(38px,4.4vw,66px)!important;line-height:1.08!important;letter-spacing:-2.3px!important;font-weight:850!important;color:#fff!important;margin:22px 0 17px!important;max-width:750px}
+.cb-home-hero h1 em{font-style:normal;color:#b34cff}
+.cb-home-hero p{max-width:530px;color:#c7c0d0;font-size:16px;line-height:1.75;margin:0}
+.cb-home-hero__actions{display:flex;gap:13px;flex-wrap:wrap;margin-top:25px}
+.cb-home-hero__actions a{display:inline-flex;align-items:center;gap:17px;padding:14px 22px;border-radius:28px;background:linear-gradient(110deg,#8a21ed,#b02df5);color:#fff!important;text-decoration:none!important;font-size:13px;font-weight:800;box-shadow:0 8px 28px rgba(129,35,225,.24)}
+.cb-home-hero__actions a.secondary{background:rgba(15,13,22,.6);border:1px solid #c6b6d6;box-shadow:none}
+.cb-home-hero__visual{min-height:265px;display:flex;align-items:center;justify-content:center;position:relative}
+.cb-home-hero__visual:before{content:"";position:absolute;width:min(90%,520px);height:230px;border-radius:50%;background:rgba(127,26,229,.32);filter:blur(65px)}
+.cb-home-hero__device{position:relative;width:min(92%,510px);height:260px;border:1px solid rgba(232,210,255,.45);border-radius:17px;background:linear-gradient(145deg,#20142f,#08070d 62%);box-shadow:0 25px 65px #000,0 0 45px rgba(139,45,232,.3);transform:perspective(900px) rotateY(-8deg) rotateX(3deg);display:flex;align-items:center;justify-content:center;overflow:hidden}
+.cb-home-hero__device:before{content:"";position:absolute;inset:0;background:linear-gradient(145deg,transparent 35%,rgba(146,39,255,.5)),repeating-linear-gradient(0deg,transparent 0 35px,rgba(255,255,255,.035) 36px)}
+.cb-home-hero__device strong{position:relative;font-size:clamp(28px,3vw,43px);letter-spacing:1px;text-align:center;text-shadow:0 0 25px rgba(178,80,255,.6)}
+.cb-home-hero__device small{display:block;font-size:12px;font-weight:400;letter-spacing:3px;color:#d7c4ed;margin-top:7px}
+.cb-home-proof{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid #282331;border-bottom:1px solid #282331;background:#100d18;padding:17px clamp(20px,5vw,75px);max-width:1600px;margin:auto}
+.cb-home-proof span{display:flex;align-items:center;justify-content:center;gap:12px;padding:5px 14px;color:#eee8f5;font-size:14px;font-weight:650;border-right:1px solid #30283a}
+.cb-home-proof span:last-child{border:0}.cb-home-proof b{font-size:23px;color:#b34cff}
+.cb-home-services{max-width:1600px;margin:auto;padding:42px clamp(24px,4.5vw,70px) 58px;display:grid;grid-template-columns:minmax(230px,.72fr) minmax(0,2.3fr);gap:30px;background:#09080e}
+.cb-home-services__intro{padding:25px 0;align-self:center}
+.cb-home-services__kicker{font-size:11px;letter-spacing:2px;font-weight:850;color:#c16aff}
+.cb-home-services__intro h2{font-size:clamp(30px,3vw,43px)!important;line-height:1.14!important;letter-spacing:-1.4px!important;color:#fff!important;margin:17px 0 16px!important}
+.cb-home-services__intro h2 em{font-style:normal;color:#b34cff}
+.cb-home-services__intro p{font-size:14px;line-height:1.8;color:#aaa2b4;max-width:340px;margin:0}
+.cb-home-services__all{display:inline-flex;align-items:center;gap:18px;margin-top:24px;padding:13px 20px;border-radius:25px;background:linear-gradient(100deg,#8620e7,#b32af1);color:#fff!important;text-decoration:none!important;font-size:12px;font-weight:800}
+.cb-home-services__grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px 15px;align-content:center}
+.cb-home-service{min-height:100px;display:grid;grid-template-columns:112px 30px minmax(0,1fr) 30px;gap:13px;align-items:center;padding:10px 13px;border:1px solid #302a38;border-radius:12px;background:linear-gradient(115deg,#17131e,#0e0c13);color:#fff!important;text-decoration:none!important;transition:border-color .2s,transform .2s,background .2s}
+.cb-home-service:hover{border-color:#9b45e2;transform:translateY(-2px);background:linear-gradient(115deg,#21152d,#100d17)}
+.cb-home-service__art{height:78px;border-radius:8px;display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative;background:radial-gradient(circle at 50% 40%,rgba(174,73,255,.55),transparent 48%),linear-gradient(135deg,#302044,#100d18)}
+.cb-home-service__art:before{content:"";position:absolute;width:60px;height:43px;border:2px solid rgba(231,206,255,.78);border-radius:5px;box-shadow:0 8px 22px #000,0 0 17px rgba(177,72,255,.4);transform:perspective(100px) rotateY(-12deg)}
+.cb-home-service__art:after{content:"";position:absolute;width:70px;height:3px;bottom:12px;border-radius:5px;background:#a95af0;box-shadow:0 0 12px #9b42ec}
+.cb-home-service:nth-child(2) .cb-home-service__art:before{width:40px;height:48px;border-radius:4px;transform:rotate(8deg);box-shadow:18px 5px 0 -2px #5e3b7e}
+.cb-home-service:nth-child(3) .cb-home-service__art:before{width:64px;height:48px;border-style:dashed}
+.cb-home-service:nth-child(4) .cb-home-service__art:before{width:65px;height:43px;border-color:#a967e7;box-shadow:inset 0 0 18px #6f2da8}
+.cb-home-service:nth-child(5) .cb-home-service__art:before{width:55px;height:48px;border-radius:2px;transform:rotate(-7deg)}
+.cb-home-service:nth-child(6) .cb-home-service__art:before{width:48px;height:48px;border-radius:50%;border-width:5px}
+.cb-home-service:nth-child(7) .cb-home-service__art:before{width:63px;height:42px;border-style:dotted}
+.cb-home-service:nth-child(8) .cb-home-service__art:before{width:60px;height:45px;border-radius:3px;box-shadow:inset 0 0 0 8px rgba(157,83,220,.25),0 0 18px #8138bb}
+.cb-home-service__icon{font-size:24px;color:#bd55ff;text-align:center}
+.cb-home-service__text strong{display:block;font-size:14px;line-height:1.3;font-weight:800;color:#fff;margin-bottom:5px}
+.cb-home-service__text small{display:block;font-size:11px;line-height:1.5;color:#c1b9ca}
+.cb-home-service__arrow{width:27px;height:27px;border:1px solid #a94ce9;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#e6c6ff;font-size:17px}
+@media(max-width:1000px){.cb-home-services{grid-template-columns:1fr}.cb-home-services__intro{padding:12px 0 5px}.cb-home-services__intro p{max-width:650px}.cb-home-services__grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:760px){.cb-home-hero{grid-template-columns:1fr;padding:48px 24px 30px;min-height:0}.cb-home-hero:after{width:100%;opacity:.28;mask-image:linear-gradient(180deg,#000,transparent 85%)}.cb-home-hero__visual{min-height:190px;margin-top:20px}.cb-home-hero__device{height:175px}.cb-home-proof{grid-template-columns:repeat(2,1fr);gap:0;padding:10px 14px}.cb-home-proof span{font-size:11px;justify-content:flex-start;padding:12px 8px}.cb-home-proof span:nth-child(2){border-right:0}.cb-home-proof span:nth-child(-n+2){border-bottom:1px solid #30283a}.cb-home-services{padding:36px 20px 45px;gap:22px}.cb-home-services__grid{grid-template-columns:1fr;gap:10px}.cb-home-service{min-height:92px;grid-template-columns:84px 25px minmax(0,1fr) 27px;gap:9px;padding:8px}.cb-home-service__art{height:72px}.cb-home-service__text strong{font-size:13px}.cb-home-service__text small{font-size:10px}}
+@media(max-width:420px){.cb-home-hero h1{font-size:37px!important;letter-spacing:-1.5px!important}.cb-home-hero p{font-size:14px}.cb-home-service{grid-template-columns:72px 22px minmax(0,1fr) 25px;gap:7px}.cb-home-service__icon{font-size:20px}.cb-home-service__text strong{font-size:12px}.cb-home-service__text small{font-size:9px}}
+</style>
+<main class="cb-home-v2">
+<section class="cb-home-hero" aria-labelledby="cb-home-v2-title">
+  <div class="cb-home-hero__copy">
+    <span class="cb-home-hero__eyebrow">Dijital Çözümler, Gerçek Sonuçlar</span>
+    <h1 id="cb-home-v2-title">Markanız İçin<br><em>Dijital Deneyimler</em> Üretiyoruz.</h1>
+    <p>Web tasarım, yazılım geliştirme ve dijital çözümlerle markanızı çevrimiçi dünyada güçlendiriyoruz.</p>
+    <div class="cb-home-hero__actions"><a href="/hizmetlerimiz.html">Hizmetlerimizi İnceleyin <span>→</span></a><a class="secondary" href="/bize-ulasin.html">Tanıtım Videosu <span>▶</span></a></div>
   </div>
-  <div class="cb-home-service-row cb-home-service-row--graphic">
-    <div class="cb-home-service-copy">
-      <span class="cb-home-service-kicker">ÇAĞBAŞ / GÖRSEL İLETİŞİM</span>
-      <h2>Grafik Tasarım</h2>
-      <p>Markanızın karakterini güçlü bir görsel dile dönüştürüyor; akılda kalan, tutarlı ve etkili tasarımlar üretiyoruz.</p>
-      <ul><li>Kurumsal kimlik ve marka dili</li><li>Dijital ve sosyal medya görselleri</li><li>Basılı ve tanıtım materyalleri</li></ul>
-      <a class="cb-home-service-link" href="/hizmetlerimiz.html#grafik-tasarim">Hizmeti keşfet <span>↗</span></a>
-    </div>
-    <a class="cb-home-service-image" href="/hizmetlerimiz.html#grafik-tasarim" aria-label="Grafik Tasarım hizmetini keşfet">
-      <img src="https://images.unsplash.com/photo-1541961017774-22349e4a1262?auto=format&fit=crop&w=2200&q=95" alt="Grafik tasarım ve yaratıcı görsel üretim çalışması" loading="lazy">
-    </a>
-  </div>
-  <div class="cb-home-service-row cb-home-service-row--arge">
-    <a class="cb-home-service-image" href="/hizmetlerimiz.html#sosyal-medya" aria-label="Ar-Ge Danışmanlığı hizmetini keşfet">
-      <img src="https://images.unsplash.com/photo-1611162616475-46b635cb6868?auto=format&fit=crop&w=2200&q=95" alt="Sosyal medya içerik ve platform yönetimi" loading="lazy">
-    </a>
-    <div class="cb-home-service-copy"><span class="cb-home-service-kicker">ÇAĞBAŞ / SOSYAL MEDYA YÖNETİMİ</span><h2>Sosyal Medya Yönetimi</h2><p>Markanızın sosyal medyada tutarlı, görünür ve etkileşim odaklı bir iletişim kurmasına yardımcı oluyoruz.</p><ul><li>İçerik stratejisi ve aylık planlama</li><li>Instagram ve diğer platformların yönetimi</li><li>Gönderi, hikâye ve kısa video içerikleri</li></ul><a class="cb-home-service-link" href="/hizmetlerimiz.html#sosyal-medya">Hizmeti keşfet <span>↗</span></a></div>
-  </div>
-  <div class="cb-home-service-row cb-home-service-row--urge">
-    <div class="cb-home-service-copy"><span class="cb-home-service-kicker">ÇAĞBAŞ / DİJİTAL PAZARLAMA</span><h2>Dijital Pazarlama</h2><p>Doğru kanallarda görünürlük kazanmanız ve ölçülebilir sonuçlar elde etmeniz için dijital pazarlama çözümleri geliştiriyoruz.</p><ul><li>Dijital reklam ve kampanya stratejisi</li><li>Google Ads ve arama ağı reklamları</li><li>SEO, performans ve dönüşüm takibi</li></ul><a class="cb-home-service-link" href="/hizmetlerimiz.html#dijital-pazarlama">Hizmeti keşfet <span>↗</span></a></div>
-    <a class="cb-home-service-image" href="/hizmetlerimiz.html#dijital-pazarlama" aria-label="UR-GE Danışmanlığı hizmetini keşfet">
-      <img src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=2200&q=95" alt="Dijital pazarlama planlaması ve kampanya stratejisi" loading="lazy">
-    </a>
+  <div class="cb-home-hero__visual" aria-hidden="true"><div class="cb-home-hero__device"><strong>ÇAĞBAŞ<small>Creative Studio</small></strong></div></div>
+</section>
+<div class="cb-home-proof" aria-label="ÇAĞBAŞ değerleri"><span><b>♜</b> Marka Değerinizi Artırın</span><span><b>〈/〉</b> Özel Yazılım Çözümleri</span><span><b>ϟ</b> Süreçlerinizi Otomatikleştirin</span><span><b>▥</b> Ölçülebilir Dijital Başarı</span></div>
+<section class="cb-home-services" aria-labelledby="cb-home-services-title">
+  <div class="cb-home-services__intro"><span class="cb-home-services__kicker">HİZMETLERİMİZ</span><h2 id="cb-home-services-title">İhtiyacınıza Uygun<br><em>Dijital Çözümler</em></h2><p>Markanızın dijital yolculuğunda ihtiyaç duyduğunuz tüm web, yazılım ve otomasyon çözümlerini tek çatı altında sunuyoruz.</p><a class="cb-home-services__all" href="/hizmetlerimiz.html">Tüm Hizmetlerimizi Görün <span>→</span></a></div>
+  <div class="cb-home-services__grid">
+    <a class="cb-home-service" href="/hizmetlerimiz.html#web-tasarim"><span class="cb-home-service__art"></span><span class="cb-home-service__icon">▣</span><span class="cb-home-service__text"><strong>Kurumsal Web Sitesi Tasarımı</strong><small>Marka kimliğinizi yansıtan, profesyonel ve güvenilir kurumsal web siteleri.</small></span><span class="cb-home-service__arrow">→</span></a>
+    <a class="cb-home-service" href="/hizmetlerimiz.html#e-ticaret"><span class="cb-home-service__art"></span><span class="cb-home-service__icon">🛒</span><span class="cb-home-service__text"><strong>E-Ticaret Sitesi Geliştirme</strong><small>Ürünlerinizi online olarak satabileceğiniz, güvenli ve ölçeklenebilir e-ticaret altyapıları.</small></span><span class="cb-home-service__arrow">→</span></a>
+    <a class="cb-home-service" href="/hizmetlerimiz.html#landing-page"><span class="cb-home-service__art"></span><span class="cb-home-service__icon">▤</span><span class="cb-home-service__text"><strong>Landing Page ve Başvuru Sistemleri</strong><small>Daha fazla dönüşüm için etkili kampanya sayfaları ve başvuru çözümleri.</small></span><span class="cb-home-service__arrow">→</span></a>
+    <a class="cb-home-service" href="/hizmetlerimiz.html#web-uygulamalari"><span class="cb-home-service__art"></span><span class="cb-home-service__icon">⌘</span><span class="cb-home-service__text"><strong>Web Uygulaması Geliştirme</strong><small>İhtiyacınıza özel, modern ve yüksek performanslı web uygulamaları.</small></span><span class="cb-home-service__arrow">→</span></a>
+    <a class="cb-home-service" href="/hizmetlerimiz.html#web-tasarim"><span class="cb-home-service__art"></span><span class="cb-home-service__icon">✎</span><span class="cb-home-service__text"><strong>Web Sitesi Tasarımı</strong><small>Hızlı, modern ve kullanıcı dostu web sitesi tasarımları.</small></span><span class="cb-home-service__arrow">→</span></a>
+    <a class="cb-home-service" href="/hizmetlerimiz.html#otomasyon"><span class="cb-home-service__art"></span><span class="cb-home-service__icon">⚙</span><span class="cb-home-service__text"><strong>İş Süreçleri Otomasyonu</strong><small>Tekrarlayan işleriniz için verimli, hızlı ve hatasız otomasyon sistemleri.</small></span><span class="cb-home-service__arrow">→</span></a>
+    <a class="cb-home-service" href="/hizmetlerimiz.html#ozel-yazilim"><span class="cb-home-service__art"></span><span class="cb-home-service__icon">⌘</span><span class="cb-home-service__text"><strong>İşletmelere Özel Yazılım Geliştirme</strong><small>İş süreçlerinize uyumlu, size özel ve ölçeklenebilir yazılım çözümleri.</small></span><span class="cb-home-service__arrow">→</span></a>
+    <a class="cb-home-service" href="/hizmetlerimiz.html#yonetim-paneli"><span class="cb-home-service__art"></span><span class="cb-home-service__icon">▦</span><span class="cb-home-service__text"><strong>Yönetim Paneli Geliştirme</strong><small>İçerik, veri ve süreçlerinizi kolayca yönetebileceğiniz özel paneller.</small></span><span class="cb-home-service__arrow">→</span></a>
   </div>
 </section>
-
-<!-- <div class="middle-image-text-container">
-    <div class="middle-image-text-wrapper">
-        <div class="middle-image-wrapper">
-            <div class="middle-image-item-right">
-                <img src="/_assets/images/oval-image.png" alt="ÇAĞBAŞ" width="80%" data-aos="fade-up" data-aos-delay="250" data-aos-once="true">
-            </div>
-        </div>
-        <div class="middle-image-text-item" data-aos="fade-up" data-aos-delay="500" data-aos-once="true">
-            <div class="middle-image-text-area-wrapper">
-                <h4>İlklere imza atıyoruz, zor olanı hedefliyoruz.</h4>
-                <p>
-                    Markaların dijital dünyada güçlü, tutarlı ve akılda kalıcı bir kimlik kazanması için tasarım ve iletişimi bir araya getiriyoruz.
-                </p>
-            </div>
-        </div>
-    </div>
-    <div class="middle-image-text-wrapper-reverse" style="background-color: #FAFBFD;">
-        <div class="middle-image-wrapper">
-            <div class="middle-image-item">
-                <img src="/_assets/images/oval-image2.png" alt="ÇAĞBAŞ" width="80%" data-aos="fade-up" data-aos-delay="250" data-aos-once="true">
-            </div>
-        </div>
-        <div class="middle-image-text-item" data-aos="fade-up" data-aos-delay="500" data-aos-once="true">
-            <div class="middle-image-text-area-wrapper">
-                <h4>Konu ülke ekonomisine katkı olunca, tüm gücümüzle çalışıyoruz.</h4>
-                <p>Kalbi ihracat için atan bir şirket olarak, gücümüzü Türkiye’nin ekonomisinden alıyoruz, her gün ona güç ve değer katmak için inançla çalışıyoruz.</p>
-            </div>
-        </div>
-
-    </div>
-</div> -->
-
+</main>
 
 <div class="footer-banner">
     <div class="footer-banner-text-wrapper" id="cb-mobile-footer-banner-copy">
