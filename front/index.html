@@ -1744,6 +1744,52 @@ repeating-linear-gradient(0deg,transparent 0 79px,rgba(90,69,103,.045) 80px,tran
 .cb-home-welcome__actions{gap:16px!important;flex-wrap:wrap!important}
 }
 </style>
+
+<style id="cb-homepage-remove-pink-fill">
+/* Keep the supplied sculpture artwork; remove all colored hero fills and overlays */
+.banner-slider-wrapper{
+  background:#fff!important;
+  background-image:none!important;
+  background-color:#fff!important;
+}
+.banner-slider-wrapper:before,
+.banner-slider-wrapper:after{
+  content:none!important;
+  display:none!important;
+  background:none!important;
+}
+.cb-map-service-intro.cb-home-welcome:after{
+  right:clamp(-560px,-40vw,-390px)!important;
+  top:50%!important;
+  transform:translateY(-50%)!important;
+  width:clamp(350px,35vw,490px)!important;
+  height:clamp(205px,24vw,275px)!important;
+  background-size:contain!important;
+  background-position:center!important;
+  background-repeat:no-repeat!important;
+  mix-blend-mode:normal!important;
+  opacity:1!important;
+  filter:none!important;
+}
+.cb-home-services-entry{
+  background:#fff!important;
+}
+@media(max-width:767px){
+  .banner-slider-wrapper{
+    background:#fff!important;
+    background-image:none!important;
+  }
+  .cb-map-service-intro.cb-home-welcome:after{
+    right:-3vw!important;
+    top:calc(100% + 12px)!important;
+    transform:none!important;
+    width:min(76vw,330px)!important;
+    height:190px!important;
+    background-size:contain!important;
+    mix-blend-mode:normal!important;
+  }
+}
+</style>
 </html><style id="cagbas-mobile-home-production">@media(max-width:767px){.menu-container{display:block!important}.mobile-menu-container{display:none!important}.mobile-menu-links-wrapper{display:none!important}.mobile-menu-links-wrapper.open{display:block!important}.banner-slider-wrapper,.banner-slider-wrapper .banner-swiper-wrapper,.banner-slider-wrapper .main-slider-container,.banner-slider-wrapper .swiper-wrapper,.banner-slider-wrapper .swiper-slide{height:390px!important;min-height:390px!important;max-height:68svh!important}.banner-content-swiper-container{position:absolute!important;inset:0!important;padding:0 20px 22px!important}.cb-map-slogan{left:20px!important;right:20px!important;bottom:20px!important;width:calc(100% - 40px)!important;max-width:330px!important;min-height:0!important;font-size:clamp(14px,4vw,18px)!important;line-height:1.25!important}.cb-home-intro{grid-template-columns:minmax(0,1fr)!important;padding:48px 22px 54px!important;gap:28px!important}.cb-home-intro h1{font-size:clamp(34px,9vw,44px)!important;line-height:1.12!important;letter-spacing:-1.2px!important;overflow-wrap:normal!important;word-break:normal!important}.cb-home-intro__side{border-left:0!important;border-top:1px solid #e8e1ed!important;padding:22px 0 0!important}}</style>
 
 <style id="cagbas-mobile-navigation-final">
