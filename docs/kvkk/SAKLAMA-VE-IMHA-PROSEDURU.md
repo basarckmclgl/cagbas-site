@@ -1,13 +1,12 @@
-# ÇAĞBAŞ – Kişisel Veri Saklama ve İmha Prosedürü
+# ÇAĞBAŞ – Saklama ve İmha Uygulama Çizelgesi
 
 - **Veri sorumlusu:** Başar Çekmecelioğlu (gerçek kişi)
-- **Sürüm:** 0.1 – çalışma taslağı
-- **Tarih:** 24.11.2026
-- **Durum:** Teknik uygulama ve hukuki değerlendirme tamamlanmadan nihai politika olarak yayımlanmayacaktır.
+- **Kayıt türü:** Kurum içi teknik uygulama çizelgesi
+- **Son güncelleme:** 24.11.2026
 
 ## 1. Amaç ve kapsam
 
-Bu prosedür, ÇAĞBAŞ web sitesi üzerinden işlenen iletişim formu, e-bülten, çerez/analitik, teknik güvenlik ve hizmet sağlayıcı e-posta kayıtlarının amaçla sınırlı saklanması ve işleme şartları sona erdiğinde silinmesi, yok edilmesi veya anonim hâle getirilmesi için uygulanacak yöntemi belirler.
+Bu çizelge, VERBİS istisnası nedeniyle zorunlu bir politika olduğu iddiasında bulunmaz. Web sitesi kayıtlarının fiilî saklama sürelerini ve teknik imha durumunu takip eder.
 
 Henüz başlamamış müşteri sözleşmesi, fatura, ödeme, tedarikçi ve personel süreçleri bu sürümün kapsamı dışındadır. Bu faaliyetler başladığında prosedür güncellenir.
 
@@ -23,21 +22,21 @@ Henüz başlamamış müşteri sözleşmesi, fatura, ödeme, tedarikçi ve perso
 
 ## 3. Saklama ve imha tablosu
 
-| Kayıt türü | Taslak azami süre / tetikleyici | İmha yöntemi | Uygulama durumu |
+| Kayıt türü | Süre / tetikleyici | İmha yöntemi | Uygulama durumu |
 |---|---|---|---|
-| İletişim formu – D1 | Talebin son işlem tarihinden itibaren 12 ay taslak süre. Devam eden uyuşmazlık veya somut hukuki saklama yükümlülüğü varsa ilgili kayıt ayrıştırılır ve yalnızca gerekli süre tutulur. | D1 satırını kalıcı olarak silme; işlem tarihi ve sonucu için kişisel veri içermeyen/minimum imha kaydı tutma | Otomatik silme kodu henüz doğrulanmadı; uygulanmış sayılmaz. |
-| Doğrulanmamış e-bülten talebi – D1 | Doğrulama tokenı 24 saat geçerli. Kayıt için taslak hedef: talep tarihinden itibaren en geç 30 gün içinde silme veya anonimleştirme; istatistik için gerekli değilse kişisel e-posta saklanmamalı. | Pending satırını silme; token hash ve e-posta dahil kayıt alanlarını kaldırma | Tokenın süresi dolunca token alanları temizleniyor; satırın silinmesi otomatik değil. 30 günlük iş akışı kurulmalı. |
+| İletişim formu – D1 | Oluşturulma tarihinden itibaren 365 gün. Devam eden uyuşmazlık veya somut hukuki saklama yükümlülüğü varsa ilgili kayıt ayrıştırılır ve yalnızca gerekli süre tutulur. | D1 satırını kalıcı olarak silme; işlem tarihi ve sonucu için kişisel veri içermeyen/minimum imha kaydı tutma | Otomatik silme kodu henüz doğrulanmadı; uygulanmış sayılmaz. |
+| Doğrulanmamış e-bülten talebi – D1 | Token 24 saat geçerlidir. Pending satırı oluşturulma tarihinden itibaren 30 gün sonra silinir. | Pending satırını silme; token hash ve e-posta dahil kayıt alanlarını kaldırma | Tokenın süresi dolunca token alanları temizleniyor; satırın silinmesi otomatik değil. 30 günlük iş akışı kurulmalı. |
 | Aktif e-bülten kaydı – D1/Brevo | Abonelik aktif olduğu ve gönderim amacı sürdüğü sürece. Ayrılma talebi onaylanınca gönderim derhal durdurulur. | Aktif gönderim listesinden çıkarma; tekrar gönderimi önlemek için zorunlu asgari bastırma kaydı ayrı tutulur. İzin ispatı kaydı gereklilik süresi sonunda silinir/anonimleştirilir. | D1 status alanı unsubscribe olarak güncelleniyor; otomatik nihai silme süresi tanımlı değil. |
-| Abonelik izin/ayrılma ispatı | Ayrılma tarihinden itibaren 3 yıl taslak hedef; somut hukuki gereklilik ve risk değerlendirmesiyle teyit edilmeli. | E-posta yerine mümkünse asgari kayıt; süre bitiminde silme/anonimleştirme | Otomatik imha doğrulanmadı. |
+| Abonelik izin/ayrılma ispatı | Ayrılma tarihinden itibaren 1095 gün (3 yıl). | E-posta yerine mümkünse asgari kayıt; süre bitiminde silme/anonimleştirme | Otomatik imha doğrulanmadı. |
 | Çerez tercih kaydı – tarayıcı | Kullanıcı tercihini değiştirene veya tarayıcı verisini temizleyene kadar; arayüzden geri alma sağlanır. | localStorage ve ilgili birinci taraf tercih çerezini silme/güncelleme | İstemci kodunda tercih yönetimi mevcut; tarayıcılar arası davranış test edilmeli. |
 | Google Analytics verileri | GA hesabında seçilen veri saklama süresi doğrulanana kadar süre kesinleştirilmemiştir. Uygun en kısa operasyonel süre seçilmelidir. | GA yönetici ayarlarından veri saklama süresini belirleme; gerekli olduğunda kullanıcı/veri silme araçlarını uygulama | Hesap ayarı görülmedi; henüz doğrulanmadı. |
-| API rate-limit kayıtları – D1 | Taslak hedef 24 saat | 24 saatten eski satırları deterministik zamanlanmış görevle silme | Mevcut kodda yalnızca istek başına %2 olasılıklı temizlik var; 24 saat garantisi sağlamaz. Düzeltme ve test gerekli. |
-| Gmail iletişim bildirimleri | Talep kapandıktan sonra 12 ay taslak hedef; hukuki saklama gereği olan kayıtlar ayrıştırılır. | Gmail'de etiket/arama tabanlı periyodik silme; çöp kutusunun kalıcı boşaltılmasını kontrol etme | Gelen kutusu için otomatik saklama kuralı doğrulanmadı; manuel prosedür gerekli. |
-| Brevo transactional logları | Kullanıcının seçtiği ayara göre 1 ay | Brevo retention ayarı üzerinden sağlayıcı silme döngüsü | Kullanıcı Save yaptığını bildirdi; ayarın kalıcılığı ve silme sonucu ekranla doğrulanmalı. |
+| API rate-limit kayıtları – D1 | 48 saat; günlük Cron görevi | 24 saatten eski satırları deterministik zamanlanmış görevle silme | Mevcut kodda yalnızca istek başına %2 olasılıklı temizlik var; 24 saat garantisi sağlamaz. Düzeltme ve test gerekli. |
+| Gmail iletişim bildirimleri | Talep kapandıktan sonra en çok 365 gün; aylık manuel kontrol. | Gmail'de etiket/arama tabanlı periyodik silme; çöp kutusunun kalıcı boşaltılmasını kontrol etme | Gelen kutusu için otomatik saklama kuralı doğrulanmadı; manuel prosedür gerekli. |
+| Brevo transactional logları | 1 ay (kullanıcının bildirdiği ayar; hesap ekranı doğrulanacak) | Brevo retention ayarı üzerinden sağlayıcı silme döngüsü | Kullanıcı Save yaptığını bildirdi; ayarın kalıcılığı ve silme sonucu ekranla doğrulanmalı. |
 | Brevo email event kayıtları | Sağlayıcının bu kayıt türü için ayrı açıkladığı süre/ayar doğrulanana kadar belirlenmemiştir. | Brevo hesabındaki event history/log ayarları ve sağlayıcı politikası üzerinden | Transactional log ayarının kapsamına girdiği varsayılmamalı. |
 | İmha işlem kayıtları | İmha işlemi tarihinden itibaren en az 3 yıl | Süre sonunda imha kaydını silme/anonimleştirme; başka yasal yükümlülük varsa ayrıca değerlendirme | İmha kayıt defteri oluşturulmalı. |
 
-**Not:** Tablodaki 12 ay, 30 gün ve 3 yıl gibi faaliyet bazlı hedefler, bu taslakta önerilen işletme süreleridir; KVKK'nın bütün veri türleri için doğrudan belirlediği genel süreler değildir. Nihai süreler, veri işleme amacı, ilgili mevzuat, hukuki ilişki ve hak arama süreleri dikkate alınarak onaylanmalıdır.
+**Not:** Bu süreler ÇAĞBAŞ'ın mevcut düşük hacimli web sitesi süreçleri için belirlenmiş işletme süreleridir; KVKK'nın bütün veri türleri için doğrudan belirlediği genel süreler değildir. Somut bir uyuşmazlık veya kanuni saklama yükümlülüğü varsa ilgili kayıt ayrıştırılır.
 
 ## 4. Periyodik kontrol ve imha takvimi
 
@@ -55,18 +54,17 @@ Bu takvim operasyonel kontrol önerisidir. Saklama ve imha politikası hazırlam
 |---|---|---|---|---|---|---|
 |  |  |  | Saklama süresi doldu / amaç sona erdi / ilgili kişi talebi | Silme / yok etme / anonimleştirme |  |  |
 
-## 6. Uygulama öncesi zorunlu teknik işler
+## 6. Uygulama durumu ve kalan kontroller
 
-- [ ] D1 veritabanındaki gerçek tablo ve alanları doğrula; gereksiz alanları tespit et.
-- [ ] İletişim kayıtları için 12 aylık süreyi uygulayacak zamanlanmış silme görevi kur ve test et.
-- [ ] 24 saati geçen pending abonelik satırlarını silen görev kur; yalnızca token alanlarını temizlemekle yetinme.
-- [ ] Unsubscribe kayıtları için gönderim engelleme amacıyla gerekli asgari veriyi belirle; süresiz e-posta tutma varsayımını önle.
-- [ ] Rate-limit kayıtları için mevcut rastlantısal temizliği deterministik günlük görevle değiştir.
-- [ ] Gmail bildirimleri için saklama etiketi/manuel üç aylık gözden geçirme prosedürü oluştur.
-- [ ] Brevo retention ve email event log ayarlarını ayrı ayrı doğrula.
-- [ ] Google Analytics veri saklama ayarını ve analitik izin akışını doğrula.
-- [ ] Sağlayıcıların veri lokasyonu, alt işleyenleri ve KVKK m.9 aktarım mekanizmasını belgele.
-- [ ] İlk imha testini yap; kanıt ve imha kayıt defterine işle.
+- [x] D1 tabloları ve alanları doğrulandı.
+- [x] D1'de 9 test iletişim kaydı silindi; son sorgu 0 kayıt gösterdi.
+- [x] Worker günlük Cron ve saklama değişkenleri yapılandırıldı.
+- [x] Gmail'de 7 test bildirimi Çöp Kutusu'na taşındı.
+- [ ] Worker'ın ilk Cron çalışmasının logu kontrol edilecek.
+- [ ] Brevo retention ayarının kalıcılığı ve genel event logları doğrulanacak.
+- [ ] Google Analytics veri saklama ayarı 2 ay olarak seçilecek.
+- [ ] Cloudflare, Google ve Brevo için KVKK m.9 aktarım mekanizması belgelenecek.
+- [ ] Gmail aylık kontrolü sürdürülecek.
 
 ## 7. Mevzuat dayanağı
 
@@ -82,4 +80,4 @@ Resmî kaynaklar:
 
 ---
 
-Bu prosedür, teknik uygulama ve hukuki değerlendirme tamamlanmadan nihai uygunluk beyanı olarak kullanılmamalıdır.
+Bu çizelge, uygulama kanıtı ile tamamlanmamış kontrolleri birbirinden ayırır. Cron kurulumu ilk silme çalışmasının başarılı olduğunu tek başına kanıtlamaz.
