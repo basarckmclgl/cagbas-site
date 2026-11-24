@@ -573,6 +573,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const result = await response.json();
             if (!response.ok) throw new Error(result.error || 'Mesajınız gönderilemedi.');
 
+            if (typeof window.gtag === 'function') window.gtag('event', 'generate_lead', { method: 'contact_form' });
             contactForm.reset();
             if (typeof _success === 'function') _success(result.message || 'Mesajınız alındı.');
             else alert(result.message || 'Mesajınız alındı.');
@@ -740,3 +741,13 @@ document.addEventListener('DOMContentLoaded', function() {
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', bindMobileNavigation);
   else bindMobileNavigation();
 })();
+
+
+/* ÇAĞBAŞ GA4 conversion: WhatsApp lead intent; fires only after analytics consent. */
+document.addEventListener('click', function (event) {
+    const whatsappLink = event.target.closest && event.target.closest('a#cagbas-whatsapp-float');
+    if (!whatsappLink) return;
+    if (typeof window.gtag === 'function') {
+        window.gtag('event', 'whatsapp_click', { link_url: whatsappLink.href, link_text: 'WhatsApp' });
+    }
+});
