@@ -121,9 +121,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const LEGACY_KEY = 'cagbas_cookie_consent';
     const GA_ID = 'G-6YM7Q549C9';
     const CONSENT_MAX_AGE = 60 * 60 * 24 * 180;
-    const lang = (document.documentElement.lang || 'tr').toLowerCase().slice(0, 2);
-
-    window.dataLayer = window.dataLayer || [];
+window.dataLayer = window.dataLayer || [];
     window.gtag = window.gtag || function () {
         window.dataLayer.push(arguments);
     };
@@ -136,65 +134,19 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     const copy = {
-        tr: {
-            title: 'Çerez tercihleri',
-            intro: 'Zorunlu çerezler sitenin çalışması için gereklidir. Analitik çerezleri yalnızca izninizle kullanılır.',
-            necessary: 'Zorunlu çerezler',
-            necessaryDesc: 'Güvenlik ve temel site işlevleri için gereklidir; kapatılamaz.',
-            analytics: 'Analitik çerezleri',
-            analyticsDesc: 'Ziyaret ve kullanım istatistiklerini Google Analytics ile ölçmemizi sağlar.',
-            accept: 'Tümünü kabul et',
-            reject: 'Reddet',
-            manage: 'Tercihleri yönet',
-            save: 'Tercihlerimi kaydet',
-            settings: 'Çerez ayarları',
-            policy: 'Çerez Politikası',
-            close: 'Kapat'
-        },
-        en: {
-            title: 'Cookie preferences',
-            intro: 'Essential cookies are required for the website to work. Analytics cookies are used only with your permission.',
-            necessary: 'Essential cookies',
-            necessaryDesc: 'Required for security and core website functions; they cannot be disabled.',
-            analytics: 'Analytics cookies',
-            analyticsDesc: 'Allow us to measure visits and usage statistics with Google Analytics.',
-            accept: 'Accept all',
-            reject: 'Reject',
-            manage: 'Manage preferences',
-            save: 'Save my preferences',
-            settings: 'Cookie settings',
-            policy: 'Cookie Policy',
-            close: 'Close'
-        },
-        ar: {
-            title: 'تفضيلات ملفات تعريف الارتباط',
-            intro: 'ملفات تعريف الارتباط الضرورية مطلوبة لتشغيل الموقع. لا تُستخدم ملفات التحليل إلا بموافقتك.',
-            necessary: 'ملفات تعريف الارتباط الضرورية',
-            necessaryDesc: 'مطلوبة للأمان والوظائف الأساسية ولا يمكن تعطيلها.',
-            analytics: 'ملفات تعريف الارتباط التحليلية',
-            analyticsDesc: 'تتيح لنا قياس الزيارات وإحصاءات الاستخدام باستخدام Google Analytics.',
-            accept: 'قبول الكل',
-            reject: 'رفض',
-            manage: 'إدارة التفضيلات',
-            save: 'حفظ تفضيلاتي',
-            settings: 'إعدادات ملفات تعريف الارتباط',
-            policy: 'سياسة ملفات تعريف الارتباط',
-            close: 'إغلاق'
-        }
-    }[lang] || {
-        title: 'Cookie preferences',
-        intro: 'Essential cookies are required. Analytics cookies are used only with your permission.',
-        necessary: 'Essential cookies',
-        necessaryDesc: 'Required for core website functions.',
-        analytics: 'Analytics cookies',
-        analyticsDesc: 'Measure visits and usage with Google Analytics.',
-        accept: 'Accept all',
-        reject: 'Reject',
-        manage: 'Manage preferences',
-        save: 'Save preferences',
-        settings: 'Cookie settings',
-        policy: 'Cookie Policy',
-        close: 'Close'
+        title: 'Çerez tercihleri',
+        intro: 'Zorunlu çerezler sitenin çalışması için gereklidir. Analitik çerezleri yalnızca izninizle kullanılır.',
+        necessary: 'Zorunlu çerezler',
+        necessaryDesc: 'Güvenlik ve temel site işlevleri için gereklidir; kapatılamaz.',
+        analytics: 'Analitik çerezleri',
+        analyticsDesc: 'Ziyaret ve kullanım istatistiklerini Google Analytics ile ölçmemizi sağlar.',
+        accept: 'Tümünü kabul et',
+        reject: 'Reddet',
+        manage: 'Tercihleri yönet',
+        save: 'Tercihlerimi kaydet',
+        settings: 'Çerez ayarları',
+        policy: 'Çerez Politikası',
+        close: 'Kapat'
     };
 
     function readCookie(name) {
@@ -356,13 +308,7 @@ document.addEventListener('DOMContentLoaded', function () {
         document.body.appendChild(banner);
     }
 
-    banner.innerHTML = '<p>' + copy.intro + ' <a href="' +
-        (lang === 'ar'
-            ? '/ar/legal-information-ar.html#cookies'
-            : lang === 'en'
-                ? '/en/legal-information-en.html#cookies'
-                : '/yasal-bilgilendirme.html#cerezler') +
-        '">' + copy.policy + '</a></p><div class="cookie-actions"><button type="button" class="cookie-reject">' +
+    banner.innerHTML = '<p>' + copy.intro + ' <a href="/yasal-bilgilendirme.html#cerezler">' + copy.policy + '</a></p><div class="cookie-actions"><button type="button" class="cookie-reject">' +
         copy.reject + '</button><button type="button" class="cookie-preferences">' + copy.manage +
         '</button><button type="button" class="cookie-accept">' + copy.accept + '</button></div>';
 
@@ -587,115 +533,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
-
-// document.addEventListener('DOMContentLoaded', function () {
-//     const langSelectorLinks = document.querySelectorAll('.langSelectorListItem a');
-
-//     langSelectorLinks.forEach(link => {
-//         link.addEventListener('click', function (event) {
-//             event.preventDefault();
-//             const selectedLang = this.querySelector('.langSelectorListNameLabel').title;
-//             translateContentById('ana-sayfa', selectedLang);
-//             translateContentById('hakkimizda', selectedLang);
-//             translateContentById('hizmetlerimiz', selectedLang);
-//             translateContentById('bize-ulasin', selectedLang);
-
-//             translateContentById('ana-sayfa-mobile', selectedLang);
-//             translateContentById('hakkimizda-mobile', selectedLang);
-//             translateContentById('hizmetlerimiz-mobile', selectedLang);
-//             translateContentById('bize-ulasin-mobile', selectedLang);
-
-//             translateContentById('slider-content-wrapper-1', selectedLang);
-//             translateContentById('slider-content-wrapper-2', selectedLang);
-//             translateContentById('slider-content-wrapper-3', selectedLang);
-
-//             translateContentById('middle-image-text-area-wrapper-title-1', selectedLang);
-//             translateContentById('middle-image-text-area-wrapper-content-1', selectedLang);
-//             translateContentById('middle-image-text-area-wrapper-title-2', selectedLang);
-//             translateContentById('middle-image-text-area-wrapper-content-2', selectedLang);
-//             translateContentById('middle-image-text-area-wrapper-title-3', selectedLang);
-//             translateContentById('middle-image-text-area-wrapper-content-3', selectedLang);
-
-//             translateContentById('footer-banner-text-wrapper-title', selectedLang);
-//             translateContentById('footer-banner-text-wrapper-content', selectedLang);
-
-//             translateContentById('footer-contact-area-item-e-bulten-title-1', selectedLang);
-//             translateContentById('footer-contact-area-item-e-bulten-title-2', selectedLang);
-//             translateContentById('footer-contact-area-item-e-bulten-content', selectedLang);
-//             translateContentById('bize-ulasin-header-area-title', selectedLang);
-            
-//             translateContentById('contact-form-link', selectedLang);
-//             translateContentById('kvkk', selectedLang);
-//             translateContentById('onay', selectedLang);
-//         });
-//     });
-
-//     async function translateContentById(elementId, targetLang) {
-//         const element = document.getElementById(elementId);
-//         const content = element.innerText;
-    
-//         if (targetLang === 'tr') {
-//             // Refresh the page if targetLang is 'tr'
-//             window.location.reload();
-//             return; // Exit the function to avoid further execution
-//         }
-    
-//         try {
-//             const response = await fetch('http://localhost:3000/translate', {
-//                 method: 'POST',
-//                 headers: {
-//                     'Content-Type': 'application/json'
-//                 },
-//                 body: JSON.stringify({
-//                     msg: content,
-//                     to: targetLang
-//                 })
-//             });
-    
-//             const data = await response.json();
-//             if (response.ok) {
-//                 element.innerText = data.translation;
-//             } else {
-//                 console.error('Translation error:', data);
-//             }
-//         } catch (error) {
-//             console.error('Fetch error:', error);
-//         }
-//     }
-// });
-
-// document.addEventListener('DOMContentLoaded', () => {
-//     const langItems = document.querySelectorAll('.langSelectorListItem');
-//     const currentLang = document.getElementById('currentLang');
-
-//     langItems.forEach(item => {
-//         item.addEventListener('click', (event) => {
-//             event.preventDefault();
-            
-//             // Remove the currently selected item from the body
-//             const currentItem = document.querySelector('.langSelectorListItem.selected');
-//             if (currentItem) {
-//                 currentItem.classList.remove('selected');
-//                 // Re-add it to the body if needed
-//                 document.querySelector('.langSelectorList').appendChild(currentItem);
-//             }
-            
-//             // Mark the new selected item
-//             item.classList.add('selected');
-
-//             const langCode = item.getAttribute('data-lang');
-//             const langLabel = item.querySelector('.langSelectorListNameLabel').innerText;
-//             const langFlagSrc = item.querySelector('img').src;
-
-//             // Update the current language display
-//             currentLang.querySelector('.langSelectorListNameFlag img').src = langFlagSrc;
-//             currentLang.querySelector('.langSelectorListNameLabel').innerText = langLabel;
-
-//             // Move the selected item to the top of the body list
-//             item.parentElement.prepend(item);
-//         });
-//     });
-// });
 
 /* Native mobile navigation fallback: works even if the legacy jQuery bundle fails. */
 (function () {
