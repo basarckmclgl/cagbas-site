@@ -119,7 +119,7 @@ function _openUrl(url) {
 document.addEventListener('DOMContentLoaded', function () {
     const CONSENT_KEY = 'cagbas_cookie_consent_v2';
     const LEGACY_KEY = 'cagbas_cookie_consent';
-    const GA_ID = 'G-6YM7Q549C9';
+    const GA_ID = 'G-MMZZ63EZKJ';
     const CONSENT_MAX_AGE = 60 * 60 * 24 * 180;
     const lang = (document.documentElement.lang || 'tr').toLowerCase().slice(0, 2);
 
