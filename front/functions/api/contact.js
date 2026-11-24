@@ -68,7 +68,7 @@ async function sendGmailNotification(env, submission) {
     "",
     "Başvuru tarihi: " + new Date().toISOString(),
     "Kayıt, yetkili erişimi olan güvenli yönetim kanalından kontrol edilmelidir."
-  ].join("\\r\\n");
+  ].join("\r\n");
   const mime = [
     "To: " + recipient,
     "From: " + recipient,
