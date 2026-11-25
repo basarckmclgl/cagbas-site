@@ -22,78 +22,95 @@ async function sha256(value) {
 }
 
 async function newsletterUnsubscribeToken(env, id, email) {
-  const secret = env.NEWSLETTER_UNSUBSCRIBE_SECRET || env.BREVO_API_KEY;
+  const secret = env.NEWSLETTER_UNSUBSCRIBE_SECRET || env.GMAIL_REFRESH_TOKEN;
+  if (!secret) throw new Error("Newsletter unsubscribe signing key is not configured.");
   const key = await crypto.subtle.importKey("raw", new TextEncoder().encode(secret), { name: "HMAC", hash: "SHA-256" }, false, ["sign"]);
   const data = "cagbas-newsletter-unsubscribe-v1:" + id + ":" + email.toLowerCase();
   const signature = await crypto.subtle.sign("HMAC", key, new TextEncoder().encode(data));
   return Array.from(new Uint8Array(signature), byte => byte.toString(16).padStart(2, "0")).join("");
 }
 
-async function sendVerificationEmail(env, email, verifyUrl, unsubscribeUrl) {
-  if (!env.BREVO_API_KEY) {
-    throw new Error("BREVO_API_KEY is not configured.");
+async function sendGmailEmail(env, to, subjectText, htmlContent, textContent) {
+  const { GMAIL_CLIENT_ID, GMAIL_CLIENT_SECRET, GMAIL_REFRESH_TOKEN } = env;
+  if (!GMAIL_CLIENT_ID || !GMAIL_CLIENT_SECRET || !GMAIL_REFRESH_TOKEN) {
+    throw new Error("Gmail secrets are not fully configured.");
   }
 
-  const senderEmail = env.BREVO_SENDER_EMAIL || "basarcekmecelioglu@cagbas.com";
-  const senderName = env.BREVO_SENDER_NAME || "ÇAĞBAŞ Creative Studio";
+  const tokenResponse = await fetch("https://oauth2.googleapis.com/token", {
+    method: "POST",
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    body: new URLSearchParams({
+      client_id: GMAIL_CLIENT_ID,
+      client_secret: GMAIL_CLIENT_SECRET,
+      refresh_token: GMAIL_REFRESH_TOKEN,
+      grant_type: "refresh_token"
+    })
+  });
+  const tokenData = await tokenResponse.json();
+  if (!tokenResponse.ok || !tokenData.access_token) {
+    throw new Error("Gmail access token refresh failed: " + (tokenData.error || tokenResponse.status));
+  }
+
+  const sender = "cagbas.2026@gmail.com";
+  const subject = "=?UTF-8?B?" + base64Utf8(subjectText) + "?=";
+  const boundary = "cagbas_" + crypto.randomUUID().replace(/-/g, "");
+  const mime = [
+    "To: " + to,
+    "From: " + sender,
+    "Subject: " + subject,
+    "MIME-Version: 1.0",
+    'Content-Type: multipart/alternative; boundary="' + boundary + '"',
+    "",
+    "--" + boundary,
+    'Content-Type: text/plain; charset="UTF-8"',
+    "Content-Transfer-Encoding: base64",
+    "",
+    base64Utf8(textContent),
+    "--" + boundary,
+    'Content-Type: text/html; charset="UTF-8"',
+    "Content-Transfer-Encoding: base64",
+    "",
+    base64Utf8(htmlContent),
+    "--" + boundary + "--"
+  ].join("\r\n");
+  const raw = base64Utf8(mime).replace(/\\+/g, "-").replace(/\\//g, "_").replace(/=+$/g, "");
+  const sendResponse = await fetch("https://gmail.googleapis.com/gmail/v1/users/me/messages/send", {
+    method: "POST",
+    headers: {
+      "Authorization": "Bearer " + tokenData.access_token,
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ raw })
+  });
+  if (!sendResponse.ok) {
+    const detail = await sendResponse.text();
+    console.error("Gmail newsletter send error:", sendResponse.status, detail.slice(0, 400));
+    throw new Error("Gmail newsletter email failed: " + sendResponse.status);
+  }
+  const result = await sendResponse.json();
+  if (!result.id) throw new Error("Gmail did not return a message ID.");
+  return result.id;
+}
+
+async function sendVerificationEmail(env, email, verifyUrl, unsubscribeUrl) {
   const subject = "ÇAĞBAŞ e-bülten aboneliğinizi doğrulayın";
   const htmlContent = `<!doctype html><html lang="tr"><body style="margin:0;padding:32px 16px;background:#f5f4f8;color:#24212b;font-family:Arial,sans-serif"><main style="max-width:560px;margin:0 auto;padding:36px;background:#fff;border-radius:16px"><p style="font-size:13px;letter-spacing:3px;color:#7750a8;font-weight:bold">ÇAĞBAŞ CREATIVE STUDIO</p><h1 style="font-size:25px;line-height:1.3">E-bülten aboneliğinizi doğrulayın</h1><p>Merhaba,</p><p>ÇAĞBAŞ e-bültenine abone olma talebinizi aldık. Aboneliğinizi etkinleştirmek için aşağıdaki bağlantıyı 24 saat içinde kullanın.</p><p style="margin:28px 0"><a href="${verifyUrl}" style="display:inline-block;padding:14px 22px;background:#7750a8;color:#fff;text-decoration:none;border-radius:8px;font-weight:bold">E-posta adresimi doğrula</a></p><p style="font-size:13px;color:#666">Buton çalışmazsa bu bağlantıyı tarayıcınıza kopyalayın:<br><a href="${verifyUrl}" style="color:#7750a8;word-break:break-all">${verifyUrl}</a></p><p style="font-size:13px;color:#777">Bu talebi siz oluşturmadıysanız e-postayı yok sayabilirsiniz.</p><hr style="border:0;border-top:1px solid #eee;margin:26px 0 16px"><p style="font-size:13px;color:#777">E-bülten abonelik talebinizi iptal etmek isterseniz <a href="${unsubscribeUrl}" style="color:#7750a8">Abonelikten çık</a> bağlantısını kullanabilirsiniz.</p></main></body></html>`;
   const textContent = [
-    "Merhaba,",
-    "",
+    "Merhaba,", "",
     "ÇAĞBAŞ e-bültenine abone olma talebinizi aldık.",
-    "Aboneliğinizi etkinleştirmek için aşağıdaki bağlantıyı 24 saat içinde açın:",
-    "",
-    verifyUrl,
-    "",
-    "Bu talebi siz oluşturmadıysanız bu e-postayı yok sayabilirsiniz.",
-    "",
-    "E-bülten abonelik talebinizi iptal etmek için: " + unsubscribeUrl,
-    "",
+    "Aboneliğinizi etkinleştirmek için aşağıdaki bağlantıyı 24 saat içinde açın:", "",
+    verifyUrl, "", "Bu talebi siz oluşturmadıysanız bu e-postayı yok sayabilirsiniz.", "",
+    "E-bülten abonelik talebinizi iptal etmek için: " + unsubscribeUrl, "",
     "ÇAĞBAŞ Creative Studio"
-  ].join("\n");
-
-  const response = await fetch("https://api.brevo.com/v3/smtp/email", {
-    method: "POST",
-    headers: {
-      "accept": "application/json",
-      "api-key": env.BREVO_API_KEY,
-      "content-type": "application/json"
-    },
-    body: JSON.stringify({
-      sender: { name: senderName, email: senderEmail },
-      to: [{ email }],
-      subject,
-      htmlContent,
-      textContent,
-      tags: ["cagbas-newsletter-verification"]
-    })
-  });
-
-  if (!response.ok) {
-    const detail = await response.text();
-    console.error("Brevo transactional email error:", response.status, detail.slice(0, 500));
-    throw new Error("Brevo transactional email request failed: " + response.status);
-  }
-
-  const result = await response.json();
-  if (!result.messageId) throw new Error("Brevo did not return a message ID.");
-  return result.messageId;
+  ].join("\\n");
+  return sendGmailEmail(env, email, subject, htmlContent, textContent);
 }
 
-
-
 async function sendUnsubscribeConfirmationEmail(env, email, unsubscribeUrl) {
-  const senderEmail = env.BREVO_SENDER_EMAIL || "basarcekmecelioglu@cagbas.com";
-  const senderName = env.BREVO_SENDER_NAME || "ÇAĞBAŞ Creative Studio";
-  if (!env.BREVO_API_KEY) throw new Error("BREVO_API_KEY is not configured.");
   const subject = "ÇAĞBAŞ e-bülten iptal talebiniz alındı – Onay gerekli";
   const htmlContent = '<!doctype html><html lang="tr"><body style="margin:0;padding:32px 16px;background:#f5f4f8;color:#24212b;font-family:Arial,sans-serif"><main style="max-width:560px;margin:0 auto;padding:36px;background:#fff;border-radius:16px"><p style="font-size:13px;letter-spacing:3px;color:#7750a8;font-weight:bold">ÇAĞBAŞ CREATIVE STUDIO</p><h1 style="font-size:25px">İptal talebinizi aldık</h1><p>ÇAĞBAŞ e-bülten aboneliğinizi iptal etme talebiniz bize ulaştı.</p><p><strong>Önemli:</strong> Aboneliğiniz henüz iptal edilmedi. İptal işlemini tamamlamak için aşağıdaki onay düğmesine basın.</p><p style="margin:28px 0"><a href="' + unsubscribeUrl + '" style="display:inline-block;padding:14px 22px;background:#7752a6;color:#fff;text-decoration:none;border-radius:8px;font-weight:bold">İptali onayla</a></p><p>Onay bağlantısını açtıktan sonra gelen sayfada “Abonelikten çıkışı onayla” düğmesine de basmanız gerekir.</p><p style="font-size:13px;color:#777">Bu talebi siz oluşturmadıysanız hiçbir işlem yapmayın; aboneliğiniz devam eder.</p></main></body></html>';
-  const textContent = "ÇAĞBAŞ e-bülten aboneliğinizi iptal etme talebiniz bize ulaştı.\n\nAboneliğiniz henüz iptal edilmedi. İptal işlemini tamamlamak için bu bağlantıyı açın ve gelen sayfada onay düğmesine basın:\n" + unsubscribeUrl + "\n\nBu talebi siz oluşturmadıysanız e-postayı yok sayabilirsiniz.";
-  const response = await fetch("https://api.brevo.com/v3/smtp/email", { method: "POST", headers: { "accept": "application/json", "api-key": env.BREVO_API_KEY, "content-type": "application/json" }, body: JSON.stringify({ sender: { name: senderName, email: senderEmail }, to: [{ email }], subject, htmlContent, textContent, tags: ["cagbas-newsletter-unsubscribe"] }) });
-  if (!response.ok) throw new Error("Brevo unsubscribe confirmation email failed: " + response.status);
-  const result = await response.json();
-  if (!result.messageId) throw new Error("Brevo did not return a message ID.");
+  const textContent = "ÇAĞBAŞ e-bülten aboneliğinizi iptal etme talebiniz bize ulaştı.\\n\\nAboneliğiniz henüz iptal edilmedi. İptal işlemini tamamlamak için bu bağlantıyı açın ve gelen sayfada onay düğmesine basın:\\n" + unsubscribeUrl + "\\n\\nBu talebi siz oluşturmadıysanız e-postayı yok sayabilirsiniz.";
+  return sendGmailEmail(env, email, subject, htmlContent, textContent);
 }
 
 async function enforceRequestSecurity(request, env, scope, limit, windowMs) {
