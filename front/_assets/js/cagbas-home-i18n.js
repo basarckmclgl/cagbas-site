@@ -13,7 +13,7 @@
     "Markanız İçin Dijital Deneyimler Üretiyoruz.": "We Create Digital Experiences for Your Brand.",
     "Markanız İçin": "We Create",
     "Dijital Deneyimler": "Digital Experiences",
-    " Üretiyoruz.": " for Your Brand.",
+    "Üretiyoruz.": "for Your Brand.",
     "Web tasarım, yazılım geliştirme ve dijital çözümlerle markanızı çevrimiçi dünyada güçlendiriyoruz.": "We strengthen your brand online through web design, software development and digital solutions.",
     "Hizmetlerimizi İnceleyin": "Explore Our Services",
     "Projenizi Konuşalım": "Let's Discuss Your Project",
