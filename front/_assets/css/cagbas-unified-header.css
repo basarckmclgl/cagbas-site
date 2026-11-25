@@ -1,0 +1,63 @@
+/* ÇAĞBAŞ — unified white navigation surface for all site pages */
+@media (min-width: 761px) {
+  .menu-container {
+    position: sticky !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    z-index: 10000 !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 12px 24px !important;
+    box-sizing: border-box !important;
+    background: #fff !important;
+  }
+  .menu-container > .menu-wrapper {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 20px !important;
+    width: min(1240px, 100%) !important;
+    min-height: 78px !important;
+    margin: 0 auto !important;
+    padding: 10px 24px !important;
+    box-sizing: border-box !important;
+    background: #fff !important;
+    border: 1px solid #eee9f2 !important;
+    border-radius: 18px !important;
+    box-shadow: 0 5px 20px rgba(25,18,35,.07) !important;
+  }
+  .menu-container > .menu-wrapper > .menu-logo { flex: 0 0 auto !important; }
+  .menu-container > .menu-wrapper > .menu-bar-links {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: clamp(12px, 1.8vw, 26px) !important;
+    width: auto !important;
+    flex: 1 1 auto !important;
+  }
+  .menu-container > .menu-wrapper > .menu-bar-links a {
+    color: #292331 !important;
+    white-space: nowrap !important;
+  }
+  .menu-container > .menu-wrapper > .langSelector { flex: 0 0 auto !important; }
+  .site-head {
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 10000 !important;
+    background: #fff !important;
+    border-bottom: 1px solid #eee9f2 !important;
+    box-shadow: 0 5px 20px rgba(25,18,35,.07) !important;
+    backdrop-filter: none !important;
+  }
+  .site-head .nav {
+    width: min(1240px, calc(100% - 48px)) !important;
+    margin: 0 auto !important;
+  }
+  .site-head .navlinks { color: #292331 !important; }
+  .site-head .navlinks a { color: #292331 !important; }
+  .site-head .navlinks a:hover,
+  .site-head .navlinks a[aria-current=page] { color: #7628c9 !important; }
+  .site-head .lang { color: #292331 !important; border-color: #e5ddeb !important; }
+  .site-head .mobile-toggle { color: #292331 !important; border-color: #d9cfdf !important; }
+}
