@@ -14,30 +14,6 @@ function base64Utf8(value) {
   return btoa(binary);
 }
 
-async function enforceRequestSecurity(request, env, scope, limit, windowMs) {
-  const origin = request.headers.get("origin");
-  const allowedOrigins = new Set(["https://cagbas.com", "https://www.cagbas.com"]);
-  if (origin && !allowedOrigins.has(origin)) return { ok: false, status: 403, message: "Bu kaynaktan gelen isteğe izin verilmiyor." };
-  if ((request.headers.get("sec-fetch-site") || "").toLowerCase() === "cross-site") {
-    return { ok: false, status: 403, message: "Çapraz site isteğine izin verilmiyor." };
-  }
-  const ip = request.headers.get("cf-connecting-ip") || "unknown";
-  const digest = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(scope + ":" + ip));
-  const key = scope + ":" + Array.from(new Uint8Array(digest), b => b.toString(16).padStart(2, "0")).join("");
-  const now = Date.now();
-  const windowStart = Math.floor(now / windowMs) * windowMs;
-  const result = await env.DB.prepare(
-    "INSERT INTO api_rate_limits (rate_key, window_start, request_count) VALUES (?, ?, 1) ON CONFLICT(rate_key) DO UPDATE SET request_count = CASE WHEN api_rate_limits.window_start < excluded.window_start THEN 1 ELSE api_rate_limits.request_count + 1 END, window_start = CASE WHEN api_rate_limits.window_start < excluded.window_start THEN excluded.window_start ELSE api_rate_limits.window_start END RETURNING request_count"
-  ).bind(key, windowStart).first();
-  if (result && result.request_count > limit) {
-    return { ok: false, status: 429, message: "Çok fazla istek gönderildi. Lütfen daha sonra tekrar deneyin." };
-  }
-  if (Math.random() < 0.02) {
-    await env.DB.prepare("DELETE FROM api_rate_limits WHERE window_start < ?").bind(now - 24 * 60 * 60 * 1000).run();
-  }
-  return { ok: true };
-}
-
 async function sendGmailNotification(env, submission) {
   const { GMAIL_CLIENT_ID, GMAIL_CLIENT_SECRET, GMAIL_REFRESH_TOKEN } = env;
   if (!GMAIL_CLIENT_ID || !GMAIL_CLIENT_SECRET || !GMAIL_REFRESH_TOKEN) {
@@ -100,8 +76,6 @@ async function sendGmailNotification(env, submission) {
 
 export async function onRequestPost({ request, env }) {
   if (!env.DB) return json({ error: "İletişim kayıt sistemi henüz yapılandırılmadı." }, 503);
-  const security = await enforceRequestSecurity(request, env, "contact", 5, 10 * 60 * 1000);
-  if (!security.ok) return json({ error: security.message }, security.status);
   if (!(request.headers.get("content-type") || "").includes("application/json")) {
     return json({ error: "Geçersiz istek biçimi." }, 415);
   }
@@ -109,8 +83,6 @@ export async function onRequestPost({ request, env }) {
   let data;
   try { data = await request.json(); }
   catch { return json({ error: "Gönderilen bilgiler okunamadı." }, 400); }
-
-  if (String(data.website || "").trim()) return json({ error: "Geçersiz form gönderimi." }, 400);
 
   const fullName = String(data.fullName || "").trim();
   const email = String(data.email || "").trim();
