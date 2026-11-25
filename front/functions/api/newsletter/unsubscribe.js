@@ -4,8 +4,8 @@ function htmlPage(title, message, body = "", status = 200) {
   return new Response(markup, { status, headers: { "Content-Type": "text/html; charset=utf-8", "Cache-Control": "no-store, max-age=0", "Referrer-Policy": "no-referrer" } });
 }
 async function makeToken(env, id, email) {
-  if (!env.BREVO_API_KEY) throw new Error("Unsubscribe signing key is not configured.");
-  const secret = env.NEWSLETTER_UNSUBSCRIBE_SECRET || env.BREVO_API_KEY;
+  if (!env.GMAIL_REFRESH_TOKEN) throw new Error("Unsubscribe signing key is not configured.");
+  const secret = env.NEWSLETTER_UNSUBSCRIBE_SECRET || env.GMAIL_REFRESH_TOKEN;
   const key = await crypto.subtle.importKey("raw", new TextEncoder().encode(secret), { name: "HMAC", hash: "SHA-256" }, false, ["sign"]);
   const data = "cagbas-newsletter-unsubscribe-v1:" + id + ":" + email.toLowerCase();
   const signature = await crypto.subtle.sign("HMAC", key, new TextEncoder().encode(data));
