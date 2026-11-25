@@ -940,10 +940,6 @@ section.cagbas-site-footer-content > div.cagbas-footer-bottom{position:static!im
       label.textContent = lang.toUpperCase();
       label.setAttribute('title', lang);
     });
-    document.querySelectorAll('#currentLang .langSelectorListNameFlag img').forEach(function (flag) {
-      flag.src = lang === 'en' ? '/_assets/images/en-flag.png' : '/_assets/images/tr-flag.png';
-      flag.alt = lang === 'en' ? 'English' : 'Türkçe';
-    });
     document.documentElement.lang = lang;
     document.documentElement.dir = 'ltr';
 
@@ -955,21 +951,29 @@ section.cagbas-site-footer-content > div.cagbas-footer-bottom{position:static!im
     });
   }
 
-  document.addEventListener('click', function (event) {
-    var link = event.target.closest && event.target.closest('.langSelectorListItem a');
-    if (!link) return;
-    var item = link.closest('.langSelectorListItem');
-    var language = item && item.getAttribute('data-lang');
-    if (language !== 'en' && language !== 'tr') return;
-    event.preventDefault();
-    event.stopPropagation();
-    setLanguage(language);
-  }, true);
+  // Expose a page-scoped handler so both desktop and mobile language links
+  // update these two paragraphs even if another navigation listener intercepts the click.
+  window.cagbasSetAboutIntroLanguage = setLanguage;
 
-  document.addEventListener('DOMContentLoaded', function () {
-    var selected = document.querySelector('.langSelectorListItem.selected');
-    if (selected) setLanguage(selected.getAttribute('data-lang'));
-  });
+  function bindAboutLanguageLinks() {
+    document.querySelectorAll('.langSelectorListItem a').forEach(function (link) {
+      if (link.dataset.aboutIntroBound === '1') return;
+      link.dataset.aboutIntroBound = '1';
+      link.addEventListener('click', function (event) {
+        var item = link.closest('.langSelectorListItem');
+        var language = item && item.getAttribute('data-lang');
+        if (language !== 'en' && language !== 'tr') return;
+        event.preventDefault();
+        event.stopImmediatePropagation();
+        setLanguage(language);
+      }, true);
+    });
+  }
+
+  bindAboutLanguageLinks();
+  document.addEventListener('DOMContentLoaded', bindAboutLanguageLinks);
+  var currentLabel = document.querySelector('#currentLang .langSelectorListNameLabel');
+  setLanguage(currentLabel && currentLabel.getAttribute('title') === 'en' ? 'en' : 'tr');
 })();
 </script>
 
