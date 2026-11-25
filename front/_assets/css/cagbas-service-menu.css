@@ -24,7 +24,7 @@
  .mobile-menu-links-wrapper li.cb-mobile-service-item>.cb-mobile-service-list a{min-height:40px!important;padding:9px 10px!important;border:0!important;color:#51445f!important;font-size:13px!important;font-weight:600!important}
  .mobile-menu-links-wrapper li.cb-mobile-service-item>.cb-mobile-service-list a:before{content:"—";color:#9a72cb;margin-right:9px}
  .mobile-menu-links-wrapper li.cb-mobile-service-item>.cb-mobile-service-list .cb-mobile-all-services{color:#6c35a5!important;font-weight:800!important}
- #prodNav.open>.cb-service-menu-panel{display:block;position:static;order:5;transform:none;width:100%;padding:13px;margin:0 0 8px;border-radius:12px;box-shadow:none}
+ #prodNav.open.cb-service-menu-open>.cb-service-menu-panel{display:block;position:static;order:5;transform:none;width:100%;padding:13px;margin:0 0 8px;border-radius:12px;box-shadow:none}
  #prodNav .cb-service-menu-grid{grid-template-columns:1fr 1fr}
  #prodNav .cb-service-menu-grid a{min-height:52px;font-size:11px;padding:9px}
  #prodNav .cb-service-menu-head span{display:none}
