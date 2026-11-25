@@ -196,6 +196,7 @@ html[dir="rtl"] .menu-bar-links{direction:rtl!important}
 <meta name="twitter:title" content="Hizmetlerimiz | ÇAĞBAŞ Creative Studio" />
 <meta name="twitter:description" content="Kurumsal web, e-ticaret, landing page, web uygulamaları, teknik destek, otomasyon, özel yazılım ve yönetim paneli çözümlerimizi keşfedin." />
 <meta name="twitter:image" content="https://www.cagbas.com/_assets/images/cagbas-share-card.svg?v=20261123-hero" />
+  <link rel="stylesheet" href="/_assets/css/cagbas-service-menu.css?v=20261125">
 </head>
     <body>
         <div class="container">
@@ -859,7 +860,8 @@ document.getElementById('cb-prod-cards').innerHTML=cardOrder.map(i=>{const s=ser
 function openDetail(i){const s=services[i];document.getElementById('cb-prod-dimg').src=detailImages[i];document.getElementById('cb-prod-dimg').alt=s.title+' detay görseli';document.getElementById('cb-prod-dmeta').textContent='ÇAĞBAŞ / HİZMET 0'+(i+1);document.getElementById('cb-prod-dtitle').textContent=s.title;document.getElementById('cb-prod-ddesc').textContent=s.desc;document.getElementById('cb-prod-df').innerHTML=s.features.map(x=>'<div class="cb-prod-detail-item"><b>'+x[0]+'</b><span>'+x[1]+'</span></div>').join('');document.getElementById('cb-prod-du').innerHTML=s.uses.map(x=>'<div class="cb-prod-detail-item"><b>'+x[0]+'</b><span>'+x[1]+'</span></div>').join('');document.getElementById('cb-prod-detail').classList.add('open');document.body.style.overflow='hidden'}function closeDetail(){document.getElementById('cb-prod-detail').classList.remove('open');document.body.style.overflow=''}
 function openServiceFromHash(){const m=location.hash.match(/^#cb-service-([0-7])$/);if(!m)return;const n=Number(m[1]);if(n>=0&&n<services.length){openDetail(n);const card=document.getElementById('cb-service-'+n);if(card)card.scrollIntoView({block:'center'});}}
 window.addEventListener('hashchange',openServiceFromHash);
-openServiceFromHash();</script></body>
+openServiceFromHash();</script><script src="/_assets/js/cagbas-service-menu.js?v=20261125" defer></script>
+</body>
 </html>
 
 
