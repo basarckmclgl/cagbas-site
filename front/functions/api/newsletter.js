@@ -73,7 +73,7 @@ async function sendGmailEmail(env, to, subjectText, htmlContent, textContent) {
     base64Utf8(htmlContent),
     "--" + boundary + "--"
   ].join("\r\n");
-  const raw = base64Utf8(mime).replace(/\\+/g, "-").replace(/\\//g, "_").replace(/=+$/g, "");
+  const raw = base64Utf8(mime).replaceAll("+", "-").replaceAll("/", "_").replace(/=+$/g, "");
   const sendResponse = await fetch("https://gmail.googleapis.com/gmail/v1/users/me/messages/send", {
     method: "POST",
     headers: {
