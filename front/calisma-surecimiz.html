@@ -59,8 +59,8 @@
 @media(max-width:760px){
 .process-map-section{padding-top:48px!important;padding-bottom:58px!important}
 .process-map{min-height:0;padding:8px 0 8px 5px;display:flex;flex-direction:column;gap:0}
-.process-map-line{left:32px;top:22px;width:36px;height:calc(100% - 40px);overflow:visible}
-.process-map-line path{stroke-width:4;stroke-dasharray:2 11}
+.process-map-line{display:none}
+.process-map:before{content:"";position:absolute;left:31px;top:88px;bottom:43px;width:3px;border-radius:4px;background:repeating-linear-gradient(to bottom,#a879ff 0 5px,transparent 5px 13px);opacity:.75}
 .process-map-center{position:relative;left:auto;top:auto;transform:none;width:100%;height:auto;min-height:72px;border-radius:16px;flex-direction:row;gap:12px;justify-content:flex-start;padding:13px 18px;margin:0 0 18px 0;box-shadow:0 5px 20px #50317a12}
 .process-map-center i{margin:0;font-size:22px}
 .process-map-center strong{font-size:13px}
