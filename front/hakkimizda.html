@@ -187,7 +187,6 @@ html[dir="rtl"] .menu-bar-links{direction:rtl!important}
 <meta name="twitter:title" content="Hakkımızda | ÇAĞBAŞ Creative Studio" />
 <meta name="twitter:description" content="ÇAĞBAŞ'ın web teknolojileri, dijital ürün geliştirme ve işletmelere özel yazılım çözümlerine yaklaşımını tanıyın." />
 <meta name="twitter:image" content="https://www.cagbas.com/_assets/images/cagbas-share-card.svg?v=20261123-hero" />
-  <link rel="stylesheet" href="/_assets/css/cagbas-service-menu.css?v=20261125">
 </head><style id="cb-about-page">
 :root{--ab-ink:#21182d;--ab-muted:#625a6c;--ab-purple:#7628c9;--ab-violet:#a54be8;--ab-lilac:#f1e7fb;--ab-paper:#fbf9fd;--ab-line:#e9def2}
 html,body{margin:0!important;background:#fff!important;color:var(--ab-ink);font-family:'Nunito',sans-serif;overflow-x:hidden}
@@ -569,8 +568,8 @@ html,body{margin:0!important;background:#fff!important;color:var(--ab-ink);font-
  <main>
   <div class="cb-about-main">
   <section class="cb-about-intro"><div><span class="cb-about-kicker">BİZ KİMİZ?</span><h2>İşletmenizi dijitalde büyüten akıllı çözümler.</h2></div><div>
-<p id="about-intro-copy-1"><strong>ÇAĞBAŞ</strong> olarak, işletmelerin dijital dünyadaki varlıklarını güçlendirmek ve operasyonel yüklerini hafifletmek amacıyla yola çıktık. Modern web teknolojilerini ve akıllı otomasyon sistemlerini bir araya getirerek; markalara yalnızca şık görünen web siteleri değil, arka planda kusursuz çalışan dijital sistemler inşa ediyoruz.</p>
-<p id="about-intro-copy-2">Her işletmenin işleyişinin ve hedeflerinin kendine özgü olduğuna inanıyoruz. Bu nedenle standart kalıpların dışına çıkıyor; kurumsal web sitelerinden e-ticaret altyapılarına, özel yönetim panellerinden iş süreçleri otomasyonuna kadar projelerimizi gerçek ihtiyaçlara göre şekillendiriyoruz.</p>
+<p><strong>ÇAĞBAŞ</strong> olarak, işletmelerin dijital dünyadaki varlıklarını güçlendirmek ve operasyonel yüklerini hafifletmek amacıyla yola çıktık. Modern web teknolojilerini ve akıllı otomasyon sistemlerini bir araya getirerek; markalara yalnızca şık görünen web siteleri değil, arka planda kusursuz çalışan dijital sistemler inşa ediyoruz.</p>
+<p>Her işletmenin işleyişinin ve hedeflerinin kendine özgü olduğuna inanıyoruz. Bu nedenle standart kalıpların dışına çıkıyor; kurumsal web sitelerinden e-ticaret altyapılarına, özel yönetim panellerinden iş süreçleri otomasyonuna kadar projelerimizi gerçek ihtiyaçlara göre şekillendiriyoruz.</p>
 </div></section>
   <section class="cb-about-purpose" aria-label="Misyon ve vizyon">
    <article class="cb-about-purpose-card"><div class="cb-about-purpose-head"><span class="cb-about-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.5"/><path d="m13 11 7-7m-4 0h4v4"/></svg></span><div><h3>Misyonumuz</h3><span class="cb-about-accent"></span></div></div><p>Markaların ihtiyaçlarına uygun, yaratıcı ve ölçülebilir dijital çözümler üretmek.</p></article>
@@ -916,69 +915,6 @@ section.cagbas-site-footer-content > div.cagbas-footer-bottom{position:static!im
  .cb-about-page .cb-about-value:nth-last-child(-n+2){border-bottom:0!important}
 }
 </style>
-
-<script id="cagbas-about-intro-language-fix">
-(function () {
-  var copy = {
-    first: {
-      tr: '<strong>ÇAĞBAŞ</strong> olarak, işletmelerin dijital dünyadaki varlıklarını güçlendirmek ve operasyonel yüklerini hafifletmek amacıyla yola çıktık. Modern web teknolojilerini ve akıllı otomasyon sistemlerini bir araya getirerek; markalara yalnızca şık görünen web siteleri değil, arka planda kusursuz çalışan dijital sistemler inşa ediyoruz.',
-      en: '<strong>At ÇAĞBAŞ</strong>, we set out to strengthen businesses’ presence in the digital world and ease their operational workload. By bringing modern web technologies and intelligent automation systems together, we build not only visually appealing websites for brands, but also seamless digital systems that work flawlessly behind the scenes.'
-    },
-    second: {
-      tr: 'Her işletmenin işleyişinin ve hedeflerinin kendine özgü olduğuna inanıyoruz. Bu nedenle standart kalıpların dışına çıkıyor; kurumsal web sitelerinden e-ticaret altyapılarına, özel yönetim panellerinden iş süreçleri otomasyonuna kadar projelerimizi gerçek ihtiyaçlara göre şekillendiriyoruz.',
-      en: 'We believe every business has its own way of operating and its own goals. That is why we go beyond standard templates and shape each project around real needs — from corporate websites and e-commerce infrastructure to custom management panels and business process automation.'
-    }
-  };
-
-  function setLanguage(language) {
-    var lang = language === 'en' ? 'en' : 'tr';
-    var first = document.getElementById('about-intro-copy-1');
-    var second = document.getElementById('about-intro-copy-2');
-    if (first) first.innerHTML = copy.first[lang];
-    if (second) second.textContent = copy.second[lang];
-
-    document.querySelectorAll('#currentLang .langSelectorListNameLabel').forEach(function (label) {
-      label.textContent = lang.toUpperCase();
-      label.setAttribute('title', lang);
-    });
-    document.documentElement.lang = lang;
-    document.documentElement.dir = 'ltr';
-
-    document.querySelectorAll('.langSelectorListItem').forEach(function (item) {
-      item.classList.toggle('selected', item.getAttribute('data-lang') === lang);
-    });
-    document.querySelectorAll('.langSelectorBody.open').forEach(function (menu) {
-      menu.classList.remove('open');
-    });
-  }
-
-  // Expose a page-scoped handler so both desktop and mobile language links
-  // update these two paragraphs even if another navigation listener intercepts the click.
-  window.cagbasSetAboutIntroLanguage = setLanguage;
-
-  function bindAboutLanguageLinks() {
-    document.querySelectorAll('.langSelectorListItem a').forEach(function (link) {
-      if (link.dataset.aboutIntroBound === '1') return;
-      link.dataset.aboutIntroBound = '1';
-      link.addEventListener('click', function (event) {
-        var item = link.closest('.langSelectorListItem');
-        var language = item && item.getAttribute('data-lang');
-        if (language !== 'en' && language !== 'tr') return;
-        event.preventDefault();
-        event.stopImmediatePropagation();
-        setLanguage(language);
-      }, true);
-    });
-  }
-
-  bindAboutLanguageLinks();
-  document.addEventListener('DOMContentLoaded', bindAboutLanguageLinks);
-  var currentLabel = document.querySelector('#currentLang .langSelectorListNameLabel');
-  setLanguage(currentLabel && currentLabel.getAttribute('title') === 'en' ? 'en' : 'tr');
-})();
-</script>
-
-<script src="/_assets/js/cagbas-service-menu.js?v=20261125" defer></script>
 </body></html>
 <style id="cagbas-mobile-navigation-final">
 @media(max-width:767px){
