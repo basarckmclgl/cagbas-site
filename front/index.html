@@ -972,7 +972,7 @@ html[dir="rtl"] .menu-bar-links{direction:rtl!important}
   }
 }
 </style></head>
-<body><a class="cb-skip-link" href="#page-title">İçeriğe geç</a>    <div class="container">
+<body><a class="cb-skip-link" href="#cb-home-v2-title">İçeriğe geç</a>    <div class="container">
 
         <div class="main-wrapper">
 
@@ -1052,7 +1052,7 @@ html[dir="rtl"] .menu-bar-links{direction:rtl!important}
 <section class="cb-home-hero" aria-labelledby="cb-home-v2-title">
   <div class="cb-home-hero__copy">
     <span class="cb-home-hero__eyebrow">Dijital Çözümler, Gerçek Sonuçlar</span>
-    <h1 id="cb-home-v2-title">Markanız İçin<br><em>Dijital Deneyimler</em> <span class="cb-home-title-tail">Üretiyoruz.</span></h1>
+    <h1 id="cb-home-v2-title" tabindex="-1">Markanız İçin<br><em>Dijital Deneyimler</em> <span class="cb-home-title-tail">Üretiyoruz.</span></h1>
     <p>Web tasarım, yazılım geliştirme ve dijital çözümlerle markanızı çevrimiçi dünyada güçlendiriyoruz.</p>
     <div class="cb-home-hero__actions"><a href="/hizmetlerimiz.html">Hizmetlerimizi İnceleyin <span>→</span></a><a class="secondary" href="/bize-ulasin.html">Projenizi Konuşalım <span>→</span></a></div>
   </div>
@@ -1263,26 +1263,21 @@ section.cagbas-site-footer-content > div.cagbas-footer-bottom{position:static!im
 
     <script>
         // Show the button when the user scrolls down 100px from the top of the document
-window.onscroll = function () {
-    scrollFunction();
-};
-
+const scrollToTopBtn = document.getElementById("scrollToTopBtn");
 function scrollFunction() {
-    const scrollToTopBtn = document.getElementById("scrollToTopBtn");
-    if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
-        scrollToTopBtn.style.display = "block";
-    } else {
-        scrollToTopBtn.style.display = "none";
-    }
+    if (!scrollToTopBtn) return;
+    const isScrolled = document.body.scrollTop > 100 || document.documentElement.scrollTop > 100;
+    scrollToTopBtn.style.display = isScrolled ? "block" : "none";
 }
+window.addEventListener("scroll", scrollFunction, { passive: true });
+scrollFunction();
 
 // Scroll to the top when the button is clicked
-document.getElementById("scrollToTopBtn").addEventListener("click", function () {
-    window.scrollTo({
-        top: 0,
-        behavior: 'smooth' // Smooth scroll to the top
+if (scrollToTopBtn) {
+    scrollToTopBtn.addEventListener("click", function () {
+        window.scrollTo({ top: 0, behavior: "smooth" });
     });
-});
+}
 
     </script>
 
