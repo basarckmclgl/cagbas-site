@@ -32,8 +32,62 @@ footer{background:#14101b;color:#d8d0de;padding:26px 0;font-size:12px}.foot{disp
  .site-head .nav.open .navlinks{display:flex!important;order:3!important;width:100%!important;flex-direction:column!important;align-items:stretch!important;padding:10px 0!important}
  .site-head .nav.open .navlinks a{padding:12px 8px!important;border-bottom:1px solid #eee9f2!important;color:#292432!important}
 }
+</style><style id="cb-process-shared-navigation">
+.menu-container{position:sticky!important;top:0!important;z-index:10000!important;width:100%!important;padding:12px 24px!important;background:#fff!important;box-sizing:border-box!important;border-bottom:1px solid #eee9f2!important}
+.menu-wrapper{display:flex!important;align-items:center!important;justify-content:space-between!important;gap:20px!important;width:min(1240px,100%)!important;min-height:78px!important;margin:0 auto!important;padding:10px 24px!important;background:#fff!important;border:1px solid #eee9f2!important;border-radius:18px!important;box-shadow:0 5px 20px rgba(25,18,35,.07)!important;box-sizing:border-box!important}
+.menu-logo{display:flex!important;align-items:center!important;flex:0 0 auto!important}
+.menu-logo img{display:block!important;width:120px!important;height:auto!important;max-height:42px!important;object-fit:contain!important}
+.menu-bar-links{display:flex!important;align-items:center!important;justify-content:center!important;gap:clamp(12px,1.8vw,26px)!important;flex:1 1 auto!important}
+.menu-bar-links a{color:#292331!important;white-space:nowrap!important;font-size:13px!important;font-weight:800!important;text-decoration:none!important}
+.menu-bar-links a:hover,.menu-bar-links a[aria-current=page]{color:#7851a5!important}
+.menu-bar-links a[aria-current=page]{border-bottom:2px solid #7851a5!important;padding:10px 0!important}
+.mobile-menu-container,.mobile-menu-links-wrapper{display:none}
+.foot{display:flex;align-items:center;justify-content:space-between;gap:20px}
+.foot img{display:block!important;width:150px!important;height:auto!important;max-height:48px!important;object-fit:contain!important;background:#fff!important;border-radius:6px!important;padding:6px!important}
+@media(max-width:760px){
+ .menu-container{padding:8px 10px!important}
+ .menu-wrapper{display:none!important}
+ .mobile-menu-container{display:flex!important;align-items:center!important;justify-content:space-between!important;min-height:62px!important;padding:8px 15px!important;background:#fff!important;border:1px solid #eee9f2!important;border-radius:16px!important;box-shadow:0 5px 18px rgba(25,18,35,.06)!important}
+ .mobile-menu-container .menu-logo img{width:112px!important;max-height:38px!important}
+ .mobile-menu-icon-wrapper{display:flex!important;width:42px!important;height:42px!important;align-items:center!important;justify-content:center!important;cursor:pointer!important}
+ .cagbas-hamburger-lines{display:flex!important;flex-direction:column!important;gap:5px!important}
+ .cagbas-hamburger-lines span{display:block!important;width:24px!important;height:2px!important;background:#292331!important;border-radius:2px!important}
+ .mobile-menu-links-wrapper{display:none;position:absolute!important;top:calc(100% - 2px)!important;left:10px!important;right:10px!important;padding:8px 16px 14px!important;background:#fff!important;border:1px solid #eee9f2!important;border-top:0!important;border-radius:0 0 16px 16px!important;box-shadow:0 12px 22px rgba(25,18,35,.10)!important;z-index:10001!important}
+ .mobile-menu-links-wrapper.open{display:block!important}
+ .mobile-menu-links-wrapper ul{list-style:none!important;padding:0!important;margin:0!important}
+ .mobile-menu-links-wrapper li{margin:0!important;padding:0!important}
+ .mobile-menu-links-wrapper a{display:flex!important;align-items:center!important;min-height:48px!important;padding:10px 4px!important;border-bottom:1px solid #eee9f2!important;color:#292331!important;font-size:14px!important;font-weight:800!important}
+ .mobile-menu-links-wrapper a[aria-current=page]{color:#7851a5!important}
+ .foot{flex-direction:column!important;text-align:center!important;padding:20px 0!important}
+}
 </style></head><body>
-<header class="site-head"><div class="wrap nav" id="prodNav"><a class="logo" href="/index.html"><img src="/_assets/images/cagbas-logo.svg" alt="ÇAĞBAŞ"></a><nav class="navlinks" aria-label="Ana menü"><a href="/index.html">Ana Sayfa</a><a href="/hakkimizda.html">Hakkımızda</a><a href="/hizmetlerimiz.html">Hizmetlerimiz</a><a href="/calisma-surecimiz.html" aria-current="page">Çalışma Sürecimiz</a><a href="/bize-ulasin.html">İletişim</a></nav><button class="mobile-toggle" type="button" aria-label="Menüyü aç" aria-expanded="false" onclick="var n=document.getElementById('prodNav');n.classList.toggle('open');this.setAttribute('aria-expanded',n.classList.contains('open'))">☰</button></div></header>
+<div class="menu-container">
+  <div class="menu-wrapper">
+    <a href="/index.html" class="menu-logo"><img src="/_assets/images/cagbas-logo.svg" width="120" alt="ÇAĞBAŞ"></a>
+    <div class="menu-bar-links">
+      <a href="/index.html" class="btn-2" id="ana-sayfa">Ana Sayfa</a>
+      <a href="/hakkimizda.html" class="btn-2" id="hakkimizda">Hakkımızda</a>
+      <a href="/hizmetlerimiz.html" class="btn-2" id="hizmetlerimiz">Hizmetlerimiz</a>
+      <a href="/calisma-surecimiz.html" class="btn-2" id="calisma-surecimiz" aria-current="page">Çalışma Sürecimiz</a>
+      <a href="/bize-ulasin.html" class="btn-2" id="bize-ulasin">İletişim</a>
+    </div>
+  </div>
+  <div class="mobile-menu-container">
+    <div class="mobile-menu-icon-wrapper" id="menu-icon" role="button" tabindex="0" aria-label="Menüyü aç">
+      <span class="cagbas-hamburger-lines" aria-hidden="true"><span></span><span></span><span></span></span>
+    </div>
+    <a class="menu-logo" href="/index.html"><img src="/_assets/images/cagbas-logo.svg" width="120" height="35" alt="ÇAĞBAŞ"></a>
+  </div>
+  <div class="mobile-menu-links-wrapper">
+    <ul>
+      <li><a href="/index.html">Ana Sayfa</a></li>
+      <li><a href="/hakkimizda.html">Hakkımızda</a></li>
+      <li><a href="/hizmetlerimiz.html">Hizmetlerimiz</a></li>
+      <li><a href="/calisma-surecimiz.html" aria-current="page">Çalışma Sürecimiz</a></li>
+      <li><a href="/bize-ulasin.html">İletişim</a></li>
+    </ul>
+  </div>
+</div>
 <main><section class="hero"><div class="wrap hero-inner"><div><span class="eyebrow">ÇAĞBAŞ / ÇALIŞMA SÜRECİMİZ</span><h1>Fikirden sonuca,<br><em>birlikte.</em></h1><p>Her başarılı dijital çözüm, doğru soruları sormakla başlar. İhtiyaçlarınızı anlamaktan tasarım ve geliştirmeye, test aşamasından yayına kadar her adımı planlı, şeffaf ve iş birliğine dayalı bir yaklaşımla yürütüyoruz.</p><div class="hero-actions"><a href="/bize-ulasin.html">Projeni Başlat ↗</a><a class="alt" href="/hizmetlerimiz.html">Hizmetlerimizi İncele</a></div></div><div class="hero-logo-wrap"><img src="/_assets/images/cagbas-logo.svg" alt="ÇAĞBAŞ Creative Studio"></div></div></section>
 <section class="section"><div class="wrap"><div class="section-head"><span class="kicker">YAKLAŞIMIMIZ</span><h2>Sadece üretmiyor, doğru çözümü birlikte geliştiriyoruz.</h2><p>Her işletmenin hedefleri, ihtiyaçları ve çalışma biçimi farklıdır. Bu nedenle hazır kalıpları uygulamak yerine projenin ihtiyaçlarını analiz ediyor, doğru stratejiyi belirliyor ve her aşamada amaca uygun çözümler geliştiriyoruz.</p></div>
 <div class="process-map" aria-label="Altı aşamalı çalışma süreci haritası"><svg class="route" viewBox="0 0 1000 590" preserveAspectRatio="none" aria-hidden="true"><path class="glow" d="M145 105 C300 15 420 45 500 115 S780 200 855 105 C960 250 950 370 855 475 C730 570 590 560 500 475 S240 385 145 475"/><path d="M145 105 C300 15 420 45 500 115 S780 200 855 105 C960 250 950 370 855 475 C730 570 590 560 500 475 S240 385 145 475"/></svg>
@@ -49,4 +103,4 @@ footer{background:#14101b;color:#d8d0de;padding:26px 0;font-size:12px}.foot{disp
 <div class="principle"><i>◌</i><h3>Şeffaf İletişim</h3><p>Sürecin her aşamasında açık ve anlaşılır iletişim kuruyoruz.</p></div><div class="principle"><i>◎</i><h3>İhtiyaca Özel Çözümler</h3><p>Her projeyi kendi hedefleri ve gereksinimleri doğrultusunda ele alıyoruz.</p></div><div class="principle"><i>◇</i><h3>Kontrollü İlerleme</h3><p>Çalışmaları belirlenen kapsam ve onay adımlarıyla yürütüyoruz.</p></div><div class="principle"><i>↗</i><h3>Sürdürülebilir Yaklaşım</h3><p>Bugünün ihtiyaçları kadar gelecekteki gelişim olanaklarını da dikkate alıyoruz.</p></div></div></div></section>
 <section class="wrap"><div class="bottom-cta"><h2>Birlikte başlayalım.</h2><p>Aklınızdaki fikri, işletmenizin ihtiyacını veya geliştirmek istediğiniz dijital projeyi bizimle paylaşın. Size uygun çalışma sürecini birlikte şekillendirelim.</p><a class="cta-btn" href="/bize-ulasin.html">Projenizi Konuşalım ↗</a></div></section></main>
 <footer><div class="wrap foot"><img src="/_assets/images/cagbas-logo.svg" alt="ÇAĞBAŞ"><span>© 2026 ÇAĞBAŞ Creative Studio. Tüm hakları saklıdır.</span><a href="/yasal-bilgilendirme.html">Yasal Bilgilendirme</a></div></footer>
-</body></html>
+<script src="/_assets/js/jquery-3.4.1.min.js"></script><script src="/_assets/js/main.js"></script><script>document.addEventListener("DOMContentLoaded",function(){var t=document.getElementById("menu-icon");var m=document.querySelector(".mobile-menu-links-wrapper");if(t&&m){t.addEventListener("click",function(){m.classList.toggle("open")});t.addEventListener("keydown",function(e){if(e.key==="Enter"||e.key===" "){e.preventDefault();m.classList.toggle("open")}})}});</script></body></html>
