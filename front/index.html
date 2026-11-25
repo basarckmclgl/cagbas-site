@@ -1303,35 +1303,11 @@ document.getElementById("scrollToTopBtn").addEventListener("click", function () 
 
     <script>
         $(document).ready(function () {
-            var UPswiper = new Swiper('.main-slider-container');
-            var LDswiper = new Swiper('.left-down-swiper-container', {
-                pagination: {
-                    el: '.swiper-pagination',
-                    type: 'progressbar',
-                },
-
-                navigation: {
-                    nextEl: '.swiper-button-next',
-                    prevEl: '.swiper-button-prev',
-                },
-            });
-            UPswiper.controller.control = LDswiper;
-            LDswiper.controller.control = UPswiper;
+            var mainSlider = document.querySelector('.main-slider-container');
+            if (mainSlider && typeof Swiper !== 'undefined') {
+                new Swiper(mainSlider);
+            }
         });
-
-    </script>
-
-
-    <script>
-        document.querySelector('.langSelectorHeader').addEventListener('click', function(event) {
-    // Olayın sayfa yenilemesini engelle
-    event.preventDefault();
-
-    // Dropdown'un açılma/kapanma işlevini burada ekle
-    const langSelectorBody = document.querySelector('.langSelectorBody');
-    langSelectorBody.classList.toggle('open'); // Aç/kapa işlemi için 'open' class'ını kullan
-});
-
     </script>
 
 
