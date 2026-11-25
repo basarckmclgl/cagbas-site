@@ -201,7 +201,7 @@ html[dir="rtl"] .menu-bar-links{direction:rtl!important}
 .cb-prod-mega-card b{font-size:11px;color:#c5a0ce}.cb-prod-mega-card strong{display:block;font-size:14px;color:#fff;margin-bottom:4px}.cb-prod-mega-card small{display:block;color:#c9c1cf;font-size:11px;line-height:1.4}.cb-prod-mega-card i{font-style:normal;color:#d0b1d8}
 .cb-prod-mega-foot{display:flex;justify-content:flex-end;margin-top:16px}
 .cb-prod-mega-cta{padding:11px 20px;border-radius:25px;background:linear-gradient(100deg,#624078,#9863a7);color:white!important;font-size:12px;font-weight:800;text-decoration:none!important}
-.cb-prod-mega-trigger:after{content:"⌄";margin-left:6px;color:#c9a8d0}
+
 @media(max-width:767px){.cb-prod-mega{display:none!important}}
 </style>
 </head><style id="cb-about-page">
@@ -934,30 +934,7 @@ section.cagbas-site-footer-content > div.cagbas-footer-bottom{position:static!im
 </style>
 <script src="/_assets/js/cagbas-inner-pages-i18n.js?v=20261125-1" defer></script>
 <script id="cb-mega-production-js">
-(function(){
-function setup(){
- var root=document.querySelector('.menu-container');if(!root||root.querySelector('.cb-prod-mega'))return;
- var trigger=root.querySelector('.menu-bar-links a[href="/hizmetlerimiz.html"]');if(!trigger)return;
- var links=[
- ['/index.html','01','Ana Sayfa','Stüdyomuzu ve dijital yaklaşımımızı keşfedin.'],
- ['/hakkimizda.html','02','Hakkımızda','Yaklaşımımızı ve yaratıcı bakış açımızı tanıyın.'],
- ['/hizmetlerimiz.html','03','Hizmetlerimiz','Dijital tasarım ve geliştirme hizmetlerimizi inceleyin.'],
- ['/calisma-surecimiz.html','04','Çalışma Sürecimiz','Fikirden teslim aşamasına uzanan adımlarımızı görün.'],
- ['/bize-ulasin.html','05','İletişim','Hedeflerinizi ve projenizi bizimle paylaşın.']
- ];
- var panel=document.createElement('section');panel.className='cb-prod-mega';panel.setAttribute('aria-label','Ana menü');
- panel.innerHTML='<div class="cb-prod-mega-head"><strong>ÇAĞBAŞ<span>.</span></strong><small>Dijital dünyada yaratıcı çözüm ortağınız.</small></div><div class="cb-prod-mega-grid">'+links.map(function(x){return '<a class="cb-prod-mega-card" href="'+x[0]+'"><b>'+x[1]+'</b><span><strong>'+x[2]+'</strong><small>'+x[3]+'</small></span><i>↗</i></a>'}).join('')+'</div><div class="cb-prod-mega-foot"><a class="cb-prod-mega-cta" href="/bize-ulasin.html">PROJENİ BAŞLAT ↗</a></div>';
- root.appendChild(panel);trigger.classList.add('cb-prod-mega-trigger');trigger.setAttribute('aria-haspopup','true');trigger.setAttribute('aria-expanded','false');
- function open(){panel.classList.add('is-open');trigger.setAttribute('aria-expanded','true')}
- function close(){panel.classList.remove('is-open');trigger.setAttribute('aria-expanded','false')}
- trigger.addEventListener('mouseenter',open);trigger.addEventListener('focus',open);
- trigger.addEventListener('click',function(e){e.preventDefault();panel.classList.contains('is-open')?close():open()});
- root.addEventListener('mouseleave',close);panel.addEventListener('mouseenter',open);
- document.addEventListener('keydown',function(e){if(e.key==='Escape')close()});
- document.addEventListener('click',function(e){if(!root.contains(e.target))close()});
-}
-if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',setup);else setup();
-})();
+;
 </script>
 </body></html>
 <style id="cagbas-mobile-navigation-final">
