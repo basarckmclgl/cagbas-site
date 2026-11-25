@@ -80,6 +80,9 @@
   const metaEN = "ÇAĞBAŞ Creative Studio provides web design, graphic design, social media management and digital marketing solutions for brands.";
   const titleEN = "ÇAĞBAŞ Creative Studio | Web Design and Digital Solutions";
 
+  const servicesIntroTR = "Markanızın dijital ihtiyaçlarını sekiz ayrı uzmanlık alanında ele alıyoruz. Tanıtım ve satış sitelerinden başvuru sistemlerine; kullanıcı odaklı web uygulamalarından işletmenize özel yazılımlara kadar her çözümü kendi amacına göre tasarlıyoruz. Yayındaki sitenizin sürekliliğini sağlıyor, iç operasyonlarınızı yönetim panelleri ve otomasyonlarla kolaylaştırıyoruz.";
+  const servicesIntroEN = "We address your brand’s digital needs across eight specialist service areas. From brand and sales websites to application systems, and from user-focused web applications to custom business software, we design each solution for its purpose. We keep your website running smoothly and simplify internal operations with management panels and automation.";
+
   function applyLanguage(lang) {
     const english = lang === "en";
     const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
@@ -96,6 +99,8 @@
         if (reverse) node.nodeValue = raw.replace(trimmed, reverse[0]);
       }
     });
+    const servicesIntro = document.getElementById("cb-home-services-description");
+    if (servicesIntro) servicesIntro.textContent = english ? servicesIntroEN : servicesIntroTR;
     document.documentElement.lang = english ? "en" : "tr";
     document.documentElement.dir = "ltr";
     document.title = english ? titleEN : originalTitle;
