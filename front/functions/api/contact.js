@@ -1,3 +1,7 @@
+const BREVO_API_URL = "https://api.brevo.com/v3/smtp/email";
+const SENDER_EMAIL = "cagbas.2026@gmail.com";
+const RECIPIENT_EMAIL = "cagbas.2026@gmail.com";
+
 function json(data, status = 200) {
   return new Response(JSON.stringify(data), {
     status,
@@ -5,77 +9,15 @@ function json(data, status = 200) {
   });
 }
 
-function base64Utf8(value) {
-  const bytes = new TextEncoder().encode(value);
-  let binary = "";
-  for (let i = 0; i < bytes.length; i += 0x8000) {
-    binary += String.fromCharCode(...bytes.subarray(i, i + 0x8000));
-  }
-  return btoa(binary);
-}
-
-async function sendGmailNotification(env, submission) {
-  const { GMAIL_CLIENT_ID, GMAIL_CLIENT_SECRET, GMAIL_REFRESH_TOKEN } = env;
-  if (!GMAIL_CLIENT_ID || !GMAIL_CLIENT_SECRET || !GMAIL_REFRESH_TOKEN) {
-    throw new Error("Gmail secrets are not fully configured.");
-  }
-
-  const tokenResponse = await fetch("https://oauth2.googleapis.com/token", {
-    method: "POST",
-    headers: { "Content-Type": "application/x-www-form-urlencoded" },
-    body: new URLSearchParams({
-      client_id: GMAIL_CLIENT_ID,
-      client_secret: GMAIL_CLIENT_SECRET,
-      refresh_token: GMAIL_REFRESH_TOKEN,
-      grant_type: "refresh_token"
-    })
-  });
-  const tokenData = await tokenResponse.json();
-  if (!tokenResponse.ok || !tokenData.access_token) {
-    throw new Error("Gmail access token refresh failed: " + (tokenData.error || tokenResponse.status));
-  }
-
-  const recipient = "cagbas.2026@gmail.com";
-  const subject = "=?UTF-8?B?" + base64Utf8("Yeni İletişim Formu: " + submission.subject) + "?=";
-  const body = [
-    "Web sitesinden yeni bir iletişim formu gönderildi.",
-    "",
-    "Ad Soyad: " + submission.fullName,
-    "E-posta: " + submission.email,
-    "Telefon: " + submission.phone,
-    "Konu: " + submission.subject,
-    "",
-    "Mesaj:",
-    submission.message
-  ].join("\r\n");
-  const mime = [
-    "To: " + recipient,
-    "From: " + recipient,
-    "Subject: " + subject,
-    "MIME-Version: 1.0",
-    "Content-Type: text/plain; charset=UTF-8",
-    "Content-Transfer-Encoding: base64",
-    "",
-    base64Utf8(body)
-  ].join("\r\n");
-  const raw = base64Utf8(mime).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/g, "");
-
-  const sendResponse = await fetch("https://gmail.googleapis.com/gmail/v1/users/me/messages/send", {
-    method: "POST",
-    headers: {
-      "Authorization": "Bearer " + tokenData.access_token,
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({ raw })
-  });
-  if (!sendResponse.ok) {
-    const detail = await sendResponse.text();
-    throw new Error("Gmail send failed: " + sendResponse.status + " " + detail.slice(0, 300));
-  }
+function escapeHtml(value) {
+  return value.replace(/[&<>"']/g, (char) => ({
+    "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
+  })[char]);
 }
 
 export async function onRequestPost({ request, env }) {
   if (!env.DB) return json({ error: "İletişim kayıt sistemi henüz yapılandırılmadı." }, 503);
+  if (!env.BREVO_API_KEY) return json({ error: "E-posta hizmeti henüz yapılandırılmadı." }, 503);
   if (!(request.headers.get("content-type") || "").includes("application/json")) {
     return json({ error: "Geçersiz istek biçimi." }, 415);
   }
@@ -109,15 +51,75 @@ export async function onRequestPost({ request, env }) {
     return json({ error: "Mesajınız şu anda kaydedilemedi. Lütfen daha sonra tekrar deneyin." }, 500);
   }
 
+  const safeName = escapeHtml(fullName);
+  const safeEmail = escapeHtml(email);
+  const safePhone = escapeHtml(phone);
+  const safeSubject = escapeHtml(subject);
+  const safeMessage = escapeHtml(message).replace(/\r?\n/g, "<br>");
+
+  const payload = {
+    sender: { name: "ÇAĞBAŞ Creative Studio", email: SENDER_EMAIL },
+    to: [{ email: RECIPIENT_EMAIL, name: "ÇAĞBAŞ Creative Studio" }],
+    replyTo: { email, name: fullName },
+    subject: "Yeni İletişim Formu: " + subject,
+    textContent: [
+      "Web sitesinden yeni bir iletişim formu gönderildi.",
+      "",
+      "Ad Soyad: " + fullName,
+      "E-posta: " + email,
+      "Telefon: " + phone,
+      "Konu: " + subject,
+      "",
+      "Mesaj:",
+      message
+    ].join("\n"),
+    htmlContent:
+      "<h2>ÇAĞBAŞ web sitesi iletişim formu</h2>" +
+      "<p><strong>Ad Soyad:</strong> " + safeName + "</p>" +
+      "<p><strong>E-posta:</strong> " + safeEmail + "</p>" +
+      "<p><strong>Telefon:</strong> " + safePhone + "</p>" +
+      "<p><strong>Konu:</strong> " + safeSubject + "</p>" +
+      "<p><strong>Mesaj:</strong><br>" + safeMessage + "</p>"
+  };
+
   try {
-    await sendGmailNotification(env, { fullName, email, phone, subject, message });
+    const brevoResponse = await fetch(BREVO_API_URL, {
+      method: "POST",
+      headers: {
+        "accept": "application/json",
+        "api-key": env.BREVO_API_KEY,
+        "content-type": "application/json"
+      },
+      body: JSON.stringify(payload)
+    });
+
+    if (!brevoResponse.ok) {
+      const details = await brevoResponse.text();
+      console.error("Brevo API error:", brevoResponse.status, details.slice(0, 1000));
+      return json({
+        success: true,
+        emailNotification: "failed",
+        error: "Mesajınız kaydedildi ancak Brevo e-posta gönderimini kabul etmedi (HTTP " + brevoResponse.status + ")."
+      }, 201);
+    }
+
+    const result = await brevoResponse.json();
+    if (!result.messageId) {
+      console.error("Brevo response missing messageId:", JSON.stringify(result).slice(0, 500));
+      return json({
+        success: true,
+        emailNotification: "failed",
+        error: "Mesajınız kaydedildi ancak e-posta gönderimi doğrulanamadı."
+      }, 201);
+    }
+
     return json({ success: true, emailNotification: "sent", message: "Mesajınız başarıyla gönderildi." }, 201);
   } catch (error) {
-    console.error("Contact email notification error:", error);
+    console.error("Brevo request failed:", error);
     return json({
       success: true,
       emailNotification: "failed",
-      message: "Mesajınız kaydedildi. E-posta bildirimi şu anda gönderilemedi."
+      error: "Mesajınız kaydedildi ancak Brevo e-posta hizmetine ulaşılamadı."
     }, 201);
   }
 }
