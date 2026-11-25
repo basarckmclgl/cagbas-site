@@ -938,6 +938,39 @@ html[dir="rtl"] .menu-bar-links{direction:rtl!important}
 .cb-map-service-intro p{
   text-shadow:0 1px 5px rgba(0,0,0,.22)!important;
 }
+</style><style id="cb-home-remove-black-panel-final">
+/* HOME HERO: remove the dark rectangle/panel behind the headline, including mobile overrides */
+.banner-slider-wrapper::before,
+.banner-slider-wrapper::after,
+.banner-slider-wrapper:before,
+.banner-slider-wrapper:after {
+  content: none !important;
+  display: none !important;
+  background: transparent !important;
+  opacity: 0 !important;
+}
+.cb-map-service-intro,
+.cb-map-service-intro::before,
+.cb-map-service-intro::after {
+  background: transparent !important;
+  background-color: transparent !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+  border: 0 !important;
+  border-color: transparent !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+@media (max-width: 767px) {
+  .cb-map-service-intro {
+    background: transparent !important;
+    background-color: transparent !important;
+    border: 0 !important;
+    box-shadow: none !important;
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
+  }
+}
 </style></head>
 <body><a class="cb-skip-link" href="#page-title">İçeriğe geç</a>    <div class="container">
 
