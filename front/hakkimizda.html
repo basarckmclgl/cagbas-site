@@ -918,60 +918,57 @@ section.cagbas-site-footer-content > div.cagbas-footer-bottom{position:static!im
 
 <script id="cagbas-about-intro-language-fix">
 (function () {
-  var translations = {
-    "about-intro-copy-1": {
+  var copy = {
+    first: {
       tr: '<strong>ÇAĞBAŞ</strong> olarak, işletmelerin dijital dünyadaki varlıklarını güçlendirmek ve operasyonel yüklerini hafifletmek amacıyla yola çıktık. Modern web teknolojilerini ve akıllı otomasyon sistemlerini bir araya getirerek; markalara yalnızca şık görünen web siteleri değil, arka planda kusursuz çalışan dijital sistemler inşa ediyoruz.',
       en: '<strong>At ÇAĞBAŞ</strong>, we set out to strengthen businesses’ presence in the digital world and ease their operational workload. By bringing modern web technologies and intelligent automation systems together, we build not only visually appealing websites for brands, but also seamless digital systems that work flawlessly behind the scenes.'
     },
-    "about-intro-copy-2": {
+    second: {
       tr: 'Her işletmenin işleyişinin ve hedeflerinin kendine özgü olduğuna inanıyoruz. Bu nedenle standart kalıpların dışına çıkıyor; kurumsal web sitelerinden e-ticaret altyapılarına, özel yönetim panellerinden iş süreçleri otomasyonuna kadar projelerimizi gerçek ihtiyaçlara göre şekillendiriyoruz.',
       en: 'We believe every business has its own way of operating and its own goals. That is why we go beyond standard templates and shape each project around real needs — from corporate websites and e-commerce infrastructure to custom management panels and business process automation.'
     }
   };
 
-  function applyLanguage() {
-    var labels = document.querySelectorAll('#currentLang .langSelectorListNameLabel');
-    if (!labels.length) return;
-    var language = Array.prototype.some.call(labels, function (label) {
-      return label.textContent.trim().toLowerCase() === 'en';
-    }) ? 'en' : 'tr';
+  function setLanguage(language) {
+    var lang = language === 'en' ? 'en' : 'tr';
+    var first = document.getElementById('about-intro-copy-1');
+    var second = document.getElementById('about-intro-copy-2');
+    if (first) first.innerHTML = copy.first[lang];
+    if (second) second.textContent = copy.second[lang];
 
-    Object.keys(translations).forEach(function (id) {
-      var element = document.getElementById(id);
-      if (element) element.innerHTML = translations[id][language];
+    document.querySelectorAll('#currentLang .langSelectorListNameLabel').forEach(function (label) {
+      label.textContent = lang.toUpperCase();
+      label.setAttribute('title', lang);
+    });
+    document.querySelectorAll('#currentLang .langSelectorListNameFlag img').forEach(function (flag) {
+      flag.src = lang === 'en' ? '/_assets/images/en-flag.png' : '/_assets/images/tr-flag.png';
+      flag.alt = lang === 'en' ? 'English' : 'Türkçe';
+    });
+    document.documentElement.lang = lang;
+    document.documentElement.dir = 'ltr';
+
+    document.querySelectorAll('.langSelectorListItem').forEach(function (item) {
+      item.classList.toggle('selected', item.getAttribute('data-lang') === lang);
+    });
+    document.querySelectorAll('.langSelectorBody.open').forEach(function (menu) {
+      menu.classList.remove('open');
     });
   }
 
+  document.addEventListener('click', function (event) {
+    var link = event.target.closest && event.target.closest('.langSelectorListItem a');
+    if (!link) return;
+    var item = link.closest('.langSelectorListItem');
+    var language = item && item.getAttribute('data-lang');
+    if (language !== 'en' && language !== 'tr') return;
+    event.preventDefault();
+    event.stopPropagation();
+    setLanguage(language);
+  }, true);
+
   document.addEventListener('DOMContentLoaded', function () {
-    applyLanguage();
-    var currentLabels = document.querySelectorAll('#currentLang');
-    currentLabels.forEach(function (label) {
-      new MutationObserver(applyLanguage).observe(label, {
-        childList: true,
-        subtree: true,
-        characterData: true
-      });
-    });
-    document.querySelectorAll('.langSelectorListItem a').forEach(function (link) {
-      link.addEventListener('click', function () {
-        var selected = this.querySelector('.langSelectorListNameLabel');
-        if (!selected) return;
-        var language = selected.getAttribute('title');
-        if (language === 'en') {
-          document.querySelectorAll('#currentLang .langSelectorListNameLabel').forEach(function (label) {
-            label.textContent = 'EN';
-            label.setAttribute('title', 'en');
-          });
-          applyLanguage();
-        } else if (language === 'tr') {
-          document.querySelectorAll('#currentLang .langSelectorListNameLabel').forEach(function (label) {
-            label.textContent = 'TR';
-            label.setAttribute('title', 'tr');
-          });
-          applyLanguage();
-        }
-      });
-    });
+    var selected = document.querySelector('.langSelectorListItem.selected');
+    if (selected) setLanguage(selected.getAttribute('data-lang'));
   });
 })();
 </script>
