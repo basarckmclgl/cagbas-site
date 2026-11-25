@@ -60,14 +60,17 @@ async function sendGmailNotification(env, submission) {
   }
 
   const recipient = "cagbas.2026@gmail.com";
-  const subject = "=?UTF-8?B?" + base64Utf8("ÇAĞBAŞ: Yeni iletişim talebi") + "?=";
-  // Minimize personal data sent to the free Gmail mailbox: no name, email,
-  // phone, subject text, message content, record ID, or direct record URL.
+  const subject = "=?UTF-8?B?" + base64Utf8("Yeni İletişim Formu: " + submission.subject) + "?=";
   const body = [
-    "ÇAĞBAŞ web sitesine yeni bir iletişim talebi ulaştı.",
+    "Web sitesinden yeni bir iletişim formu gönderildi.",
     "",
-    "Başvuru tarihi: " + new Date().toISOString(),
-    "Kayıt, yetkili erişimi olan güvenli yönetim kanalından kontrol edilmelidir."
+    "Ad Soyad: " + submission.fullName,
+    "E-posta: " + submission.email,
+    "Telefon: " + submission.phone,
+    "Konu: " + submission.subject,
+    "",
+    "Mesaj:",
+    submission.message
   ].join("\r\n");
   const mime = [
     "To: " + recipient,
