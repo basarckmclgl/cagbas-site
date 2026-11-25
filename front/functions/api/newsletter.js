@@ -48,32 +48,24 @@ async function sendGmailEmail(env, to, subjectText, htmlContent, textContent) {
   });
   const tokenData = await tokenResponse.json();
   if (!tokenResponse.ok || !tokenData.access_token) {
+    console.error("Gmail newsletter token refresh failed:", tokenResponse.status, tokenData.error || "no_access_token");
     throw new Error("Gmail access token refresh failed: " + (tokenData.error || tokenResponse.status));
   }
 
   const sender = "cagbas.2026@gmail.com";
   const subject = "=?UTF-8?B?" + base64Utf8(subjectText) + "?=";
-  const boundary = "cagbas_" + crypto.randomUUID().replace(/-/g, "");
   const mime = [
     "To: " + to,
     "From: " + sender,
     "Subject: " + subject,
     "MIME-Version: 1.0",
-    'Content-Type: multipart/alternative; boundary="' + boundary + '"',
-    "",
-    "--" + boundary,
-    'Content-Type: text/plain; charset="UTF-8"',
+    "Content-Type: text/plain; charset=UTF-8",
     "Content-Transfer-Encoding: base64",
     "",
-    base64Utf8(textContent),
-    "--" + boundary,
-    'Content-Type: text/html; charset="UTF-8"',
-    "Content-Transfer-Encoding: base64",
-    "",
-    base64Utf8(htmlContent),
-    "--" + boundary + "--"
+    base64Utf8(textContent)
   ].join("\r\n");
-  const raw = base64Utf8(mime).replaceAll("+", "-").replaceAll("/", "_").replace(/=+$/g, "");
+  const raw = base64Utf8(mime).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/g, "");
+
   const sendResponse = await fetch("https://gmail.googleapis.com/gmail/v1/users/me/messages/send", {
     method: "POST",
     headers: {
