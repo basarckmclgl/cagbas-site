@@ -184,12 +184,18 @@ body{background:#f5f6fa;color:var(--text)}
  </section>
  <section class="page" id="ads">
   <div class="card" style="margin-bottom:16px">
-   <div class="crud-head"><h2>Google AdSense bağlantısı</h2><span class="status pending">Bağlantı bekliyor</span></div>
-   <p class="muted" style="font-size:13px;margin:0 0 14px">ÇAĞBAŞ AdSense hesabını güvenli Google yetkilendirmesiyle bağla. Bağlantı tamamlandığında rapor entegrasyonu üzerinden gerçek performans verileri alınabilecek.</p>
-   <div class="actions"><button class="btn primary" type="button" id="connectAdsenseBtn">Google AdSense'i bağla</button></div>
-   <p class="hint" style="margin:12px 0 0">Yalnızca salt okunur AdSense erişimi istenir. Gelir veya gösterim verisi henüz alınmıyor.</p>
+   <div class="crud-head"><h2>Google AdSense bağlantısı</h2><span class="status pending" id="adsenseConnectionBadge">Durum kontrol ediliyor</span></div>
+   <p class="muted" style="font-size:13px;margin:0 0 14px">ÇAĞBAŞ AdSense hesabı salt okunur Google yetkilendirmesiyle bağlanır. Bu panel hesabınızda değişiklik yapmaz.</p>
+   <div class="actions"><button class="btn primary" type="button" id="connectAdsenseBtn">Google AdSense'i yeniden bağla</button><button class="btn" type="button" id="loadAdsenseReportBtn" disabled>Son 7 gün raporunu getir</button></div>
+   <p class="hint" id="adsenseConnectionNote" style="margin:12px 0 0">Bağlantı durumu kontrol ediliyor.</p>
   </div>
-  <div class="notice">AdSense hesabı bağlanana ve rapor API'si tamamlanana kadar otomatik gösterim/tıklama verisi alınmaz. Gelir kayıtları gerçek veriye dayanır.</div>
+  <div class="grid" id="adsenseMetrics" style="margin-bottom:16px">
+   <article class="card"><div class="metrichead">Tahmini kazanç</div><div class="metric" id="adsenseEarnings">—</div><div class="hint">Son 7 gün</div></article>
+   <article class="card"><div class="metrichead">Sayfa görüntüleme</div><div class="metric" id="adsensePageViews">—</div><div class="hint">Son 7 gün</div></article>
+   <article class="card"><div class="metrichead">Tıklamalar</div><div class="metric" id="adsenseClicks">—</div><div class="hint">Son 7 gün</div></article>
+   <article class="card"><div class="metrichead">Reklam gösterimleri</div><div class="metric" id="adsenseImpressions">—</div><div class="hint">Son 7 gün</div></article>
+  </div>
+  <div class="notice" id="adsenseReportNote">Rapor verileri Google AdSense hesabından doğrudan okunur; gelir kayıtlarına otomatik veya mükerrer kayıt eklenmez.</div>
   <div id="sourcesMount"></div>
  </section>
  <section class="page" id="partners"><div id="partnersMount"></div></section>
@@ -215,12 +221,40 @@ document.getElementById("generateKey").addEventListener("click",()=>{const bytes
 document.getElementById("setupForm").addEventListener("submit",async e=>{e.preventDefault();showError("setupError","");const password=document.getElementById("setupPassword").value;if(password!==document.getElementById("setupConfirm").value){showError("setupError","Parolalar eşleşmiyor.");return}const key=document.getElementById("setupKey").value;try{await api("/api/setup",{method:"POST",headers:{"X-Setup-Key":key},body:JSON.stringify({email:document.getElementById("setupEmail").value,password})});setupPanel.hidden=true;loginPanel.hidden=false;document.getElementById("loginEmail").value=document.getElementById("setupEmail").value;document.getElementById("setupKey").value="";document.getElementById("setupPassword").value="";document.getElementById("setupConfirm").value="";showError("loginError","Yönetici hesabı oluşturuldu. Şimdi giriş yapabilirsin.")}catch(err){showError("setupError",err.message==="SETUP_NOT_CONFIGURED"?"Önce BOOTSTRAP_SECRET değerini Cloudflare'da Secret olarak kaydet.":err.message==="UNAUTHORIZED"?"Kurulum anahtarı doğru değil.":err.message==="SETUP_ALREADY_COMPLETED"?"Kurulum daha önce tamamlanmış. Giriş yap.":err.message)}});
 document.getElementById("loginForm").addEventListener("submit",async e=>{e.preventDefault();showError("loginError","");try{const result=await api("/api/login",{method:"POST",body:JSON.stringify({email:document.getElementById("loginEmail").value,password:document.getElementById("loginPassword").value})});showPanel(result.user)}catch(err){showError("loginError",err.message==="INVALID_CREDENTIALS"?"E-posta veya parola hatalı.":err.message==="TOO_MANY_ATTEMPTS"?"Çok fazla başarısız deneme. 15 dakika sonra tekrar dene.":err.message)}});
 document.getElementById("connectAdsenseBtn").addEventListener("click",()=>{if(!currentSiteId){alert("Önce Sitelerim bölümünden ÇAĞBAŞ sitesini seç.");return}if(currentSiteId!=="site-cagbas"){alert("Google AdSense bağlantısı şu anda yalnızca ÇAĞBAŞ için etkin.");return}window.location.href="/oauth/google/start"});
+
+async function loadAdsenseStatus(){
+ const badge=document.getElementById("adsenseConnectionBadge"),note=document.getElementById("adsenseConnectionNote"),reportBtn=document.getElementById("loadAdsenseReportBtn");
+ try{
+  const status=await api("/api/adsense/status");
+  badge.textContent=status.connected?"Bağlandı":"Bağlantı bekliyor";
+  badge.classList.toggle("pending",!status.connected);
+  reportBtn.disabled=!status.connected;
+  note.textContent=status.connected?"Google AdSense hesabı güvenli şekilde bağlı. Son bağlantı: "+new Date(status.connectedAt).toLocaleString("tr-TR"):"AdSense hesabı henüz bağlanmadı.";
+  document.getElementById("connectAdsenseBtn").hidden=status.connected;
+ }catch(err){badge.textContent="Kontrol edilemedi";note.textContent="Bağlantı durumu alınamadı: "+err.message}
+}
+async function loadAdsenseReport(){
+ const button=document.getElementById("loadAdsenseReportBtn"),note=document.getElementById("adsenseReportNote");
+ button.disabled=true;button.textContent="Rapor alınıyor…";note.textContent="Google AdSense raporu isteniyor.";
+ try{
+  const r=await api("/api/adsense/report");
+  const money=new Intl.NumberFormat("tr-TR",{style:"currency",currency:r.currencyCode||"USD"}).format(Number(r.estimatedEarnings||0));
+  document.getElementById("adsenseEarnings").textContent=money;
+  document.getElementById("adsensePageViews").textContent=Number(r.pageViews||0).toLocaleString("tr-TR");
+  document.getElementById("adsenseClicks").textContent=Number(r.clicks||0).toLocaleString("tr-TR");
+  document.getElementById("adsenseImpressions").textContent=Number(r.impressions||0).toLocaleString("tr-TR");
+  note.textContent="Hesap: "+r.accountName+" · Rapor dönemi: Son 7 gün · Son güncelleme: "+new Date(r.reportDate).toLocaleString("tr-TR");
+ }catch(err){note.textContent="Rapor alınamadı: "+err.message}
+ finally{button.disabled=false;button.textContent="Son 7 gün raporunu getir"}
+}
+document.getElementById("loadAdsenseReportBtn").addEventListener("click",loadAdsenseReport);
+
 document.getElementById("logoutBtn").addEventListener("click",async()=>{try{await api("/api/logout",{method:"POST"})}finally{panelApp.classList.remove("ready");authGate.hidden=false;document.getElementById("loginPassword").value="";initAuth()}});
 function activatePage(page){document.querySelectorAll("[data-page]").forEach(x=>x.classList.toggle("active",x.dataset.page===page));document.querySelectorAll(".page").forEach(x=>x.classList.toggle("active",x.id===page));document.getElementById("pagetitle").textContent=titles[page][0];document.getElementById("pagesub").textContent=titles[page][1];const pill=document.getElementById("activeSitePill");if(page==="sites")pill.hidden=true;else{pill.hidden=false;pill.textContent=page==="shared"?"● Ortak Merkez":(currentSiteName?"● "+currentSiteName:"Site seçilmedi")}}
 document.querySelectorAll("[data-page]").forEach(btn=>btn.addEventListener("click",()=>{const page=btn.dataset.page;if(btn.dataset.sitePage==="true"&&!currentSiteId){activatePage("sites");return}if(page==="shared"){currentSiteId=null;currentSiteName="";activatePage("shared");loadSharedSummary();loadSites();return}if(page==="sites"){currentSiteId=null;currentSiteName="";activatePage("sites");loadSites();return}activatePage(page)}));
 function siteTile(site){const kind=site.site_type==="own"?"Kendi sitem":"Müşteri sitesi";const ga=site.ga4_property_id?"GA4 mülkü tanımlı":site.ga4_measurement_id?"Ölçüm kimliği tanımlı":"Analitik bağlantısı bekliyor";const initial=site.slug==="edwise"?"E":site.slug==="cagbas"?"Ç":"＋";return '<article class="site-tile"><div class="site-tile-head"><div class="site-logo">'+initial+'</div><div><h3>'+esc(site.name)+'</h3><p>'+esc(site.domain||"Alan adı eklenmedi")+'</p></div></div><div class="site-meta"><span class="site-tag">'+kind+'</span><span class="site-tag">'+ga+'</span></div><p>'+esc(site.client_name||"")+'</p><button class="btn primary" data-open-site="'+esc(site.id)+'">Yönetim alanını aç</button></article>'}
 async function loadSites(){try{const r=await api("/api/sites");managedSites=r.items||[];const cards=managedSites.map(siteTile).join("");const plus='<article class="site-tile"><div class="site-logo">＋</div><h3>Yeni Site Ekle</h3><p>Yeni bir işletme veya internet sitesi oluştur.</p><button class="btn" data-add-site="true">Site ekle</button></article>';document.getElementById("siteGrid").innerHTML=cards+plus;document.getElementById("sharedSiteGrid").innerHTML=cards;document.querySelectorAll("[data-open-site]").forEach(btn=>btn.addEventListener("click",()=>selectSite(btn.dataset.openSite)));document.querySelectorAll("[data-add-site]").forEach(btn=>btn.addEventListener("click",()=>{document.getElementById("addSiteCard").hidden=false;document.getElementById("addSiteCard").scrollIntoView({behavior:"smooth",block:"center"})}))}catch(err){document.getElementById("siteGrid").innerHTML='<div class="card crud-empty">Siteler yüklenemedi: '+esc(err.message)+'</div>'}}
-async function selectSite(id){const site=managedSites.find(x=>x.id===id);if(!site)return;currentSiteId=site.id;currentSiteName=site.name;activatePage("overview");loadSummary();loadOperationalModules()}
+async function selectSite(id){const site=managedSites.find(x=>x.id===id);if(!site)return;currentSiteId=site.id;currentSiteName=site.name;activatePage("overview");loadSummary();loadOperationalModules();if(currentSiteId==="site-cagbas")loadAdsenseStatus()}
 async function loadSharedSummary(){try{const r=await api("/api/summary");document.getElementById("sharedRevenue").textContent=formatTry(r.revenueTotalMinor);document.getElementById("sharedOrders").textContent=r.paidOrders;document.getElementById("sharedPartners").textContent=r.activePartners;document.getElementById("sharedSources").textContent=r.activeSources}catch(err){console.warn("Ortak özet alınamadı:",err.message)}}
 document.getElementById("showAddSite").addEventListener("click",()=>{document.getElementById("addSiteCard").hidden=false;document.getElementById("addSiteCard").scrollIntoView({behavior:"smooth",block:"center"})});
 document.getElementById("hideAddSite").addEventListener("click",()=>{document.getElementById("addSiteCard").hidden=true});
