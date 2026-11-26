@@ -331,7 +331,7 @@ async function oauthStart(request, env) {
     return json({error:"GOOGLE_OAUTH_SECRETS_NOT_CONFIGURED"},503);
   }
   const stateBytes = crypto.getRandomValues(new Uint8Array(32));
-  const state = base64(stateBytes).replace(/\\+/g,"-").replace(/\\//g,"_").replace(/=+$/g,"");
+  const state = base64(stateBytes).replace(/\+/g,"-").replace(/\//g,"_").replace(/=+$/g,"");
   await env.DB.prepare("INSERT INTO google_oauth_states (state_hash,user_id,site_id,expires_at) VALUES (?,?,?,?)")
     .bind(await sha256(state),session.id,"site-cagbas",new Date(Date.now()+10*60*1000).toISOString()).run();
   const u = new URL("https://accounts.google.com/o/oauth2/v2/auth");
@@ -348,8 +348,6 @@ async function oauthStart(request, env) {
 
 async function oauthCallback(request, env) {
   const url = new URL(request.url);
-  if (url.pathname === "/oauth/google/callback" && request.method === "GET") return await oauthCallback(request, env);
-  if (url.pathname === "/oauth/google/start" && request.method === "GET") return await oauthStart(request, env);
   const state = url.searchParams.get("state") || "";
   const code = url.searchParams.get("code") || "";
   const error = url.searchParams.get("error");
@@ -379,6 +377,8 @@ async function oauthCallback(request, env) {
 
 async function handle(request, env) {
   const url = new URL(request.url);
+  if (url.pathname === "/oauth/google/start" && request.method === "GET") return await oauthStart(request, env);
+  if (url.pathname === "/oauth/google/callback" && request.method === "GET") return await oauthCallback(request, env);
   if (!url.pathname.startsWith("/api/")) {
     if (url.pathname === "/" || url.pathname === "/index.html") {
       return new Response(DASHBOARD_HTML, {
