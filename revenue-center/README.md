@@ -31,6 +31,7 @@ Bağımsız gelir yönetim paneli ve API.
 3. Cloudflare Dashboard > Workers & Pages > `cagbas-revenue-api` > Settings > Variables and Secrets bölümünde `BOOTSTRAP_SECRET` adıyla **Secret** ekle ve aynı değeri kaydet.
 4. Panel kurulum ekranına dön; oluşturduğun anahtarı, yönetici e-postasını ve en az 12 karakterlik parolanı gir.
 5. Yönetici hesabı oluşturulduktan sonra kurulum tek seferlik olarak kapanır. Daha sonra normal giriş ekranı kullanılır.
+6. Kurulum tamamlanınca Cloudflare'daki `BOOTSTRAP_SECRET` Secret'ını sil; tekrar ihtiyaç duyulmaz.
 
 Kurulum anahtarı veya yönetici parolası sohbet mesajına, GitHub'a ya da düz metin değişkenine yazılmamalıdır.
 
