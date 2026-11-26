@@ -259,7 +259,7 @@ async function resourceRoute(request, env, session, resource, siteId, id=null) {
     return json({success:true});
   }
   if(request.method==="DELETE") {
-    await env.DB.prepare(undefined).bind(id,siteId).run();
+    await env.DB.prepare("DELETE FROM "+cfg.table+" WHERE id = ? AND site_id = ?").bind(id,siteId).run();
     await env.DB.prepare("INSERT INTO audit_logs (id,user_id,action,resource_type,resource_id) VALUES (?,?,?,?,?)")
       .bind(crypto.randomUUID(),session.id,"delete",resource,id).run();
     return json({success:true});
@@ -349,7 +349,7 @@ async function handle(request, env) {
     if(!session)return json({error:"UNAUTHENTICATED"},401);
     return await sitesRoute(request,env,session);
   }
-  const siteResourceMatch=url.pathname.match(/^\\/api\\/sites\\/([A-Za-z0-9-]+)$/);
+  const siteResourceMatch=url.pathname.match(/^\/api\/sites\/([A-Za-z0-9-]+)$/);
   if(siteResourceMatch) {
     const session=await requireSession(request,env);
     if(!session)return json({error:"UNAUTHENTICATED"},401);
@@ -381,27 +381,18 @@ async function handle(request, env) {
     const session = await requireSession(request, env);
     if (!session) return json({ error: "UNAUTHENTICATED" }, 401);
     if (!["owner", "admin"].includes(session.role)) return json({ error: "FORBIDDEN" }, 403);
-
-    const [revenue, sources, products, partners, sponsors, orders] = await Promise.all([
-      env.DB.prepare(`SELECT COALESCE(SUM(CASE
-        WHEN entry_type IN ('earning','commission') THEN amount_minor
-        WHEN entry_type IN ('expense','refund') THEN -ABS(amount_minor)
-        ELSE amount_minor END),0) AS total_minor
-        FROM revenue_entries WHERE currency = 'TRY'`).first(),
-      env.DB.prepare("SELECT COUNT(*) AS count FROM revenue_sources WHERE status = 'active'").first(),
-      env.DB.prepare("SELECT COUNT(*) AS count FROM digital_products WHERE status = 'active'").first(),
-      env.DB.prepare("SELECT COUNT(*) AS count FROM partners WHERE status = 'active'").first(),
-      env.DB.prepare("SELECT COUNT(*) AS count FROM sponsor_campaigns WHERE status IN ('scheduled','published')").first(),
-      env.DB.prepare("SELECT COUNT(*) AS count FROM orders WHERE payment_status = 'paid'").first()
+    const siteId=url.searchParams.get("site_id");
+    if(siteId && !await env.DB.prepare("SELECT id FROM sites WHERE id=?").bind(siteId).first()) return json({error:"SITE_NOT_FOUND"},404);
+    const q=(sql)=>siteId?env.DB.prepare(sql+" AND site_id = ?").bind(siteId).first():env.DB.prepare(sql).first();
+    const [revenue,sources,products,partners,sponsors,orders]=await Promise.all([
+      q("SELECT COALESCE(SUM(CASE WHEN entry_type IN ('earning','commission') THEN amount_minor WHEN entry_type IN ('expense','refund') THEN -ABS(amount_minor) ELSE amount_minor END),0) AS total_minor FROM revenue_entries WHERE currency = 'TRY'"),
+      q("SELECT COUNT(*) AS count FROM revenue_sources WHERE status = 'active'"),
+      q("SELECT COUNT(*) AS count FROM digital_products WHERE status = 'active'"),
+      q("SELECT COUNT(*) AS count FROM partners WHERE status = 'active'"),
+      q("SELECT COUNT(*) AS count FROM sponsor_campaigns WHERE status IN ('scheduled','published')"),
+      q("SELECT COUNT(*) AS count FROM orders WHERE payment_status = 'paid'")
     ]);
-    return json({
-      revenueTotalMinor: Number(revenue?.total_minor || 0),
-      activeSources: Number(sources?.count || 0),
-      activeProducts: Number(products?.count || 0),
-      activePartners: Number(partners?.count || 0),
-      liveSponsorCampaigns: Number(sponsors?.count || 0),
-      paidOrders: Number(orders?.count || 0)
-    });
+    return json({revenueTotalMinor:Number(revenue?.total_minor||0),activeSources:Number(sources?.count||0),activeProducts:Number(products?.count||0),activePartners:Number(partners?.count||0),liveSponsorCampaigns:Number(sponsors?.count||0),paidOrders:Number(orders?.count||0),scope:siteId||"all"});
   }
 
   return json({ error: "NOT_FOUND" }, 404);
