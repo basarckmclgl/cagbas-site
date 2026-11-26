@@ -437,6 +437,36 @@ async function oauthCallback(request, env) {
   return new Response("<!doctype html><meta charset=utf-8><title>Bağlantı tamamlandı</title><main style='font:16px system-ui;max-width:560px;margin:12vh auto;padding:24px'><h2>AdSense bağlantısı tamamlandı</h2><p>Google hesabı Revenue Center'a güvenli şekilde bağlandı. Bu pencereyi kapatıp yönetim paneline dönebilirsin.</p></main>",{headers:{"content-type":"text/html; charset=utf-8","cache-control":"no-store"}});
 }
 
+
+async function textbeeStatus(env) {
+  if (!env.TEXTBEE_API_KEY) return json({ ok: false, error: "TEXTBEE_API_KEY_MISSING" }, 503);
+  const response = await fetch("https://api.textbee.dev/api/v1/gateway/stats", {
+    method: "GET",
+    headers: { "x-api-key": env.TEXTBEE_API_KEY, "accept": "application/json" }
+  });
+  const payload = await response.json().catch(() => ({}));
+  if (!response.ok) return json({ ok: false, error: "TEXTBEE_AUTH_OR_GATEWAY_ERROR", status: response.status, details: payload }, 502);
+  return json({ ok: true, gateway: payload });
+}
+
+async function textbeeSendTest(request, env, session) {
+  if (!env.TEXTBEE_API_KEY) return json({ error: "TEXTBEE_API_KEY_MISSING" }, 503);
+  let body;
+  try { body = await readJson(request); } catch { return json({ error: "INVALID_REQUEST" }, 400); }
+  const recipient = String(body.phone || "").replace(/[\\s()-]/g, "");
+  if (!/^\\+[1-9]\\d{7,14}$/.test(recipient)) return json({ error: "PHONE_E164_REQUIRED" }, 400);
+  const response = await fetch("https://api.textbee.dev/api/v1/gateway/send-sms", {
+    method: "POST",
+    headers: { "x-api-key": env.TEXTBEE_API_KEY, "content-type": "application/json", "accept": "application/json" },
+    body: JSON.stringify({ recipients: [recipient], message: "CAGBAS Revenue Center SMS gateway test. Bu bir test mesajidir." })
+  });
+  const payload = await response.json().catch(() => ({}));
+  if (!response.ok) return json({ error: "TEXTBEE_SEND_FAILED", status: response.status, details: payload }, 502);
+  await env.DB.prepare("INSERT INTO audit_logs (id,user_id,action,resource_type,resource_id,metadata_json) VALUES (?,?,?,?,?,?)")
+    .bind(crypto.randomUUID(), session.id, "security.sms_test_queued", "phone", recipient, JSON.stringify({ provider: "textbee" })).run();
+  return json({ success: true, queued: true, provider: "textbee", result: payload });
+}
+
 async function handle(request, env) {
   const url = new URL(request.url);
   if (url.pathname === "/oauth/google/start" && request.method === "GET") return await oauthStart(request, env);
@@ -463,6 +493,17 @@ async function handle(request, env) {
   }
   if (!sameOrigin(request)) return json({ error: "CROSS_ORIGIN_REQUEST_BLOCKED" }, 403);
   if (request.method === "OPTIONS") return new Response(null, { status: 204, headers: { "allow": "GET, POST, OPTIONS" } });
+
+  if (url.pathname === "/api/security/textbee-status" && request.method === "GET") {
+    const session = await requireSession(request, env);
+    if (!session || !["owner","admin"].includes(session.role)) return json({ error: "UNAUTHENTICATED" }, 401);
+    return await textbeeStatus(env);
+  }
+  if (url.pathname === "/api/security/textbee-test" && request.method === "POST") {
+    const session = await requireSession(request, env);
+    if (!session || !["owner","admin"].includes(session.role)) return json({ error: "UNAUTHENTICATED" }, 401);
+    return await textbeeSendTest(request, env, session);
+  }
 
   if (url.pathname === "/api/setup/status" && request.method === "GET") {
     const row = await env.DB.prepare("SELECT COUNT(*) AS count FROM admin_users").first();
