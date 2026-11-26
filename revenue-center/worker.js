@@ -230,16 +230,16 @@ function cleanResourceInput(resource, body, partial=false) {
   for(const key of ["name","sponsor_name","campaign_name","website","commission_model","description","reference_code","disclosure_text","order_reference","source_id","product_id","occurred_at","start_date","end_date"]) if(out[key]!==undefined && out[key]!==null) out[key]=String(out[key]).trim();
   return out;
 }
-async function resourceRoute(request, env, session, resource, id=null) {
+async function resourceRoute(request, env, session, resource, siteId, id=null) {
   const cfg=RESOURCE_CONFIG[resource]; if(!cfg) return json({error:"NOT_FOUND"},404);
   const writable=["owner","admin","editor"].includes(session.role);
   if(request.method==="GET") {
-    const rows=await env.DB.prepare("SELECT * FROM "+cfg.table+" ORDER BY created_at DESC LIMIT 250").all();
+    const rows=await env.DB.prepare("SELECT * FROM "+cfg.table+" WHERE site_id = ? ORDER BY created_at DESC LIMIT 250").bind(siteId).all();
     return json({items:rows.results||[]});
   }
   if(!writable) return json({error:"FORBIDDEN"},403);
   if(request.method==="POST") {
-    const body=await readJson(request); const data=cleanResourceInput(resource,body,false);
+    const body=await readJson(request); const data=cleanResourceInput(resource,body,false); data.site_id=siteId;
     const idNew=crypto.randomUUID(); const cols=["id",...Object.keys(data)];
     const placeholders=cols.map(()=>"?").join(",");
     await env.DB.prepare("INSERT INTO "+cfg.table+" ("+cols.join(",")+") VALUES ("+placeholders+")")
@@ -252,16 +252,59 @@ async function resourceRoute(request, env, session, resource, id=null) {
   if(request.method==="PATCH") {
     const body=await readJson(request); const data=cleanResourceInput(resource,body,true);
     const keys=Object.keys(data); if(!keys.length) return json({error:"NO_FIELDS"},400);
-    await env.DB.prepare("UPDATE "+cfg.table+" SET "+keys.map(k=>k+" = ?").join(", ")+" WHERE id = ?")
-      .bind(...keys.map(k=>data[k]),id).run();
+    await env.DB.prepare("UPDATE "+cfg.table+" SET "+keys.map(k=>k+" = ?").join(", ")+" WHERE id = ? AND site_id = ?")
+      .bind(...keys.map(k=>data[k]),id,siteId).run();
     await env.DB.prepare("INSERT INTO audit_logs (id,user_id,action,resource_type,resource_id) VALUES (?,?,?,?,?)")
       .bind(crypto.randomUUID(),session.id,"update",resource,id).run();
     return json({success:true});
   }
   if(request.method==="DELETE") {
-    await env.DB.prepare("DELETE FROM "+cfg.table+" WHERE id = ?").bind(id).run();
+    await env.DB.prepare(undefined).bind(id,siteId).run();
     await env.DB.prepare("INSERT INTO audit_logs (id,user_id,action,resource_type,resource_id) VALUES (?,?,?,?,?)")
       .bind(crypto.randomUUID(),session.id,"delete",resource,id).run();
+    return json({success:true});
+  }
+  return json({error:"METHOD_NOT_ALLOWED"},405);
+}
+
+
+async function sitesRoute(request,env,session,id=null) {
+  if(request.method==="GET") {
+    const rows=await env.DB.prepare("SELECT id,name,slug,domain,client_name,site_type,ga4_measurement_id,ga4_property_id,analytics_status,created_at FROM sites ORDER BY created_at ASC").all();
+    return json({items:rows.results||[]});
+  }
+  if(!["owner","admin"].includes(session.role)) return json({error:"FORBIDDEN"},403);
+  if(request.method==="POST") {
+    const body=await readJson(request);
+    const name=String(body.name||"").trim(), domain=String(body.domain||"").trim(), client=String(body.client_name||"").trim();
+    const slug=String(body.slug||"").trim().toLowerCase();
+    if(!name||!domain||!slug||!/^[a-z0-9-]{2,48}$/.test(slug)) return json({error:"NAME_DOMAIN_AND_VALID_SLUG_REQUIRED"},400);
+    let normalized;
+    try { normalized=new URL(domain); if(!["http:","https:"].includes(normalized.protocol)) throw new Error(); }
+    catch { return json({error:"INVALID_DOMAIN"},400); }
+    const siteId=crypto.randomUUID();
+    await env.DB.prepare("INSERT INTO sites (id,name,slug,domain,client_name,site_type,ga4_measurement_id,ga4_property_id,analytics_status) VALUES (?,?,?,?,?,?,?,?,?)")
+      .bind(siteId,name,slug,normalized.origin,client,body.site_type==="own"?"own":"client",String(body.ga4_measurement_id||"").trim()||null,String(body.ga4_property_id||"").trim()||null,"pending").run();
+    await env.DB.prepare("INSERT INTO audit_logs (id,user_id,action,resource_type,resource_id) VALUES (?,?,?,?,?)")
+      .bind(crypto.randomUUID(),session.id,"create","site",siteId).run();
+    return json({success:true,id:siteId},201);
+  }
+  if(!id) return json({error:"ID_REQUIRED"},400);
+  if(request.method==="PATCH") {
+    const body=await readJson(request), allowed=["name","domain","client_name","ga4_measurement_id","ga4_property_id"];
+    const data={}; for(const key of allowed) if(body[key]!==undefined)data[key]=String(body[key]).trim();
+    if(!Object.keys(data).length)return json({error:"NO_FIELDS"},400);
+    if(data.domain){try{data.domain=new URL(data.domain).origin}catch{return json({error:"INVALID_DOMAIN"},400)}}
+    const keys=Object.keys(data);
+    await env.DB.prepare("UPDATE sites SET "+keys.map(k=>k+" = ?").join(", ")+" WHERE id = ?")
+      .bind(...keys.map(k=>data[k]),id).run();
+    return json({success:true});
+  }
+  if(request.method==="DELETE") {
+    const count=await env.DB.prepare("SELECT (SELECT COUNT(*) FROM revenue_sources WHERE site_id=?) + (SELECT COUNT(*) FROM partners WHERE site_id=?) + (SELECT COUNT(*) FROM sponsor_campaigns WHERE site_id=?) + (SELECT COUNT(*) FROM digital_products WHERE site_id=?) AS total").bind(id,id,id,id).first();
+    if(Number(count?.total||0)>0)return json({error:"SITE_HAS_RECORDS_ARCHIVE_INSTEAD"},409);
+    if(["site-cagbas","site-edwise"].includes(id))return json({error:"DEFAULT_SITES_CANNOT_BE_DELETED"},403);
+    await env.DB.prepare("DELETE FROM sites WHERE id=?").bind(id).run();
     return json({success:true});
   }
   return json({error:"METHOD_NOT_ALLOWED"},405);
@@ -300,6 +343,19 @@ async function handle(request, env) {
     });
   }
 
+
+  if(url.pathname === "/api/sites") {
+    const session=await requireSession(request,env);
+    if(!session)return json({error:"UNAUTHENTICATED"},401);
+    return await sitesRoute(request,env,session);
+  }
+  const siteResourceMatch=url.pathname.match(/^\\/api\\/sites\\/([A-Za-z0-9-]+)$/);
+  if(siteResourceMatch) {
+    const session=await requireSession(request,env);
+    if(!session)return json({error:"UNAUTHENTICATED"},401);
+    return await sitesRoute(request,env,session,siteResourceMatch[1]);
+  }
+
   if (url.pathname === "/api/setup" && request.method === "POST") return await setup(request, env);
   if (url.pathname === "/api/login" && request.method === "POST") return await login(request, env);
   if (url.pathname === "/api/logout" && request.method === "POST") return await logout(request, env);
@@ -314,7 +370,11 @@ async function handle(request, env) {
   if(resourceMatch) {
     const session=await requireSession(request,env);
     if(!session) return json({error:"UNAUTHENTICATED"},401);
-    return await resourceRoute(request,env,session,resourceMatch[1],resourceMatch[2]||null);
+    const siteId=url.searchParams.get("site_id");
+    if(!siteId)return json({error:"SITE_CONTEXT_REQUIRED"},400);
+    const site=await env.DB.prepare("SELECT id FROM sites WHERE id=?").bind(siteId).first();
+    if(!site)return json({error:"SITE_NOT_FOUND"},404);
+    return await resourceRoute(request,env,session,resourceMatch[1],siteId,resourceMatch[2]||null);
   }
 
   if (url.pathname === "/api/summary" && request.method === "GET") {
