@@ -3,6 +3,20 @@
 -- Bu şema gerçek kullanıcı/parola oluşturmaz; ilk yönetici güvenli kurulum akışıyla tanımlanmalıdır.
 PRAGMA foreign_keys = ON;
 
+CREATE TABLE IF NOT EXISTS sites (
+  id TEXT PRIMARY KEY,
+  name TEXT NOT NULL,
+  slug TEXT NOT NULL UNIQUE,
+  domain TEXT,
+  client_name TEXT,
+  site_type TEXT NOT NULL DEFAULT 'client',
+  ga4_measurement_id TEXT,
+  ga4_property_id TEXT,
+  analytics_status TEXT NOT NULL DEFAULT 'pending',
+  created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+
 CREATE TABLE IF NOT EXISTS admin_users (
   id TEXT PRIMARY KEY,
   email TEXT NOT NULL UNIQUE COLLATE NOCASE,
@@ -48,6 +62,7 @@ CREATE TABLE IF NOT EXISTS revenue_sources (
   source_type TEXT NOT NULL CHECK (source_type IN ('ads','affiliate','sponsor','store','referral')),
   status TEXT NOT NULL DEFAULT 'draft' CHECK (status IN ('draft','active','paused','archived')),
   created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+  site_id TEXT,
 );
 
 CREATE TABLE IF NOT EXISTS revenue_entries (
@@ -61,6 +76,7 @@ CREATE TABLE IF NOT EXISTS revenue_entries (
   occurred_at TEXT NOT NULL,
   created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
   FOREIGN KEY (source_id) REFERENCES revenue_sources(id)
+  site_id TEXT,
 );
 
 CREATE TABLE IF NOT EXISTS partners (
@@ -71,6 +87,7 @@ CREATE TABLE IF NOT EXISTS partners (
   commission_rate REAL,
   status TEXT NOT NULL DEFAULT 'prospect' CHECK (status IN ('prospect','active','paused','closed')),
   created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+  site_id TEXT,
 );
 
 CREATE TABLE IF NOT EXISTS sponsor_campaigns (
@@ -84,6 +101,7 @@ CREATE TABLE IF NOT EXISTS sponsor_campaigns (
   disclosure_text TEXT,
   status TEXT NOT NULL DEFAULT 'draft' CHECK (status IN ('draft','scheduled','published','completed','cancelled')),
   created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+  site_id TEXT,
 );
 
 CREATE TABLE IF NOT EXISTS digital_products (
@@ -94,6 +112,7 @@ CREATE TABLE IF NOT EXISTS digital_products (
   currency TEXT NOT NULL DEFAULT 'TRY',
   status TEXT NOT NULL DEFAULT 'draft' CHECK (status IN ('draft','active','archived')),
   created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+  site_id TEXT,
 );
 
 CREATE TABLE IF NOT EXISTS orders (
@@ -105,6 +124,7 @@ CREATE TABLE IF NOT EXISTS orders (
   payment_status TEXT NOT NULL DEFAULT 'pending' CHECK (payment_status IN ('pending','paid','failed','refunded')),
   created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
   FOREIGN KEY (product_id) REFERENCES digital_products(id)
+  site_id TEXT,
 );
 
 CREATE INDEX IF NOT EXISTS idx_admin_sessions_user ON admin_sessions(user_id);
