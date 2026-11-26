@@ -455,11 +455,11 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     dialog.querySelector('.cagbas-cookie-reject').addEventListener('click', function () {
-        saveConsent(false);
+        saveConsent(false, false);
     });
 
     dialog.querySelector('.cagbas-cookie-accept').addEventListener('click', function () {
-        saveConsent(true);
+        saveConsent(true, true);
     });
 
     dialog.querySelector('.cagbas-cookie-save').addEventListener('click', function () {
