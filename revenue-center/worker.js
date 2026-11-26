@@ -150,6 +150,76 @@ async function setup(request, env) {
     return json({ error: "INTERNAL_SERVER_ERROR", detail: String(error?.message || error).slice(0, 240) }, 500);
   }
 }
+function totpKeyBytes(env){
+  const raw=String(env.TOTP_ENCRYPTION_KEY||"").trim();
+  if(/^[0-9a-fA-F]{64}$/.test(raw)) return Uint8Array.from(raw.match(/.{2}/g),x=>parseInt(x,16));
+  try { const b=fromBase64(raw); if(b.length===32)return b; } catch {}
+  throw new Error("TOTP_ENCRYPTION_KEY_INVALID");
+}
+async function encryptTotpSecret(secret,env){
+  const key=await crypto.subtle.importKey("raw",totpKeyBytes(env),"AES-GCM",false,["encrypt"]);
+  const iv=crypto.getRandomValues(new Uint8Array(12));
+  const data=await crypto.subtle.encrypt({name:"AES-GCM",iv},key,new TextEncoder().encode(secret));
+  return base64(iv)+"."+base64(new Uint8Array(data));
+}
+async function decryptTotpSecret(value,env){
+  const parts=String(value||"").split(".");
+  if(parts.length!==2)throw new Error("TOTP_SECRET_INVALID");
+  const key=await crypto.subtle.importKey("raw",totpKeyBytes(env),"AES-GCM",false,["decrypt"]);
+  const data=await crypto.subtle.decrypt({name:"AES-GCM",iv:fromBase64(parts[0])},key,fromBase64(parts[1]));
+  return new TextDecoder().decode(data);
+}
+function base32Encode(bytes){
+  const alphabet="ABCDEFGHIJKLMNOPQRSTUVWXYZ234567";let bits=0,value=0,out="";
+  for(const byte of bytes){value=(value<<8)|byte;bits+=8;while(bits>=5){out+=alphabet[(value>>>(bits-5))&31];bits-=5;}}
+  if(bits)out+=alphabet[(value<<(5-bits))&31];
+  return out;
+}
+function base32Decode(input){
+  const alphabet="ABCDEFGHIJKLMNOPQRSTUVWXYZ234567";let bits=0,value=0;const out=[];
+  for(const ch of String(input).replace(/=+$/,"").toUpperCase()){const n=alphabet.indexOf(ch);if(n<0)throw new Error("TOTP_SECRET_INVALID");value=(value<<5)|n;bits+=5;if(bits>=8){out.push((value>>>(bits-8))&255);bits-=8;}}
+  return new Uint8Array(out);
+}
+async function totpAt(secret,step){
+  const key=await crypto.subtle.importKey("raw",base32Decode(secret),{name:"HMAC",hash:"SHA-1"},false,["sign"]);
+  const counter=new Uint8Array(8);let n=BigInt(step);for(let i=7;i>=0;i--){counter[i]=Number(n&255n);n>>=8n;}
+  const mac=new Uint8Array(await crypto.subtle.sign("HMAC",key,counter));const offset=mac[mac.length-1]&15;
+  const binary=((mac[offset]&127)<<24)|(mac[offset+1]<<16)|(mac[offset+2]<<8)|mac[offset+3];
+  return String(binary%1000000).padStart(6,"0");
+}
+async function verifyTotp(secret,code,lastStep=-1){
+  if(!/^\d{6}$/.test(String(code)))return null;
+  const current=Math.floor(Date.now()/30000);
+  for(const step of [current-1,current,current+1])if(step>lastStep&&equalText(await totpAt(secret,step),String(code)))return step;
+  return null;
+}
+async function totpStatus(request,env,session){
+  const row=await env.DB.prepare("SELECT enabled_at FROM admin_totp WHERE user_id=?").bind(session.id).first();
+  return json({configured:Boolean(row),enabled:Boolean(row?.enabled_at)});
+}
+async function totpBegin(request,env,session){
+  if(!env.TOTP_ENCRYPTION_KEY)return json({error:"TOTP_ENCRYPTION_KEY_MISSING"},503);
+  const existing=await env.DB.prepare("SELECT enabled_at FROM admin_totp WHERE user_id=?").bind(session.id).first();
+  if(existing?.enabled_at)return json({error:"TOTP_ALREADY_ENABLED"},409);
+  const secret=base32Encode(crypto.getRandomValues(new Uint8Array(20)));
+  const encrypted=await encryptTotpSecret(secret,env);
+  await env.DB.prepare("INSERT INTO admin_totp (user_id,secret_ciphertext,enabled_at,last_used_step) VALUES (?,?,NULL,NULL) ON CONFLICT(user_id) DO UPDATE SET secret_ciphertext=excluded.secret_ciphertext,enabled_at=NULL,last_used_step=NULL").bind(session.id,encrypted).run();
+  const label=encodeURIComponent("CAGBAS Revenue Center:"+session.email);
+  const uri="otpauth://totp/"+label+"?secret="+secret+"&issuer=CAGBAS%20Revenue%20Center&algorithm=SHA1&digits=6&period=30";
+  return json({success:true,secret,otpauth_uri:uri});
+}
+async function totpConfirm(request,env,session){
+  let body;try{body=await readJson(request)}catch{return json({error:"INVALID_REQUEST"},400)}
+  const row=await env.DB.prepare("SELECT secret_ciphertext,enabled_at FROM admin_totp WHERE user_id=?").bind(session.id).first();
+  if(!row?.secret_ciphertext)return json({error:"TOTP_SETUP_NOT_STARTED"},409);
+  if(row.enabled_at)return json({error:"TOTP_ALREADY_ENABLED"},409);
+  const secret=await decryptTotpSecret(row.secret_ciphertext,env);
+  const step=await verifyTotp(secret,String(body.code||""));
+  if(step===null)return json({error:"INVALID_TOTP"},401);
+  await env.DB.prepare("UPDATE admin_totp SET enabled_at=datetime('now'),last_used_step=? WHERE user_id=?").bind(step,session.id).run();
+  await env.DB.prepare("INSERT INTO audit_logs (id,user_id,action,resource_type,resource_id,metadata_json) VALUES (?,?,?,?,?,?)").bind(crypto.randomUUID(),session.id,"security.totp_enabled","admin_user",session.id,JSON.stringify({method:"authenticator"})).run();
+  return json({success:true,enabled:true});
+}
 async function login(request,env){
  let b;try{b=await readJson(request)}catch{return json({error:"INVALID_REQUEST"},400)}
  const email=String(b.email||"").trim().toLowerCase(),password=String(b.password||"");
@@ -480,6 +550,13 @@ async function handle(request, env) {
   if (!sameOrigin(request)) return json({ error: "CROSS_ORIGIN_REQUEST_BLOCKED" }, 403);
   if (request.method === "OPTIONS") return new Response(null, { status: 204, headers: { "allow": "GET, POST, OPTIONS" } });
 
+  if (url.pathname.startsWith("/api/security/totp-")) {
+    const session = await requireSession(request, env);
+    if (!session || !["owner","admin"].includes(session.role)) return json({ error: "UNAUTHENTICATED" },401);
+    if (url.pathname === "/api/security/totp-status" && request.method === "GET") return await totpStatus(request,env,session);
+    if (url.pathname === "/api/security/totp-begin" && request.method === "POST") return await totpBegin(request,env,session);
+    if (url.pathname === "/api/security/totp-confirm" && request.method === "POST") return await totpConfirm(request,env,session);
+  }
   if (url.pathname === "/api/security/textbee-status" && request.method === "GET") {
     const session = await requireSession(request, env);
     if (!session || !["owner","admin"].includes(session.role)) return json({ error: "UNAUTHENTICATED" }, 401);
