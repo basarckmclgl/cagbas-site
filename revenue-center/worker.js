@@ -310,6 +310,73 @@ async function sitesRoute(request,env,session,id=null) {
   return json({error:"METHOD_NOT_ALLOWED"},405);
 }
 
+
+const GOOGLE_REDIRECT_URI = "https://cagbas-revenue-api.basarcekmecelioglu6-0f8.workers.dev/oauth/google/callback";
+const GOOGLE_SCOPE = "https://www.googleapis.com/auth/adsense.readonly";
+
+async function encryptSecret(value, env) {
+  if (!env.GOOGLE_TOKEN_ENCRYPTION_KEY) throw new Error("GOOGLE_TOKEN_ENCRYPTION_KEY_MISSING");
+  const keyBytes = fromBase64(env.GOOGLE_TOKEN_ENCRYPTION_KEY);
+  if (keyBytes.length !== 32) throw new Error("GOOGLE_TOKEN_ENCRYPTION_KEY_INVALID");
+  const key = await crypto.subtle.importKey("raw", keyBytes, "AES-GCM", false, ["encrypt"]);
+  const iv = crypto.getRandomValues(new Uint8Array(12));
+  const encrypted = await crypto.subtle.encrypt({name:"AES-GCM",iv}, key, new TextEncoder().encode(value));
+  return base64(iv) + "." + base64(new Uint8Array(encrypted));
+}
+
+async function oauthStart(request, env) {
+  const session = await requireSession(request, env);
+  if (!session) return json({error:"UNAUTHENTICATED"},401);
+  if (!env.GOOGLE_CLIENT_ID || !env.GOOGLE_CLIENT_SECRET || !env.GOOGLE_TOKEN_ENCRYPTION_KEY) {
+    return json({error:"GOOGLE_OAUTH_SECRETS_NOT_CONFIGURED"},503);
+  }
+  const stateBytes = crypto.getRandomValues(new Uint8Array(32));
+  const state = base64(stateBytes).replace(/\\+/g,"-").replace(/\\//g,"_").replace(/=+$/g,"");
+  await env.DB.prepare("INSERT INTO google_oauth_states (state_hash,user_id,site_id,expires_at) VALUES (?,?,?,?)")
+    .bind(await sha256(state),session.id,"site-cagbas",new Date(Date.now()+10*60*1000).toISOString()).run();
+  const u = new URL("https://accounts.google.com/o/oauth2/v2/auth");
+  u.searchParams.set("client_id",env.GOOGLE_CLIENT_ID);
+  u.searchParams.set("redirect_uri",GOOGLE_REDIRECT_URI);
+  u.searchParams.set("response_type","code");
+  u.searchParams.set("scope",GOOGLE_SCOPE);
+  u.searchParams.set("access_type","offline");
+  u.searchParams.set("prompt","consent");
+  u.searchParams.set("include_granted_scopes","true");
+  u.searchParams.set("state",state);
+  return Response.redirect(u.toString(),302);
+}
+
+async function oauthCallback(request, env) {
+  const url = new URL(request.url);
+  if (url.pathname === "/oauth/google/callback" && request.method === "GET") return await oauthCallback(request, env);
+  if (url.pathname === "/oauth/google/start" && request.method === "GET") return await oauthStart(request, env);
+  const state = url.searchParams.get("state") || "";
+  const code = url.searchParams.get("code") || "";
+  const error = url.searchParams.get("error");
+  if (error) return new Response("Google yetkilendirmesi iptal edildi. Bu sekmeyi kapatıp Revenue Center'a dönebilirsin.",{status:400});
+  if (!state || !code || !env.GOOGLE_CLIENT_ID || !env.GOOGLE_CLIENT_SECRET || !env.GOOGLE_TOKEN_ENCRYPTION_KEY) {
+    return new Response("OAuth yapılandırması eksik veya Google yanıtı geçersiz.",{status:400});
+  }
+  const stateHash = await sha256(state);
+  const saved = await env.DB.prepare("SELECT user_id,site_id FROM google_oauth_states WHERE state_hash=? AND expires_at>? LIMIT 1")
+    .bind(stateHash,new Date().toISOString()).first();
+  if (!saved) return new Response("OAuth isteğinin süresi dolmuş veya state doğrulanamadı. Revenue Center'dan yeniden bağlan.",{status:400});
+  await env.DB.prepare("DELETE FROM google_oauth_states WHERE state_hash=?").bind(stateHash).run();
+  const body = new URLSearchParams({
+    code,client_id:env.GOOGLE_CLIENT_ID,client_secret:env.GOOGLE_CLIENT_SECRET,
+    redirect_uri:GOOGLE_REDIRECT_URI,grant_type:"authorization_code"
+  });
+  const tokenResponse = await fetch("https://oauth2.googleapis.com/token",{method:"POST",headers:{"content-type":"application/x-www-form-urlencoded"},body});
+  const tokens = await tokenResponse.json();
+  if (!tokenResponse.ok || !tokens.refresh_token) {
+    return new Response("Google token yanıtı alınamadı. Yeniden bağlantı kurmayı dene. "+String(tokens.error_description||tokens.error||"refresh_token_missing"),{status:400});
+  }
+  const encrypted = await encryptSecret(tokens.refresh_token,env);
+  await env.DB.prepare("INSERT INTO google_oauth_tokens (site_id,refresh_token_encrypted,scope,connected_at) VALUES (?,?,?,?) ON CONFLICT(site_id) DO UPDATE SET refresh_token_encrypted=excluded.refresh_token_encrypted,scope=excluded.scope,connected_at=excluded.connected_at")
+    .bind(saved.site_id,encrypted,tokens.scope||GOOGLE_SCOPE,new Date().toISOString()).run();
+  return new Response("<!doctype html><meta charset=utf-8><title>Bağlantı tamamlandı</title><main style='font:16px system-ui;max-width:560px;margin:12vh auto;padding:24px'><h2>AdSense bağlantısı tamamlandı</h2><p>Google hesabı Revenue Center'a güvenli şekilde bağlandı. Bu pencereyi kapatıp yönetim paneline dönebilirsin.</p></main>",{headers:{"content-type":"text/html; charset=utf-8","cache-control":"no-store"}});
+}
+
 async function handle(request, env) {
   const url = new URL(request.url);
   if (!url.pathname.startsWith("/api/")) {
