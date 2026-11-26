@@ -10,10 +10,63 @@
 button{font:inherit}.app{display:grid;grid-template-columns:252px minmax(0,1fr);min-height:100vh}.side{padding:26px 17px;border-right:1px solid var(--line);background:#0e0c16}.brand{display:flex;gap:12px;align-items:center;padding:0 9px 28px}.mark{width:39px;height:39px;border-radius:13px;background:linear-gradient(145deg,#b29aff,#6744d3);display:grid;place-items:center;font-weight:900;color:white;box-shadow:0 8px 25px #7651d644}.brand strong{display:block;letter-spacing:.13em;font-size:13px}.brand small{color:var(--muted);font-size:11px}.navlabel{padding:12px 10px 7px;color:#766e89;font-size:10px;letter-spacing:.14em;text-transform:uppercase}.nav{display:grid;gap:5px}.nav button{border:0;color:#aaa3b9;background:transparent;text-align:left;padding:11px 12px;border-radius:10px;cursor:pointer;display:flex;align-items:center;gap:11px}.nav button:hover,.nav button.active{background:#211a33;color:#fff}.nav button.active{box-shadow:inset 2px 0 var(--purple)}.ico{width:19px;text-align:center;color:#b49bff}.sidefoot{position:sticky;top:calc(100vh - 90px);margin:38px 8px 0;padding-top:18px;border-top:1px solid var(--line);color:var(--muted);font-size:11px}.main{min-width:0;padding:30px clamp(18px,4vw,54px) 50px}.top{display:flex;justify-content:space-between;align-items:center;gap:18px;margin-bottom:30px}.eyebrow{color:var(--purple);font-size:11px;letter-spacing:.16em;text-transform:uppercase;font-weight:700}.top h1{font-size:clamp(24px,3vw,34px);letter-spacing:-.04em;margin:5px 0}.sub{color:var(--muted);margin:0}.topright{display:flex;gap:10px;align-items:center}.pill{border:1px solid #4b3b70;background:#211a32;color:#d5c7ff;padding:7px 11px;border-radius:30px;font-size:11px}.avatar{width:36px;height:36px;border-radius:50%;display:grid;place-items:center;background:#342750;color:#e5d9ff;font-weight:700}.notice{border:1px solid #574326;background:#251d14;color:#e8c994;border-radius:12px;padding:12px 15px;margin-bottom:22px;font-size:12px}.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}.card{background:linear-gradient(150deg,#191625,#12101a);border:1px solid var(--line);border-radius:15px;padding:18px;min-width:0}.metrichead{display:flex;justify-content:space-between;color:var(--muted);font-size:12px}.metricicon{width:30px;height:30px;display:grid;place-items:center;border-radius:9px;background:#29203e;color:#c8b5ff}.metric{font-size:27px;font-weight:750;letter-spacing:-.04em;margin:13px 0 3px}.hint{color:#827b91;font-size:11px}.sectionhead{display:flex;justify-content:space-between;align-items:center;margin:28px 0 13px}.sectionhead h2{font-size:16px;margin:0}.sectionhead span{font-size:11px;color:var(--muted)}.lower{display:grid;grid-template-columns:1.4fr 1fr;gap:14px}.bars{height:190px;display:flex;align-items:end;gap:12px;padding:20px 6px 4px;border-bottom:1px solid var(--line)}.barcol{height:100%;flex:1;display:flex;flex-direction:column;justify-content:end;align-items:center;gap:8px;color:var(--muted);font-size:10px}.bar{width:min(34px,70%);border-radius:7px 7px 2px 2px;background:linear-gradient(180deg,#b39aff,#6848ca);opacity:.9}.sources{display:grid;gap:16px;margin-top:18px}.source{display:grid;grid-template-columns:1fr auto;gap:8px;font-size:12px}.track{height:6px;background:#282333;border-radius:9px;grid-column:1/-1;overflow:hidden}.fill{height:100%;background:linear-gradient(90deg,#7050d0,#b49aff);border-radius:9px}.muted{color:var(--muted)}.tablewrap{overflow:auto}.table{width:100%;border-collapse:collapse;font-size:12px}.table th,.table td{text-align:left;padding:13px 10px;border-bottom:1px solid var(--line);white-space:nowrap}.table th{color:var(--muted);font-weight:500}.status{font-size:10px;border-radius:20px;padding:4px 8px;background:#242033;color:#c9b9f5}.status.pending{background:#2b2419;color:#e9c17e}.actions{display:flex;flex-wrap:wrap;gap:9px}.btn{border:1px solid var(--line);background:#211b30;color:#e9e2fa;padding:9px 13px;border-radius:9px;cursor:pointer}.btn.primary{background:var(--purple2);border-color:var(--purple2);color:white}.btn:hover{filter:brightness(1.13)}.page{display:none}.page.active{display:block}.modulegrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}.module{min-height:150px}.module h3{font-size:14px;margin:13px 0 5px}.module p{font-size:12px;color:var(--muted);margin:0}.module .tag{font-size:10px;color:#c9b9f5}.empty{padding:28px;text-align:center;color:var(--muted);border:1px dashed #3a334b;border-radius:12px}
 @media(max-width:1050px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.modulegrid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:720px){.app{grid-template-columns:1fr}.side{padding:14px;border-right:0;border-bottom:1px solid var(--line)}.brand{padding:0 4px 12px}.nav{display:flex;overflow:auto}.navlabel,.sidefoot{display:none}.nav button{white-space:nowrap;padding:9px}.main{padding:22px 15px}.top{align-items:flex-start}.topright .pill{display:none}.lower{grid-template-columns:1fr}.grid{gap:9px}.card{padding:13px}.metric{font-size:22px}.modulegrid{grid-template-columns:1fr}}
+
+/* Authentication gate */
+.app{display:none}.app.ready{display:grid}
+.auth-shell{min-height:100vh;display:grid;place-items:center;padding:24px;background:radial-gradient(ellipse at 50% 0%,#2a1c4b 0,transparent 48%),var(--bg)}
+.auth-card{width:min(100%,460px);padding:30px;background:linear-gradient(150deg,#191625,#12101a);border:1px solid var(--line);border-radius:18px;box-shadow:0 24px 80px #0008}
+.auth-brand{display:flex;align-items:center;gap:12px;margin-bottom:24px}.auth-brand .mark{width:43px;height:43px}
+.auth-card h1{font-size:23px;margin:0 0 6px;letter-spacing:-.04em}.auth-card p{color:var(--muted);font-size:13px;margin:0 0 20px}
+.auth-card label{display:block;font-size:12px;color:#c9c1d8;margin:14px 0 6px}
+.auth-card input{width:100%;padding:12px 13px;border:1px solid #393249;border-radius:9px;background:#0d0b14;color:var(--text);outline:none}
+.auth-card input:focus{border-color:var(--purple)}
+.auth-card .btn{width:100%;margin-top:16px;padding:12px}.auth-card .btn:disabled{opacity:.45;cursor:not-allowed}
+.auth-note{padding:12px;border:1px solid #574326;background:#251d14;color:#e8c994;border-radius:10px;font-size:12px;margin:14px 0}
+.auth-error{color:#ff9b9b;font-size:12px;min-height:18px;margin-top:10px}
+.auth-switch{font-size:12px;color:var(--muted);margin-top:16px}
+.auth-inline{display:flex;gap:8px;align-items:center}.auth-inline input{min-width:0}
+.auth-inline .btn{width:auto;white-space:nowrap;margin:0;padding:10px}
+.topright .logout{font-size:11px;padding:8px 10px}
+@media(max-width:720px){.auth-card{padding:22px}.auth-inline{align-items:stretch;flex-direction:column}.auth-inline .btn{width:100%}}
+
 </style>
 </head>
 <body>
-<div class="app">
+<div class="auth-shell" id="authGate">
+ <section class="auth-card">
+  <div class="auth-brand"><div class="mark">Ç</div><div><strong>ÇAĞBAŞ</strong><div class="muted" style="font-size:11px;letter-spacing:.12em">REVENUE CENTER</div></div></div>
+  <div id="setupPanel" hidden>
+   <h1>Yönetici kurulumu</h1>
+   <p>İlk yönetici hesabını oluştur. Bu işlem yalnızca bir kez yapılabilir.</p>
+   <div class="auth-note" id="setupInstructions">Kurulum anahtarı henüz tanımlanmadı. Önce Cloudflare'da <b>cagbas-revenue-api</b> Worker'ına <b>BOOTSTRAP_SECRET</b> adlı bir Secret ekle. En az 32 karakterlik rastgele bir değer kullan. Aşağıdaki anahtar alanına aynı değeri gir.</div>
+   <form id="setupForm">
+    <label for="setupEmail">Yönetici e-posta adresi</label>
+    <input id="setupEmail" type="email" value="cagbas.2026@gmail.com" autocomplete="username" required>
+    <label for="setupKey">Kurulum anahtarı</label>
+    <div class="auth-inline"><input id="setupKey" type="password" minlength="32" autocomplete="off" required><button class="btn" type="button" id="generateKey">Anahtar üret</button></div>
+    <label for="setupPassword">Yönetici parolası (en az 12 karakter)</label>
+    <input id="setupPassword" type="password" minlength="12" autocomplete="new-password" required>
+    <label for="setupConfirm">Parolayı tekrar gir</label>
+    <input id="setupConfirm" type="password" minlength="12" autocomplete="new-password" required>
+    <button class="btn primary" type="submit" id="setupSubmit">Yönetici hesabını oluştur</button>
+    <div class="auth-error" id="setupError" role="status"></div>
+   </form>
+  </div>
+  <div id="loginPanel" hidden>
+   <h1>Yönetim paneli girişi</h1>
+   <p>Devam etmek için yönetici hesabınla oturum aç.</p>
+   <form id="loginForm">
+    <label for="loginEmail">E-posta</label>
+    <input id="loginEmail" type="email" value="cagbas.2026@gmail.com" autocomplete="username" required>
+    <label for="loginPassword">Parola</label>
+    <input id="loginPassword" type="password" autocomplete="current-password" required>
+    <button class="btn primary" type="submit">Giriş yap</button>
+    <div class="auth-error" id="loginError" role="status"></div>
+   </form>
+  </div>
+ </section>
+</div>
+<div class="app" id="panelApp">
 <aside class="side">
  <div class="brand"><div class="mark">Ç</div><div><strong>ÇAĞBAŞ</strong><small>REVENUE CENTER</small></div></div>
  <div class="navlabel">Yönetim</div>
@@ -30,14 +83,14 @@ button{font:inherit}.app{display:grid;grid-template-columns:252px minmax(0,1fr);
  <div class="sidefoot">Bağımsız yönetim arayüzü<br>Önizleme sürümü · 0.1.0</div>
 </aside>
 <main class="main">
- <header class="top"><div><div class="eyebrow">ÇAĞBAŞ / YÖNETİM</div><h1 id="pagetitle">Genel Bakış</h1><p class="sub" id="pagesub">Gelir kanallarının genel performans görünümü.</p></div><div class="topright"><span class="pill">● Arayüz prototipi</span><div class="avatar">B</div></div></header>
+ <header class="top"><div><div class="eyebrow">ÇAĞBAŞ / YÖNETİM</div><h1 id="pagetitle">Genel Bakış</h1><p class="sub" id="pagesub">Gelir kanallarının genel performans görünümü.</p></div><div class="topright"><span class="pill" id="sessionLabel">● Güvenli oturum</span><div class="avatar" id="userAvatar">Ç</div><button class="btn logout" id="logoutBtn" type="button">Çıkış</button></div></header>
  <section class="page active" id="overview">
-  <div class="notice">ÖNİZLEME MODU — Bu ekrandaki tutarlar örnek veridir. Henüz gerçek hesaplara, reklam ağlarına veya ödeme sistemlerine bağlı değildir.</div>
+  <div class="notice">Canlı panel bağlantısı aktif. Entegre edilmemiş reklam, satış ve ödeme kanalları için veri gösterilmez.</div>
   <div class="grid">
-   <article class="card"><div class="metrichead">Toplam gelir <span class="metricicon">₺</span></div><div class="metric">₺0,00</div><div class="hint">Gerçek veri bağlantısı bekleniyor</div></article>
-   <article class="card"><div class="metrichead">Bu ayki satış <span class="metricicon">▣</span></div><div class="metric">0</div><div class="hint">Henüz sipariş kaydı yok</div></article>
-   <article class="card"><div class="metrichead">Yönlendirilen talep <span class="metricicon">♧</span></div><div class="metric">0</div><div class="hint">Henüz dönüşüm kaydı yok</div></article>
-   <article class="card"><div class="metrichead">Gelir kanalı <span class="metricicon">⌁</span></div><div class="metric">5</div><div class="hint">Modüller taslak olarak hazırlandı</div></article>
+   <article class="card"><div class="metrichead">Toplam gelir <span class="metricicon">₺</span></div><div class="metric" id="metricRevenue">₺0,00</div><div class="hint">TRY cinsinden kayıtlı gelir</div></article>
+   <article class="card"><div class="metrichead">Ödenen sipariş <span class="metricicon">▣</span></div><div class="metric" id="metricOrders">0</div><div class="hint">Kayıtlı tüm dönem</div></article>
+   <article class="card"><div class="metrichead">Aktif iş ortağı <span class="metricicon">♧</span></div><div class="metric" id="metricPartners">0</div><div class="hint">Kayıtlı aktif ortaklar</div></article>
+   <article class="card"><div class="metrichead">Aktif gelir kanalı <span class="metricicon">⌁</span></div><div class="metric" id="metricSources">0</div><div class="hint">Aktif kaynak kayıtları</div></article>
   </div>
   <div class="sectionhead"><h2>Gelir kanalları</h2><span>Bağlantı durumu</span></div>
   <div class="lower">
@@ -62,7 +115,20 @@ button{font:inherit}.app{display:grid;grid-template-columns:252px minmax(0,1fr);
 </main>
 </div>
 <script>
-const titles={overview:["Genel Bakış","Gelir kanallarının genel performans görünümü."],ads:["Reklam Yönetimi","Reklam ağları ve reklam performansı."],partners:["İş Ortaklıkları","Affiliate programları ve komisyon kayıtları."],sponsors:["Sponsorlar","Ticari iş birlikleri ve yayın anlaşmaları."],store:["Dijital Mağaza","Dijital ürün kataloğu ve sipariş yönetimi."],leads:["Müşteri Talepleri","Yönlendirilen müşteri taleplerinin takibi."],analytics:["Ziyaretçi Analitiği","Ziyaret, görüntüleme ve dönüşüm ölçümü."],finance:["Finansal Raporlar","Gelir, komisyon, gider ve net sonuç." ]};
-document.querySelectorAll("[data-page]").forEach(btn=>btn.addEventListener("click",()=>{document.querySelectorAll("[data-page]").forEach(x=>x.classList.toggle("active",x===btn));document.querySelectorAll(".page").forEach(x=>x.classList.toggle("active",x.id===btn.dataset.page));document.getElementById("pagetitle").textContent=titles[btn.dataset.page][0];document.getElementById("pagesub").textContent=titles[btn.dataset.page][1];}));
+const titles={overview:["Genel Bakış","Gelir kanallarının genel performans görünümü."],ads:["Reklam Yönetimi","Reklam ağları ve reklam performansı."],partners:["İş Ortaklıkları","Affiliate programları ve komisyon kayıtları."],sponsors:["Sponsorlar","Ticari iş birlikleri ve yayın anlaşmaları."],store:["Dijital Mağaza","Dijital ürün kataloğu ve sipariş yönetimi."],leads:["Müşteri Talepleri","Yönlendirilen müşteri taleplerinin takibi."],analytics:["Ziyaretçi Analitiği","Ziyaret, görüntüleme ve dönüşüm ölçümü."],finance:["Finansal Raporlar","Gelir, komisyon, gider ve net sonuç."]};
+const authGate=document.getElementById("authGate"),panelApp=document.getElementById("panelApp");
+const setupPanel=document.getElementById("setupPanel"),loginPanel=document.getElementById("loginPanel");
+function showError(id,message){document.getElementById(id).textContent=message||""}
+async function api(path,options={}){const response=await fetch(path,{...options,credentials:"same-origin",headers:{"content-type":"application/json",...(options.headers||{})}});let data={};try{data=await response.json()}catch{}if(!response.ok)throw new Error(data.error||"İstek tamamlanamadı.");return data}
+function showPanel(user){authGate.hidden=true;panelApp.classList.add("ready");document.getElementById("sessionLabel").textContent="● "+user.role;document.getElementById("userAvatar").textContent=(user.email||"Ç").slice(0,1).toUpperCase();loadSummary()}
+function formatTry(minor){return new Intl.NumberFormat("tr-TR",{style:"currency",currency:"TRY"}).format((Number(minor)||0)/100)}
+async function loadSummary(){try{const s=await api("/api/summary");document.getElementById("metricRevenue").textContent=formatTry(s.revenueTotalMinor);document.getElementById("metricOrders").textContent=s.paidOrders;document.getElementById("metricPartners").textContent=s.activePartners;document.getElementById("metricSources").textContent=s.activeSources}catch(e){console.warn("Özet verisi alınamadı:",e.message)}}
+async function initAuth(){try{const status=await api("/api/setup/status");if(status.initialized){loginPanel.hidden=false;setupPanel.hidden=true}else{setupPanel.hidden=false;loginPanel.hidden=true;if(status.setupConfigured){document.getElementById("setupInstructions").textContent="Kurulum anahtarı sunucuda tanımlı. Aşağıdaki alanlara aynı anahtarı ve yönetici bilgilerini gir."}}}catch(e){loginPanel.hidden=false;setupPanel.hidden=true;showError("loginError","Sunucuya bağlanılamadı. Biraz sonra tekrar dene.")}}
+document.getElementById("generateKey").addEventListener("click",()=>{const bytes=crypto.getRandomValues(new Uint8Array(32));const key=Array.from(bytes,b=>b.toString(16).padStart(2,"0")).join("");document.getElementById("setupKey").value=key;document.getElementById("setupKey").type="text";document.getElementById("setupInstructions").textContent="Üretilen anahtarı kopyala. Cloudflare > Workers & Pages > cagbas-revenue-api > Settings > Variables and Secrets bölümünde BOOTSTRAP_SECRET adıyla Secret olarak kaydet. Ardından bu ekrana dönüp kurulumu tamamla."});
+document.getElementById("setupForm").addEventListener("submit",async e=>{e.preventDefault();showError("setupError","");const password=document.getElementById("setupPassword").value;if(password!==document.getElementById("setupConfirm").value){showError("setupError","Parolalar eşleşmiyor.");return}const key=document.getElementById("setupKey").value;try{await api("/api/setup",{method:"POST",headers:{"X-Setup-Key":key},body:JSON.stringify({email:document.getElementById("setupEmail").value,password})});setupPanel.hidden=true;loginPanel.hidden=false;document.getElementById("loginEmail").value=document.getElementById("setupEmail").value;showError("loginError","Yönetici hesabı oluşturuldu. Şimdi giriş yapabilirsin.")}catch(err){showError("setupError",err.message==="SETUP_NOT_CONFIGURED"?"Önce BOOTSTRAP_SECRET değerini Cloudflare'da Secret olarak kaydet.":err.message==="UNAUTHORIZED"?"Kurulum anahtarı doğru değil.":err.message==="SETUP_ALREADY_COMPLETED"?"Kurulum daha önce tamamlanmış. Giriş yap.":err.message)}});
+document.getElementById("loginForm").addEventListener("submit",async e=>{e.preventDefault();showError("loginError","");try{const result=await api("/api/login",{method:"POST",body:JSON.stringify({email:document.getElementById("loginEmail").value,password:document.getElementById("loginPassword").value})});showPanel(result.user)}catch(err){showError("loginError",err.message==="INVALID_CREDENTIALS"?"E-posta veya parola hatalı.":err.message==="TOO_MANY_ATTEMPTS"?"Çok fazla başarısız deneme. 15 dakika sonra tekrar dene.":err.message)}});
+document.getElementById("logoutBtn").addEventListener("click",async()=>{try{await api("/api/logout",{method:"POST"})}finally{panelApp.classList.remove("ready");authGate.hidden=false;document.getElementById("loginPassword").value="";initAuth()}});
+document.querySelectorAll("[data-page]").forEach(btn=>btn.addEventListener("click",()=>{document.querySelectorAll("[data-page]").forEach(x=>x.classList.toggle("active",x===btn));document.querySelectorAll(".page").forEach(x=>x.classList.toggle("active",x.id===btn.dataset.page));document.getElementById("pagetitle").textContent=titles[btn.dataset.page][0];document.getElementById("pagesub").textContent=titles[btn.dataset.page][1]}));
+(async()=>{try{const me=await api("/api/me");if(me.authenticated)showPanel(me.user);else await initAuth()}catch{await initAuth()}})();
 </script>
 </body></html>
