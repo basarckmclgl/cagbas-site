@@ -45,3 +45,14 @@ Kurulum anahtarı veya yönetici parolası sohbet mesajına, GitHub'a ya da düz
 - GA4 rapor verisi henüz Revenue Center'a çekilmez. Site ekleme sırasında alan adı ve GA4 kimlikleri kaydedilir; gerçek otomatik veri çekimi için Google Analytics Data API yetkilendirmesi ve sunucu Secret'ı gerekir.
 - AdSense, affiliate ağları, sponsor tahsilatı ve ödeme sağlayıcısı entegrasyonları ayrıca kurulmalıdır; örnek/uydurma performans verisi gösterilmez.
 - Canlı ticari kullanımdan önce rol bazlı yazma yetkileri, denetim kayıtları, KVKK metinleri, veri saklama/silme politikası, ödeme sağlayıcıları ve muhasebe süreçleri ayrıca tamamlanmalıdır.
+
+
+## Google AdSense OAuth entegrasyonu
+- Worker OAuth başlangıç yolu: `/oauth/google/start`
+- Google OAuth geri dönüş URI: `https://cagbas-revenue-api.basarcekmecelioglu6-0f8.workers.dev/oauth/google/callback`
+- İzin kapsamı: `https://www.googleapis.com/auth/adsense.readonly` (salt okunur)
+- Worker Secret değişkenleri: `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET`, `GOOGLE_TOKEN_ENCRYPTION_KEY`.
+- Yenileme belirteci D1'de AES-GCM ile şifreli tutulur; şifreleme anahtarı yalnızca Worker Secret olarak saklanır.
+- OAuth state tek kullanımlık ve 10 dakika geçerlidir.
+- D1 tabloları: `google_oauth_states`, `google_oauth_tokens`.
+- OAuth callback ve token saklama altyapısı eklendi. Google OAuth istemci bilgileri Cloudflare Worker Secret'larına girilmeden bağlantı başlatılamaz.
