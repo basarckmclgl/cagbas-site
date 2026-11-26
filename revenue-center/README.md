@@ -5,18 +5,26 @@ Bağımsız gelir yönetim paneli başlangıç paketi.
 ## Güvenlik ve yayın sınırları
 - Bu klasör mevcut `front/` web sitesinden bağımsızdır.
 - Bu çalışma yalnızca `feature/revenue-center-foundation` dalındadır.
-- Canlı siteye, Cloudflare Pages üretim ayarlarına veya mevcut D1 veritabanına müdahale edilmemiştir.
+- Canlı siteye, mevcut Pages projesine ve üretim dağıtım ayarlarına müdahale edilmemiştir.
 - `index.html` şu an yalnızca arayüz prototipidir. Gerçek oturum açma, yetkilendirme, veri kaydı veya ödeme işlemi yapmaz.
-- Gerçek kullanıma açılmadan önce sunucu taraflı kimlik doğrulama, oturum güvenliği, erişim kontrolleri, denetim kayıtları ve KVKK değerlendirmesi zorunludur.
+- Gerçek kullanıma açılmadan önce Worker API, sunucu taraflı kimlik doğrulama, oturum güvenliği, erişim kontrolleri ve KVKK değerlendirmesi tamamlanmalıdır.
+- Veritabanı henüz gerçek kullanıcı, müşteri veya gelir kaydı içermemektedir.
+
+## Altyapı durumu
+- Bağımsız D1 veritabanı: `cagbas-revenue-center`
+- D1 ID: `f2e8bec2-71c0-492c-8da9-24bd596c58af`
+- Şema uygulandı ve tablolar doğrulandı.
+- Veritabanı Cloudflare tarafından EEUR bölgesinde oluşturuldu. Kişisel veri aktarımı başlamadan önce KVKK yurt dışına aktarım şartları ayrıca değerlendirilmelidir.
+- Mevcut `bascag-reviews`, `cagbas-contact` ve `cagbas-preview-db` veritabanlarına dokunulmamıştır.
 
 ## İçerik
 - `index.html`: Duyarlı yönetim paneli arayüz prototipi.
-- `schema.sql`: Ayrı D1 veritabanı için başlangıç şeması taslağı; henüz uygulanmamıştır.
+- `schema.sql`: Yönetici hesapları, oturumlar, giriş denemeleri, denetim kayıtları ve gelir modülleri için D1 şeması.
 
-## Önerilen sonraki adımlar
-1. Cloudflare Pages üzerinde ayrı bir proje oluşturup bu klasörü kök dizin olarak tanımlamak.
-2. Ayrı bir D1 veritabanı oluşturmak; mevcut `bascag-reviews` veritabanına dokunmamak.
-3. Cloudflare Worker API geliştirmek.
-4. Yönetici kimlik doğrulamasını ve rol kontrollerini sunucu tarafında kurmak.
-5. Gerçek AdSense, affiliate, sponsor ve ödeme entegrasyonlarını ayrı ayrı doğrulamak.
+## Sonraki adımlar
+1. Worker API ve güvenli ilk yönetici kurulum akışını geliştirmek.
+2. API'yi ayrı bir Worker olarak yapılandırmak ve D1 bağlantısını yalnızca bu Worker'a vermek.
+3. Paneli ayrı bir Cloudflare projesinde yayınlamak; mevcut `cagbas-site` projesine bağlamamak.
+4. Gerçek yönetici e-postası ve parolasını Cloudflare Secrets üzerinden tanımlamak; GitHub'a hiçbir gizli bilgi koymamak.
+5. AdSense, affiliate, sponsor ve ödeme entegrasyonlarını ayrı ayrı kurmak.
 6. KVKK, çerez ve ticari mevzuat kontrolleri tamamlanmadan ziyaretçi verisi toplamamak veya ticari faaliyeti başlatmamak.
