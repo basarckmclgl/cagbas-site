@@ -165,7 +165,7 @@ const authGate=document.getElementById("authGate"),panelApp=document.getElementB
 const setupPanel=document.getElementById("setupPanel"),loginPanel=document.getElementById("loginPanel");
 function showError(id,message){document.getElementById(id).textContent=message||""}
 async function api(path,options={}){const response=await fetch(path,{...options,credentials:"same-origin",headers:{"content-type":"application/json",...(options.headers||{})}});let data={};try{data=await response.json()}catch{}if(!response.ok)throw new Error(data.detail?`${data.error||"SERVER_ERROR"}: ${data.detail}`:(data.error||"İstek tamamlanamadı."));return data}
-function showPanel(user){authGate.hidden=true;panelApp.classList.add("ready");document.getElementById("sessionLabel").textContent="● "+user.role;loadSummary()}
+function showPanel(user){authGate.hidden=true;panelApp.classList.add("ready");document.getElementById("sessionLabel").textContent="● "+user.role;loadSummary();loadOperationalModules()}
 function formatTry(minor){return new Intl.NumberFormat("tr-TR",{style:"currency",currency:"TRY"}).format((Number(minor)||0)/100)}
 async function loadSummary(){try{const s=await api("/api/summary");document.getElementById("metricRevenue").textContent=formatTry(s.revenueTotalMinor);document.getElementById("metricOrders").textContent=s.paidOrders;document.getElementById("metricPartners").textContent=s.activePartners;document.getElementById("metricSources").textContent=s.activeSources}catch(e){console.warn("Özet verisi alınamadı:",e.message)}}
 async function initAuth(){try{const status=await api("/api/setup/status");if(status.initialized){loginPanel.hidden=false;setupPanel.hidden=true}else{setupPanel.hidden=false;loginPanel.hidden=true;if(status.setupConfigured){document.getElementById("setupInstructions").textContent="Kurulum anahtarı sunucuda tanımlı. Aşağıdaki alanlara aynı anahtarı ve yönetici bilgilerini gir."}}}catch(e){loginPanel.hidden=false;setupPanel.hidden=true;showError("loginError","Sunucuya bağlanılamadı. Biraz sonra tekrar dene.")}}
@@ -174,6 +174,83 @@ document.getElementById("setupForm").addEventListener("submit",async e=>{e.preve
 document.getElementById("loginForm").addEventListener("submit",async e=>{e.preventDefault();showError("loginError","");try{const result=await api("/api/login",{method:"POST",body:JSON.stringify({email:document.getElementById("loginEmail").value,password:document.getElementById("loginPassword").value})});showPanel(result.user)}catch(err){showError("loginError",err.message==="INVALID_CREDENTIALS"?"E-posta veya parola hatalı.":err.message==="TOO_MANY_ATTEMPTS"?"Çok fazla başarısız deneme. 15 dakika sonra tekrar dene.":err.message)}});
 document.getElementById("logoutBtn").addEventListener("click",async()=>{try{await api("/api/logout",{method:"POST"})}finally{panelApp.classList.remove("ready");authGate.hidden=false;document.getElementById("loginPassword").value="";initAuth()}});
 document.querySelectorAll("[data-page]").forEach(btn=>btn.addEventListener("click",()=>{document.querySelectorAll("[data-page]").forEach(x=>x.classList.toggle("active",x===btn));document.querySelectorAll(".page").forEach(x=>x.classList.toggle("active",x.id===btn.dataset.page));document.getElementById("pagetitle").textContent=titles[btn.dataset.page][0];document.getElementById("pagesub").textContent=titles[btn.dataset.page][1]}));
+
+const resourceData={};
+const resourceMeta={
+ sources:{mount:"sourcesMount",title:"Gelir Kanalları",fields:[
+  ["name","Kanal adı","text",true],["source_type","Gelir türü","select",true,[["ads","Reklam"],["affiliate","Satış ortaklığı"],["sponsor","Sponsor"],["store","Dijital mağaza"],["referral","Müşteri yönlendirme"]]],["status","Durum","select",true,[["draft","Taslak"],["active","Aktif"],["paused","Duraklatıldı"],["archived","Arşiv"]]]],columns:[["name","Kanal"],["source_type","Tür"],["status","Durum"]]},
+ partners:{mount:"partnersMount",title:"İş Ortakları",fields:[
+  ["name","Firma / iş ortağı","text",true],["website","Web sitesi","url"],["commission_model","Komisyon modeli","text"],["commission_rate","Komisyon oranı (%)","number"],["status","Durum","select",true,[["prospect","Aday"],["active","Aktif"],["paused","Duraklatıldı"],["closed","Kapalı"]]]],columns:[["name","İş ortağı"],["website","Web sitesi"],["commission_model","Model"],["commission_rate","Oran"],["status","Durum"]]},
+ sponsors:{mount:"sponsorsMount",title:"Sponsor Kampanyaları",fields:[
+  ["sponsor_name","Sponsor firma","text",true],["campaign_name","Kampanya adı","text",true],["start_date","Başlangıç","date"],["end_date","Bitiş","date"],["agreed_amount_minor","Anlaşma bedeli (TL)","number"],["currency","Para birimi","text",false,null,"TRY"],["disclosure_text","Reklam / iş birliği açıklaması","text"],["status","Durum","select",true,[["draft","Taslak"],["scheduled","Planlandı"],["published","Yayında"],["completed","Tamamlandı"],["cancelled","İptal"]]]],columns:[["sponsor_name","Sponsor"],["campaign_name","Kampanya"],["start_date","Başlangıç"],["end_date","Bitiş"],["agreed_amount_minor","Anlaşma bedeli"],["status","Durum"]]},
+ products:{mount:"productsMount",title:"Dijital Ürünler",fields:[
+  ["name","Ürün adı","text",true],["description","Açıklama","text"],["price_minor","Satış fiyatı (TL)","number",true],["currency","Para birimi","text",false,null,"TRY"],["status","Durum","select",true,[["draft","Taslak"],["active","Aktif"],["archived","Arşiv"]]]],columns:[["name","Ürün"],["description","Açıklama"],["price_minor","Fiyat"],["status","Durum"]]},
+ entries:{mount:"entriesMount",title:"Gelir ve Gider Kayıtları",fields:[
+  ["source_id","Gelir kanalı","select",true,"sources"],["entry_type","Kayıt türü","select",true,[["earning","Gelir"],["commission","Komisyon"],["expense","Gider"],["refund","İade"],["adjustment","Düzeltme"]]],["amount_minor","Tutar (TL)","number",true],["currency","Para birimi","text",false,null,"TRY"],["reference_code","Referans no","text"],["description","Açıklama","text"],["occurred_at","İşlem tarihi","datetime-local",true]],columns:[["occurred_at","Tarih"],["source_id","Kanal"],["entry_type","Tür"],["amount_minor","Tutar"],["description","Açıklama"]]},
+ orders:{mount:"ordersMount",title:"Sipariş Kayıtları",fields:[
+  ["product_id","Ürün","select",true,"products"],["order_reference","Sipariş no","text"],["amount_minor","Sipariş tutarı (TL)","number",true],["currency","Para birimi","text",false,null,"TRY"],["payment_status","Ödeme durumu","select",true,[["pending","Bekliyor"],["paid","Ödendi"],["failed","Başarısız"],["refunded","İade edildi"]]]],columns:[["order_reference","Sipariş no"],["product_id","Ürün"],["amount_minor","Tutar"],["payment_status","Ödeme"]]}
+};
+function esc(v){return String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+function moneyMinor(v,c="TRY"){return new Intl.NumberFormat("tr-TR",{style:"currency",currency:c||"TRY"}).format((Number(v)||0)/100)}
+function fieldOptions(field){
+ const source=field[4];
+ if(source==="sources")return (resourceData.sources||[]).map(x=>[x.id,x.name]);
+ if(source==="products")return (resourceData.products||[]).map(x=>[x.id,x.name]);
+ return Array.isArray(source)?source:[];
+}
+function renderField(f){
+ const [name,label,type,required,opts,defaultValue]=f;
+ const value=defaultValue|| (name==="occurred_at"?new Date(Date.now()-new Date().getTimezoneOffset()*60000).toISOString().slice(0,16):"");
+ if(type==="select")return '<label class="crud-field">'+esc(label)+'<select name="'+name+'" '+(required?"required":"")+'>'+fieldOptions(f).map(o=>'<option value="'+esc(o[0])+'">'+esc(o[1])+'</option>').join("")+'</select></label>';
+ return '<label class="crud-field">'+esc(label)+'<input name="'+name+'" type="'+type+'" '+(type==="number"?'step="0.01" min="0"':"")+' '+(required?"required":"")+' '+(value?'value="'+esc(value)+'"':"")+'></label>';
+}
+function displayValue(resource,key,row){
+ let v=row[key];
+ if(key==="amount_minor"||key==="price_minor"||key==="agreed_amount_minor")return moneyMinor(v,row.currency);
+ if(key==="source_id")return (resourceData.sources||[]).find(x=>x.id===v)?.name||"—";
+ if(key==="product_id")return (resourceData.products||[]).find(x=>x.id===v)?.name||"—";
+ const labels={ads:"Reklam",affiliate:"Satış ortaklığı",sponsor:"Sponsor",store:"Dijital mağaza",referral:"Yönlendirme",earning:"Gelir",commission:"Komisyon",expense:"Gider",refund:"İade",adjustment:"Düzeltme",prospect:"Aday",active:"Aktif",paused:"Duraklatıldı",closed:"Kapalı",draft:"Taslak",scheduled:"Planlandı",published:"Yayında",completed:"Tamamlandı",cancelled:"İptal",archived:"Arşiv",pending:"Bekliyor",paid:"Ödendi",failed:"Başarısız",refunded:"İade edildi"};
+ return labels[v]||v||"—";
+}
+async function loadResource(resource){
+ const meta=resourceMeta[resource],mount=document.getElementById(meta.mount);
+ try{
+  const result=await api("/api/"+resource);resourceData[resource]=result.items||[];
+  const formFields=meta.fields.map(renderField).join("");
+  const headers=meta.columns.map(c=>'<th>'+esc(c[1])+'</th>').join("");
+  const rows=resourceData[resource].map(row=>'<tr>'+meta.columns.map(c=>'<td>'+esc(displayValue(resource,c[0],row))+'</td>').join("")+'<td><button class="btn" data-edit="'+esc(row.id)+'">Düzenle</button> <button class="btn" data-delete="'+esc(row.id)+'">Sil</button></td></tr>').join("");
+  mount.innerHTML='<div class="crud-wrap"><div class="card"><div class="crud-head"><h2>'+esc(meta.title)+'</h2><span class="muted">'+resourceData[resource].length+' kayıt</span></div><form class="crud-form" data-resource-form="'+resource+'">'+formFields+'<div class="crud-actions"><button class="btn primary" type="submit">Kaydet</button><button class="btn" type="reset">Temizle</button></div><div class="crud-msg" id="'+resource+'Msg" role="status"></div></form></div><div class="card"><div class="crud-table-wrap">'+(rows?'<table class="crud-table"><thead><tr>'+headers+'<th>İşlem</th></tr></thead><tbody>'+rows+'</tbody></table>':'<div class="crud-empty">Henüz kayıt yok. İlk kaydı yukarıdaki formdan ekleyebilirsin.</div>')+'</div></div></div>';
+  const form=mount.querySelector("form");
+  form.addEventListener("submit",async e=>{
+   e.preventDefault();const data=Object.fromEntries(new FormData(form).entries());
+   for(const key of ["amount_minor","price_minor","agreed_amount_minor"])if(data[key]!==undefined&&data[key]!=="")data[key]=Math.round(Number(data[key])*100);
+   if(data.commission_rate!==undefined&&data.commission_rate==="")delete data.commission_rate;
+   const editId=form.dataset.editId;
+   try{await api("/api/"+resource+(editId?"/"+editId:""),{method:editId?"PATCH":"POST",body:JSON.stringify(data)});await loadResource(resource);await loadSummary();if(resource==="sources")await loadResource("entries");if(resource==="products")await loadResource("orders")}
+   catch(err){document.getElementById(resource+"Msg").textContent=err.message}
+  });
+  form.addEventListener("reset",()=>{delete form.dataset.editId;const btn=form.querySelector('button[type="submit"]');if(btn)btn.textContent="Kaydet"});
+  mount.querySelectorAll("[data-edit]").forEach(btn=>btn.addEventListener("click",()=>{
+   const row=resourceData[resource].find(x=>x.id===btn.dataset.edit);if(!row)return;
+   form.dataset.editId=row.id;
+   for(const f of meta.fields){const input=form.elements[f[0]];if(!input)continue;let value=row[f[0]]??f[5]??"";if(["amount_minor","price_minor","agreed_amount_minor"].includes(f[0]))value=Number(value)/100;if(f[2]==="datetime-local"&&value)value=String(value).slice(0,16);input.value=value}
+   form.querySelector('button[type="submit"]').textContent="Değişiklikleri kaydet";form.scrollIntoView({behavior:"smooth",block:"center"});
+  }));
+  mount.querySelectorAll("[data-delete]").forEach(btn=>btn.addEventListener("click",async()=>{
+   if(!confirm("Bu kaydı silmek istediğine emin misin?"))return;
+   try{await api("/api/"+resource+"/"+btn.dataset.delete,{method:"DELETE"});await loadResource(resource);await loadSummary()}catch(err){alert("Kayıt silinemedi: "+err.message)}
+  }));
+ }catch(err){mount.innerHTML='<div class="card crud-empty">Kayıtlar yüklenemedi: '+esc(err.message)+'</div>'}
+}
+async function loadFinanceSummary(){
+ try{const r=await api("/api/summary");const target=document.getElementById("financeSummary");if(!target)return;
+ target.innerHTML=[["Toplam gelir",r.revenueTotalMinor],["Ödenen sipariş",r.paidOrders],["Aktif iş ortağı",r.activePartners],["Aktif gelir kanalı",r.activeSources]].map((x,i)=>'<article class="card"><div class="metrichead">'+x[0]+'</div><div class="metric">'+(i===0?moneyMinor(x[1]):esc(x[1]))+'</div></article>').join("");
+ }catch{}
+}
+async function loadOperationalModules(){
+ await loadResource("sources");await loadResource("partners");await loadResource("sponsors");await loadResource("products");await loadResource("entries");await loadResource("orders");await loadFinanceSummary();
+}
+
 (async()=>{try{const me=await api("/api/me");if(me.authenticated)showPanel(me.user);else await initAuth()}catch{await initAuth()}})();
 </script>
 </body></html>
