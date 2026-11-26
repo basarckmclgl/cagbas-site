@@ -19,10 +19,10 @@ Bağımsız gelir yönetim paneli başlangıç paketi.
 
 ## İçerik
 - `index.html`: Duyarlı yönetim paneli arayüz prototipi.
-- `schema.sql`: Yönetici hesapları, oturumlar, giriş denemeleri, denetim kayıtları ve gelir modülleri için D1 şeması.
+- `schema.sql`: Yönetici hesapları, oturumlar, giriş denemeleri, denetim kayıtları ve gelir modülleri için uygulanmış D1 şeması.\n- `worker.js`: İlk yönetici kurulumu, parola doğrulama, güvenli oturum çerezi, oturum kapatma ve korumalı özet API'si için Worker kaynak kodu. Henüz dağıtılmamıştır.
 
 ## Sonraki adımlar
-1. Worker API ve güvenli ilk yönetici kurulum akışını geliştirmek.
+1. Worker API kaynağı eklendi; şimdi Cloudflare üzerinde ayrı Worker olarak yapılandırılıp test edilmelidir.
 2. API'yi ayrı bir Worker olarak yapılandırmak ve D1 bağlantısını yalnızca bu Worker'a vermek.
 3. Paneli ayrı bir Cloudflare projesinde yayınlamak; mevcut `cagbas-site` projesine bağlamamak.
 4. Gerçek yönetici e-postası ve parolasını Cloudflare Secrets üzerinden tanımlamak; GitHub'a hiçbir gizli bilgi koymamak.
