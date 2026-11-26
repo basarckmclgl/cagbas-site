@@ -310,7 +310,7 @@ async function handle(request, env) {
     return json({ authenticated: true, user: { email: session.email, role: session.role } });
   }
 
-  const resourceMatch=url.pathname.match(/^\\/api\\/(partners|sponsors|products|sources|entries|orders)(?:\\/([A-Za-z0-9-]+))?$/);
+  const resourceMatch=url.pathname.match(/^\/api\/(partners|sponsors|products|sources|entries|orders)(?:\/([A-Za-z0-9-]+))?$/);
   if(resourceMatch) {
     const session=await requireSession(request,env);
     if(!session) return json({error:"UNAUTHENTICATED"},401);
