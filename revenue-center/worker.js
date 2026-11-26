@@ -71,8 +71,15 @@ function clearCookie() {
 
 function sameOrigin(request) {
   const origin = request.headers.get("Origin");
-  if (!origin) return true;
-  return new URL(origin).origin === new URL(request.url).origin;
+  // Browser POST requests must carry an exact same-origin Origin header.
+  // Reject missing Origin as well as cross-origin requests to prevent CSRF.
+  if (request.method === "POST" && !origin) return false;
+  if (!origin) return true; // Read-only GET requests may omit Origin.
+  try {
+    return new URL(origin).origin === new URL(request.url).origin;
+  } catch {
+    return false;
+  }
 }
 
 async function readJson(request) {
