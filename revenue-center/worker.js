@@ -206,6 +206,67 @@ async function logout(request, env) {
   return json({ success: true }, 200, { "set-cookie": clearCookie() });
 }
 
+
+const RESOURCE_CONFIG = {
+  partners: { table:"partners", fields:["name","website","commission_model","commission_rate","status"], required:["name"], statuses:["prospect","active","paused","closed"] },
+  sponsors: { table:"sponsor_campaigns", fields:["sponsor_name","campaign_name","start_date","end_date","agreed_amount_minor","currency","disclosure_text","status"], required:["sponsor_name","campaign_name"], statuses:["draft","scheduled","published","completed","cancelled"] },
+  products: { table:"digital_products", fields:["name","description","price_minor","currency","status"], required:["name"], statuses:["draft","active","archived"] },
+  sources: { table:"revenue_sources", fields:["name","source_type","status"], required:["name","source_type"], statuses:["draft","active","paused","archived"], types:["ads","affiliate","sponsor","store","referral"] },
+  entries: { table:"revenue_entries", fields:["source_id","entry_type","amount_minor","currency","reference_code","description","occurred_at"], required:["source_id","entry_type","amount_minor","occurred_at"], types:["earning","commission","expense","refund","adjustment"] },
+  orders: { table:"orders", fields:["product_id","order_reference","amount_minor","currency","payment_status"], required:["product_id","amount_minor"], statuses:["pending","paid","failed","refunded"] }
+};
+function cleanResourceInput(resource, body, partial=false) {
+  const cfg=RESOURCE_CONFIG[resource]; const out={};
+  for (const key of cfg.fields) if (Object.prototype.hasOwnProperty.call(body,key)) out[key]=body[key];
+  if (!partial) for (const key of cfg.required) if (out[key]===undefined || out[key]===null || String(out[key]).trim()==="") throw new Error("REQUIRED_"+key.toUpperCase());
+  if (out.currency!==undefined) { out.currency=String(out.currency).toUpperCase(); if(!/^[A-Z]{3}$/.test(out.currency)) throw new Error("INVALID_CURRENCY"); }
+  for (const key of ["amount_minor","price_minor","agreed_amount_minor"]) if(out[key]!==undefined && (!Number.isSafeInteger(Number(out[key])) || Number(out[key])<0)) throw new Error("INVALID_"+key.toUpperCase()); else if(out[key]!==undefined) out[key]=Number(out[key]);
+  if(out.commission_rate!==undefined && (out.commission_rate!==null && (!Number.isFinite(Number(out.commission_rate)) || Number(out.commission_rate)<0 || Number(out.commission_rate)>100))) throw new Error("INVALID_COMMISSION_RATE");
+  if(out.commission_rate!==undefined && out.commission_rate!==null) out.commission_rate=Number(out.commission_rate);
+  if(out.status!==undefined && cfg.statuses && !cfg.statuses.includes(out.status)) throw new Error("INVALID_STATUS");
+  if(out.source_type!==undefined && cfg.types && !cfg.types.includes(out.source_type)) throw new Error("INVALID_SOURCE_TYPE");
+  if(out.entry_type!==undefined && cfg.types && !cfg.types.includes(out.entry_type)) throw new Error("INVALID_ENTRY_TYPE");
+  if(out.payment_status!==undefined && cfg.statuses && !cfg.statuses.includes(out.payment_status)) throw new Error("INVALID_PAYMENT_STATUS");
+  for(const key of ["name","sponsor_name","campaign_name","website","commission_model","description","reference_code","disclosure_text","order_reference","source_id","product_id","occurred_at","start_date","end_date"]) if(out[key]!==undefined && out[key]!==null) out[key]=String(out[key]).trim();
+  return out;
+}
+async function resourceRoute(request, env, session, resource, id=null) {
+  const cfg=RESOURCE_CONFIG[resource]; if(!cfg) return json({error:"NOT_FOUND"},404);
+  const writable=["owner","admin","editor"].includes(session.role);
+  if(request.method==="GET") {
+    const rows=await env.DB.prepare("SELECT * FROM "+cfg.table+" ORDER BY created_at DESC LIMIT 250").all();
+    return json({items:rows.results||[]});
+  }
+  if(!writable) return json({error:"FORBIDDEN"},403);
+  if(request.method==="POST") {
+    const body=await readJson(request); const data=cleanResourceInput(resource,body,false);
+    const idNew=crypto.randomUUID(); const cols=["id",...Object.keys(data)];
+    const placeholders=cols.map(()=>"?").join(",");
+    await env.DB.prepare("INSERT INTO "+cfg.table+" ("+cols.join(",")+") VALUES ("+placeholders+")")
+      .bind(idNew,...Object.values(data)).run();
+    await env.DB.prepare("INSERT INTO audit_logs (id,user_id,action,resource_type,resource_id) VALUES (?,?,?,?,?)")
+      .bind(crypto.randomUUID(),session.id,"create",resource,idNew).run();
+    return json({success:true,id:idNew},201);
+  }
+  if(!id) return json({error:"ID_REQUIRED"},400);
+  if(request.method==="PATCH") {
+    const body=await readJson(request); const data=cleanResourceInput(resource,body,true);
+    const keys=Object.keys(data); if(!keys.length) return json({error:"NO_FIELDS"},400);
+    await env.DB.prepare("UPDATE "+cfg.table+" SET "+keys.map(k=>k+" = ?").join(", ")+" WHERE id = ?")
+      .bind(...keys.map(k=>data[k]),id).run();
+    await env.DB.prepare("INSERT INTO audit_logs (id,user_id,action,resource_type,resource_id) VALUES (?,?,?,?,?)")
+      .bind(crypto.randomUUID(),session.id,"update",resource,id).run();
+    return json({success:true});
+  }
+  if(request.method==="DELETE") {
+    await env.DB.prepare("DELETE FROM "+cfg.table+" WHERE id = ?").bind(id).run();
+    await env.DB.prepare("INSERT INTO audit_logs (id,user_id,action,resource_type,resource_id) VALUES (?,?,?,?,?)")
+      .bind(crypto.randomUUID(),session.id,"delete",resource,id).run();
+    return json({success:true});
+  }
+  return json({error:"METHOD_NOT_ALLOWED"},405);
+}
+
 async function handle(request, env) {
   const url = new URL(request.url);
   if (!url.pathname.startsWith("/api/")) {
@@ -247,6 +308,13 @@ async function handle(request, env) {
     const session = await requireSession(request, env);
     if (!session) return json({ authenticated: false }, 401);
     return json({ authenticated: true, user: { email: session.email, role: session.role } });
+  }
+
+  const resourceMatch=url.pathname.match(/^\\/api\\/(partners|sponsors|products|sources|entries|orders)(?:\\/([A-Za-z0-9-]+))?$/);
+  if(resourceMatch) {
+    const session=await requireSession(request,env);
+    if(!session) return json({error:"UNAUTHENTICATED"},401);
+    return await resourceRoute(request,env,session,resourceMatch[1],resourceMatch[2]||null);
   }
 
   if (url.pathname === "/api/summary" && request.method === "GET") {
