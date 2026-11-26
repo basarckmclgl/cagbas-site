@@ -138,11 +138,13 @@ document.addEventListener('DOMContentLoaded', function () {
     const copy = {
         tr: {
             title: 'Çerez tercihleri',
-            intro: 'Zorunlu çerezler sitenin çalışması için gereklidir. Analitik çerezleri yalnızca izninizle kullanılır.',
+            intro: 'Zorunlu çerezler sitenin çalışması için gereklidir. Analitik ve reklam çerezleri yalnızca izninizle kullanılır.',
             necessary: 'Zorunlu çerezler',
             necessaryDesc: 'Güvenlik ve temel site işlevleri için gereklidir; kapatılamaz.',
             analytics: 'Analitik çerezleri',
             analyticsDesc: 'Ziyaret ve kullanım istatistiklerini Google Analytics ile ölçmemizi sağlar.',
+            advertising: 'Reklam çerezleri',
+            advertisingDesc: 'Reklamların gösterilmesi, ölçülmesi ve kişiselleştirilmesi için kullanılır. İzin vermezseniz kişiselleştirilmiş reklam çerezleri kullanılmaz.',
             accept: 'Tümünü kabul et',
             reject: 'Reddet',
             manage: 'Tercihleri yönet',
@@ -153,11 +155,13 @@ document.addEventListener('DOMContentLoaded', function () {
         },
         en: {
             title: 'Cookie preferences',
-            intro: 'Essential cookies are required for the website to work. Analytics cookies are used only with your permission.',
+            intro: 'Essential cookies are required. Analytics and advertising cookies are used only with your permission.',
             necessary: 'Essential cookies',
             necessaryDesc: 'Required for security and core website functions; they cannot be disabled.',
             analytics: 'Analytics cookies',
             analyticsDesc: 'Allow us to measure visits and usage statistics with Google Analytics.',
+            advertising: 'Advertising cookies',
+            advertisingDesc: 'Used to deliver, measure and personalize ads. Personalized advertising cookies are not used without your permission.',
             accept: 'Accept all',
             reject: 'Reject',
             manage: 'Manage preferences',
@@ -168,11 +172,13 @@ document.addEventListener('DOMContentLoaded', function () {
         },
         ar: {
             title: 'تفضيلات ملفات تعريف الارتباط',
-            intro: 'ملفات تعريف الارتباط الضرورية مطلوبة لتشغيل الموقع. لا تُستخدم ملفات التحليل إلا بموافقتك.',
+            intro: 'ملفات تعريف الارتباط الضرورية مطلوبة. لا تُستخدم ملفات التحليل والإعلانات إلا بموافقتك.',
             necessary: 'ملفات تعريف الارتباط الضرورية',
             necessaryDesc: 'مطلوبة للأمان والوظائف الأساسية ولا يمكن تعطيلها.',
             analytics: 'ملفات تعريف الارتباط التحليلية',
             analyticsDesc: 'تتيح لنا قياس الزيارات وإحصاءات الاستخدام باستخدام Google Analytics.',
+            advertising: 'ملفات تعريف الارتباط الإعلانية',
+            advertisingDesc: 'تُستخدم لعرض الإعلانات وقياسها وتخصيصها. لن تُستخدم ملفات الإعلانات المخصصة دون موافقتك.',
             accept: 'قبول الكل',
             reject: 'رفض',
             manage: 'إدارة التفضيلات',
@@ -188,6 +194,8 @@ document.addEventListener('DOMContentLoaded', function () {
         necessaryDesc: 'Required for core website functions.',
         analytics: 'Analytics cookies',
         analyticsDesc: 'Measure visits and usage with Google Analytics.',
+        advertising: 'Advertising cookies',
+        advertisingDesc: 'Used to deliver, measure and personalize ads. Personalized advertising cookies are not used without your permission.',
         accept: 'Accept all',
         reject: 'Reject',
         manage: 'Manage preferences',
@@ -216,6 +224,7 @@ document.addEventListener('DOMContentLoaded', function () {
         return {
             necessary: true,
             analytics: value.analytics === true,
+            advertising: value.advertising === true,
             updatedAt: value.updatedAt || null
         };
     }
@@ -252,8 +261,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
         try {
             const legacy = localStorage.getItem(LEGACY_KEY);
-            if (legacy === 'accepted') return { necessary: true, analytics: true };
-            if (legacy === 'rejected') return { necessary: true, analytics: false };
+            if (legacy === 'accepted') return { necessary: true, analytics: true, advertising: false };
+            if (legacy === 'rejected') return { necessary: true, analytics: false, advertising: false };
         } catch (error) {
             console.warn('Legacy cookie consent could not be read.', error);
         }
@@ -264,9 +273,6 @@ document.addEventListener('DOMContentLoaded', function () {
     function loadAnalytics() {
         window.gtag('consent', 'update', {
             analytics_storage: 'granted',
-            ad_storage: 'denied',
-            ad_user_data: 'denied',
-            ad_personalization: 'denied'
         });
 
         if (window.cagbasAnalyticsLoaded) return;
@@ -285,9 +291,6 @@ document.addEventListener('DOMContentLoaded', function () {
     function disableAnalytics() {
         window.gtag('consent', 'update', {
             analytics_storage: 'denied',
-            ad_storage: 'denied',
-            ad_user_data: 'denied',
-            ad_personalization: 'denied'
         });
 
         const hostParts = location.hostname.split('.');
@@ -308,10 +311,20 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    function saveConsent(analytics) {
+    function updateAdvertisingConsent(advertising) {
+        const value = advertising === true ? 'granted' : 'denied';
+        window.gtag('consent', 'update', {
+            ad_storage: value,
+            ad_user_data: value,
+            ad_personalization: value
+        });
+    }
+
+    function saveConsent(analytics, advertising) {
         const choice = {
             necessary: true,
             analytics: analytics === true,
+            advertising: advertising === true,
             updatedAt: new Date().toISOString()
         };
 
@@ -337,6 +350,7 @@ document.addEventListener('DOMContentLoaded', function () {
         } else {
             disableAnalytics();
         }
+        updateAdvertisingConsent(choice.advertising);
 
         banner.hidden = true;
         launcher.hidden = false;
@@ -379,6 +393,8 @@ document.addEventListener('DOMContentLoaded', function () {
         '</p></div><input type="checkbox" checked disabled aria-label="' + copy.necessary +
         '"></div><label class="cagbas-cookie-option"><span><strong>' + copy.analytics + '</strong><small>' +
         copy.analyticsDesc + '</small></span><input type="checkbox" class="cagbas-cookie-analytics"></label>' +
+        '<label class="cagbas-cookie-option"><span><strong>' + copy.advertising + '</strong><small>' +
+        copy.advertisingDesc + '</small></span><input type="checkbox" class="cagbas-cookie-advertising"></label>' +
         '<div class="cagbas-cookie-dialog__actions"><button type="button" class="cagbas-cookie-reject">' +
         copy.reject + '</button><button type="button" class="cagbas-cookie-save">' + copy.save +
         '</button><button type="button" class="cagbas-cookie-accept">' + copy.accept + '</button></div></div>';
@@ -393,12 +409,15 @@ document.addEventListener('DOMContentLoaded', function () {
     document.body.appendChild(launcher);
 
     const analyticsToggle = dialog.querySelector('.cagbas-cookie-analytics');
+    const advertisingToggle = dialog.querySelector('.cagbas-cookie-advertising');
     const existing = readConsent();
 
     if (existing) {
         banner.hidden = true;
         launcher.hidden = false;
         analyticsToggle.checked = existing.analytics === true;
+        advertisingToggle.checked = existing.advertising === true;
+        updateAdvertisingConsent(existing.advertising);
 
         if (existing.analytics === true) {
             loadAnalytics();
@@ -414,6 +433,7 @@ document.addEventListener('DOMContentLoaded', function () {
     function openPreferences() {
         const current = readConsent();
         analyticsToggle.checked = current ? current.analytics === true : false;
+        advertisingToggle.checked = current ? current.advertising === true : false;
         dialog.hidden = false;
         analyticsToggle.focus();
     }
@@ -421,11 +441,11 @@ document.addEventListener('DOMContentLoaded', function () {
     launcher.addEventListener('click', openPreferences);
 
     banner.querySelector('.cookie-accept').addEventListener('click', function () {
-        saveConsent(true);
+        saveConsent(true, true);
     });
 
     banner.querySelector('.cookie-reject').addEventListener('click', function () {
-        saveConsent(false);
+        saveConsent(false, false);
     });
 
     banner.querySelector('.cookie-preferences').addEventListener('click', openPreferences);
@@ -443,7 +463,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     dialog.querySelector('.cagbas-cookie-save').addEventListener('click', function () {
-        saveConsent(analyticsToggle.checked === true);
+        saveConsent(analyticsToggle.checked === true, advertisingToggle.checked === true);
     });
 
     dialog.addEventListener('click', function (event) {
