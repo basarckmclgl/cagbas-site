@@ -202,11 +202,16 @@ async function totpStatus(request,env,session){
 }
 async function totpBegin(request,env,session){
   if(!env.TOTP_ENCRYPTION_KEY)return json({error:"TOTP_ENCRYPTION_KEY_MISSING"},503);
-  const existing=await env.DB.prepare("SELECT enabled_at FROM admin_totp WHERE user_id=?").bind(session.id).first();
+  const existing=await env.DB.prepare("SELECT secret_ciphertext,enabled_at FROM admin_totp WHERE user_id=?").bind(session.id).first();
   if(existing?.enabled_at)return json({error:"TOTP_ALREADY_ENABLED"},409);
-  const secret=base32Encode(crypto.getRandomValues(new Uint8Array(20)));
-  const encrypted=await encryptTotpSecret(secret,env);
-  await env.DB.prepare("INSERT INTO admin_totp (user_id,secret_ciphertext,enabled_at,last_used_step) VALUES (?,?,\'\',0) ON CONFLICT(user_id) DO UPDATE SET secret_ciphertext=excluded.secret_ciphertext,enabled_at=\'\',last_used_step=0").bind(session.id,encrypted).run();
+  let secret;
+  if(existing?.secret_ciphertext){
+    secret=await decryptTotpSecret(existing.secret_ciphertext,env);
+  }else{
+    secret=base32Encode(crypto.getRandomValues(new Uint8Array(20)));
+    const encrypted=await encryptTotpSecret(secret,env);
+    await env.DB.prepare("INSERT INTO admin_totp (user_id,secret_ciphertext,enabled_at,last_used_step) VALUES (?,?,\'\',0)").bind(session.id,encrypted).run();
+  }
   const label=encodeURIComponent("CAGBAS Revenue Center:"+session.email);
   const uri="otpauth://totp/"+label+"?secret="+secret+"&issuer=CAGBAS%20Revenue%20Center&algorithm=SHA1&digits=6&period=30";
   return json({success:true,secret,otpauth_uri:uri});
