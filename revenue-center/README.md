@@ -16,14 +16,17 @@ Bağımsız gelir yönetim paneli ve API.
 - D1 veritabanı: `cagbas-revenue-center`
 - D1 ID: `f2e8bec2-71c0-492c-8da9-24bd596c58af`
 - Worker'ın `DB` binding'i yalnızca bu yeni D1 veritabanına bağlıdır.
-- D1 şeması uygulandı; yönetici/işletme kayıtları henüz oluşturulmadı.
+- D1 şeması uygulandı; ilk yönetici hesabı oluşturuldu.
+- Çoklu site yapısı eklendi: `sites` tablosu ve site bazlı `site_id` alanları kullanılır.
+- Başlangıç siteleri: ÇAĞBAŞ (`site-cagbas`) ve EDWISE Danışmanlık (`site-edwise`).
+- Mevcut beş gelir kanalı ÇAĞBAŞ çalışma alanına bağlandı; EDWISE kayıtları ayrı tutulur.
 - D1 bölgesi EEUR. Kişisel veri işlemeye başlamadan önce KVKK yurt dışına aktarım şartları değerlendirilmelidir.
 - Mevcut `bascag-reviews`, `cagbas-contact` ve `cagbas-preview-db` veritabanlarına dokunulmamıştır.
 
 ## Dosyalar
 - `index.html`: Giriş ekranı, ilk yönetici kurulum arayüzü ve panel prototipi.
 - `schema.sql`: Yönetici hesapları, oturumlar, giriş denemeleri, denetim kayıtları ve gelir modülleri için D1 şeması.
-- `worker.js`: İlk yönetici kurulumu, PBKDF2 parola doğrulama, güvenli oturum çerezi, oturum kapatma ve korumalı özet API'si.
+- `worker.js`: Kimlik doğrulama, güvenli oturumlar, site kayıt API'si, site kapsamlı CRUD API'leri ve ortak/site bazlı özet API'si.
 
 ## İlk kurulum — kullanıcı tarafından tamamlanacak güvenli adım
 1. Worker adresini aç.
@@ -37,6 +40,8 @@ Kurulum anahtarı veya yönetici parolası sohbet mesajına, GitHub'a ya da düz
 
 ## Şu anki kapsam ve sınırlamalar
 - Giriş, ilk yönetici kurulumu, oturum çerezi, oturum kapatma ve özet API'si hazırdır.
-- Reklam ağları, affiliate programları, sponsor tahsilatları, dijital mağaza ödemeleri ve GA4 henüz entegre edilmemiştir.
-- Diğer modüllerin CRUD işlemleri henüz tamamlanmamıştır; örnek/uydurma gelir verisi gösterilmez.
+- Site seçimi, ortak merkez ve siteye özel çalışma alanları vardır.
+- Gelir kanalları, iş ortakları, sponsorlar, dijital ürünler, siparişler ve finansal kayıtlar site bazında ayrılır.
+- GA4 rapor verisi henüz Revenue Center'a çekilmez. Site ekleme sırasında alan adı ve GA4 kimlikleri kaydedilir; gerçek otomatik veri çekimi için Google Analytics Data API yetkilendirmesi ve sunucu Secret'ı gerekir.
+- AdSense, affiliate ağları, sponsor tahsilatı ve ödeme sağlayıcısı entegrasyonları ayrıca kurulmalıdır; örnek/uydurma performans verisi gösterilmez.
 - Canlı ticari kullanımdan önce rol bazlı yazma yetkileri, denetim kayıtları, KVKK metinleri, veri saklama/silme politikası, ödeme sağlayıcıları ve muhasebe süreçleri ayrıca tamamlanmalıdır.
