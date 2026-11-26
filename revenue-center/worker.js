@@ -126,7 +126,7 @@ async function setup(request, env) {
     try { body = await readJson(request); } catch { return json({ error: "INVALID_REQUEST" }, 400); }
     const email = String(body.email || "").trim().toLowerCase();
     const password = String(body.password || "");
-    if (!/^[^\s@]+@[^\\s@]+\.[^\\s@]+$/.test(email) || password.length < 12 || password.length > 256) {
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) || password.length < 12 || password.length > 256) {
       return json({ error: "VALID_EMAIL_AND_PASSWORD_MIN_12_REQUIRED" }, 400);
     }
 
