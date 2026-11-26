@@ -111,41 +111,45 @@ async function requireSession(request, env) {
 }
 
 async function setup(request, env) {
-  if (!env.BOOTSTRAP_SECRET || env.BOOTSTRAP_SECRET.length < 32) {
-    return json({ error: "SETUP_NOT_CONFIGURED" }, 503);
+  try {
+    if (!env.BOOTSTRAP_SECRET || env.BOOTSTRAP_SECRET.length < 32) {
+      return json({ error: "SETUP_NOT_CONFIGURED" }, 503);
+    }
+    const supplied = request.headers.get("X-Setup-Key") || "";
+    const [expectedHash, suppliedHash] = await Promise.all([
+      sha256(env.BOOTSTRAP_SECRET),
+      sha256(supplied)
+    ]);
+    if (!equalText(expectedHash, suppliedHash)) return json({ error: "UNAUTHORIZED" }, 401);
+
+    let body;
+    try { body = await readJson(request); } catch { return json({ error: "INVALID_REQUEST" }, 400); }
+    const email = String(body.email || "").trim().toLowerCase();
+    const password = String(body.password || "");
+    if (!/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(email) || password.length < 12 || password.length > 256) {
+      return json({ error: "VALID_EMAIL_AND_PASSWORD_MIN_12_REQUIRED" }, 400);
+    }
+
+    const existing = await env.DB.prepare("SELECT COUNT(*) AS count FROM admin_users").first();
+    if (Number(existing?.count || 0) !== 0) return json({ error: "SETUP_ALREADY_COMPLETED" }, 409);
+
+    const salt = crypto.getRandomValues(new Uint8Array(16));
+    const passwordHash = await derivePassword(password, salt);
+    const userId = crypto.randomUUID();
+    await env.DB.prepare(
+      "INSERT INTO admin_users (id,email,password_hash,password_salt,role,status) VALUES (?,?,?,?, 'owner','active')"
+    ).bind(userId, email, passwordHash, base64(salt)).run();
+
+    await env.DB.prepare(
+      "INSERT INTO audit_logs (id,user_id,action,resource_type,resource_id) VALUES (?,?,?,?,?)"
+    ).bind(crypto.randomUUID(), userId, "owner_account_created", "admin_user", userId).run();
+
+    return json({ success: true, message: "OWNER_CREATED" }, 201);
+  } catch (error) {
+    console.error("Revenue Center setup failed:", error);
+    return json({ error: "INTERNAL_SERVER_ERROR", detail: String(error?.message || error).slice(0, 240) }, 500);
   }
-  const supplied = request.headers.get("X-Setup-Key") || "";
-  const [expectedHash, suppliedHash] = await Promise.all([
-    sha256(env.BOOTSTRAP_SECRET),
-    sha256(supplied)
-  ]);
-  if (!equalText(expectedHash, suppliedHash)) return json({ error: "UNAUTHORIZED" }, 401);
-
-  let body;
-  try { body = await readJson(request); } catch { return json({ error: "INVALID_REQUEST" }, 400); }
-  const email = String(body.email || "").trim().toLowerCase();
-  const password = String(body.password || "");
-  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) || password.length < 12 || password.length > 256) {
-    return json({ error: "VALID_EMAIL_AND_PASSWORD_MIN_12_REQUIRED" }, 400);
-  }
-
-  const existing = await env.DB.prepare("SELECT COUNT(*) AS count FROM admin_users").first();
-  if (Number(existing?.count || 0) !== 0) return json({ error: "SETUP_ALREADY_COMPLETED" }, 409);
-
-  const salt = crypto.getRandomValues(new Uint8Array(16));
-  const passwordHash = await derivePassword(password, salt);
-  const userId = crypto.randomUUID();
-  await env.DB.prepare(
-    "INSERT INTO admin_users (id,email,password_hash,password_salt,role,status) VALUES (?,?,?,?, 'owner','active')"
-  ).bind(userId, email, passwordHash, base64(salt)).run();
-
-  await env.DB.prepare(
-    "INSERT INTO audit_logs (id,user_id,action,resource_type,resource_id) VALUES (?,?,?,?,?)"
-  ).bind(crypto.randomUUID(), userId, "owner_account_created", "admin_user", userId).run();
-
-  return json({ success: true, message: "OWNER_CREATED" }, 201);
 }
-
 async function login(request, env) {
   let body;
   try { body = await readJson(request); } catch { return json({ error: "INVALID_REQUEST" }, 400); }
