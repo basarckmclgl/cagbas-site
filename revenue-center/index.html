@@ -29,6 +29,46 @@ button{font:inherit}.app{display:grid;grid-template-columns:252px minmax(0,1fr);
 .topright .logout{font-size:11px;padding:8px 10px}
 @media(max-width:720px){.auth-card{padding:22px}.auth-inline{align-items:stretch;flex-direction:column}.auth-inline .btn{width:100%}}
 
+
+/* Light theme — high contrast for comfortable reading */
+:root{color-scheme:light;--bg:#f5f6fa;--panel:#ffffff;--panel2:#ffffff;--line:#e5e7ef;--text:#252238;--muted:#6d6a7d;--purple:#7652d6;--purple2:#6844cf;--green:#16865e;--amber:#9a650c}
+body{background:#f5f6fa;color:var(--text)}
+.side{background:#fff;border-right:1px solid #e5e7ef}
+.brand strong{color:#28243a}.brand small{color:#777286}
+.navlabel{color:#8a8498}
+.nav button{color:#5f5a70}
+.nav button:hover,.nav button.active{background:#f0ebff;color:#4f32a7}
+.nav button.active{box-shadow:inset 3px 0 #7955d6}
+.ico{color:#7652d6}
+.sidefoot{border-top-color:#e8e5ee;color:#777286}
+.eyebrow{color:#7652d6}
+.sub,.muted{color:#6d6a7d}
+.pill{border-color:#ddd3f8;background:#f3efff;color:#5c3caf}
+.avatar{background:#eee8ff;color:#5c3caf}
+.notice{border-color:#e7d9b8;background:#fffaf0;color:#76551a}
+.card{background:#fff;border-color:#e5e7ef;box-shadow:0 3px 14px #29204708}
+.metrichead{color:#6d6a7d}
+.metricicon{background:#f0ebff;color:#6844cf}
+.hint{color:#777286}
+.bars{border-bottom-color:#e5e7ef}
+.barcol{color:#777286}
+.track{background:#eceaf1}
+.status{background:#f1edfb;color:#6546ae}
+.status.pending{background:#fff6e6;color:#8a5b0c}
+.btn{border-color:#ddd9e8;background:#fff;color:#373149}
+.btn.primary{background:#6844cf;border-color:#6844cf;color:#fff}
+.module .tag{color:#6546ae}
+.empty{color:#6d6a7d;border-color:#d9d5e2}
+.auth-shell{background:#f5f6fa}
+.auth-card{background:#fff;border-color:#e5e7ef;box-shadow:0 18px 55px #28204412}
+.auth-card h1{color:#252238}
+.auth-card p{color:#6d6a7d}
+.auth-card label{color:#49445a}
+.auth-card input{border-color:#dcd9e5;background:#fff;color:#252238}
+.auth-card input:focus{border-color:#7652d6;box-shadow:0 0 0 3px #7652d61a}
+.auth-note{border-color:#eadcbf;background:#fffaf0;color:#76551a}
+.auth-error{color:#b42318}
+
 </style>
 </head>
 <body>
