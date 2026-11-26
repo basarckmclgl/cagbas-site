@@ -207,6 +207,14 @@ async function handle(request, env) {
   if (!sameOrigin(request)) return json({ error: "CROSS_ORIGIN_REQUEST_BLOCKED" }, 403);
   if (request.method === "OPTIONS") return new Response(null, { status: 204, headers: { "allow": "GET, POST, OPTIONS" } });
 
+  if (url.pathname === "/api/setup/status" && request.method === "GET") {
+    const row = await env.DB.prepare("SELECT COUNT(*) AS count FROM admin_users").first();
+    return json({
+      setupConfigured: Boolean(env.BOOTSTRAP_SECRET && env.BOOTSTRAP_SECRET.length >= 32),
+      initialized: Number(row?.count || 0) > 0
+    });
+  }
+
   if (url.pathname === "/api/setup" && request.method === "POST") return await setup(request, env);
   if (url.pathname === "/api/login" && request.method === "POST") return await login(request, env);
   if (url.pathname === "/api/logout" && request.method === "POST") return await logout(request, env);
@@ -227,7 +235,7 @@ async function handle(request, env) {
         WHEN entry_type IN ('earning','commission') THEN amount_minor
         WHEN entry_type IN ('expense','refund') THEN -ABS(amount_minor)
         ELSE amount_minor END),0) AS total_minor
-        FROM revenue_entries`).first(),
+        FROM revenue_entries WHERE currency = 'TRY'`).first(),
       env.DB.prepare("SELECT COUNT(*) AS count FROM revenue_sources WHERE status = 'active'").first(),
       env.DB.prepare("SELECT COUNT(*) AS count FROM digital_products WHERE status = 'active'").first(),
       env.DB.prepare("SELECT COUNT(*) AS count FROM partners WHERE status = 'active'").first(),
