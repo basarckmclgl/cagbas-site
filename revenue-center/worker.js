@@ -453,8 +453,8 @@ async function textbeeSendTest(request, env, session) {
   if (!env.TEXTBEE_API_KEY) return json({ error: "TEXTBEE_API_KEY_MISSING" }, 503);
   let body;
   try { body = await readJson(request); } catch { return json({ error: "INVALID_REQUEST" }, 400); }
-  const recipient = String(body.phone || "").replace(/[\\s()-]/g, "");
-  if (!/^\\+[1-9]\\d{7,14}$/.test(recipient)) return json({ error: "PHONE_E164_REQUIRED" }, 400);
+  const recipient = String(body.phone || "").replace(/[\s()-]/g, "");
+  if (!/^\+[1-9]\d{7,14}$/.test(recipient)) return json({ error: "PHONE_E164_REQUIRED" }, 400);
   const response = await fetch("https://api.textbee.dev/api/v1/gateway/send-sms", {
     method: "POST",
     headers: { "x-api-key": env.TEXTBEE_API_KEY, "content-type": "application/json", "accept": "application/json" },
