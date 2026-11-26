@@ -97,15 +97,22 @@ async function getSession(request, env) {
   const token = getCookie(request, SESSION_COOKIE);
   if (!token || token.length < 40) return null;
   const tokenHash = await sha256(token);
+  const now = new Date();
+  const nowIso = now.toISOString();
+  const idleCutoff = new Date(now.getTime() - 5 * 60 * 1000).toISOString();
   const row = await env.DB.prepare(
-    `SELECT u.id, u.email, u.role, u.status, s.id AS session_id
+    `SELECT u.id, u.email, u.role, u.status, s.id AS session_id, s.last_seen_at
      FROM admin_sessions s JOIN admin_users u ON u.id = s.user_id
-     WHERE s.token_hash = ? AND s.expires_at > ? AND u.status = 'active'
+     WHERE s.token_hash = ? AND s.expires_at > ? AND s.last_seen_at > ? AND u.status = 'active'
      LIMIT 1`
-  ).bind(tokenHash, new Date().toISOString()).first();
-  if (!row) return null;
+  ).bind(tokenHash, nowIso, idleCutoff).first();
+  if (!row) {
+    await env.DB.prepare("DELETE FROM admin_sessions WHERE token_hash = ? AND (expires_at <= ? OR last_seen_at <= ?)")
+      .bind(tokenHash, nowIso, idleCutoff).run();
+    return null;
+  }
   await env.DB.prepare("UPDATE admin_sessions SET last_seen_at = ? WHERE id = ?")
-    .bind(new Date().toISOString(), row.session_id).run();
+    .bind(nowIso, row.session_id).run();
   return row;
 }
 
@@ -264,7 +271,7 @@ async function verifyLoginOtp(request,env){
  await env.DB.prepare("UPDATE admin_otp_challenges SET consumed_at=datetime('now') WHERE id=?").bind(id).run();
  await env.DB.prepare("UPDATE admin_auth_contacts SET phone_verified_at=datetime('now'),updated_at=datetime('now') WHERE user_id=?").bind(x.user_id).run();
  const token=base64(crypto.getRandomValues(new Uint8Array(32))).replace(/\+/g,"-").replace(/\//g,"_").replace(/=+$/g,""),hash=await sha256(token),expiry=new Date(Date.now()+SESSION_TTL_SECONDS*1000).toISOString();
- await env.DB.prepare("INSERT INTO admin_sessions (id,user_id,token_hash,expires_at) VALUES (?,?,?,?)").bind(crypto.randomUUID(),x.user_id,hash,expiry).run();
+ await env.DB.prepare("INSERT INTO admin_sessions (id,user_id,token_hash,expires_at,last_seen_at) VALUES (?,?,?,?,?)").bind(crypto.randomUUID(),x.user_id,hash,expiry,new Date().toISOString()).run();
  await env.DB.prepare("UPDATE admin_users SET last_login_at=? WHERE id=?").bind(new Date().toISOString(),x.user_id).run();
  return json({success:true,user:{email:x.email,role:x.role}},200,{"set-cookie":cookie(token,SESSION_TTL_SECONDS)});
 }
@@ -281,7 +288,7 @@ async function verifyLoginTotp(request,env){
  if(step===null)return json({error:"INVALID_TOTP"},401);
  await env.DB.prepare("UPDATE admin_totp SET last_used_step=? WHERE user_id=?").bind(step,u.id).run();
  const token=base64(crypto.getRandomValues(new Uint8Array(32))).replace(/\+/g,"-").replace(/\//g,"_").replace(/=+$/g,""),hash=await sha256(token),expiry=new Date(Date.now()+SESSION_TTL_SECONDS*1000).toISOString();
- await env.DB.prepare("INSERT INTO admin_sessions (id,user_id,token_hash,expires_at) VALUES (?,?,?,?)").bind(crypto.randomUUID(),u.id,hash,expiry).run();
+ await env.DB.prepare("INSERT INTO admin_sessions (id,user_id,token_hash,expires_at,last_seen_at) VALUES (?,?,?,?,?)").bind(crypto.randomUUID(),u.id,hash,expiry,new Date().toISOString()).run();
  await env.DB.prepare("UPDATE admin_users SET last_login_at=? WHERE id=?").bind(new Date().toISOString(),u.id).run();
  return json({success:true,user:{email:u.email,role:u.role}},200,{"set-cookie":cookie(token,SESSION_TTL_SECONDS)});
 }
