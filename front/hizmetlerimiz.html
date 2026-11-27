@@ -266,63 +266,69 @@ html[dir="rtl"] .menu-bar-links{direction:rtl!important}
     </div>
 
         <style id="cagbas-five-services-layout">
-.cb-five-services{--five-ink:#211a2a;--five-muted:#6d6674;--five-purple:#76509b;background:#fff;color:var(--five-ink);padding-bottom:74px}
+.cb-five-services{--five-ink:#24202b;--five-muted:#625d69;--five-purple:#9853c7;position:relative;isolation:isolate;overflow:hidden;background:#fff;color:var(--five-ink);padding:0 0 58px}
 .cb-five-services *{box-sizing:border-box}
-.cb-five-hero{max-width:1240px;margin:0 auto;padding:76px 30px 62px;text-align:center}
-.cb-five-eyebrow{display:inline-flex;align-items:center;gap:10px;color:#7952a5;font-size:11px;font-weight:850;letter-spacing:2.2px}
-.cb-five-eyebrow:before,.cb-five-eyebrow:after{content:"";width:28px;height:1px;background:#bca5d0}
-.cb-five-hero h1{max-width:900px;margin:22px auto 16px;font-size:clamp(40px,5.3vw,68px);line-height:1.06;letter-spacing:-2.8px;font-weight:850;color:#211a2a}
-.cb-five-hero p{max-width:700px;margin:0 auto;color:#6d6674;font-size:16px;line-height:1.8}
-.cb-five-list{max-width:1240px;margin:0 auto;padding:0 30px}
-.cb-five-row{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:center;gap:clamp(34px,6vw,84px);padding:54px 0;border-top:1px solid #eee9f1}
-.cb-five-row:last-child{border-bottom:1px solid #eee9f1}
-.cb-five-row:nth-child(even) .cb-five-media{order:2}
-.cb-five-media{position:relative;min-width:0;overflow:hidden;border-radius:20px;background:#f0ebf4;aspect-ratio:1.42/1;box-shadow:0 18px 48px rgba(42,28,55,.12)}
-.cb-five-media img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .55s ease}
-.cb-five-row:hover .cb-five-media img{transform:scale(1.035)}
-.cb-five-copy{min-width:0;padding:12px 0}
-.cb-five-number{display:inline-flex;align-items:center;gap:10px;color:#8965a6;font-size:10px;font-weight:850;letter-spacing:1.8px}
-.cb-five-number:after{content:"";width:34px;height:1px;background:#c9b6d8}
-.cb-five-copy h2{margin:18px 0 16px;font-size:clamp(29px,3.2vw,43px);line-height:1.12;letter-spacing:-1.5px;color:#211a2a}
-.cb-five-copy p{margin:0;color:#6d6674;font-size:15px;line-height:1.85}
-.cb-five-points{display:grid;grid-template-columns:1fr 1fr;gap:11px 18px;margin:24px 0 0;padding:0;list-style:none}
-.cb-five-points li{position:relative;padding-left:17px;color:#393340;font-size:13px;line-height:1.55}
-.cb-five-points li:before{content:"";position:absolute;left:0;top:7px;width:6px;height:6px;border-radius:50%;background:#8b65ac}
-.cb-five-cta{max-width:1180px;margin:68px auto 0;padding:42px 48px;display:flex;align-items:center;justify-content:space-between;gap:28px;border-radius:18px;background:linear-gradient(115deg,#21182c,#493064);color:#fff}
-.cb-five-cta h2{margin:0 0 9px;font-size:clamp(25px,3vw,36px);line-height:1.15;color:#fff}
-.cb-five-cta p{margin:0;color:#e0d6e9;font-size:14px;line-height:1.7}
-.cb-five-cta a{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:0 22px;border:1px solid rgba(255,255,255,.55);border-radius:999px;color:#fff;text-decoration:none;font-size:13px;font-weight:800;transition:background .2s ease,color .2s ease}
-.cb-five-cta a:hover{background:#fff;color:#493064}
+.cb-five-hero{position:relative;isolation:isolate;max-width:1240px;margin:0 auto;padding:48px 30px 25px;text-align:center}
+.cb-five-hero:before{content:"";position:absolute;z-index:-1;left:50%;top:-160px;transform:translateX(-50%);width:120vw;height:390px;background:radial-gradient(ellipse at 50% 18%,rgba(185,119,230,.17),transparent 58%);pointer-events:none}
+.cb-five-eyebrow{display:block;color:#9651bf;font-size:12px;font-weight:900;letter-spacing:3px}
+.cb-five-hero h1{margin:9px auto 7px;font-size:clamp(34px,4vw,46px);line-height:1.12;letter-spacing:-1.7px;font-weight:850;color:#24202b}
+.cb-five-hero h1 em{font-style:normal;color:#9853c7}
+.cb-five-hero p{max-width:650px;margin:0 auto;color:#57515f;font-size:15px;line-height:1.5}
+.cb-five-rule{width:58px;height:4px;margin:12px auto 14px;border-radius:99px;background:#b65ee1;box-shadow:0 0 13px rgba(174,85,222,.38)}
+.cb-five-studio{display:flex;align-items:center;justify-content:center;gap:18px;max-width:430px;min-height:52px;margin:0 auto;padding:10px 22px;border:2px solid #b66be1;border-radius:17px;background:linear-gradient(100deg,#fff,#f8efff);box-shadow:0 0 0 3px rgba(190,117,231,.10),0 0 18px rgba(169,88,215,.22);color:#30243a;text-decoration:none;font-size:16px;font-weight:850;transition:transform .2s ease,box-shadow .2s ease}
+.cb-five-studio:hover{transform:translateY(-2px);box-shadow:0 0 0 4px rgba(190,117,231,.14),0 0 24px rgba(169,88,215,.3)}
+.cb-five-studio .cb-five-spark{font-size:23px;color:#a84bd5}
+.cb-five-studio .cb-five-arrow{font-size:22px;color:#a84bd5}
+.cb-five-studio-note{margin:8px 0 0!important;font-size:13px!important;color:#68616f!important}
+.cb-five-list{position:relative;max-width:1240px;margin:0 auto;padding:0 30px}
+.cb-five-row{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:center;gap:clamp(28px,4.5vw,62px);padding:9px 0;border-top:1px solid #e8dced}
+.cb-five-row:last-child{border-bottom:1px solid #e8dced}
+.cb-five-row:nth-child(odd) .cb-five-media{order:2}
+.cb-five-row:nth-child(even) .cb-five-media{order:0}
+.cb-five-media{position:relative;min-width:0;overflow:hidden;border-radius:17px;background:#f3edf7;aspect-ratio:1.78/1;box-shadow:0 9px 25px rgba(57,35,73,.10)}
+.cb-five-media img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .45s ease}
+.cb-five-row:hover .cb-five-media img{transform:scale(1.025)}
+.cb-five-copy{position:relative;min-width:0;padding:10px 0 10px 22px}
+.cb-five-copy:before{content:"";position:absolute;left:0;top:25px;bottom:25px;width:3px;border-radius:5px;background:#b85de0;box-shadow:0 0 10px rgba(177,84,218,.2)}
+.cb-five-number{display:block;color:#9851bd;font-size:10px;font-weight:900;letter-spacing:1.8px}
+.cb-five-copy h2{margin:5px 0 5px;font-size:clamp(24px,2.6vw,33px);line-height:1.08;letter-spacing:-.9px;color:#26212c}
+.cb-five-copy p{margin:0;color:#5d5763;font-size:13px;line-height:1.5}
+.cb-five-points{display:grid;grid-template-columns:1fr 1fr;gap:5px 14px;margin:9px 0 10px;padding:0;list-style:none}
+.cb-five-points li{position:relative;padding-left:19px;color:#38333e;font-size:12px;line-height:1.45}
+.cb-five-points li:before{content:"✓";position:absolute;left:0;top:-1px;color:#ad55d4;font-size:17px;font-weight:900;line-height:1}
+.cb-five-tags{display:flex;flex-wrap:wrap;gap:8px}
+.cb-five-tags span{display:inline-flex;align-items:center;min-height:24px;padding:4px 12px;border:1px solid #e6d9ef;border-radius:8px;background:#f8f4fb;color:#43364e;font-size:10px;font-weight:750}
 @media(max-width:767px){
- .cb-five-services{padding-bottom:42px}
- .cb-five-hero{padding:54px 22px 40px;text-align:left}
- .cb-five-hero h1{font-size:clamp(37px,10vw,50px);letter-spacing:-1.8px;margin:18px 0 13px}
- .cb-five-hero p{font-size:14px;line-height:1.75}
- .cb-five-list{padding:0 20px}
- .cb-five-row{grid-template-columns:minmax(0,1fr);gap:22px;padding:32px 0}
- .cb-five-row:nth-child(even) .cb-five-media{order:0}
- .cb-five-media{aspect-ratio:1.45/1;border-radius:15px}
- .cb-five-copy{padding:0}
- .cb-five-copy h2{font-size:clamp(29px,8vw,38px);letter-spacing:-1px;margin:13px 0 11px}
- .cb-five-copy p{font-size:14px;line-height:1.75}
- .cb-five-points{grid-template-columns:1fr;gap:9px;margin-top:18px}
- .cb-five-points li{font-size:13px}
- .cb-five-cta{display:block;margin:38px 20px 0;padding:30px 24px;border-radius:15px}
- .cb-five-cta p{font-size:13px}
- .cb-five-cta a{margin-top:22px;width:100%}
+ .cb-five-services{padding-bottom:34px}
+ .cb-five-hero{padding:36px 20px 22px}
+ .cb-five-hero h1{font-size:clamp(31px,8vw,40px);letter-spacing:-1.2px}
+ .cb-five-hero p{font-size:13px}
+ .cb-five-studio{max-width:100%;gap:10px;padding:9px 12px;font-size:13px;border-radius:13px}
+ .cb-five-studio-note{font-size:11px!important}
+ .cb-five-list{padding:0 16px}
+ .cb-five-row{grid-template-columns:minmax(0,1fr);gap:13px;padding:16px 0}
+ .cb-five-row:nth-child(odd) .cb-five-media,.cb-five-row:nth-child(even) .cb-five-media{order:0}
+ .cb-five-media{aspect-ratio:1.55/1;border-radius:13px}
+ .cb-five-copy{padding:3px 0 3px 16px}
+ .cb-five-copy:before{top:6px;bottom:6px}
+ .cb-five-copy h2{font-size:clamp(23px,6.5vw,30px);margin:5px 0 7px}
+ .cb-five-copy p{font-size:12px;line-height:1.55}
+ .cb-five-points{gap:6px 10px;margin:10px 0}
+ .cb-five-points li{font-size:11px;padding-left:17px}
+ .cb-five-tags{gap:6px}
+ .cb-five-tags span{font-size:9px;min-height:23px;padding:3px 9px}
 }
-@media(prefers-reduced-motion:reduce){.cb-five-media img,.cb-five-cta a{transition:none!important}}
+@media(prefers-reduced-motion:reduce){.cb-five-media img,.cb-five-studio{transition:none!important}}
 </style>
 <main class="cb-five-services">
-<header class="cb-five-hero"><span class="cb-five-eyebrow">ÇAĞBAŞ / HİZMETLERİMİZ</span><h1>Dijital ihtiyaçlarınıza özel çözümler</h1><p>İşletmenizin dijital dünyadaki ihtiyaçlarını tek tek ele alıyor; tasarımdan yazılıma, marka iletişiminden otomasyona kadar doğru çözümleri birlikte oluşturuyoruz.</p></header>
+<header class="cb-five-hero"><span class="cb-five-eyebrow">HİZMETLERİMİZ</span><h1>Dijitalde Sunduğumuz <em>Çözümler</em></h1><p>Markanızın ihtiyaçlarına özel, tasarımdan geliştirmeye, iletişimden büyümeye uzanan bütünleşik dijital hizmetler.</p><div class="cb-five-rule"></div><a class="cb-five-studio" href="/bize-ulasin.html"><span class="cb-five-spark">✧</span><span>ÇAĞBAŞ AI STUDIO’yu Başlat</span><span class="cb-five-arrow">→</span></a><p class="cb-five-studio-note">Yapay zekâ ile konuşarak veya yazarak kendi web siteni oluştur.</p></header>
 <section class="cb-five-list" aria-label="ÇAĞBAŞ hizmet alanları">
-<article class="cb-five-row"><div class="cb-five-media"><img src="https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?auto=format&fit=crop&w=1200&q=85" alt="Web tasarım ve dijital sistem geliştirme" loading="lazy"></div><div class="cb-five-copy"><span class="cb-five-number">01 / DİJİTAL ALTYAPI</span><h2>Web Tasarım, Yazılım ve Dijital Sistemler</h2><p>Markanızın ihtiyaçlarına uygun, hızlı, mobil uyumlu ve kullanıcı odaklı web siteleri ile dijital sistemler geliştiriyoruz. Kurumsal web sitelerinden e-ticaret altyapılarına, özel yazılımlardan yönetim panellerine kadar işletmenizin çevrim içi süreçlerini planlıyoruz.</p><ul class="cb-five-points"><li>Kurumsal web sitesi ve e-ticaret</li><li>Web uygulamaları ve özel yazılım</li><li>Yönetim paneli ve başvuru sistemleri</li><li>Bakım, güncelleme ve teknik destek</li></ul></div></article>
-<article class="cb-five-row"><div class="cb-five-media"><img src="https://images.unsplash.com/photo-1541961017774-22349e4a1262?auto=format&fit=crop&w=1200&q=85" alt="Grafik tasarım ve marka kimliği çalışması" loading="lazy"></div><div class="cb-five-copy"><span class="cb-five-number">02 / GÖRSEL İLETİŞİM</span><h2>Grafik Tasarım ve Marka Kimliği</h2><p>Markanızın karakterini doğru yansıtan, tutarlı ve akılda kalıcı görsel tasarımlar hazırlıyoruz. Dijital ve basılı mecralarda kullanılabilecek tasarım dilini belirleyerek markanızın her temas noktasında bütünlük sağlıyoruz.</p><ul class="cb-five-points"><li>Logo ve kurumsal kimlik</li><li>Katalog, broşür ve sunum tasarımı</li><li>Sosyal medya görselleri</li><li>Reklam ve kampanya tasarımları</li></ul></div></article>
-<article class="cb-five-row"><div class="cb-five-media"><img src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&fit=crop&w=1200&q=85" alt="Sosyal medya içerik ve yönetim çalışması" loading="lazy"></div><div class="cb-five-copy"><span class="cb-five-number">03 / DİJİTAL İLETİŞİM</span><h2>Sosyal Medya Yönetimi</h2><p>Markanızın hedef kitlesiyle düzenli ve etkili iletişim kurmasına yardımcı oluyoruz. İçerik planlaması, görsel üretim ve hesap yönetimini marka kimliğinizle uyumlu bir yayın akışında bir araya getiriyoruz.</p><ul class="cb-five-points"><li>İçerik takvimi ve paylaşım planı</li><li>Gönderi, hikâye ve kısa video tasarımı</li><li>Marka dili ve içerik düzeni</li><li>Hesap takibi ve performans değerlendirmesi</li></ul></div></article>
-<article class="cb-five-row"><div class="cb-five-media"><img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=85" alt="Dijital pazarlama ve SEO analizi" loading="lazy"></div><div class="cb-five-copy"><span class="cb-five-number">04 / GÖRÜNÜRLÜK</span><h2>Dijital Pazarlama ve SEO</h2><p>Dijital kanallardaki görünürlüğünüzü artırmaya yönelik ölçülebilir ve sürdürülebilir çalışmalar yürütüyoruz. Web sitenizin arama motorlarına uygun yapısını geliştiriyor, dijital kampanyalar için doğru içerik ve yönlendirme kurgusunu oluşturuyoruz.</p><ul class="cb-five-points"><li>Teknik ve içerik SEO düzenlemeleri</li><li>Anahtar kelime ve içerik planlaması</li><li>Dijital kampanya kurgusu</li><li>Performans ve dönüşüm takibi</li></ul></div></article>
-<article class="cb-five-row"><div class="cb-five-media"><img src="https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&w=1200&q=85" alt="Araştırma geliştirme ve teknoloji çalışmaları" loading="lazy"></div><div class="cb-five-copy"><span class="cb-five-number">05 / YENİLİK</span><h2>AR-GE ve Yenilikçi Çözümler</h2><p>Yeni fikirleri, teknolojileri ve dijital yöntemleri araştırarak işletmelerin ihtiyaçlarına uyarlanabilecek çözümler geliştiriyoruz. Prototipleme, süreç analizi ve teknoloji denemeleriyle yeni fırsatları değerlendiriyoruz.</p><ul class="cb-five-points"><li>Teknoloji ve çözüm araştırması</li><li>Prototip ve konsept geliştirme</li><li>İş süreçleri için yenilikçi fikirler</li><li>Otomasyon ve entegrasyon denemeleri</li></ul></div></article>
+<article class="cb-five-row"><div class="cb-five-media"><img src="https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?auto=format&fit=crop&w=1200&q=85" alt="Web tasarımı ve dijital sistemler" loading="lazy"></div><div class="cb-five-copy"><span class="cb-five-number">01 / DİJİTAL ÇÖZÜMLER</span><h2>Web Tasarım, Yazılım ve Dijital Sistemler</h2><p>Kurumsal web siteleri, özel yazılım çözümleri ve ihtiyaçlarınıza uygun yönetim sistemleri geliştiriyoruz.</p><ul class="cb-five-points"><li>Kurumsal Web Siteleri</li><li>Yönetim ve Kontrol Panelleri</li><li>Özel Yazılım Geliştirme</li><li>Entegrasyon Çözümleri</li></ul><div class="cb-five-tags"><span>Web</span><span>Yazılım</span><span>Panel</span><span>Entegrasyon</span></div></div></article>
+<article class="cb-five-row"><div class="cb-five-media"><img src="https://images.unsplash.com/photo-1541961017774-22349e4a1262?auto=format&fit=crop&w=1200&q=85" alt="Grafik tasarım ve marka kimliği" loading="lazy"></div><div class="cb-five-copy"><span class="cb-five-number">02 / GÖRSEL İLETİŞİM</span><h2>Grafik Tasarım ve Marka Kimliği</h2><p>Markanızın karakterini yansıtan, tutarlı ve etkileyici görsel çözümlerle güçlü bir marka kimliği oluşturuyoruz.</p><ul class="cb-five-points"><li>Logo ve Kurumsal Kimlik</li><li>Sosyal Medya Görselleri</li><li>Reklam ve Kampanya Tasarımları</li><li>Basılı ve Dijital Materyaller</li></ul><div class="cb-five-tags"><span>Logo</span><span>Kurumsal Kimlik</span><span>Görsel Tasarım</span><span>Reklam</span></div></div></article>
+<article class="cb-five-row"><div class="cb-five-media"><img src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&fit=crop&w=1200&q=85" alt="Sosyal medya yönetimi" loading="lazy"></div><div class="cb-five-copy"><span class="cb-five-number">03 / SOSYAL İLETİŞİM</span><h2>Sosyal Medya Yönetimi</h2><p>Dijital dünyada markanızın sesini doğru kitleye ulaştırıyor, hesaplarınızı profesyonelce yönetiyoruz.</p><ul class="cb-five-points"><li>İçerik Planlama ve Üretim</li><li>Görsel ve Video Tasarımı</li><li>Hesap Yönetimi</li><li>Performans Raporlama</li></ul><div class="cb-five-tags"><span>İçerik</span><span>Tasarım</span><span>Yönetim</span><span>Raporlama</span></div></div></article>
+<article class="cb-five-row"><div class="cb-five-media"><img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=85" alt="Dijital pazarlama ve SEO" loading="lazy"></div><div class="cb-five-copy"><span class="cb-five-number">04 / DİJİTAL BÜYÜME</span><h2>Dijital Pazarlama ve SEO</h2><p>Arama motoru optimizasyonu (SEO) ve hedef odaklı dijital reklam stratejileriyle markanızı dijitalde büyütüyoruz.</p><ul class="cb-five-points"><li>SEO (Arama Motoru Optimizasyonu)</li><li>Hedef Kitle ve Analiz</li><li>Dijital Reklam Yönetimi</li><li>Performans Optimizasyonu</li></ul><div class="cb-five-tags"><span>SEO</span><span>Reklam</span><span>Analiz</span><span>Büyüme</span></div></div></article>
+<article class="cb-five-row"><div class="cb-five-media"><img src="https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&w=1200&q=85" alt="Araştırma geliştirme ve teknoloji" loading="lazy"></div><div class="cb-five-copy"><span class="cb-five-number">05 / ARAŞTIRMA VE GELİŞTİRME</span><h2>AR-GE</h2><p>Teknolojik yenilikleri araştırıyor, özgün dijital çözümler geliştiriyor ve yenilikçi projeler üzerinde çalışıyoruz.</p><ul class="cb-five-points"><li>Teknoloji Araştırmaları</li><li>Yenilikçi Dijital Projeler</li><li>Prototip ve Kavram Geliştirme</li><li>Süreç ve Ürün İyileştirme</li></ul><div class="cb-five-tags"><span>AR-GE</span><span>İnovasyon</span><span>Prototip</span><span>Teknoloji</span></div></div></article>
 </section>
-<section class="cb-five-cta"><div><h2>Projenizi birlikte hayata geçirelim.</h2><p>İhtiyacınızı paylaşın; size uygun kapsamı ve çalışma planını birlikte oluşturalım.</p></div><a href="/bize-ulasin.html">Proje Talebi Oluştur <span aria-hidden="true">→</span></a></section>
 </main>
 
 <style id="cb-services-four-card-preview">
