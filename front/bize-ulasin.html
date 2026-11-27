@@ -431,22 +431,7 @@ document.getElementById("scrollToTopBtn").addEventListener("click", function () 
     <script src="/_assets/js/swiper.min.js?v=jcZI6TDGC3hzQZzrURk5iTc-vtOSbNIImAEDxQ3ZuiA"></script>
     <script src="/_assets/js/parsley.min.js?v=yRwm0kte_729S7f5lG1HqUnJ3m9Dj-vWeRhImPs9oug"></script>
 
-    <script>
-        document.querySelector('.langSelectorHeader').addEventListener('click', function(event) {
-    // Olayın sayfa yenilemesini engelle
-    event.preventDefault();
-
-    // Dropdown'un açılma/kapanma işlevini burada ekle
-    const langSelectorBody = document.querySelector('.langSelectorBody');
-    langSelectorBody.classList.toggle('open'); // Aç/kapa işlemi için 'open' class'ını kullan
-});
-
-    </script>
-
-
-
-
-<!--<script type="text/javascript">
+    <!--<script type="text/javascript">
 	if (!localStorage.getItem("show-video-171sr")) {
 		_openUrl($("html").attr("lang") == "tr" ? "https://www.youtube.com/embed/piEi7ugR9P0?autoplay=1" : "https://www.youtube.com/embed/1Bmh2e00VOI?autoplay=1");
 		localStorage.setItem("show-video-171sr", true);
