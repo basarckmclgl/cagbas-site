@@ -96,7 +96,20 @@ a{color:inherit;text-decoration:none}
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900;1000&display=swap" rel="stylesheet">
-</head>
+<style id="cagbas-single-language-control">
+/* Keep one language switch only; disable the legacy dropdown entirely. */
+.langSelector,.langSelectorHeader,.langSelectorBody,.language,.language-selector{display:none!important;visibility:hidden!important}
+.cagbas-lang-toggle{display:inline-flex!important}
+@media(min-width:768px){
+ .menu-wrapper>.cagbas-lang-toggle{display:inline-flex!important}
+ .mobile-menu-container>.cagbas-lang-toggle{display:none!important}
+}
+@media(max-width:767px){
+ .menu-container>.menu-wrapper{display:none!important}
+ .menu-wrapper>.cagbas-lang-toggle{display:none!important}
+ .mobile-menu-container>.cagbas-lang-toggle{display:inline-flex!important}
+}
+</style></head>
 <body>
 <header class="site-header">
  <div class="header-inner">
