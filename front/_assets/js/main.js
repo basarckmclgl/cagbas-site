@@ -751,3 +751,20 @@ document.addEventListener('click', function (event) {
         window.gtag('event', 'whatsapp_click', { link_url: whatsappLink.href, link_text: 'WhatsApp' });
     }
 });
+
+
+// Remove the standalone TR language control from the rendered header.
+(function removeStandaloneTRControl(){
+  const remove = () => {
+    document.querySelectorAll('a,button,[role="button"]').forEach((el) => {
+      if ((el.textContent || '').trim() !== 'TR') return;
+      const parent = el.parentElement;
+      const target = parent && parent.children.length === 1 && parent.textContent.trim() === 'TR' ? parent : el;
+      target.remove();
+    });
+  };
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', remove, { once: true });
+  else remove();
+  const observer = new MutationObserver(remove);
+  observer.observe(document.documentElement, { childList: true, subtree: true });
+})();
