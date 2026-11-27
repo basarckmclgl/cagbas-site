@@ -258,40 +258,7 @@ html{scroll-behavior:smooth}body{background:#fff!important;color:var(--cb-ink)!i
                         <!-- <a href="/istiraklerimiz" class="btn-2">İştiraklerimiz</a> -->
 
                     </div>
-            <div class="langSelector">
-                <div class="langSelectorHeader">
-                    <b class="langSelectorTitle">
-                      <a href="/en/index-en.html" id="currentLang">
-                        <span class="langSelectorListNameFlag">
-                            <img src="/_assets/images/en-flag.png" alt="English" />
-                        </span>
-                        <abbr class="langSelectorListNameLabel" title="en">EN</abbr>
-                      </a>
-                        <i class="fa fa-caret-down" aria-hidden="true"></i>
-                    </b>
-                </div>
-                <div class="langSelectorBody">
-                    <ul class="langSelectorList">
-                        <li class="langSelectorListItem" data-lang="tr">
-                            <a href="/index.html" class="langSelectorListName">
-                                <span class="langSelectorListNameFlag">
-                                    <img src="/_assets/images/tr-flag.png" alt="Türkçe" />
-                                </span>
-                                <abbr class="langSelectorListNameLabel" title="tr">TR</abbr>
-                            </a>
-                        </li>
-                        <li class="langSelectorListItem" data-lang="en">
-                            <a href="/en/index-en.html" class="langSelectorListName">
-                                <span class="langSelectorListNameFlag">
-                                    <img src="/_assets/images/en-flag.png" alt="Flag of United Kingdom" />
-                                </span>
-                                <abbr class="langSelectorListNameLabel" title="en">EN</abbr>
-                            </a>
-                        </li>
-                        
-                    </ul>
-                </div>
-            </div>                              
+                                          
     </div>
     <div class="mobile-menu-container">
         <div class="mobile-menu-icon-wrapper" id="menu-icon">
@@ -300,40 +267,7 @@ html{scroll-behavior:smooth}body{background:#fff!important;color:var(--cb-ink)!i
         <a class="menu-logo" href="/en/index-en.html"><img src="/_assets/images/cagbas-logo.svg" width="120" height="35" alt="ÇAĞBAŞ"></a>
 
 
-        <div class="langSelector">
-            <div class="langSelectorHeader">
-                <b class="langSelectorTitle">
-                    <span id="currentLang">
-                        <span class="langSelectorListNameFlag">
-                            <img src="/_assets/images/en-flag.png" alt="English" />
-                        </span>
-                        <abbr class="langSelectorListNameLabel" title="tr">TR</abbr>
-                    </span>
-                    <i class="fa fa-caret-down" aria-hidden="true"></i>
-                </b>
-            </div>
-            <div class="langSelectorBody">
-                <ul class="langSelectorList">
-                    <li class="langSelectorListItem" data-lang="tr">
-                        <a href="/index.html" class="langSelectorListName">
-                            <span class="langSelectorListNameFlag">
-                                <img src="/_assets/images/tr-flag.png" alt="Türkçe" />
-                            </span>
-                            <abbr class="langSelectorListNameLabel" title="tr">TR</abbr>
-                        </a>
-                    </li>
-                    <li class="langSelectorListItem" data-lang="en">
-                        <a href="/en/index-en.html" class="langSelectorListName">
-                            <span class="langSelectorListNameFlag">
-                                <img src="/_assets/images/en-flag.png" alt="Flag of United Kingdom" />
-                            </span>
-                            <abbr class="langSelectorListNameLabel" title="en">EN</abbr>
-                        </a>
-                    </li>
-                    
-                </ul>
-            </div>
-        </div>
+        
     </div>
     <div class="mobile-menu-links-wrapper">
         <ul>
@@ -641,21 +575,7 @@ document.getElementById("scrollToTopBtn").addEventListener("click", function () 
     </script>
 
 
-    <script>
-        document.querySelector('.langSelectorHeader').addEventListener('click', function(event) {
-    // Olayın sayfa yenilemesini engelle
-    event.preventDefault();
-
-    // Dropdown'un açılma/kapanma işlevini burada ekle
-    const langSelectorBody = document.querySelector('.langSelectorBody');
-    langSelectorBody.classList.toggle('open'); // Aç/kapa işlemi için 'open' class'ını kullan
-});
-
-    </script>
-
-
-
-<!--<script type="text/javascript">
+    <!--<script type="text/javascript">
 	if (!localStorage.getItem("show-video-171sr")) {
 		_openUrl($("html").attr("lang") == "tr" ? "https://www.youtube.com/embed/piEi7ugR9P0?autoplay=1" : "https://www.youtube.com/embed/1Bmh2e00VOI?autoplay=1");
 		localStorage.setItem("show-video-171sr", true);
