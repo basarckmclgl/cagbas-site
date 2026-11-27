@@ -33,7 +33,7 @@
 <script src="/_assets/js/accessibility.js" defer></script>
 <script id="cagbas-language-control-remove">
 (function () {
-  const selectors = '.langSelector, [class~="langSelector"], .cb-language-link, a[class*="language-link"]';
+  const selectors = '.langSelector, [class~="langSelector"], .cb-language-link, a[class*="language-link"], .cb-language-switch, .cb-inner-language-switch';
   function removeLanguageControls(root) {
     if (!root || !root.querySelectorAll) return;
     root.querySelectorAll(selectors).forEach(function (element) { element.remove(); });
@@ -41,14 +41,11 @@
   }
   removeLanguageControls(document);
   new MutationObserver(function (records) {
-    records.forEach(function (record) {
-      record.addedNodes.forEach(function (node) {
-        if (node.nodeType === 1) removeLanguageControls(node);
-      });
-    });
+    records.forEach(function (record) { record.addedNodes.forEach(function (node) { if (node.nodeType === 1) removeLanguageControls(node); }); });
   }).observe(document.documentElement, { childList: true, subtree: true });
 })();
 </script>
+
 </body></htm
 <style id="cagbas-final-hide-language-control">
 html body .menu-container .menu-wrapper > .langSelector,
