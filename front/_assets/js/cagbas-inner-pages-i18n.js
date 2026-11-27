@@ -83,25 +83,6 @@
     });
     if(persist) try{localStorage.setItem("cagbas-language",english?"en":"tr")}catch(e){}
   }
-  const style=document.createElement("style");
-  style.textContent=`
-    .langSelector{display:none!important}
-    .cb-inner-language-switch{display:inline-flex!important;align-items:center!important;justify-content:center!important;min-width:58px!important;height:38px!important;padding:0 13px!important;border:1px solid rgba(120,81,165,.35)!important;border-radius:999px!important;background:#fff!important;color:#624184!important;font:800 12px/1 Arial,sans-serif!important;letter-spacing:.06em!important;cursor:pointer!important;box-shadow:0 3px 12px rgba(30,20,45,.08)!important;z-index:12050!important}
-    .cb-inner-language-switch:hover,.cb-inner-language-switch:focus-visible{background:#7851a5!important;color:#fff!important;outline:2px solid rgba(120,81,165,.25)!important;outline-offset:2px!important}
-    .menu-wrapper>.cb-inner-language-switch{margin-left:10px!important;flex:0 0 auto!important}
-    .mobile-menu-container>.cb-inner-language-switch{position:absolute!important;right:14px!important;top:50%!important;transform:translateY(-50%)!important}
-    @media(max-width:767px){.menu-container>.menu-wrapper{display:none!important}.menu-container>.mobile-menu-container{display:flex!important}}
-  `;
-  document.head.appendChild(style);
-  function addSwitch(parent){
-    if(!parent || parent.querySelector(":scope > .cb-inner-language-switch")) return;
-    const b=document.createElement("button");b.type="button";b.className="cb-inner-language-switch";b.textContent="TR";
-    b.addEventListener("click",()=>setLanguage(document.documentElement.lang!=="en"));
-    parent.appendChild(b);
-  }
-  addSwitch(document.querySelector(".menu-wrapper"));
-  addSwitch(document.querySelector(".mobile-menu-container"));
-  document.querySelectorAll(".langSelector").forEach(el=>el.remove());
   let english=false;try{english=localStorage.getItem("cagbas-language")==="en"}catch(e){}
   setLanguage(english,false);
   const observer=new MutationObserver(records=>{
