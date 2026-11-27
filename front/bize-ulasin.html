@@ -498,7 +498,26 @@ document.getElementById("scrollToTopBtn").addEventListener("click", function () 
 </script>
 </body>
 </html>
-<style id="cagbas-mobile-contact-production">
+<st
+<style id="cagbas-final-hide-language-control">
+html body .menu-container .menu-wrapper > .langSelector,
+html body .menu-container .mobile-menu-container > .langSelector,
+html body .mobile-menu-container .langSelector,
+html body .langSelector {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  width: 0 !important;
+  min-width: 0 !important;
+  max-width: 0 !important;
+  height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+}
+</style>
+yle id="cagbas-mobile-contact-production">
 @media(max-width:767px){
  .menu-container{display:block!important}.mobile-menu-container{display:none!important}
  .mobile-menu-links-wrapper{display:none!important}.mobile-menu-links-wrapper.open{display:block!important}
