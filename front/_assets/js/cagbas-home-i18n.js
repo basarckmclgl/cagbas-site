@@ -99,18 +99,6 @@
         if (reverse) node.nodeValue = raw.replace(trimmed, reverse[0]);
       }
     });
-    const servicesIntro = document.getElementById("cb-home-services-description");
-    if (servicesIntro) servicesIntro.textContent = english ? servicesIntroEN : servicesIntroTR;
-    document.documentElement.lang = english ? "en" : "tr";
-    document.documentElement.dir = "ltr";
-    document.title = english ? titleEN : originalTitle;
-    const desc = document.querySelector('meta[name="description"]');
-    if (desc) desc.content = english ? metaEN : originalDescription;
-    document.querySelectorAll(".cb-language-switch").forEach(button => {
-      button.textContent = english ? "EN" : "TR";
-      button.setAttribute("aria-label", english ? "Switch language to Turkish" : "Switch language to English");
-      button.setAttribute("aria-expanded", "false");
-    });
     try { localStorage.setItem("cagbas-language", english ? "en" : "tr"); } catch (_) {}
   }
 
