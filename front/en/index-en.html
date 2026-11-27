@@ -136,6 +136,18 @@ html body .header-actions,
 html body .mobile-menu-container .langSelector,
 html body .menu-wrapper .langSelector{display:none!important;visibility:hidden!important;opacity:0!important;pointer-events:none!important}
 html body a.cagbas-lang-toggle{display:inline-flex!important;visibility:visible!important;opacity:1!important;pointer-events:auto!important}
+</style><style id="cagbas-single-language-control-override">
+/* Hide the legacy selector on every breakpoint. Keep the single linked language control. */
+html body .menu-container .menu-wrapper>.langSelector,
+html body .menu-container .mobile-menu-container>.langSelector,
+html body .menu-container .mobile-menu-container .langSelector,
+html body .menu-container .langSelector,
+html body .site-header .langSelector,
+html body .site-header .language,
+html body .site-header .header-actions{display:none!important;visibility:hidden!important;opacity:0!important;pointer-events:none!important;width:0!important;height:0!important;min-width:0!important;min-height:0!important;max-width:0!important;max-height:0!important;overflow:hidden!important}
+html body.cb-about-page .menu-container .mobile-menu-container>.langSelector,
+html body.cb-about-page .menu-container .mobile-menu-container .langSelector{display:none!important;visibility:hidden!important;opacity:0!important;pointer-events:none!important;width:0!important;height:0!important;min-width:0!important;min-height:0!important;max-width:0!important;max-height:0!important;overflow:hidden!important}
+html body .cagbas-lang-toggle{display:inline-flex!important;visibility:visible!important;opacity:1!important;pointer-events:auto!important}
 </style></head>
 <body>
 <header class="site-header">
