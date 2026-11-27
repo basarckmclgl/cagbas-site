@@ -176,8 +176,8 @@
       </button>
 
       <button id="btnVoiceReplyToggle" onclick="toggleSpeechSynthesis()" class="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-indigo-50 hover:bg-indigo-100 border border-indigo-200 text-xs font-semibold text-[#4f46e5] cursor-pointer transition">
-        <span id="voiceReplyIcon">🔊</span>
-        <span id="voiceReplyLabel">Sesli Yanıt Açık</span>
+        <span id="voiceReplyIcon">🔇</span>
+        <span id="voiceReplyLabel">Sesli Yanıt Kapalı</span>
       </button>
     </div>
 
@@ -498,7 +498,7 @@
       accent: '#4f46e5',
       selectedId: null,
       previewOnly: false,
-      voiceReply: true,
+      voiceReply: false,
       blocks: [
         {
           id: 'b-nav-1',
