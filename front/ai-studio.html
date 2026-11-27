@@ -468,6 +468,11 @@
             <textarea id="leadNotes" rows="3" class="w-full rounded-xl bg-white border border-[#cbd5e1] focus:border-[#4f46e5] focus:outline-none px-3.5 py-2 text-xs text-[#0f172a]"></textarea>
           </div>
 
+          <div class="flex items-start gap-2 text-[11px] text-[#475569] leading-relaxed">
+            <input id="leadConsent" type="checkbox" required class="mt-0.5 accent-[#4f46e5]" />
+            <label for="leadConsent">Proje talebimin değerlendirilmesi ve benimle iletişime geçilmesi için bilgilerimin işlenmesini kabul ediyorum. <a href="/yasal-bilgilendirme.html" target="_blank" rel="noopener" class="text-[#4f46e5] underline">Aydınlatma metni</a></label>
+          </div>
+          <input id="leadWebsite" name="website" type="text" tabindex="-1" autocomplete="off" aria-hidden="true" class="hidden" />
           <button type="submit" class="btn-studio-primary w-full py-3 rounded-xl font-display font-bold text-xs sm:text-sm cursor-pointer">
             Tasarım Talebini Gönder
           </button>
@@ -949,6 +954,85 @@
         badge.textContent = 'Yok';
         actionBar.classList.add('hidden');
         actionBar.classList.remove('flex');
+      }
+    }
+
+
+    function openProjectLeadModal() {
+      const modal = document.getElementById('projectLeadModal');
+      const summary = document.getElementById('autoDesignSummary');
+      const count = document.getElementById('summaryBlockCount');
+      const notes = document.getElementById('leadNotes');
+      if (!modal) return;
+
+      const lines = state.blocks.map((block, index) => {
+        const title = block.title || block.heading || block.name || block.type;
+        return (index + 1) + '. ' + block.name + ': ' + title;
+      });
+      if (summary) summary.textContent = lines.join(' · ');
+      if (count) count.textContent = state.blocks.length + ' Blok';
+      if (notes && !notes.value) notes.value = 'Tema: ' + state.theme + '\nVurgu rengi: ' + state.accent;
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    function closeProjectLeadModal() {
+      const modal = document.getElementById('projectLeadModal');
+      if (!modal) return;
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+
+    async function submitLeadForm(event) {
+      event.preventDefault();
+      const form = event.currentTarget;
+      const submitButton = form.querySelector('button[type="submit"]');
+      if (!form.reportValidity()) return;
+      if (submitButton) {
+        submitButton.disabled = true;
+        submitButton.textContent = 'Talebiniz gönderiliyor...';
+      }
+
+      const payload = {
+        fullName: document.getElementById('leadFullName').value,
+        email: document.getElementById('leadEmail').value,
+        phone: document.getElementById('leadPhone').value,
+        brandName: document.getElementById('leadBrand').value,
+        serviceType: 'ÇAĞBAŞ AI STUDIO Tasarım Talebi',
+        message: document.getElementById('leadNotes').value.trim() || 'Ziyaretçi oluşturduğu tasarım hakkında iletişime geçilmesini istiyor.',
+        website: document.getElementById('leadWebsite').value,
+        design: {
+          theme: state.theme,
+          accent: state.accent,
+          blocks: state.blocks
+        },
+        conversation: aiConversation.slice(-20)
+      };
+
+      try {
+        const response = await fetch('/api/ai-studio-lead', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        const result = await response.json().catch(() => ({}));
+        if (!response.ok || !result.success) {
+          throw new Error(result.error || 'Talebiniz gönderilemedi. Lütfen tekrar deneyin.');
+        }
+
+        document.getElementById('leadSubmissionForm').classList.add('hidden');
+        const confirmation = document.getElementById('leadConfirmationBox');
+        confirmation.classList.remove('hidden');
+        document.getElementById('leadReferenceCode').textContent = 'Talep numarası: ' + result.referenceCode;
+        const confirmationText = confirmation.querySelector('p.text-xs');
+        if (confirmationText) confirmationText.textContent = result.message;
+      } catch (error) {
+        alert(error.message || 'Talebiniz gönderilemedi. Lütfen tekrar deneyin.');
+      } finally {
+        if (submitButton) {
+          submitButton.disabled = false;
+          submitButton.textContent = 'Tasarım Talebini Gönder';
+        }
       }
     }
 
