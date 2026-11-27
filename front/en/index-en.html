@@ -1,729 +1,146 @@
-
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="msapplication-TileColor" content="#ffffff" />
-    <meta name="apple-mobile-web-app-title" content="" />
-    <meta name="google-play-app" content="" />
-    <meta name="msapplication-TileColor" content="#ffffff" />
-    <meta name="theme-color" content="#ffffff" />
-    <meta name="format-detection" content="telephone=no" />
-
-    <link rel="shortcut icon" type="image/x-icon" sizes="32x32" href="/_assets/images/cagbas-logo.svg" />
-    <link rel="shortcut icon" type="image/x-icon" sizes="16x16" href="/_assets/images/cagbas-logo.svg" />
-    <!-- <link rel="apple-touch-icon" href="/_assets/images/icon/apple-icon-72x72.png" />
-    <link rel="android-touch-icon" href="/_assets/images/icon/android-icon-72x72.png" />
-    <link rel="apple-touch-icon" sizes="72x72" href="/_assets/images/icon/apple-icon-72x72.png" />
-    <link rel="apple-touch-icon" sizes="114x114" href="/_assets/images/icon/apple-icon-114x114.png" /> -->
-
-    <link href="/_assets/css/style.css" rel="stylesheet" />
-    <link href="/_assets/css/swiper.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito&display=swap">
-    <link href="/_assets/css/aos.css" rel="stylesheet" />
-    <link href="https://api.mapbox.com/mapbox-gl-js/v1.7.0/mapbox-gl.css" rel="stylesheet" />
-
-    <title>Home | Web Design & Digital Solutions | ÇAĞBAŞ</title>
-    <meta name="description" content="ÇAĞBAŞ Creative Studio creates user-focused websites, custom software and digital solutions for brands." />
-    <link rel="canonical" href="https://www.cagbas.com/en/index-en.html" />
-    <link rel="alternate" hreflang="tr" href="https://www.cagbas.com/en/index-en.html" />
-    <link rel="alternate" hreflang="en" href="https://www.cagbas.com/en/index-en.html" />
-    <meta name="robots" content="index,follow,max-image-preview:large" />
-    <meta property="og:type" content="website" />
-    <meta property="og:locale" content="en_GB" />
-    <meta property="og:site_name" content="ÇAĞBAŞ Creative Studio" />
-    <meta property="og:url" content="https://www.cagbas.com/" />
-    <meta property="og:title" content="ÇAĞBAŞ Creative Studio | Dijital Tasarım ve Teknoloji Çözümleri" />
-    <meta property="og:description" content="Web tasarım, özel yazılım geliştirme ve dijital teknoloji çözümleri. Fikirleri güçlü dijital deneyimlere dönüştürüyoruz." />
-    <meta property="og:image" content="https://www.cagbas.com/_assets/images/cagbas-share-card.svg" />
-    <meta property="og:image:secure_url" content="https://www.cagbas.com/_assets/images/cagbas-share-card.svg" />
-    <meta property="og:image:type" content="image/svg+xml" />
-    <meta property="og:image:alt" content="ÇAĞBAŞ Creative Studio — Dijital Tasarım ve Teknoloji Çözümleri" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="ÇAĞBAŞ Creative Studio | Dijital Tasarım ve Teknoloji Çözümleri" />
-    <meta name="twitter:description" content="Web tasarım, özel yazılım geliştirme ve dijital teknoloji çözümleri." />
-    <meta name="twitter:image" content="https://www.cagbas.com/_assets/images/cagbas-share-card.svg" />
-
-<style id="cb-homepage-redesign">
-:root{--cb-ink:#171521;--cb-paper:#f7f6f8;--cb-purple:#7851a5;--cb-lilac:#d8c3ee;--cb-muted:#77717e}
-html{scroll-behavior:smooth}body{background:#fff!important;color:var(--cb-ink)!important}
-.container{width:100%!important;height:auto!important;min-height:100vh!important;max-width:none!important;overflow-x:hidden!important;overflow-y:visible!important}
-.main-wrapper{width:100%!important;max-width:none!important}
-.menu-container{position:sticky!important;top:0!important;z-index:1000!important;background:rgba(255,255,255,.94)!important;backdrop-filter:blur(16px)!important;border-bottom:1px solid #eee9f2!important;box-shadow:0 6px 24px rgba(25,18,35,.045)!important}
-.menu-wrapper{max-width:1320px!important;margin:auto!important;padding:13px 28px!important;min-height:76px!important}
-.menu-logo img{max-height:42px!important;width:auto!important}
-.menu-bar-links{gap:clamp(14px,2.4vw,34px)!important}
-.menu-bar-links a{font-size:13px!important;font-weight:700!important;letter-spacing:.02em!important;color:#292432!important;text-decoration:none!important;transition:color .2s ease!important}
-.menu-bar-links a:hover{color:var(--cb-purple)!important}
-.mobile-menu-container{background:#fff!important;border-bottom:1px solid #eee9f2!important}
-.banner-slider-wrapper{position:relative!important;min-height:clamp(300px,42vw,560px)!important;overflow:hidden!important;background:#171521!important}
-.banner-slider-wrapper .banner-swiper-wrapper,.banner-slider-wrapper .main-slider-container,.banner-slider-wrapper .swiper-wrapper,.banner-slider-wrapper .swiper-slide{height:clamp(300px,42vw,560px)!important}
-.banner-slider-wrapper .swiper-slide{background-position:center 68%!important;background-size:cover!important}
-.banner-slider-wrapper:after{content:"";position:absolute;inset:0;z-index:2;pointer-events:none;background:linear-gradient(90deg,rgba(12,10,20,.44),rgba(12,10,20,.08) 75%)}
-.banner-content-swiper-container{z-index:3!important}
-.banner-content-swiper-container .slider-content-wrapper span{color:#fff!important;text-shadow:0 2px 20px rgba(0,0,0,.45)!important}
-.cb-home-intro{width:min(1280px,100%);margin:0 auto;padding:84px 34px 88px;display:grid;grid-template-columns:minmax(0,1.5fr) minmax(230px,.65fr);gap:8%;align-items:center;background:#fff}
-.cb-home-intro__eyebrow{font-size:10px;letter-spacing:2.2px;font-weight:850;color:var(--cb-purple)}
-.cb-home-intro h1{font-size:clamp(38px,5.4vw,70px)!important;line-height:1.08!important;letter-spacing:-2.7px!important;font-weight:800!important;color:#1b1722!important;margin:20px 0 22px!important;max-width:850px}
-.cb-home-intro h1 em{font-family:Georgia,serif;font-weight:400;color:var(--cb-purple)}
-.cb-home-intro__inner>p{font-size:16px!important;line-height:1.9!important;color:#706a77!important;max-width:690px!important;margin:0!important}
-.cb-home-intro__actions{display:flex;gap:13px;flex-wrap:wrap;margin-top:30px}
-.cb-home-intro__actions a{display:inline-flex;align-items:center;gap:18px;padding:15px 20px;border-radius:5px;background:#7851a5;color:#fff!important;text-decoration:none!important;font-size:13px;font-weight:800;transition:transform .2s,background .2s}
-.cb-home-intro__actions a:hover{transform:translateY(-2px);background:#604087}
-.cb-home-intro__actions a span{font-size:18px}
-.cb-home-intro__actions a.cb-home-intro__secondary{background:#f2edf7;color:#5c3e7d!important}
-.cb-home-intro__side{border-left:1px solid #e8e1ed;padding:12px 0 12px 32px;display:flex;flex-direction:column;gap:28px}
-.cb-home-intro__side>span{font-size:11px;color:#9a8ba8;letter-spacing:2px;font-weight:800}
-.cb-home-intro__side strong{font-size:clamp(23px,2.7vw,34px);line-height:1.25;letter-spacing:-1px;color:#27212e}
-.cb-home-intro__side strong i{font-family:Georgia,serif;font-weight:400;color:var(--cb-purple)}
-.cb-home-intro__side small{font-size:9px;letter-spacing:2px;color:#9a929f;font-weight:800}
-.cb-home-process{max-width:none!important;background:#f7f6f8!important;padding:92px max(30px,calc((100% - 1210px)/2)) 82px!important}
-.cb-home-process__head{max-width:1210px;margin-left:auto!important;margin-right:auto!important}
-.cb-home-process__grid{max-width:1210px;margin:0 auto!important;border-color:#e4dfe8!important}
-.cb-home-process__item{border-color:#e4dfe8!important}
-.footer-banner{background:linear-gradient(rgba(23,21,33,.66),rgba(23,21,33,.76)),url('/_assets/images/sinirsiz-ticaret-potansiyeli.jpg') center/cover no-repeat!important;padding:72px 28px!important;position:relative!important;overflow:hidden!important}
-.footer-banner:before{content:"";position:absolute;width:440px;height:440px;border:1px solid rgba(216,195,238,.18);border-radius:50%;right:-110px;top:-240px}
-.footer-banner-text-wrapper{max-width:1000px!important;margin:auto!important;text-align:left!important;position:relative!important;z-index:1}
-.footer-banner-text-wrapper h4{font-size:clamp(30px,4vw,48px)!important;line-height:1.12!important;color:#fff!important;font-weight:800!important;letter-spacing:-1.4px!important;margin:0 0 18px!important}
-.footer-banner-text-wrapper p{max-width:690px!important;color:#c9c2d0!important;font-size:15px!important;line-height:1.85!important;margin:0!important}
-.footer-contact-area-container{background:#f1eef4!important;padding:64px 28px!important}
-.footer-contact-area-wrapper{max-width:1160px!important;margin:auto!important;display:grid!important;grid-template-columns:1fr 1fr!important;gap:8%!important}
-.footer-bize-ulasin-area h4,.footer-contact-area-item-e-bulten h4{font-size:23px!important;color:#211b29!important;font-weight:800!important;margin:0 0 16px!important}
-.footer-bize-ulasin-area p,.footer-contact-area-item-e-bulten>p{font-size:14px!important;line-height:1.8!important;color:#6f6876!important}
-.footer-contact-area-item-e-bulten h5{font-size:16px!important;color:#453453!important;margin:0 0 10px!important}
-.footer-contact-area-container a{color:#67438b!important}
-.footer-contact-area-item-e-bulten .input-wrapper{display:flex!important;gap:8px!important}
-.footer-contact-area-item-e-bulten input[type=email]{min-width:0!important;flex:1!important;border:1px solid #d9d1e0!important;border-radius:5px!important;background:#fff!important;padding:13px 14px!important;color:#27212e!important}
-.footer-contact-area-item-e-bulten .signup-button{background:#7851a5!important;color:#fff!important;border:0!important;border-radius:5px!important;padding:0 18px!important;font-weight:800!important}
-.newsletter-privacy,.checkbox-wrapper label{font-size:11px!important;line-height:1.6!important;color:#746d79!important}
-.cagbas-site-footer-content{background:#111827!important}
-.footer-container{background:#111827!important;color:#aeb9ca!important}
-#cagbas-whatsapp-float{z-index:1200!important}
-@media(max-width:800px){.menu-wrapper{padding:10px 18px!important}.cb-home-intro{grid-template-columns:1fr;padding:62px 24px;gap:38px}.cb-home-intro__side{border-left:0;border-top:1px solid #e8e1ed;padding:24px 0 0;gap:16px}.cb-home-intro__side strong br{display:none}.footer-contact-area-wrapper{grid-template-columns:1fr!important;gap:38px!important}.footer-banner{padding:56px 24px!important}}
-@media(max-width:520px){.banner-slider-wrapper,.banner-slider-wrapper .banner-swiper-wrapper,.banner-slider-wrapper .main-slider-container,.banner-slider-wrapper .swiper-wrapper,.banner-slider-wrapper .swiper-slide{min-height:280px!important;height:280px!important}.cb-home-intro{padding:50px 22px 58px}.cb-home-intro h1{font-size:40px!important;letter-spacing:-1.6px!important}.cb-home-intro__inner>p{font-size:14px!important}.cb-home-intro__actions{flex-direction:column;align-items:stretch}.cb-home-intro__actions a{justify-content:space-between}.footer-contact-area-container{padding:48px 22px!important}.footer-contact-area-item-e-bulten .input-wrapper{flex-direction:column!important}.footer-contact-area-item-e-bulten .signup-button{min-height:44px!important}}
-.cb-home-intro[dir=rtl]{direction:rtl;text-align:right}.cb-home-intro[dir=rtl] .cb-home-intro__side{border-left:0;border-right:1px solid #e8e1ed;padding:12px 32px 12px 0}.cb-home-intro[dir=rtl] .cb-home-intro__actions{justify-content:flex-start}
-@media(max-width:800px){.cb-home-intro[dir=rtl] .cb-home-intro__side{border-right:0;border-top:1px solid #e8e1ed;padding:24px 0 0}}
-
-
-/* Balance the Contact column with the newsletter column */
-.footer-contact-area-wrapper{grid-template-columns:1fr 1fr!important;gap:6%!important}
-.footer-contact-area-item{align-items:stretch!important;border-right:1px solid #ded8e3!important}
-.footer-bize-ulasin-area{width:100%!important;max-width:none!important;padding:0!important}
-.footer-bize-ulasin-area h4{margin-bottom:18px!important}
-.footer-bize-ulasin-area>p{margin:0 0 22px!important}
-.footer-bize-ulasin-area .contact-info-wrapper{display:grid!important;grid-template-columns:1fr!important;gap:14px!important;width:100%!important}
-.footer-bize-ulasin-area .phone-info-container{width:100%!important;min-height:48px!important;display:flex!important;align-items:center!important;gap:12px!important;margin:0!important}
-.footer-bize-ulasin-area .phone-info-container img{width:42px!important;height:42px!important;object-fit:contain!important;padding:9px!important;box-sizing:border-box!important}
-.footer-bize-ulasin-area .phone-info-container a{padding:0!important;font-size:14px!important;line-height:1.5!important}
-.footer-bize-ulasin-area .contact-form-arrow-wrapper{display:none!important}
-@media(max-width:800px){
- .footer-contact-area-wrapper{grid-template-columns:1fr!important}
- .footer-contact-area-item{border-right:0!important;border-bottom:1px solid #ded8e3!important;padding:0 0 28px!important}
-}
-/* Footer contact and newsletter proportions */
-.footer-contact-area-container{padding:72px 28px!important}
-.footer-contact-area-wrapper{grid-template-columns:.9fr 1.1fr!important;gap:7%!important;align-items:stretch!important}
-.footer-contact-area-item{width:auto!important;min-height:320px!important;justify-content:center!important;padding:30px 42px 30px 0!important}
-.footer-contact-area-item-e-bulten{width:auto!important;min-height:320px!important;justify-content:center!important;padding:30px 0 30px 8px!important}
-.footer-contact-area-item-e-bulten .input-container,.footer-contact-area-item-e-bulten .newsletter-form{width:100%!important;max-width:none!important}
-.footer-contact-area-item-e-bulten .input-wrapper{width:100%!important;display:flex!important;align-items:stretch!important;gap:10px!important;margin:20px 0 12px!important}
-.footer-contact-area-item-e-bulten input[type=email]{height:52px!important;min-height:52px!important;box-sizing:border-box!important}
-.footer-contact-area-item-e-bulten .signup-button{position:static!important;height:52px!important;min-height:52px!important;white-space:nowrap!important;padding:0 24px!important}
-.footer-contact-area-item-e-bulten .newsletter-privacy{margin:12px 0!important}
-.footer-contact-area-item-e-bulten .checkbox-wrapper{margin-top:12px!important}
-@media(max-width:800px){
- .footer-contact-area-container{padding:48px 22px!important}
- .footer-contact-area-wrapper{grid-template-columns:1fr!important;gap:24px!important}
- .footer-contact-area-item{min-height:0!important;padding:0 0 28px!important}
- .footer-contact-area-item-e-bulten{min-height:0!important;padding:28px 0 0!important;border-top:1px solid #ded8e3!important}
-}
-@media(max-width:520px){
- .footer-contact-area-item-e-bulten .input-wrapper{flex-direction:column!important}
- .footer-contact-area-item-e-bulten .signup-button{width:100%!important}
-}
-
-/* Integrate the world-map hero to the very top; remove the white strip above it */
-.menu-container{position:absolute!important;top:0!important;left:0!important;right:0!important;width:100%!important;background:transparent!important;border:0!important;box-shadow:none!important;backdrop-filter:none!important}
-.menu-wrapper{background:transparent!important}
-.menu-bar-links a{color:#fff!important;text-shadow:0 1px 8px rgba(0,0,0,.65)!important}
-.mobile-menu-container{background:rgba(23,21,33,.35)!important;border:0!important}
-.banner-slider-wrapper{margin-top:0!important}
-
-/* White ÇAĞBAŞ brand mark and bottom-left hero slogan */
-.menu-wrapper .menu-logo img{filter:brightness(0) invert(1)!important}
-.banner-content-swiper-container{bottom:0!important;left:0!important;right:0!important;width:100%!important;height:100%!important;display:flex!important;align-items:flex-end!important;justify-content:flex-start!important;padding:0 0 30px 42px!important;box-sizing:border-box!important}
-.banner-content-swiper-container .left-down-swiper-container{position:absolute!important;left:42px!important;right:auto!important;bottom:30px!important;width:min(520px,75%)!important;text-align:left!important}
-.banner-content-swiper-container .slider-content-wrapper{position:relative!important;left:auto!important;right:auto!important;bottom:auto!important;transform:none!important;text-align:left!important}
-.banner-content-swiper-container .slider-content-wrapper span{display:block!important;color:#fff!important;text-align:left!important;font-size:clamp(20px,2.5vw,34px)!important;font-weight:800!important;text-shadow:0 2px 18px rgba(0,0,0,.7)!important}
-@media(max-width:700px){.banner-content-swiper-container{padding:0 0 22px 20px!important}.banner-content-swiper-container .left-down-swiper-container{left:20px!important;right:auto!important;bottom:22px!important;width:calc(100% - 40px)!important}}
-
-/* Keep the brand logo visible beside the navigation */
-.menu-wrapper{display:flex!important;align-items:center!important;gap:18px!important}
-.menu-wrapper>.menu-logo{display:flex!important;flex:0 0 120px!important;width:120px!important;min-width:120px!important;max-width:120px!important;align-items:center!important;justify-content:flex-start!important;margin:0!important;padding:5px 0!important;visibility:visible!important;opacity:1!important}
-.menu-wrapper>.menu-logo img{display:block!important;visibility:visible!important;opacity:1!important;width:120px!important;max-width:120px!important;height:auto!important;max-height:42px!important;object-fit:contain!important}
-.menu-wrapper>.menu-bar-links{flex:1 1 auto!important;width:auto!important;min-width:0!important}
-.menu-wrapper>.langSelector{flex:0 0 auto!important}
-@media(max-width:900px){
- .menu-wrapper>.menu-logo{flex-basis:100px!important;width:100px!important;min-width:100px!important;max-width:100px!important}
- .menu-wrapper>.menu-logo img{width:100px!important;max-width:100px!important}
-}
-
-
-
-/* Final hero placement: headline anchored to the bottom-left */
-.banner-content-swiper-container{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;display:block!important;padding:0!important;box-sizing:border-box!important}
-.banner-content-swiper-container .left-down-swiper-container{position:absolute!important;left:42px!important;right:auto!important;top:auto!important;bottom:30px!important;width:min(520px,75%)!important;margin:0!important;text-align:left!important}
-.banner-content-swiper-container .left-down-swiper-container .swiper-wrapper{align-items:flex-end!important}
-.banner-content-swiper-container .slider-content-wrapper{position:relative!important;left:auto!important;right:auto!important;top:auto!important;bottom:auto!important;transform:none!important;text-align:left!important}
-@media(max-width:700px){.banner-content-swiper-container .left-down-swiper-container{left:20px!important;right:auto!important;bottom:22px!important;width:calc(100% - 40px)!important}}
-
-
-/* Centered compass ornament within the map hero */
-.banner-slider-wrapper{position:relative!important;isolation:isolate}
-
-
-
-
-
-
-/* Slogan at the map's bottom-left */
-.banner-content-swiper-container .left-down-swiper-container{display:none!important}
-.banner-content-swiper-container .swiper-pagination,.banner-content-swiper-container .swiper-button-wrapper{display:none!important}
-
-.cb-map-slogan{position:absolute!important;z-index:5!important;left:42px!important;right:auto!important;bottom:clamp(16px,3.2vw,34px)!important;width:min(32%,360px)!important;min-height:clamp(104px,15vw,184px)!important;display:flex!important;align-items:flex-end!important;justify-content:flex-start!important;padding-bottom:clamp(5px,1vw,12px)!important;box-sizing:border-box!important;color:#fff!important;font-size:clamp(14px,1.8vw,24px)!important;line-height:1.2!important;font-weight:850!important;text-align:left!important;text-shadow:0 2px 16px rgba(0,0,0,.78)!important;pointer-events:none!important}
-@media(max-width:700px){.cb-map-slogan{left:20px!important;right:auto!important;bottom:18px!important;width:34vw!important;min-height:clamp(82px,22vw,112px)!important;padding-bottom:4px!important;font-size:clamp(12px,3.3vw,16px)!important;line-height:1.18!important}}
-
-
-/* Homepage services band: remove dark side gutters and use a clean white surface */
-.cb-home-proof{
-  width:100%!important;
-  max-width:none!important;
-  background:#fff!important;
-  color:#282330!important;
-  border-top:1px solid #eee9f2!important;
-  border-bottom:1px solid #eee9f2!important;
-}
-.cb-home-proof span{color:#625a69!important;border-right-color:#e8e2ed!important}
-.cb-home-proof b{color:#8b35d2!important}
-.cb-home-services{
-  width:100%!important;
-  max-width:none!important;
-  background:#fff!important;
-  color:#211c28!important;
-  padding-left:max(24px,calc((100% - 1450px)/2))!important;
-  padding-right:max(24px,calc((100% - 1450px)/2))!important;
-}
-.cb-home-services__intro h2{color:#211c28!important}
-.cb-home-services__intro p{color:#6e6875!important}
-.cb-home-service{
-  background:#fff!important;
-  border:1px solid #e8e3ec!important;
-  color:#211c28!important;
-  box-shadow:0 5px 18px rgba(38,24,52,.045)!important;
-}
-.cb-home-service:hover{background:#fcfaff!important;border-color:#b88add!important}
-.cb-home-service__text strong{color:#211c28!important}
-.cb-home-service__text small{color:#716b78!important}
-.cb-home-service__arrow{color:#8b35d2!important;border-color:#b98add!important}
-@media(max-width:1000px){
- .cb-home-services{padding-left:22px!important;padding-right:22px!important}
-}
-
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#ffffff">
+<title>ÇAĞBAŞ Creative Studio | Digital Solutions</title>
+<meta name="description" content="ÇAĞBAŞ Creative Studio provides web design, graphic design, social media management, digital marketing and R&D solutions.">
+<meta name="keywords" content="ÇAĞBAŞ, web design, graphic design, brand identity, social media management, digital marketing, SEO, R&D">
+<link rel="canonical" href="https://www.cagbas.com/">
+<meta property="og:title" content="ÇAĞBAŞ Creative Studio | Digital Solutions">
+<meta property="og:description" content="Creative and effective digital solutions for your brand.">
+<meta property="og:image" content="https://www.cagbas.com/_assets/images/cagbas-share-card.svg">
+<link rel="icon" href="/_assets/images/cagbas-favicon.svg" type="image/svg+xml">
+<style>
+:root{--ink:#17172b;--purple:#7900d7;--purple2:#9b25ed;--muted:#55566a;--line:#eee8f5;--max:1380px}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:#fff;color:var(--ink);font-family:Nunito,Arial,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+.site-header{height:76px;background:rgba(255,255,255,.98);border-bottom:1px solid #f0edf4;display:flex;align-items:center;position:relative;z-index:20}
+.header-inner{width:min(var(--max),calc(100% - 64px));margin:auto;display:flex;align-items:center;justify-content:space-between;gap:32px}
+.brand img{display:block;width:146px;height:auto;max-height:58px;object-fit:contain}
+.nav{display:flex;align-items:center;gap:38px;margin-left:auto;margin-right:auto}
+.nav a{font-size:16px;font-weight:800;white-space:nowrap;padding:25px 0 22px;position:relative}
+.nav a.active,.nav a:hover{color:var(--purple)}
+.nav a.active:after{content:"";height:3px;border-radius:3px;background:var(--purple);position:absolute;left:0;right:0;bottom:9px}
+.header-actions{display:flex;align-items:center;gap:16px}
+.language{position:relative}
+.language select{appearance:none;border:1px solid #e9e4f0;border-radius:24px;background:#fff;color:var(--ink);font:700 15px Nunito,Arial;padding:11px 36px 11px 18px;cursor:pointer}
+.language:after{content:"⌄";position:absolute;right:14px;top:7px;font-size:20px;pointer-events:none}
+.project-btn,.primary-btn{display:inline-flex;align-items:center;justify-content:center;gap:16px;background:linear-gradient(110deg,#8c00df,#5c00bd);color:#fff;border-radius:28px;padding:13px 24px;font-weight:800;box-shadow:0 8px 22px rgba(112,0,204,.14);transition:transform .2s,box-shadow .2s}
+.project-btn:hover,.primary-btn:hover{transform:translateY(-2px);box-shadow:0 11px 26px rgba(112,0,204,.22)}
+.menu-toggle{display:none;border:0;background:none;font-size:28px;color:var(--ink);cursor:pointer}
+.hero{min-height:396px;display:grid;grid-template-columns:minmax(430px,.88fr) minmax(0,1.12fr);align-items:center;position:relative;overflow:hidden;background:#fff}
+.hero-copy{padding:42px 24px 42px max(7.5vw,calc((100vw - var(--max))/2));position:relative;z-index:2;max-width:none}
+.eyebrow{margin:0 0 10px;color:var(--purple);font-size:15px;font-weight:900;letter-spacing:1.4px;text-transform:uppercase}
+.hero h1{font-size:clamp(38px,3.2vw,54px);line-height:.99;letter-spacing:-1.7px;margin:0 0 14px;font-weight:950;max-width:590px}
+.hero-copy>p:not(.eyebrow){font-size:19px;line-height:1.5;margin:0 0 20px;max-width:560px;color:#242438}
+.hero-buttons{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.primary-btn{padding:15px 28px;font-size:16px}
+.video-btn{display:inline-flex;align-items:center;gap:11px;border:1.5px solid var(--purple);border-radius:28px;padding:13px 25px;font-weight:850;background:#fff}
+.video-btn span{color:var(--purple);font-size:18px}
+.hero-visual{height:396px;position:relative;overflow:hidden}
+.hero-visual:before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(90deg,#fff 0%,rgba(255,255,255,.08) 23%,rgba(255,255,255,0) 100%)}
+.hero-visual img{width:100%;height:100%;object-fit:cover;object-position:center 48%;display:block}
+.services{padding:19px max(5vw,calc((100vw - var(--max))/2)) 54px;text-align:center}
+.section-kicker{display:flex;align-items:center;justify-content:center;gap:12px;color:var(--purple);font-size:17px;font-weight:950;letter-spacing:2.4px;margin:0 0 6px}
+.section-kicker:before,.section-kicker:after{content:"";width:40px;height:1px;background:var(--purple)}
+.services h2{font-size:clamp(30px,2.7vw,42px);letter-spacing:-1.2px;line-height:1.15;margin:0 0 7px;font-weight:950}
+.section-intro{font-size:17px;margin:0 auto 20px;color:#242438}
+.service-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:22px;align-items:start}
+.service-card{min-width:0;text-align:center;border-radius:17px;transition:transform .2s}
+.service-card:hover{transform:translateY(-4px)}
+.service-card img{display:block;width:100%;height:122px;object-fit:cover;border-radius:17px;margin-bottom:10px;background:#f4eef9}
+.service-card h3{font-size:21px;line-height:1.13;letter-spacing:-.55px;margin:0 auto 8px;font-weight:950;max-width:240px;min-height:48px}
+.service-card p{font-size:16px;line-height:1.45;margin:0 auto;color:#202033;max-width:260px}
+.all-services{margin-top:19px;display:inline-flex;align-items:center;gap:22px;padding:13px 32px;border:1.5px solid var(--purple);border-radius:30px;color:var(--purple);font-weight:900;font-size:17px;transition:background .2s,color .2s}
+.all-services:hover{background:var(--purple);color:#fff}
+.site-footer{background:#171421;color:#fff;padding:32px 24px}
+.footer-inner{width:min(var(--max),100%);margin:auto;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap}
+.footer-brand img{width:145px;max-height:48px;object-fit:contain}
+.footer-links{display:flex;gap:24px;flex-wrap:wrap;font-size:14px;color:#e9e4ef}
+.footer-copy{font-size:13px;color:#c8c1d0}
+@media(max-width:1050px){.header-inner{width:calc(100% - 36px);gap:18px}.nav{gap:20px}.nav a{font-size:14px}.brand img{width:130px}.service-grid{gap:14px}.service-card img{height:108px}.service-card h3{font-size:18px}.service-card p{font-size:14px}.hero-copy{padding-left:5vw}.hero{grid-template-columns:.95fr 1.05fr}}
+@media(max-width:760px){.site-header{height:auto;min-height:68px}.header-inner{min-height:68px;flex-wrap:wrap;padding:8px 0}.brand img{width:128px}.menu-toggle{display:block;order:3}.header-actions{margin-left:auto;gap:9px}.project-btn{padding:10px 15px;font-size:13px}.language select{padding:9px 30px 9px 13px}.nav{display:none;order:4;flex:0 0 100%;width:100%;margin:0;padding:8px 0 14px;align-items:stretch;gap:0;flex-direction:column}.nav.open{display:flex}.nav a{padding:13px 4px;border-top:1px solid #f0edf4;font-size:15px}.nav a.active:after{display:none}.hero{display:flex;flex-direction:column;min-height:0}.hero-copy{width:100%;padding:38px 24px 25px}.hero h1{font-size:42px;max-width:520px}.hero-copy>p:not(.eyebrow){font-size:16px}.hero-visual{height:250px;width:100%}.hero-visual:before{background:linear-gradient(180deg,#fff 0%,rgba(255,255,255,0) 25%)}.services{padding:30px 20px 42px}.section-kicker{font-size:14px}.services h2{font-size:30px}.section-intro{font-size:15px;line-height:1.45;margin-bottom:22px}.service-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:22px 14px}.service-card img{height:120px}.service-card h3{font-size:18px;min-height:42px}.service-card p{font-size:14px}.service-card:last-child{grid-column:1/-1;width:calc(50% - 7px);justify-self:center}.all-services{font-size:15px;padding:12px 23px}.footer-inner{justify-content:center;text-align:center}.footer-links{justify-content:center;gap:14px}}
+@media(max-width:420px){.header-inner{width:calc(100% - 24px)}.brand img{width:112px}.project-btn{gap:7px;padding:9px 12px}.hero h1{font-size:36px}.hero-buttons{gap:10px}.primary-btn,.video-btn{font-size:14px;padding:12px 17px}.service-card img{height:100px}.service-card h3{font-size:16px}.service-card p{font-size:13px}}
 </style>
-<link rel="alternate" hreflang="tr" href="https://www.cagbas.com/">
-<link rel="alternate" hreflang="en" href="https://www.cagbas.com/en/index-en.html">
-<link rel="alternate" hreflang="x-default" href="https://www.cagbas.com/">
-
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      window.gtag = window.gtag || function(){ window.dataLayer.push(arguments); };
-      window.gtag('consent', 'default', { ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied', analytics_storage: 'denied' });
-    </script>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9002889478901770" crossorigin="anonymous"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900;1000&display=swap" rel="stylesheet">
 </head>
 <body>
-
-
-
-
-
-    <div class="container">
-
-        <div class="main-wrapper">
-
-            <div class="menu-container">
-                <div class="menu-wrapper">
-                    <a href="/en/index-en.html" class="menu-logo"><img src="/_assets/images/cagbas-logo.svg" width="120" alt="ÇAĞBAŞ"></a>
-                    <div class="menu-bar-links">
-                        <a href="/en/index-en.html" class="btn-2" id="ana-sayfa">Home</a>
-                        <a href="/en/hakkimizda-en.html" class="btn-2" id="hakkimizda">About</a>
-                        <a href="/en/hizmetlerimiz-en.html" class="btn-2" id="hizmetlerimiz">Services</a>
-                        <a href="/en/bize-ulasin-en.html" class="btn-2" id="bize-ulasin">Contact</a>
-                        <!-- <a href="/istiraklerimiz" class="btn-2">İştiraklerimiz</a> -->
-
-                    </div>
-            <div class="langSelector">
-                <div class="langSelectorHeader">
-                    <b class="langSelectorTitle">
-                      <a href="/en/index-en.html" id="currentLang">
-                        <span class="langSelectorListNameFlag">
-                            <img src="/_assets/images/en-flag.png" alt="English" />
-                        </span>
-                        <abbr class="langSelectorListNameLabel" title="en">EN</abbr>
-                      </a>
-                        <i class="fa fa-caret-down" aria-hidden="true"></i>
-                    </b>
-                </div>
-                <div class="langSelectorBody">
-                    <ul class="langSelectorList">
-                        <li class="langSelectorListItem" data-lang="tr">
-                            <a href="/index.html" class="langSelectorListName">
-                                <span class="langSelectorListNameFlag">
-                                    <img src="/_assets/images/tr-flag.png" alt="Türkçe" />
-                                </span>
-                                <abbr class="langSelectorListNameLabel" title="tr">TR</abbr>
-                            </a>
-                        </li>
-                        <li class="langSelectorListItem" data-lang="en">
-                            <a href="/en/index-en.html" class="langSelectorListName">
-                                <span class="langSelectorListNameFlag">
-                                    <img src="/_assets/images/en-flag.png" alt="Flag of United Kingdom" />
-                                </span>
-                                <abbr class="langSelectorListNameLabel" title="en">EN</abbr>
-                            </a>
-                        </li>
-                        
-                    </ul>
-                </div>
-            </div>                              
-    </div>
-    <div class="mobile-menu-container">
-        <div class="mobile-menu-icon-wrapper" id="menu-icon">
-            <img src="/_assets/images/menu-icon.png" width="24px" alt="ÇAĞBAŞ">
-        </div>
-        <a class="menu-logo" href="/en/index-en.html"><img src="/_assets/images/cagbas-logo.svg" width="120" height="35" alt="ÇAĞBAŞ"></a>
-
-
-        <div class="langSelector">
-            <div class="langSelectorHeader">
-                <b class="langSelectorTitle">
-                    <span id="currentLang">
-                        <span class="langSelectorListNameFlag">
-                            <img src="/_assets/images/en-flag.png" alt="English" />
-                        </span>
-                        <abbr class="langSelectorListNameLabel" title="tr">TR</abbr>
-                    </span>
-                    <i class="fa fa-caret-down" aria-hidden="true"></i>
-                </b>
-            </div>
-            <div class="langSelectorBody">
-                <ul class="langSelectorList">
-                    <li class="langSelectorListItem" data-lang="tr">
-                        <a href="/index.html" class="langSelectorListName">
-                            <span class="langSelectorListNameFlag">
-                                <img src="/_assets/images/tr-flag.png" alt="Türkçe" />
-                            </span>
-                            <abbr class="langSelectorListNameLabel" title="tr">TR</abbr>
-                        </a>
-                    </li>
-                    <li class="langSelectorListItem" data-lang="en">
-                        <a href="/en/index-en.html" class="langSelectorListName">
-                            <span class="langSelectorListNameFlag">
-                                <img src="/_assets/images/en-flag.png" alt="Flag of United Kingdom" />
-                            </span>
-                            <abbr class="langSelectorListNameLabel" title="en">EN</abbr>
-                        </a>
-                    </li>
-                    
-                </ul>
-            </div>
-        </div>
-    </div>
-    <div class="mobile-menu-links-wrapper">
-        <ul>
-    <li><a href="/en/index-en.html" class="btn-2" id="ana-sayfa-mobile">Home</a></li>
-    <li><a href="/en/hakkimizda-en.html" class="btn-2" id="hakkimizda-mobile">About</a></li>
-    <!-- <li><a href="/yurt-disi-temsilciliklerimiz" class="btn-2">Yurt Dışı Temsilciliklerimiz</a></li> -->
-    <li><a href="/en/hizmetlerimiz-en.html" class="btn-2" id="hizmetlerimiz-mobile">Services</a></li>
-    <li><a href="/en/bize-ulasin-en.html" class="btn-2" id="bize-ulasin-mobile">Contact</a></li>
-
-        </ul>
-    </div>
-</div>
-
-
-
-<style>
-/* ÇAĞBAŞ homepage refresh — production */
-.cb-home-v2{background:#09080e;color:#fff;overflow:hidden}
-.cb-home-v2 *{box-sizing:border-box}
-.cb-home-hero{min-height:350px;position:relative;display:grid;grid-template-columns:1fr 1fr;align-items:center;max-width:1600px;margin:auto;padding:54px clamp(28px,5.5vw,86px);isolation:isolate}
-.cb-home-hero:before{content:"";position:absolute;z-index:-2;inset:0;background:radial-gradient(ellipse at 72% 58%,rgba(126,32,229,.42),transparent 43%),linear-gradient(105deg,#09080e 0%,#100c19 55%,#09080e 100%)}
-.cb-home-hero:after{content:"";position:absolute;z-index:-1;right:0;top:0;width:58%;height:100%;background:linear-gradient(90deg,#09080e 0%,rgba(9,8,14,.1) 35%,rgba(9,8,14,.08)),url('/medium/Banner/Image/banner1.webp') center/cover no-repeat;opacity:.58;mask-image:linear-gradient(90deg,transparent 0%,#000 28%)}
-.cb-home-hero__copy{max-width:700px;position:relative;z-index:1}
-.cb-home-hero__eyebrow{display:inline-flex;align-items:center;gap:9px;border:1px solid rgba(177,93,255,.28);border-radius:30px;background:rgba(126,32,229,.16);padding:9px 15px;color:#e8d8ff;font-size:12px;font-weight:700}
-.cb-home-hero__eyebrow:before{content:"✦";color:#c66cff}
-.cb-home-hero h1{font-size:clamp(38px,4.4vw,66px)!important;line-height:1.08!important;letter-spacing:-2.3px!important;font-weight:850!important;color:#fff!important;margin:22px 0 17px!important;max-width:750px}
-.cb-home-hero h1 em{font-style:normal;color:#b34cff}
-.cb-home-hero p{max-width:530px;color:#c7c0d0;font-size:16px;line-height:1.75;margin:0}
-.cb-home-hero__actions{display:flex;gap:13px;flex-wrap:wrap;margin-top:25px}
-.cb-home-hero__actions a{display:inline-flex;align-items:center;gap:17px;padding:14px 22px;border-radius:28px;background:linear-gradient(110deg,#8a21ed,#b02df5);color:#fff!important;text-decoration:none!important;font-size:13px;font-weight:800;box-shadow:0 8px 28px rgba(129,35,225,.24)}
-.cb-home-hero__actions a.secondary{background:rgba(15,13,22,.6);border:1px solid #c6b6d6;box-shadow:none}
-.cb-home-hero__visual{min-height:265px;display:flex;align-items:center;justify-content:center;position:relative}
-.cb-home-hero__visual:before{content:"";position:absolute;width:min(90%,520px);height:230px;border-radius:50%;background:rgba(127,26,229,.32);filter:blur(65px)}
-.cb-home-hero__device{position:relative;width:min(92%,510px);height:260px;border:1px solid rgba(232,210,255,.45);border-radius:17px;background:linear-gradient(145deg,#20142f,#08070d 62%);box-shadow:0 25px 65px #000,0 0 45px rgba(139,45,232,.3);transform:perspective(900px) rotateY(-8deg) rotateX(3deg);display:flex;align-items:center;justify-content:center;overflow:hidden}
-.cb-home-hero__device:before{content:"";position:absolute;inset:0;background:linear-gradient(145deg,transparent 35%,rgba(146,39,255,.5)),repeating-linear-gradient(0deg,transparent 0 35px,rgba(255,255,255,.035) 36px)}
-.cb-home-hero__device strong{position:relative;font-size:clamp(28px,3vw,43px);letter-spacing:1px;text-align:center;text-shadow:0 0 25px rgba(178,80,255,.6)}
-.cb-home-hero__device small{display:block;font-size:12px;font-weight:400;letter-spacing:3px;color:#d7c4ed;margin-top:7px}
-.cb-home-proof{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid #282331;border-bottom:1px solid #282331;background:#100d18;padding:17px clamp(20px,5vw,75px);max-width:1600px;margin:auto}
-.cb-home-proof span{display:flex;align-items:center;justify-content:center;gap:12px;padding:5px 14px;color:#eee8f5;font-size:14px;font-weight:650;border-right:1px solid #30283a}
-.cb-home-proof span:last-child{border:0}.cb-home-proof b{font-size:23px;color:#b34cff}
-.cb-home-services{max-width:1600px;margin:auto;padding:42px clamp(24px,4.5vw,70px) 58px;display:grid;grid-template-columns:minmax(230px,.72fr) minmax(0,2.3fr);gap:30px;background:#09080e}
-.cb-home-services__intro{padding:25px 0;align-self:center}
-.cb-home-services__kicker{font-size:11px;letter-spacing:2px;font-weight:850;color:#c16aff}
-.cb-home-services__intro h2{font-size:clamp(30px,3vw,43px)!important;line-height:1.14!important;letter-spacing:-1.4px!important;color:#fff!important;margin:17px 0 16px!important}
-.cb-home-services__intro h2 em{font-style:normal;color:#b34cff}
-.cb-home-services__intro p{font-size:14px;line-height:1.8;color:#aaa2b4;max-width:340px;margin:0}
-.cb-home-services__all{display:inline-flex;align-items:center;gap:18px;margin-top:24px;padding:13px 20px;border-radius:25px;background:linear-gradient(100deg,#8620e7,#b32af1);color:#fff!important;text-decoration:none!important;font-size:12px;font-weight:800}
-.cb-home-services__grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px 15px;align-content:center}
-.cb-home-service{min-height:100px;display:grid;grid-template-columns:112px 30px minmax(0,1fr) 30px;gap:13px;align-items:center;padding:10px 13px;border:1px solid #302a38;border-radius:12px;background:linear-gradient(115deg,#17131e,#0e0c13);color:#fff!important;text-decoration:none!important;transition:border-color .2s,transform .2s,background .2s}
-.cb-home-service:hover{border-color:#9b45e2;transform:translateY(-2px);background:linear-gradient(115deg,#21152d,#100d17)}
-.cb-home-service__art{height:78px;border-radius:8px;display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative;background:radial-gradient(circle at 50% 40%,rgba(174,73,255,.55),transparent 48%),linear-gradient(135deg,#302044,#100d18)}
-.cb-home-service__art:before{content:"";position:absolute;width:60px;height:43px;border:2px solid rgba(231,206,255,.78);border-radius:5px;box-shadow:0 8px 22px #000,0 0 17px rgba(177,72,255,.4);transform:perspective(100px) rotateY(-12deg)}
-.cb-home-service__art:after{content:"";position:absolute;width:70px;height:3px;bottom:12px;border-radius:5px;background:#a95af0;box-shadow:0 0 12px #9b42ec}
-.cb-home-service:nth-child(2) .cb-home-service__art:before{width:40px;height:48px;border-radius:4px;transform:rotate(8deg);box-shadow:18px 5px 0 -2px #5e3b7e}
-.cb-home-service:nth-child(3) .cb-home-service__art:before{width:64px;height:48px;border-style:dashed}
-.cb-home-service:nth-child(4) .cb-home-service__art:before{width:65px;height:43px;border-color:#a967e7;box-shadow:inset 0 0 18px #6f2da8}
-.cb-home-service:nth-child(5) .cb-home-service__art:before{width:55px;height:48px;border-radius:2px;transform:rotate(-7deg)}
-.cb-home-service:nth-child(6) .cb-home-service__art:before{width:48px;height:48px;border-radius:50%;border-width:5px}
-.cb-home-service:nth-child(7) .cb-home-service__art:before{width:63px;height:42px;border-style:dotted}
-.cb-home-service:nth-child(8) .cb-home-service__art:before{width:60px;height:45px;border-radius:3px;box-shadow:inset 0 0 0 8px rgba(157,83,220,.25),0 0 18px #8138bb}
-.cb-home-service__icon{font-size:24px;color:#bd55ff;text-align:center}
-.cb-home-service__text strong{display:block;font-size:14px;line-height:1.3;font-weight:800;color:#fff;margin-bottom:5px}
-.cb-home-service__text small{display:block;font-size:11px;line-height:1.5;color:#c1b9ca}
-.cb-home-service__arrow{width:27px;height:27px;border:1px solid #a94ce9;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#e6c6ff;font-size:17px}
-@media(max-width:1000px){.cb-home-services{grid-template-columns:1fr}.cb-home-services__intro{padding:12px 0 5px}.cb-home-services__intro p{max-width:650px}.cb-home-services__grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media(max-width:760px){.cb-home-hero{grid-template-columns:1fr;padding:48px 24px 30px;min-height:0}.cb-home-hero:after{width:100%;opacity:.28;mask-image:linear-gradient(180deg,#000,transparent 85%)}.cb-home-hero__visual{min-height:190px;margin-top:20px}.cb-home-hero__device{height:175px}.cb-home-proof{grid-template-columns:repeat(2,1fr);gap:0;padding:10px 14px}.cb-home-proof span{font-size:11px;justify-content:flex-start;padding:12px 8px}.cb-home-proof span:nth-child(2){border-right:0}.cb-home-proof span:nth-child(-n+2){border-bottom:1px solid #30283a}.cb-home-services{padding:36px 20px 45px;gap:22px}.cb-home-services__grid{grid-template-columns:1fr;gap:10px}.cb-home-service{min-height:92px;grid-template-columns:84px 25px minmax(0,1fr) 27px;gap:9px;padding:8px}.cb-home-service__art{height:72px}.cb-home-service__text strong{font-size:13px}.cb-home-service__text small{font-size:10px}}
-@media(max-width:420px){.cb-home-hero h1{font-size:37px!important;letter-spacing:-1.5px!important}.cb-home-hero p{font-size:14px}.cb-home-service{grid-template-columns:72px 22px minmax(0,1fr) 25px;gap:7px}.cb-home-service__icon{font-size:20px}.cb-home-service__text strong{font-size:12px}.cb-home-service__text small{font-size:9px}}
-</style>
-<main class="cb-home-v2">
-<section class="cb-home-hero" aria-labelledby="cb-home-v2-title">
-  <div class="cb-home-hero__copy">
-    <span class="cb-home-hero__eyebrow">Digital Solutions. Real Results.</span>
-    <h1 id="cb-home-v2-title">For Your Brand<br><em>Digital Experiences</em> We Create.</h1>
-    <p>We strengthen your brand in the digital world through web design, software development and tailored digital solutions.</p>
-    <div class="cb-home-hero__actions"><a href="/en/hizmetlerimiz-en.html">Explore Our Services <span>→</span></a><a class="secondary" href="/en/bize-ulasin-en.html">Showreel <span>▶</span></a></div>
+<header class="site-header">
+ <div class="header-inner">
+  <a class="brand" href="/en/index-en.html" aria-label="ÇAĞBAŞ Home"><img src="/_assets/images/cagbas-logo.svg" alt="ÇAĞBAŞ Creative Studio"></a>
+  <button class="menu-toggle" type="button" aria-label="Menüyü aç" aria-expanded="false">☰</button>
+  <nav class="nav" id="mainNav" aria-label="Ana menü">
+   <a class="active" href="/index.html">Home</a>
+   <a href="/en/hizmetlerimiz-en.html">Services</a>
+   <a href="/en/hakkimizda-en.html">About</a>
+   <a href="/en/index-en.html">Our Work</a>
+   <a href="/en/bize-ulasin-en.html">Contact</a>
+  </nav>
+  <div class="header-actions">
+   <div class="language"><select aria-label="Language" onchange="if(this.value)window.location.href=this.value"><option value="/en/index-en.html" selected>EN</option><option value="/index.html">TR</option></select></div>
+   <a class="project-btn" href="/en/bize-ulasin-en.html">Start a Project <span aria-hidden="true">→</span></a>
   </div>
-  <div class="cb-home-hero__visual" aria-hidden="true"><div class="cb-home-hero__device"><strong>ÇAĞBAŞ<small>Creative Studio</small></strong></div></div>
+ </div>
+</header>
+<main>
+<section class="hero" aria-labelledby="hero-title">
+ <div class="hero-copy">
+  <p class="eyebrow">YOUR DIGITAL SOLUTIONS PARTNER</p>
+  <h1 id="hero-title">Creative and Effective<br>Digital Solutions<br>for Your Brand</h1>
+  <p>We help your brand grow digitally through web design, graphic design, social media management and digital marketing.</p>
+  <div class="hero-buttons">
+   <a class="primary-btn" href="/en/hizmetlerimiz-en.html">Servicesi İncele <span aria-hidden="true">→</span></a>
+   <a class="video-btn" href="/en/hakkimizda-en.html"><span aria-hidden="true">▶</span> Introduction Video</a>
+  </div>
+ </div>
+ <div class="hero-visual"><img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1800&q=90" alt="Modern çalışma masasında dizüstü bilgisayar ve dijital tasarım ortamı" fetchpriority="high"></div>
 </section>
-<div class="cb-home-proof" aria-label="ÇAĞBAŞ değerleri"><span><b>♜</b> Increase Your Brand Value</span><span><b>〈/〉</b> Custom Software Solutions</span><span><b>ϟ</b> Automate Your Processes</span><span><b>▥</b> Measurable Digital Success</span></div>
-<section class="cb-home-services" aria-labelledby="cb-home-services-title">
-  <div class="cb-home-services__intro"><span class="cb-home-services__kicker">OUR SERVICES</span><h2 id="cb-home-services-title">Tailored to Your Needs<br><em>Digital Solutions</em></h2><p>We bring together the web, software and automation solutions your brand needs throughout its digital journey.</p><a class="cb-home-services__all" href="/en/hizmetlerimiz-en.html">View All Services <span>→</span></a></div>
-  <div class="cb-home-services__grid">
-    <a class="cb-home-service" href="/en/hizmetlerimiz-en.html#web-tasarim"><span class="cb-home-service__art"></span><span class="cb-home-service__icon">▣</span><span class="cb-home-service__text"><strong>Corporate Website Design</strong><small>Professional, reliable corporate websites that reflect your brand identity.</small></span><span class="cb-home-service__arrow">→</span></a>
-    <a class="cb-home-service" href="/en/hizmetlerimiz-en.html#web-tasarim"><span class="cb-home-service__art"></span><span class="cb-home-service__icon">🛒</span><span class="cb-home-service__text"><strong>E-commerce Website Development</strong><small>Secure and scalable e-commerce platforms that let you sell your products online.</small></span><span class="cb-home-service__arrow">→</span></a>
-    <a class="cb-home-service" href="/en/hizmetlerimiz-en.html#web-tasarim"><span class="cb-home-service__art"></span><span class="cb-home-service__icon">▤</span><span class="cb-home-service__text"><strong>Landing Pages and Application Systems</strong><small>Effective campaign pages and application solutions designed to increase conversions.</small></span><span class="cb-home-service__arrow">→</span></a>
-    <a class="cb-home-service" href="/en/hizmetlerimiz-en.html#web-tasarim"><span class="cb-home-service__art"></span><span class="cb-home-service__icon">⌘</span><span class="cb-home-service__text"><strong>Web Application Development</strong><small>Modern, high-performance web applications tailored to your needs.</small></span><span class="cb-home-service__arrow">→</span></a>
-    <a class="cb-home-service" href="/en/hizmetlerimiz-en.html#web-tasarim"><span class="cb-home-service__art"></span><span class="cb-home-service__icon">✎</span><span class="cb-home-service__text"><strong>Website Design</strong><small>Fast, modern and user-friendly website designs.</small></span><span class="cb-home-service__arrow">→</span></a>
-    <a class="cb-home-service" href="/en/hizmetlerimiz-en.html#web-tasarim"><span class="cb-home-service__art"></span><span class="cb-home-service__icon">⚙</span><span class="cb-home-service__text"><strong>Business Process Automation</strong><small>Efficient, fast and reliable automation systems for repetitive tasks.</small></span><span class="cb-home-service__arrow">→</span></a>
-    <a class="cb-home-service" href="/en/hizmetlerimiz-en.html#web-tasarim"><span class="cb-home-service__art"></span><span class="cb-home-service__icon">⌘</span><span class="cb-home-service__text"><strong>Custom Software Development</strong><small>Scalable software solutions tailored to your business processes.</small></span><span class="cb-home-service__arrow">→</span></a>
-    <a class="cb-home-service" href="/en/hizmetlerimiz-en.html#web-tasarim"><span class="cb-home-service__art"></span><span class="cb-home-service__icon">▦</span><span class="cb-home-service__text"><strong>Admin Panel Development</strong><small>Custom panels that make it easy to manage your content, data and workflows.</small></span><span class="cb-home-service__arrow">→</span></a>
-  </div>
+<section class="services" aria-labelledby="services-title">
+ <p class="section-kicker">OUR SERVICES</p>
+ <h2 id="services-title">Digital Solutions We Offer</h2>
+ <p class="section-intro">Creative and sustainable digital services tailored to your brand’s needs.</p>
+ <div class="service-grid">
+  <a class="service-card" href="/en/hizmetlerimiz-en.html#web-tasarim">
+   <img src="/_assets/images/cagbas-service-tasarim.jpg" alt="Web design and digital systems" loading="lazy">
+   <h3>Web Design<br>& Digital Systems</h3><p>Modern, fast and user-focused web solutions.</p>
+  </a>
+  <a class="service-card" href="/en/hizmetlerimiz-en.html#grafik-tasarim">
+   <img src="/_assets/images/color.jpg" alt="Graphic design and brand identity" loading="lazy">
+   <h3>Graphic Design<br>& Brand Identity</h3><p>Creative designs that strengthen your brand identity.</p>
+  </a>
+  <a class="service-card" href="/en/hizmetlerimiz-en.html#sosyal-medya">
+   <img src="/_assets/images/middle-image.jpg" alt="Social media management and content creation" loading="lazy">
+   <h3>Social Media<br>Management</h3><p>We connect your brand with the right audience online.</p>
+  </a>
+  <a class="service-card" href="/en/hizmetlerimiz-en.html#dijital-pazarlama">
+   <img src="/_assets/images/cagbas-service-pazarlama.jpg" alt="Digital marketing and SEO analytics dashboard" loading="lazy">
+   <h3>Digital Marketing<br>& SEO</h3><p>Result-driven strategies that increase your visibility.</p>
+  </a>
+  <a class="service-card" href="/en/hizmetlerimiz-en.html#arge">
+   <img src="/_assets/images/cagbas-service-arge.jpg" alt="Research and development, technical drawing and prototyping" loading="lazy">
+   <h3>AR-GE</h3><p>Original and innovative solutions for your brand through emerging technologies.</p>
+  </a>
+ </div>
+ <a class="all-services" href="/en/hizmetlerimiz-en.html">Tüm Servicesi İnceleyin <span aria-hidden="true">→</span></a>
 </section>
 </main>
-
-<div class="footer-banner">
-    <div class="footer-banner-text-wrapper" data-aos="fade-up" data-aos-delay="400">
-        <h4 id="footer-banner-text-wrapper-title">Endless Design Possibilities for Your Brand</h4>
-        <p id="footer-banner-text-wrapper-content">ÇAĞBAŞ delivers web and graphic design solutions that strengthen your brand’s digital identity.</p>
-    </div>
-</div>          
-
-<div class="footer-contact-area-container">
-    <div class="footer-contact-area-wrapper">
-        <div class="footer-contact-area-item">
-            <div class="footer-bize-ulasin-area">
-                <h4 id="footer-banner-text-wrapper-title">Contact</h4>
-                <p>Çekmece, Defne / Hatay, Türkiye</p>
-                <div class="contact-info-wrapper">
-                    <div class="phone-info-container">
-                        <img src="/_assets/images/phone.png" alt="ÇAĞBAŞ">
-                        <a href="">+90 538 448 3866</a>
-                    </div>
-                    <!-- <div class="phone-info-container">
-                        <img src="/_assets/images/fax.png" alt="ÇAĞBAŞ">
-                        <a href=""></a>
-                    </div> -->
-                    <div class="phone-info-container">
-                        <a href="/en/bize-ulasin-en.html" class="contact-form-link" id="contact-form-link">Contact Form</a>
-                        <div class="contact-form-arrow-wrapper">
-                            <i class="icono-arrow1-left"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-
-        <div class="footer-contact-area-item-e-bulten">
-    <h4>Newsletter</h4>
-    <h5>Stay Connected with ÇAĞBAŞ</h5>
-    <p>Subscribe to our mailing list for updates on our latest projects, services and announcements.</p>
-    <div class="input-container">
-        <form id="newsletterForm" class="newsletter-form" novalidate>
-            <div class="input-wrapper">
-                <input type="email" name="email" id="newsletterEmail" placeholder="E-posta adresinizi girin..." required maxlength="254" autocomplete="email">
-                <button type="submit" class="signup-button">SUBSCRIBE</button>
-            </div>
-            <p class="newsletter-privacy">Your email address is processed <a href="/yasal-bilgilendirme.html#kisisel-veriler" target="_blank" rel="noopener">under our Personal Data Protection Notice</a> for newsletter communications.</p>
-            <div class="checkbox-wrapper">
-                <input type="checkbox" id="newsletterConsent" name="marketingConsent" value="yes" required>
-                <label for="newsletterConsent">I agree to receive newsletters and announcement emails.</label>
-            </div>
-            <p class="newsletter-feedback" id="newsletterFeedback" role="status" aria-live="polite"></p>
-        </form>
-    </div>
-</div>
-
-    </div>
-</div>
-
-<style>
-/* Footer contrast and layout hardening */
-.cagbas-site-footer-content{
-  display:block!important;width:100%!important;min-height:250px!important;
-  background:#111827!important;color:#edf2fb!important;
-  padding:64px clamp(22px,5vw,76px) 22px!important;
-  border-top:1px solid rgba(255,255,255,.12)!important;
-  position:relative!important;z-index:2!important;
-  opacity:1!important;visibility:visible!important;filter:none!important;
-}
-.cagbas-site-footer-content,.cagbas-site-footer-content *{
-  box-sizing:border-box!important;text-shadow:none!important;
-}
-.cagbas-site-footer-content .cagbas-footer-grid{
-  width:min(1240px,100%)!important;margin:0 auto!important;
-  display:grid!important;grid-template-columns:1.45fr 1fr .8fr 1.15fr!important;
-  gap:clamp(26px,4vw,64px)!important;align-items:start!important;
-}
-.cagbas-site-footer-content .cagbas-footer-brand{max-width:330px!important}
-.cagbas-site-footer-content .cagbas-footer-name{
-  display:inline-block!important;color:#fff!important;text-decoration:none!important;
-  font-size:29px!important;line-height:1!important;font-weight:800!important;
-  letter-spacing:.09em!important;margin:0 0 18px!important;
-}
-.cagbas-site-footer-content .cagbas-footer-brand p{
-  margin:0!important;color:#c4cede!important;font-size:14px!important;
-  line-height:1.85!important;max-width:290px!important;opacity:1!important;
-}
-.cagbas-site-footer-content .cagbas-footer-grid h3{
-  margin:2px 0 20px!important;color:#d6b8ff!important;font-size:14px!important;
-  font-weight:750!important;letter-spacing:.08em!important;opacity:1!important;
-}
-.cagbas-site-footer-content .cagbas-footer-grid ul{
-  list-style:none!important;margin:0!important;padding:0!important;
-  display:grid!important;gap:13px!important;
-}
-.cagbas-site-footer-content .cagbas-footer-grid li{margin:0!important;padding:0!important}
-.cagbas-site-footer-content .cagbas-footer-grid li a{
-  color:#d2d9e6!important;text-decoration:none!important;font-size:13px!important;
-  line-height:1.65!important;opacity:1!important;transition:color .2s ease!important;
-}
-.cagbas-site-footer-content .cagbas-footer-grid li a:hover{color:#fff!important}
-.cagbas-site-footer-content .cagbas-footer-socials{
-  display:flex!important;gap:10px!important;flex-wrap:wrap!important;margin-top:23px!important;
-}
-.cagbas-site-footer-content .cagbas-footer-socials a{
-  display:inline-flex!important;align-items:center!important;gap:9px!important;
-  padding:9px 13px!important;border:1px solid rgba(214,184,255,.35)!important;
-  border-radius:10px!important;color:#e2ceff!important;text-decoration:none!important;
-  font-size:12px!important;opacity:1!important;
-}
-.cagbas-site-footer-content .cagbas-footer-socials svg{
-  width:15px!important;height:15px!important;fill:currentColor!important;
-}
-.cagbas-site-footer-content .cagbas-footer-bottom{
-  width:min(1240px,100%)!important;margin:42px auto 0!important;
-  padding-top:18px!important;border-top:1px solid rgba(255,255,255,.16)!important;
-  color:#aeb9ca!important;font-size:12px!important;opacity:1!important;
-}
-@media(max-width:850px){
-  .cagbas-site-footer-content .cagbas-footer-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:34px!important}
-  .cagbas-site-footer-content .cagbas-footer-brand{max-width:none!important}
-}
-@media(max-width:520px){
-  .cagbas-site-footer-content{padding:44px 22px 20px!important}
-  .cagbas-site-footer-content .cagbas-footer-grid{grid-template-columns:1fr 1fr!important;gap:30px 18px!important}
-  .cagbas-site-footer-content .cagbas-footer-brand{grid-column:1/-1!important}
-  .cagbas-site-footer-content .cagbas-footer-grid h3{font-size:12px!important;margin-bottom:14px!important}
-  .cagbas-site-footer-content .cagbas-footer-grid li a{font-size:12px!important}
-  .cagbas-site-footer-content .cagbas-footer-bottom{margin-top:30px!important}
-}
-</style>
-<section class="cagbas-site-footer-content" aria-label="ÇAĞBAŞ içerik ve bağlantılar">
-  <div class="cagbas-footer-grid">
-    <div class="cagbas-footer-brand">
-      <a class="cagbas-footer-name" href="/en/index-en.html">ÇAĞBAŞ</a>
-      <p>We turn ideas into meaningful, functional and sustainable solutions through research, design and digital technology.</p>
-      <div class="cagbas-footer-socials" aria-label="Sosyal medya bağlantıları">
-        <a href="https://www.linkedin.com/in/basarckmclgl/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn – Başar Çekmecelioğlu"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5A2.5 2.5 0 1 1 5 8.5a2.5 2.5 0 0 1-.02-5ZM3.5 9.5h3V21h-3zM9 9.5h2.9v1.57h.04c.4-.76 1.39-1.57 2.87-1.57 3.07 0 3.64 2.02 3.64 4.65V21h-3v-6.08c0-1.45-.03-3.31-2.02-3.31-2.02 0-2.33 1.58-2.33 3.2V21H9z"/></svg><span>LinkedIn</span></a>
-        <a href="https://github.com/basarckmclgl" target="_blank" rel="noopener noreferrer" aria-label="GitHub – basarckmclgl"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .9a11.1 11.1 0 0 0-3.51 21.63c.55.1.76-.24.76-.53v-2.08c-3.1.67-3.76-1.32-3.76-1.32-.5-1.28-1.23-1.62-1.23-1.62-1.01-.69.08-.68.08-.68 1.12.08 1.71 1.15 1.71 1.15.99 1.7 2.59 1.21 3.22.92.1-.72.39-1.21.7-1.49-2.47-.28-5.07-1.24-5.07-5.5 0-1.22.44-2.21 1.15-2.99-.12-.28-.5-1.42.11-2.95 0 0 .94-.3 3.05 1.14a10.6 10.6 0 0 1 5.55 0c2.11-1.44 3.05-1.14 3.05-1.14.61 1.53.11 2.67.11 2.95.72.78 1.15 1.77 1.15 2.99 0 4.27-2.6 5.22-5.08 5.49.4.35.75 1.02.75 2.06V22c0 .29.2.63.77.52A11.1 11.1 0 0 0 12 .9Z"/></svg><span>GitHub</span></a>
-      </div>
-    </div>
-    <div><h3>Services</h3><ul><li><a href="/en/hizmetlerimiz-en.html#web-tasarim">Web Design</a></li><li><a href="/en/hizmetlerimiz-en.html#grafik-tasarim">Graphic Design</a></li></ul></div>
-    <div><h3>Company</h3><ul><li><a href="/en/hakkimizda-en.html">About</a></li><li><a href="/en/hizmetlerimiz-en.html">Services</a></li><li><a href="/en/bize-ulasin-en.html">Contact</a></li></ul></div>
-    <div><h3>Legal Information</h3><ul><li><a href="/lisans.html">Licensing & Copyright</a></li><li><a href="/yasal-bilgilendirme.html#kisisel-veriler">Privacy Policy</a></li><li><a href="/yasal-bilgilendirme.html#cerezler">Cookie Policy</a></li><li><a href="/yasal-bilgilendirme.html#yasal">Legal Information</a></li></ul></div>
-  </div>
-  <div class="cagbas-footer-bottom">© 2026 ÇAĞBAŞ. All rights reserved.</div>
-</section>
-
-<div class="cookie-container" role="dialog" aria-label="Çerez tercihleri" aria-live="polite"><p>This site uses essential cookies. Analytics cookies are enabled only with your consent. You can change your preferences at any time. <a href="/yasal-bilgilendirme.html#cerezler" target="_blank" rel="noopener noreferrer">Cookie Policy</a></p><div class="cookie-actions"><button type="button" class="cookie-reject">Decline</button><button type="button" class="cookie-accept">Accept</button></div></div>
-
-    <div class="modal error-modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <span class="close">&times;</span>
-                <h2>An error occurred</h2>
-            </div>
-            <div class="modal-body">
-                <p></p>
-            </div>
-        </div>
-    </div>
-
-    <div class="modal success-modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <span class="close">&times;</span>
-                <h2>Operation successful</h2>
-            </div>
-            <div class="modal-body">
-                <p></p>
-            </div>
-        </div>
-    </div>
-
-    <div class="modal video-modal">
-        <div class="modal-content">
-            <a class="modal-close" href="javascript:;">x</a>
-            <iframe frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-        </div>
-    </div>
-    <button id="scrollToTopBtn" title="Go to top">↑</button>
-
-    <script>
-        // Show the button when the user scrolls down 100px from the top of the document
-window.onscroll = function () {
-    scrollFunction();
-};
-
-function scrollFunction() {
-    const scrollToTopBtn = document.getElementById("scrollToTopBtn");
-    if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
-        scrollToTopBtn.style.display = "block";
-    } else {
-        scrollToTopBtn.style.display = "none";
-    }
-}
-
-// Scroll to the top when the button is clicked
-document.getElementById("scrollToTopBtn").addEventListener("click", function () {
-    window.scrollTo({
-        top: 0,
-        behavior: 'smooth' // Smooth scroll to the top
-    });
-});
-
-    </script>
-
-
-    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
-    <script>
-        AOS.init({
-            once: true
-        });
-    </script>
-
-    <script src="https://api.mapbox.com/mapbox-gl-js/v1.7.0/mapbox-gl.js"></script>
-    <script src="/_assets/js/jquery-3.4.1.min.js"></script>
-    <script src="/_assets/js/main.js?v=20261126-ads-consent"></script>
-    <script src="/_assets/js/swiper.min.js"></script>
-    <script src="/_assets/js/parsley.min.js"></script>
-
-
-
-    <script>
-        $(document).ready(function () {
-            var UPswiper = new Swiper('.main-slider-container');
-            var LDswiper = new Swiper('.left-down-swiper-container', {
-                pagination: {
-                    el: '.swiper-pagination',
-                    type: 'progressbar',
-                },
-
-                navigation: {
-                    nextEl: '.swiper-button-next',
-                    prevEl: '.swiper-button-prev',
-                },
-            });
-            UPswiper.controller.control = LDswiper;
-            LDswiper.controller.control = UPswiper;
-        });
-
-    </script>
-
-
-    <script>
-        document.querySelector('.langSelectorHeader').addEventListener('click', function(event) {
-    // Olayın sayfa yenilemesini engelle
-    event.preventDefault();
-
-    // Dropdown'un açılma/kapanma işlevini burada ekle
-    const langSelectorBody = document.querySelector('.langSelectorBody');
-    langSelectorBody.classList.toggle('open'); // Aç/kapa işlemi için 'open' class'ını kullan
-});
-
-    </script>
-
-
-
-<!--<script type="text/javascript">
-	if (!localStorage.getItem("show-video-171sr")) {
-		_openUrl($("html").attr("lang") == "tr" ? "https://www.youtube.com/embed/piEi7ugR9P0?autoplay=1" : "https://www.youtube.com/embed/1Bmh2e00VOI?autoplay=1");
-		localStorage.setItem("show-video-171sr", true);
-	}
-</script>-->
-
-<style>
-/*.banner-swiper-wrapper .swiper-slide:first-of-type
-{
-    background-position: center !important;
-    background-color: #3A3A3A;
-    background-size: contain !important;
-}*/
-</style>
-
-<style id="cagbas-whatsapp-refinement">#cagbas-whatsapp-float{transform:scale(.9);transform-origin:bottom right}</style>
-<a id="cagbas-whatsapp-float" href="https://wa.me/905384483866?text=Merhaba%20%C3%87A%C4%9EBA%C5%9E%2C%20web%20siteniz%20%C3%BCzerinden%20ula%C5%9F%C4%B1yorum." target="_blank" rel="noopener noreferrer" aria-label="WhatsApp üzerinden ÇAĞBAŞ ile iletişime geçin" title="WhatsApp ile iletişime geçin"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16.02 3C8.86 3 3.04 8.8 3.04 15.94c0 2.28.6 4.5 1.75 6.47L3 29l6.76-1.77a13.05 13.05 0 0 0 6.25 1.59h.01c7.15 0 12.97-5.81 12.98-12.96A12.9 12.9 0 0 0 25.2 6.7 12.9 12.9 0 0 0 16.02 3Zm0 23.62h-.01c-1.9 0-3.77-.51-5.4-1.48l-.39-.23-4.01 1.05 1.07-3.91-.25-.4a10.75 10.75 0 0 1-1.65-5.71c0-5.91 4.82-10.72 10.74-10.72 2.86 0 5.55 1.12 7.57 3.14a10.66 10.66 0 0 1 3.13 7.59c0 5.91-4.82 10.72-10.8 10.72Zm5.9-8.03c-.32-.16-1.9-.94-2.2-1.05-.3-.11-.51-.16-.73.16-.21.32-.84 1.05-1.03 1.27-.19.21-.38.24-.7.08-.32-.16-1.35-.5-2.57-1.6-.95-.85-1.6-1.9-1.79-2.22-.19-.32-.02-.49.14-.65.14-.14.32-.38.48-.57.16-.19.21-.32.32-.54.11-.21.05-.4-.03-.56-.08-.16-.73-1.75-1-2.4-.26-.63-.53-.54-.73-.55h-.62c-.21 0-.56.08-.86.4-.3.32-1.13 1.1-1.13 2.68s1.16 3.1 1.32 3.31c.16.21 2.28 3.48 5.52 4.88.77.33 1.37.53 1.84.68.77.24 1.47.21 2.02.13.62-.09 1.9-.78 2.17-1.53.27-.75.27-1.4.19-1.53-.08-.13-.29-.21-.62-.38Z"/></svg><span>WhatsApp</span></a>
-
-<style id="cagbas-mobile-home-final">
-@media(max-width:767px){
-  .menu-container{display:none!important}
-  .mobile-menu-container{display:flex!important;position:relative!important;inset:auto!important;background:#fff!important;min-height:68px!important}
-  .mobile-menu-links-wrapper{display:none!important}
-  .mobile-menu-links-wrapper.open{display:block!important}
-  .banner-slider-wrapper,.banner-slider-wrapper .banner-swiper-wrapper,.banner-slider-wrapper .main-slider-container,.banner-slider-wrapper .swiper-wrapper,.banner-slider-wrapper .swiper-slide{height:390px!important;min-height:390px!important;max-height:68svh!important}
-  .banner-slider-wrapper{margin-top:0!important}
-  .banner-content-swiper-container{position:absolute!important;inset:0!important;padding:0 20px 22px!important}
-  .cb-map-slogan{left:20px!important;right:20px!important;bottom:20px!important;width:calc(100% - 40px)!important;max-width:330px!important;min-height:0!important;font-size:clamp(14px,4vw,18px)!important;line-height:1.25!important}
-  .cb-home-intro{grid-template-columns:minmax(0,1fr)!important;padding:48px 22px 54px!important;gap:28px!important}
-  .cb-home-intro h1{font-size:clamp(34px,9vw,44px)!important;line-height:1.12!important;letter-spacing:-1.2px!important;overflow-wrap:normal!important;word-break:normal!important}
-  .cb-home-intro__side{border-left:0!important;border-top:1px solid #e8e1ed!important;padding:22px 0 0!important}
-}
-</style>
-
+<footer class="site-footer">
+ <div class="footer-inner">
+  <a class="footer-brand" href="/index.html"><img src="/_assets/images/cagbas-wordmark-white.svg" alt="ÇAĞBAŞ Creative Studio"></a>
+  <nav class="footer-links" aria-label="Footer navigation"><a href="/en/hakkimizda-en.html">About</a><a href="/en/hizmetlerimiz-en.html">Services</a><a href="/en/bize-ulasin-en.html">Contact</a><a href="/lisans.html">Licensing</a><a href="/yasal-bilgilendirme.html">Legal Notice</a></nav>
+  <span class="footer-copy">© <span id="year"></span> ÇAĞBAŞ Creative Studio</span>
+ </div>
+</footer>
+<script>
+const toggle=document.querySelector('.menu-toggle'),nav=document.querySelector('#mainNav');
+toggle.addEventListener('click',()=>{const open=nav.classList.toggle('open');toggle.setAttribute('aria-expanded',String(open));toggle.textContent=open?'✕':'☰';});
+document.getElementById('year').textContent=new Date().getFullYear();
+</script>
 </body>
 </html>
