@@ -979,6 +979,26 @@ html[dir="rtl"] .menu-bar-links{direction:rtl!important}
 .cb-language-link--mobile{display:none!important}
 @media(max-width:767px){.cb-language-link--mobile{display:inline-flex!important;margin-left:auto!important}.menu-wrapper>.cb-language-link{display:none!important}}
 </style>
+
+<style id="cagbas-home-hide-language-selector">
+html body html body .menu-container .langSelector,
+html body html body .menu-container [class*="langSelector"],
+html body html body .mobile-menu-container .langSelector,
+html body html body .mobile-menu-container [class*="langSelector"] {
+  display:none!important;
+  visibility:hidden!important;
+  opacity:0!important;
+  pointer-events:none!important;
+  width:0!important;
+  min-width:0!important;
+  max-width:0!important;
+  height:0!important;
+  min-height:0!important;
+  margin:0!important;
+  padding:0!important;
+  overflow:hidden!important;
+}
+</style>
 </head>
 <body><a class="cb-skip-link" href="#cb-home-v2-title">İçeriğe geç</a>    <div class="container">
 
