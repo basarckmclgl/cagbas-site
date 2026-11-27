@@ -40,7 +40,6 @@
     color: #292331 !important;
     white-space: nowrap !important;
   }
-  .menu-container > .menu-wrapper > .langSelector { flex: 0 0 auto !important; }
   .site-head {
     position: sticky !important;
     top: 0 !important;
