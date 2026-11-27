@@ -61,7 +61,22 @@ html body .langSelector {
 }
 </style>
 dy>
-</html>
+</ht
+<script id="cagbas-language-control-remove">
+(function () {
+  const selectors = '.langSelector, [class~="langSelector"], .cb-language-link, a[class*="language-link"]';
+  function removeLanguageControls(root) {
+    if (!root || !root.querySelectorAll) return;
+    root.querySelectorAll(selectors).forEach(function (element) { element.remove(); });
+    if (root.matches && root.matches(selectors)) root.remove();
+  }
+  removeLanguageControls(document);
+  new MutationObserver(function (records) {
+    records.forEach(function (record) { record.addedNodes.forEach(function (node) { if (node.nodeType === 1) removeLanguageControls(node); }); });
+  }).observe(document.documentElement, { childList: true, subtree: true });
+})();
+</script>
+ml>
 <style id="cagbas-language-button-remove-final">
 html body html body .langSelector,
 html body html body [class*="langSelector"],
