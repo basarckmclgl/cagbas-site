@@ -32,8 +32,8 @@ a{color:inherit;text-decoration:none}
 .project-btn,.primary-btn{display:inline-flex;align-items:center;justify-content:center;gap:16px;background:linear-gradient(110deg,#8c00df,#5c00bd);color:#fff;border-radius:28px;padding:13px 24px;font-weight:800;box-shadow:0 8px 22px rgba(112,0,204,.14);transition:transform .2s,box-shadow .2s}
 .project-btn:hover,.primary-btn:hover{transform:translateY(-2px);box-shadow:0 11px 26px rgba(112,0,204,.22)}
 .menu-toggle{display:none;border:0;background:none;font-size:28px;color:var(--ink);cursor:pointer}
-.hero{min-height:396px;display:grid;grid-template-columns:minmax(430px,.88fr) minmax(0,1.12fr);align-items:center;position:relative;overflow:hidden;background:#fff}
-.hero-copy{padding:42px 24px 42px max(7.5vw,calc((100vw - var(--max))/2));position:relative;z-index:2}
+.hero{min-height:300px;display:grid;grid-template-columns:1fr;align-items:center;position:relative;overflow:hidden;background:#fff}
+.hero-copy{padding:42px 24px 42px max(7.5vw,calc((100vw - var(--max))/2));position:relative;z-index:2;max-width:900px}
 .eyebrow{margin:0 0 10px;color:var(--purple);font-size:15px;font-weight:900;letter-spacing:1.4px;text-transform:uppercase}
 .hero h1{font-size:clamp(38px,3.2vw,54px);line-height:.99;letter-spacing:-1.7px;margin:0 0 14px;font-weight:950;max-width:590px}
 .hero-copy>p:not(.eyebrow){font-size:19px;line-height:1.5;margin:0 0 20px;max-width:560px;color:#242438}
@@ -41,9 +41,9 @@ a{color:inherit;text-decoration:none}
 .primary-btn{padding:15px 28px;font-size:16px}
 .video-btn{display:inline-flex;align-items:center;gap:11px;border:1.5px solid var(--purple);border-radius:28px;padding:13px 25px;font-weight:850;background:#fff}
 .video-btn span{color:var(--purple);font-size:18px}
-.hero-visual{height:396px;position:relative;overflow:hidden}
-.hero-visual:before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(90deg,#fff 0%,rgba(255,255,255,.08) 23%,rgba(255,255,255,0) 100%)}
-.hero-visual img{width:100%;height:100%;object-fit:cover;object-position:center 48%;display:block}
+.hero-visual{display:none!important}
+.hero-visual:before{display:none}
+.hero-visual img{display:none}
 .services{padding:19px max(5vw,calc((100vw - var(--max))/2)) 54px;text-align:center}
 .section-kicker{display:flex;align-items:center;justify-content:center;gap:12px;color:var(--purple);font-size:17px;font-weight:950;letter-spacing:2.4px;margin:0 0 6px}
 .section-kicker:before,.section-kicker:after{content:"";width:40px;height:1px;background:var(--purple)}
@@ -63,7 +63,7 @@ a{color:inherit;text-decoration:none}
 .footer-links{display:flex;gap:24px;flex-wrap:wrap;font-size:14px;color:#e9e4ef}
 .footer-copy{font-size:13px;color:#c8c1d0}
 @media(max-width:1050px){.header-inner{width:calc(100% - 36px);gap:18px}.nav{gap:20px}.nav a{font-size:14px}.brand img{width:130px}.service-grid{gap:14px}.service-card img{height:108px}.service-card h3{font-size:18px}.service-card p{font-size:14px}.hero-copy{padding-left:5vw}.hero{grid-template-columns:.95fr 1.05fr}}
-@media(max-width:760px){.site-header{height:auto;min-height:68px}.header-inner{min-height:68px;flex-wrap:wrap;padding:8px 0}.brand img{width:128px}.menu-toggle{display:block;order:3}.header-actions{margin-left:auto;gap:9px}.project-btn{padding:10px 15px;font-size:13px}.language select{padding:9px 30px 9px 13px}.nav{display:none;order:4;flex:0 0 100%;width:100%;margin:0;padding:8px 0 14px;align-items:stretch;gap:0;flex-direction:column}.nav.open{display:flex}.nav a{padding:13px 4px;border-top:1px solid #f0edf4;font-size:15px}.nav a.active:after{display:none}.hero{display:flex;flex-direction:column;min-height:0}.hero-copy{width:100%;padding:38px 24px 25px}.hero h1{font-size:42px;max-width:520px}.hero-copy>p:not(.eyebrow){font-size:16px}.hero-visual{height:250px;width:100%}.hero-visual:before{background:linear-gradient(180deg,#fff 0%,rgba(255,255,255,0) 25%)}.services{padding:30px 20px 42px}.section-kicker{font-size:14px}.services h2{font-size:30px}.section-intro{font-size:15px;line-height:1.45;margin-bottom:22px}.service-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:22px 14px}.service-card img{height:120px}.service-card h3{font-size:18px;min-height:42px}.service-card p{font-size:14px}.service-card:last-child{grid-column:1/-1;width:calc(50% - 7px);justify-self:center}.all-services{font-size:15px;padding:12px 23px}.footer-inner{justify-content:center;text-align:center}.footer-links{justify-content:center;gap:14px}}
+@media(max-width:760px){.site-header{height:auto;min-height:68px}.header-inner{min-height:68px;flex-wrap:wrap;padding:8px 0}.brand img{width:128px}.menu-toggle{display:block;order:3}.header-actions{margin-left:auto;gap:9px}.project-btn{padding:10px 15px;font-size:13px}.language select{padding:9px 30px 9px 13px}.nav{display:none;order:4;flex:0 0 100%;width:100%;margin:0;padding:8px 0 14px;align-items:stretch;gap:0;flex-direction:column}.nav.open{display:flex}.nav a{padding:13px 4px;border-top:1px solid #f0edf4;font-size:15px}.nav a.active:after{display:none}.hero{display:block;min-height:0}.hero-copy{width:100%;padding:38px 24px 25px}.hero h1{font-size:42px;max-width:520px}.hero-copy>p:not(.eyebrow){font-size:16px}.hero-visual{display:none!important}.hero-visual:before{display:none}.services{padding:30px 20px 42px}.section-kicker{font-size:14px}.services h2{font-size:30px}.section-intro{font-size:15px;line-height:1.45;margin-bottom:22px}.service-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:22px 14px}.service-card img{height:120px}.service-card h3{font-size:18px;min-height:42px}.service-card p{font-size:14px}.service-card:last-child{grid-column:1/-1;width:calc(50% - 7px);justify-self:center}.all-services{font-size:15px;padding:12px 23px}.footer-inner{justify-content:center;text-align:center}.footer-links{justify-content:center;gap:14px}}
 @media(max-width:420px){.header-inner{width:calc(100% - 24px)}.brand img{width:112px}.project-btn{gap:7px;padding:9px 12px}.hero h1{font-size:36px}.hero-buttons{gap:10px}.primary-btn,.video-btn{font-size:14px;padding:12px 17px}.service-card img{height:100px}.service-card h3{font-size:16px}.service-card p{font-size:13px}}
 </style>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -99,7 +99,7 @@ a{color:inherit;text-decoration:none}
    <a class="video-btn" href="/hakkimizda.html"><span aria-hidden="true">▶</span> Tanıtım Videosu</a>
   </div>
  </div>
- <div class="hero-visual"><img src="/_assets/images/welcome-image.jpg" alt="ÇAĞBAŞ Creative Studio dijital çalışma alanı" fetchpriority="high"></div>
+ 
 </section>
 <section class="services" aria-labelledby="services-title">
  <p class="section-kicker">HİZMETLERİMİZ</p>
