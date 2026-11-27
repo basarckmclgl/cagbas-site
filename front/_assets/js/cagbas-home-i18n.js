@@ -114,33 +114,6 @@
     try { localStorage.setItem("cagbas-language", english ? "en" : "tr"); } catch (_) {}
   }
 
-  const style = document.createElement("style");
-  style.textContent = `
-    html[lang="en"] .cb-home-title-tail{display:block!important}
-    .cb-language-switch{display:inline-flex!important;align-items:center!important;justify-content:center!important;gap:6px!important;min-width:58px!important;height:38px!important;padding:0 13px!important;border:1px solid rgba(120,81,165,.35)!important;border-radius:999px!important;background:#fff!important;color:#624184!important;font:800 12px/1 Nunito,Arial,sans-serif!important;letter-spacing:.06em!important;cursor:pointer!important;box-shadow:0 3px 12px rgba(30,20,45,.08)!important;z-index:1205!important}
-    .cb-language-switch:hover,.cb-language-switch:focus-visible{background:#7851a5!important;color:#fff!important;outline:2px solid rgba(120,81,165,.25)!important;outline-offset:2px!important}
-    .menu-wrapper>.cb-language-switch{flex:0 0 auto!important;margin-left:8px!important}
-    .mobile-menu-container>.cb-language-switch{position:absolute!important;right:14px!important;top:50%!important;transform:translateY(-50%)!important}
-    @media(max-width:767px){.menu-container>.menu-wrapper{display:none!important}.menu-container>.mobile-menu-container{display:flex!important}}
-  `;
-  document.head.appendChild(style);
-
-  function addSwitch(parent, extraClass) {
-    if (!parent || parent.querySelector(":scope > .cb-language-switch")) return;
-    const button = document.createElement("button");
-    button.type = "button";
-    button.className = "cb-language-switch " + (extraClass || "");
-    button.textContent = "TR";
-    button.setAttribute("aria-label", "Switch language to English");
-    button.addEventListener("click", () => {
-      const next = document.documentElement.lang === "en" ? "tr" : "en";
-      applyLanguage(next);
-    });
-    parent.appendChild(button);
-  }
-
-  addSwitch(document.querySelector(".menu-wrapper"), "cb-language-switch-desktop");
-  addSwitch(document.querySelector(".mobile-menu-container"), "cb-language-switch-mobile");
   let saved = "tr";
   try { saved = localStorage.getItem("cagbas-language") || "tr"; } catch (_) {}
   if (saved === "en") applyLanguage("en");
