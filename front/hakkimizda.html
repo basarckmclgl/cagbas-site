@@ -846,7 +846,26 @@ section.cagbas-site-footer-content > div.cagbas-footer-bottom{position:static!im
 ;
 </script>
 </body></html>
-<style id="cagbas-mobile-navigation-final">
+<style 
+<style id="cagbas-final-hide-language-control">
+html body .menu-container .menu-wrapper > .langSelector,
+html body .menu-container .mobile-menu-container > .langSelector,
+html body .mobile-menu-container .langSelector,
+html body .langSelector {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  width: 0 !important;
+  min-width: 0 !important;
+  max-width: 0 !important;
+  height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+}
+</style>
+id="cagbas-mobile-navigation-final">
 @media(max-width:767px){
  html,body{width:100%!important;max-width:100%!important;overflow-x:hidden!important}
  .container,.main-wrapper{width:100%!important;max-width:100%!important;height:auto!important;min-height:0!important}
