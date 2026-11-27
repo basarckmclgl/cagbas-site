@@ -91,6 +91,7 @@ a{color:inherit;text-decoration:none}
 .home-footer-bottom{border-top:1px solid #4a414f;text-align:center;padding:13px 10px 15px;color:#d5cedd;font-size:11px;}
 @media(max-width:760px){.home-contact-grid{grid-template-columns:1fr;min-height:0}.home-contact-block,.home-newsletter-block{padding:30px 22px}.home-contact-block{border-right:0;border-bottom:1px solid #ddd5e7}.home-footer-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:28px 22px;padding:0 4px 25px}.home-footer{padding:30px 20px 0}}
 @media(max-width:430px){.home-footer-grid{grid-template-columns:1fr 1fr;gap:24px 15px}.home-footer p,.home-footer-links a{font-size:11px}.home-contact-news p{font-size:12px}}
+.cagbas-lang-toggle{display:inline-flex;align-items:center;justify-content:center;min-width:64px;height:40px;padding:0 16px;border:1px solid #ded4e8;border-radius:999px;background:#fff;color:#70449a;font-weight:800;text-decoration:none;box-shadow:0 3px 12px rgba(30,20,42,.06)}
 </style>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -109,7 +110,7 @@ a{color:inherit;text-decoration:none}
    <a href="/bize-ulasin.html">İletişim</a>
   </nav>
   <div class="header-actions">
-   <div class="language"><select aria-label="Language" onchange="if(this.value)window.location.href=this.value"><option value="/index.html" selected>TR</option><option value="/en/index-en.html">EN</option></select></div>
+   <div class="language"><a class="cagbas-lang-toggle" href="/en/index-en.html" aria-label="Switch language">TR</a></div>
    <a class="project-btn" href="/bize-ulasin.html">Proje Başlat <span aria-hidden="true">→</span></a>
   </div>
  </div>
