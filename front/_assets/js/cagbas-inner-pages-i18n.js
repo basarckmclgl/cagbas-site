@@ -69,18 +69,7 @@
       });
     });
   }
-  function setLanguage(english, persist=true) {
-    document.documentElement.lang = english ? "en" : "tr";
-    document.documentElement.dir = "ltr";
-    translateElement(document.body, english);
-    document.title = english ? englishTitle : initialTitle;
-    const desc=document.querySelector('meta[name="description"]');
-    if(desc) desc.content=english ? englishDescription : initialDescription;
-    document.querySelectorAll(".cb-inner-language-switch").forEach(b=>{
-      b.textContent=english?"EN":"TR";
-      b.setAttribute("aria-label",english?"Switch language to Turkish":"Switch language to English");
-      b.setAttribute("aria-pressed",english?"true":"false");
-    });
+  function setLanguage(english, persist=true) {);
     if(persist) try{localStorage.setItem("cagbas-language",english?"en":"tr")}catch(e){}
   }
   let english=false;try{english=localStorage.getItem("cagbas-language")==="en"}catch(e){}
