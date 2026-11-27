@@ -550,5 +550,38 @@ document.getElementById("scrollToTopBtn").addEventListener("click", function () 
 }
 </style>
 
+<style id="cagbas-language-switcher-final-visibility">
+/* Final desktop/mobile visibility override for the existing TR/EN switcher */
+html body .container .main-wrapper .menu-container .menu-wrapper > .langSelector{
+ display:flex!important;visibility:visible!important;opacity:1!important;position:relative!important;
+ flex:0 0 auto!important;width:auto!important;height:auto!important;min-width:64px!important;
+ margin-left:18px!important;padding:0!important;z-index:12050!important;align-items:center!important;
+}
+html body .container .main-wrapper .menu-container .menu-wrapper > .langSelector .langSelectorHeader{
+ display:flex!important;visibility:visible!important;opacity:1!important;align-items:center!important;
+ justify-content:center!important;min-width:64px!important;min-height:42px!important;padding:7px 14px!important;
+ border:1px solid #ded4e8!important;border-radius:999px!important;background:#fff!important;
+ box-shadow:0 3px 12px rgba(30,20,42,.06)!important;
+}
+html body .container .main-wrapper .menu-container .menu-wrapper > .langSelector .langSelectorHeader a,
+html body .container .main-wrapper .menu-container .menu-wrapper > .langSelector .langSelectorHeader abbr,
+html body .container .main-wrapper .menu-container .menu-wrapper > .langSelector .langSelectorHeader i{
+ display:inline-flex!important;visibility:visible!important;color:#74509a!important;font-weight:800!important;
+}
+html body .container .main-wrapper .menu-container .mobile-menu-container > .langSelector{display:none!important}
+@media(max-width:767px){
+ html body .container .main-wrapper .menu-container .menu-wrapper > .langSelector{display:none!important}
+ html body .container .main-wrapper .menu-container .mobile-menu-container > .langSelector{
+  display:flex!important;visibility:visible!important;opacity:1!important;position:relative!important;
+  width:78px!important;min-width:78px!important;height:40px!important;margin-left:auto!important;
+  z-index:12050!important;align-items:center!important;justify-content:center!important;
+ }
+ html body .container .main-wrapper .menu-container .mobile-menu-container > .langSelector .langSelectorHeader{
+  display:flex!important;visibility:visible!important;opacity:1!important;width:78px!important;min-width:78px!important;
+  height:40px!important;min-height:40px!important;align-items:center!important;justify-content:center!important;
+  border:1px solid #e8e0ef!important;border-radius:9px!important;background:#faf9fc!important;
+ }
+}
+</style>
 </body>
 </html>
