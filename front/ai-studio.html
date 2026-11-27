@@ -955,6 +955,67 @@
     // =========================================================================
     // AI CHAT, COMMAND ENGINE, WEB SPEECH STT & SPEECH SYNTHESIS TTS
     // =========================================================================
+
+    // =========================================================================
+    // ÇAĞBAŞ AI STUDIO — SECURE SERVER-SIDE AI CHAT
+    // =========================================================================
+    const aiConversation = [];
+
+    async function sendAiStudioMessage(message) {
+      const cleanMessage = String(message || '').trim();
+      if (!cleanMessage) return;
+
+      appendChatMessage('user', cleanMessage);
+      aiConversation.push({ role: 'user', content: cleanMessage });
+
+      const input = document.getElementById('aiCommandInput');
+      const submitButton = input?.form?.querySelector('button[type="submit"]');
+      if (input) input.disabled = true;
+      if (submitButton) {
+        submitButton.disabled = true;
+        submitButton.textContent = 'Yanıtlanıyor...';
+      }
+
+      try {
+        const response = await fetch('/api/ai-studio', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ messages: aiConversation.slice(-12) })
+        });
+        const data = await response.json().catch(() => ({}));
+        if (!response.ok) throw new Error(data.error || 'Yapay zekâ şu anda yanıt veremiyor.');
+        if (!data.reply) throw new Error('Yapay zekâdan boş yanıt alındı.');
+
+        aiConversation.push({ role: 'assistant', content: data.reply });
+        replyAssistant(data.reply);
+      } catch (error) {
+        const messageText = error.message || 'Bağlantı kurulamadı. Lütfen tekrar deneyin.';
+        replyAssistant('Bağlantı hatası: ' + messageText);
+      } finally {
+        if (input) {
+          input.disabled = false;
+          input.focus();
+        }
+        if (submitButton) {
+          submitButton.disabled = false;
+          submitButton.textContent = 'Gönder';
+        }
+      }
+    }
+
+    function handleCommandFormSubmit(event) {
+      event.preventDefault();
+      const input = document.getElementById('aiCommandInput');
+      const message = input?.value || '';
+      if (!message.trim()) return;
+      input.value = '';
+      sendAiStudioMessage(message);
+    }
+
+    function runAiCommand(command) {
+      sendAiStudioMessage(command);
+    }
+
     function appendChatMessage(role, text) {
       const stream = document.getElementById('aiChatStream');
       const bubble = document.createElement('div');
