@@ -64,24 +64,33 @@ async function callGemini(messages, apiKey) {
     }
   }
 
-  const response = await fetch("https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent", {
-    method: "POST",
-    headers: {
-      "x-goog-api-key": apiKey,
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({
-      systemInstruction: {
-        parts: [{ text: AI_INSTRUCTIONS }]
+  let response;
+  try {
+    response = await fetch("https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent", {
+      method: "POST",
+      headers: {
+        "x-goog-api-key": apiKey,
+        "Content-Type": "application/json"
       },
-      contents,
-      generationConfig: {
-        responseMimeType: "application/json",
-        temperature: 0.2,
-        maxOutputTokens: 4096
-      }
-    })
-  });
+      signal: AbortSignal.timeout(35000),
+      body: JSON.stringify({
+        systemInstruction: {
+          parts: [{ text: AI_INSTRUCTIONS }]
+        },
+        contents,
+        generationConfig: {
+          responseMimeType: "application/json",
+          temperature: 0.2,
+          maxOutputTokens: 4096
+        }
+      })
+    });
+  } catch (error) {
+    if (error?.name === "TimeoutError" || error?.name === "AbortError") {
+      throw Object.assign(new Error("Gemini 35 saniye içinde yanıt vermedi. Bir kez daha deneyin; sorun sürerse model erişimini kontrol edeceğiz."), { status: 504 });
+    }
+    throw Object.assign(new Error("Gemini sunucusuna bağlanılamadı: " + String(error?.message || "ağ hatası").slice(0, 160)), { status: 502 });
+  }
 
   const result = await response.json().catch(() => ({}));
   if (!response.ok) {
