@@ -52,68 +52,77 @@ DESTEKLENEN OPERASYONLAR:
 Mevcut tasarım durumu mesaj içinde verilir; yalnızca mevcut ID'leri kullan. Blok alanları için mevcut bileşen şemasına uygun veri üret: navbar brand/links/cta; hero badge/title/subtitle/primaryBtn/secondaryBtn; features heading/items[{title,desc}]; gallery heading/cards[{tag,title,desc}]; pricing heading/plans[{name,price,desc}]; cta heading/subtitle/buttonText; contact heading/subtitle/submitText. HTML, CSS, JavaScript veya çalıştırılabilir kod üretme.`;
 
 async function callGemini(messages, apiKey) {
-  const conversation = messages.map(item =>
-    (item.role === "assistant" ? "ASİSTAN" : "KULLANICI") + ":\n" + item.content
-  ).join("\n\n");
-  const response = await fetch("https://generativelanguage.googleapis.com/v1beta/interactions", {
+  const contents = messages.map(item => ({
+    role: item.role === "assistant" ? "model" : "user",
+    parts: [{ text: item.content }]
+  }));
+
+  const response = await fetch("https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent", {
     method: "POST",
     headers: {
       "x-goog-api-key": apiKey,
       "Content-Type": "application/json"
     },
     body: JSON.stringify({
-      model: "gemini-3.8-flash",
-      input: AI_INSTRUCTIONS + "\n\nKONUŞMA:\n" + conversation,
-      response_format: {
-        type: "text",
-        mime_type: "application/json",
-        schema: {
-          type: "object",
-          properties: {
-            reply: { type: "string" },
-            operations: {
-              type: "array",
-              items: {
-                type: "object",
-                properties: { type: { type: "string" } },
-                required: ["type"],
-                additionalProperties: true
-              }
-            }
-          },
-          required: ["reply", "operations"],
-          additionalProperties: false
-        }
+      systemInstruction: {
+        parts: [{ text: AI_INSTRUCTIONS }]
+      },
+      contents,
+      generationConfig: {
+        responseMimeType: "application/json",
+        temperature: 0.2,
+        maxOutputTokens: 4096
       }
     })
   });
+
   const result = await response.json().catch(() => ({}));
   if (!response.ok) {
-    console.error("Gemini API error:", response.status, result?.error?.status || result?.error?.message || "unknown");
-    if (response.status === 400 || response.status === 403) {
-      throw Object.assign(new Error("Gemini API anahtarı, model erişimi veya proje yapılandırması geçersiz. Google AI Studio ayarlarını kontrol edin."), { status: 502 });
+    const apiMessage = String(result?.error?.message || "");
+    console.error("Gemini API error:", response.status, result?.error?.status || "unknown", apiMessage.slice(0, 500));
+    if (response.status === 400 || response.status === 403 || response.status === 404) {
+      throw Object.assign(new Error("Gemini isteği reddedildi. Model erişimi, API anahtarı ve Google AI Studio proje ayarlarını kontrol edin. Ayrıntı: " + apiMessage.slice(0, 220)), { status: 502 });
+    }
+    if (response.status === 401) {
+      throw Object.assign(new Error("Gemini API anahtarı doğrulanamadı. Cloudflare GEMINI_API_KEY değerini kontrol edin."), { status: 502 });
     }
     if (response.status === 429) {
-      throw Object.assign(new Error("Gemini ücretsiz kullanım kotası veya istek hızı sınırına ulaşıldı. Bir süre bekleyin veya Google AI Studio limitlerini kontrol edin."), { status: 429 });
+      throw Object.assign(new Error("Gemini ücretsiz kullanım kotası veya istek hızı sınırına ulaşıldı. Google AI Studio limitlerini kontrol edin."), { status: 429 });
     }
-    throw Object.assign(new Error("Gemini servisine şu anda ulaşılamıyor."), { status: 502 });
+    throw Object.assign(new Error("Gemini servisi şu anda yanıt vermiyor. HTTP " + response.status), { status: 502 });
   }
-  const outputText = result.output_text ||
-    (result.steps || [])
-      .filter(step => step.type === "model_output")
-      .flatMap(step => step.content || [])
-      .filter(part => part.type === "text")
-      .map(part => part.text || "")
-      .join("\\n").trim();
-  if (!outputText) throw Object.assign(new Error("Gemini boş yanıt döndürdü."), { status: 502 });
+
+  const outputText = (result.candidates || [])
+    .flatMap(candidate => candidate.content?.parts || [])
+    .map(part => part.text || "")
+    .join("\\n")
+    .trim();
+
+  if (!outputText) {
+    const finishReason = result.candidates?.[0]?.finishReason || "unknown";
+    throw Object.assign(new Error("Gemini boş yanıt döndürdü. Yanıt durumu: " + finishReason), { status: 502 });
+  }
+
   let parsed;
-  try { parsed = JSON.parse(outputText); }
-  catch { throw Object.assign(new Error("Gemini yanıtı beklenen JSON biçiminde değil."), { status: 502 }); }
-  if (!parsed || typeof parsed.reply !== "string" || !Array.isArray(parsed.operations)) {
-    throw Object.assign(new Error("Gemini yanıtında gerekli tasarım alanları eksik."), { status: 502 });
+  try {
+    const cleaned = outputText.replace(/^\`\`\`(?:json)?\\s*/i, "").replace(/\\s*\`\`\`$/, "");
+    parsed = JSON.parse(cleaned);
+  } catch {
+    console.error("Gemini returned non-JSON output:", outputText.slice(0, 500));
+    throw Object.assign(new Error("Gemini yanıtı JSON biçiminde değil. Lütfen komutu yeniden deneyin."), { status: 502 });
   }
-  if (parsed.operations.length > 20) throw Object.assign(new Error("Tek istekte çok fazla tasarım işlemi üretildi."), { status: 502 });
-  return { reply: parsed.reply.slice(0, 3000), operations: parsed.operations, provider: "gemini" };
+
+  if (!parsed || typeof parsed.reply !== "string" || !Array.isArray(parsed.operations)) {
+    throw Object.assign(new Error("Gemini yanıtında gerekli reply veya operations alanları eksik."), { status: 502 });
+  }
+  if (parsed.operations.length > 20) {
+    throw Object.assign(new Error("Tek istekte çok fazla tasarım işlemi üretildi."), { status: 502 });
+  }
+  return {
+    reply: parsed.reply.slice(0, 3000),
+    operations: parsed.operations,
+    provider: "gemini"
+  };
 }
 
 export async function onRequestPost({ request, env }) {
