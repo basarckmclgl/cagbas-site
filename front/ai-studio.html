@@ -157,24 +157,18 @@ header button.btn-rescue:hover { background:#34d399; }
     <h2>🚀 Paketini Seç, Çoklu Sayfa Web Siteni Tasarla</h2>
     <p class="sub">Tüm paketlerde sınırsız sayfa ekleme, menü yönetimi ve doğrudan yazı düzenleme aktif!</p>
     <div class="packages">
-      <div class="pkg" onclick="selectPlan('Başlangıç','0')">
-        <h3>Başlangıç</h3>
-        <div class="price">Ücretsiz</div>
-        <ul><li>Çoklu sayfa ekleme</li><li>Otomatik menü adaptasyonu</li><li>Doğrudan yazı düzenleme</li><li>HTML kod çıktısı</li></ul>
-        <button>Ücretsiz Başla</button>
-      </div>
-      <div class="pkg featured" onclick="selectPlan('Pro','99₺/ay')">
-        <div class="badge">EN POPÜLER</div>
+      <div class="pkg featured">
+        <div class="badge">PROFESYONEL</div>
         <h3>Pro</h3>
-        <div class="price">99₺<small>/ay</small></div>
+        <div class="price">Üyelik başvurusu</div>
         <ul><li>Sınırsız sayfa & proje</li><li>Akıllı yazılı asistan</li><li>Mesleğe özel çoklu sayfa kurulumu</li><li>Düzen koruma & otomatik menü</li><li>Tam HTML kod çıktısı</li></ul>
-        <button>Pro'yu Seç</button>
+        <button type="button" onclick="applyForPlan('Pro')">Pro'yu Seç</button>
       </div>
-      <div class="pkg" onclick="selectPlan('Premium','249₺/ay')">
+      <div class="pkg">
         <h3>Premium</h3>
-        <div class="price">249₺<small>/ay</small></div>
+        <div class="price">Üyelik başvurusu</div>
         <ul><li>Pro'daki her şey</li><li>Özel alan adı bağlama</li><li>Kurumsal şablonlar</li><li>Öncelikli destek</li></ul>
-        <button>Premium'u Seç</button>
+        <button type="button" onclick="applyForPlan('Premium')">Premium'u Seç</button>
       </div>
     </div>
   </div>
@@ -339,11 +333,25 @@ function norm(s){
   return String(s || '').toLocaleLowerCase('tr').replace(/[İI]/g,'i').replace(/ı/g,'i');
 }
 
-function selectPlan(name){
-  document.getElementById('planBadge').textContent = '✅ ' + name + ' Aktif';
-  document.getElementById('packageModal').classList.add('hidden');
-  document.getElementById('mainPanel').classList.add('active');
-  render();
+function applyForPlan(plan){
+  const recipient = 'cagbas.2026@gmail.com';
+  const subject = 'ÇAĞBAŞ AI Studio ' + plan + ' Üyelik Başvurusu';
+  const body = [
+    'Merhaba,',
+    '',
+    'ÇAĞBAŞ AI Studio ' + plan + ' paketi için üyelik başvurusu yapmak istiyorum.',
+    '',
+    'Ad Soyad:',
+    'Telefon:',
+    'E-posta:',
+    'Kullanım amacım:',
+    '',
+    'Üyelik ve fiyatlandırma detayları hakkında benimle iletişime geçmenizi rica ederim.',
+    '',
+    'İyi çalışmalar.'
+  ].join('\\n');
+  const mailto = 'mailto:' + recipient + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+  window.location.href = mailto;
 }
 
 // ========== ÇOKLU SAYFA & SOL MENÜ ADAPTASYONU ==========
