@@ -33,6 +33,13 @@ ANA OLUŞTURMA KURALLARI:
 - Kullanıcı yeni ayrıntı eklediğinde mevcut tasarımı koru ve yalnızca gerekli değişiklikleri uygula; baştan kurma, var olan blokları sebepsiz çoğaltma veya silme.
 - Kullanıcı açıkça çok sayfalı site isterse add_page ile sayfaları oluştur; aksi söylenmedikçe tek sayfalı tasarım üret.
 - Yazılan metinleri Türkçe, anlaşılır, gerçekçi ve kısa tut. Gerçek olmayan ödül, referans, sertifika, fiyat veya istatistik uydurma.
+- Görsel kalite birinci önceliktir: her site isteğinde sektör ve marka kimliğine uygun bir ART DIRECTION seç; her bölümü aynı dikey şablona dönüştürme.
+- Hero için layout alanını split, centered veya wide olarak belirle. Varsayılanın split olsun: solda güçlü başlık/metin/CTA, sağda görsel alan. Kullanıcı özellikle klasik/ortalanmış tasarım isterse centered seç.
+- Özellikler için layout: bento, editorial, grid-2, grid-3 veya grid-4 seç. Bento/editorial düzenlerini uygun olduğunda tercih et; aynı ölçüde üç kutuyu otomatik varsayılan yapma.
+- Galeri için layout: editorial, grid-2, grid-3 veya bento seç. Kart sayısı, içerik ve görsel ağırlığına göre kompozisyonu belirle.
+- Uygun bloklarda eyebrow, subtitle, align, background ve imageAlt gibi görsel alanları doldur. imageUrl yalnızca güvenilir ve mevcut bir görsel adresi biliniyorsa kullan; URL uydurma.
+- Renk paleti, boşluk ritmi, başlık ölçeği ve bölüm hizalaması bütün sayfada tutarlı olsun. Yatay/dikey düzeni yalnızca kullanıcının açık talimatına değil, tasarım amacına göre de seç.
+- Görsel alanı boş bırakma: fotoğraf URL'si yoksa render motorunun kendi gradient/abstract art direction alanını kullanmasını sağla.
 - Her üretim isteğinde tasarım operasyonlarını en fazla 20 işlemle sınırla. İşlemleri görsel ve içerik bütünlüğünü koruyacak sırada ver.
 - Kullanıcı yalnızca soru soruyor veya fikir danışıyorsa tasarımı değiştirme; operations boş dizi döndür.
 
@@ -49,7 +56,7 @@ DESTEKLENEN OPERASYONLAR:
 - {"type":"switch_page","pageId":"mevcut sayfa ID"}
 - {"type":"delete_page","pageId":"mevcut sayfa ID"}.
 
-Mevcut tasarım durumu mesaj içinde verilir; yalnızca mevcut ID'leri kullan. Blok alanları için mevcut bileşen şemasına uygun veri üret: navbar brand/links/cta; hero badge/title/subtitle/primaryBtn/secondaryBtn; features heading/items[{title,desc}]; gallery heading/cards[{tag,title,desc}]; pricing heading/plans[{name,price,desc}]; cta heading/subtitle/buttonText; contact heading/subtitle/submitText. HTML, CSS, JavaScript veya çalıştırılabilir kod üretme.`;
+Mevcut tasarım durumu mesaj içinde verilir; yalnızca mevcut ID'leri kullan. Blok alanları için mevcut bileşen şemasına uygun veri üret: navbar brand/links/cta; hero badge/title/subtitle/primaryBtn/secondaryBtn/layout('split'|'centered'|'wide')/imageUrl/imageAlt/background; features heading/subtitle/eyebrow/align/layout('bento'|'editorial'|'grid-2'|'grid-3'|'grid-4')/items[{title,desc}]; gallery heading/eyebrow/align/layout('editorial'|'grid-2'|'grid-3'|'bento')/cards[{tag,title,desc}]; pricing heading/plans[{name,price,desc}]; cta heading/subtitle/buttonText; contact heading/subtitle/submitText. HTML, CSS, JavaScript veya çalıştırılabilir kod üretme.`;
 
 async function callGemini(messages, apiKey) {
   // Gemini requires alternating user/model turns. Merge adjacent messages with the same role.
@@ -235,7 +242,7 @@ DESTEKLENEN OPERASYONLAR:
 - {"type":"switch_page","pageId":"mevcut sayfa ID"}
 - {"type":"delete_page","pageId":"mevcut sayfa ID"}.
 
-Mevcut tasarım durumu mesaj içinde verilir; yalnızca mevcut ID'leri kullan. Blok alanları için mevcut bileşen şemasına uygun veri üret: navbar brand/links/cta; hero badge/title/subtitle/primaryBtn/secondaryBtn; features heading/items[{title,desc}]; gallery heading/cards[{tag,title,desc}]; pricing heading/plans[{name,price,desc}]; cta heading/subtitle/buttonText; contact heading/subtitle/submitText. HTML, CSS, JavaScript veya çalıştırılabilir kod üretme.`,
+Mevcut tasarım durumu mesaj içinde verilir; yalnızca mevcut ID'leri kullan. Blok alanları için mevcut bileşen şemasına uygun veri üret: navbar brand/links/cta; hero badge/title/subtitle/primaryBtn/secondaryBtn/layout('split'|'centered'|'wide')/imageUrl/imageAlt/background; features heading/subtitle/eyebrow/align/layout('bento'|'editorial'|'grid-2'|'grid-3'|'grid-4')/items[{title,desc}]; gallery heading/eyebrow/align/layout('editorial'|'grid-2'|'grid-3'|'bento')/cards[{tag,title,desc}]; pricing heading/plans[{name,price,desc}]; cta heading/subtitle/buttonText; contact heading/subtitle/submitText. HTML, CSS, JavaScript veya çalıştırılabilir kod üretme.`,
 
         input: messages,
         max_output_tokens: 1800
