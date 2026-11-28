@@ -1206,47 +1206,60 @@ const PROFESSIONS = [
 
 function buildMultiPageProfession(prof){
   pushUndo();
-  const style = selectedDesignStyle || 'standard';
-  document.getElementById('siteName').value = prof.siteName;
-  document.getElementById('siteColor').value = prof.mainColor;
-
-  let sourcePages = JSON.parse(JSON.stringify(prof.pages));
-  if(style === 'mini'){
-    sourcePages = sourcePages.slice(0,1);
-    sourcePages[0].blocks = sourcePages[0].blocks.filter(b => ['hero','cards','contact'].includes(b.type));
-    if(!sourcePages[0].blocks.some(b => b.type === 'contact')){
-      sourcePages[0].blocks.push({type:'contact',title:'Bize Ulaşın',text:'Bilgi ve iletişim için bize ulaşın.',bg:'#ffffff',color:'#1e293b',btn:prof.mainColor});
-    }
-  } else if(style === 'pro'){
-    sourcePages.push({title:'Projelerimiz',blocks:[{type:'gallery',title:'Çalışmalarımızdan Seçkiler',text:'Öne çıkan projeler ve uygulamalar',bg:'#f8fafc',color:'#1e293b',btn:prof.mainColor}]});
-    sourcePages[0].blocks.push({type:'about',title:'Neden Bizi Tercih Etmelisiniz?',text:'Deneyim, şeffaf iletişim ve ihtiyacınıza özel çözümlerle yanınızdayız.',bg:'#f8fafc',color:'#1e293b',btn:prof.mainColor});
-  } else if(style === 'premium'){
-    sourcePages.push(
-      {title:'Projelerimiz',blocks:[{type:'gallery',title:'Seçilmiş Projeler',text:'Kalite ve detay odaklı çalışmalarımız',bg:'#f8fafc',color:'#1e293b',btn:prof.mainColor}]},
-      {title:'Yaklaşımımız',blocks:[{type:'about',title:'Ayrıcalıklı Hizmet Anlayışı',text:'İlk görüşmeden teslimata kadar planlı, özenli ve kişiselleştirilmiş bir deneyim sunuyoruz.',bg:'#ffffff',color:'#1e293b',btn:prof.mainColor}]}
-    );
-    sourcePages[0].blocks.push(
-      {type:'about',title:'Marka Hikâyemiz',text:'Uzmanlık, estetik ve güveni bir araya getiren yaklaşımımızla hizmet veriyoruz.',bg:'#f8fafc',color:'#1e293b',btn:prof.mainColor},
-      {type:'cards',title:'Bizi Farklı Kılanlar',text:'Kişiye Özel Yaklaşım • Nitelikli İşçilik • Süreç Takibi',bg:'#ffffff',color:'#1e293b',btn:prof.mainColor}
-    );
+  const style=selectedDesignStyle||'standard', family=prof.designFamily||'general', color=prof.mainColor||'#334155', ink='#1e293b';
+  const data={
+    legal:['Hukuki Uzmanlık Alanları',['Ticaret ve Şirketler Hukuku','Ceza Hukuku','Aile ve Miras Hukuku','İş Hukuku'],['Sözleşme ve ticari uyuşmazlık danışmanlığı.','Soruşturma ve kovuşturma süreçlerinde hukuki destek.','Aile ve miras süreçlerinin hukuki takibi.','İşçi ve işveren ilişkilerinde süreç yönetimi.']],
+    clinic:['Tedavi Alanları',['Koruyucu Diş Hekimliği','Estetik Diş Hekimliği','İmplant ve Protez','Ortodonti'],['Muayene ve koruyucu ağız-diş sağlığı.','Kişiye göre estetik uygulama seçenekleri.','Hekim değerlendirmesiyle tedavi planlaması.','Diş ve çene yapısına yönelik takip.']],
+    restaurant:['Menümüzden Seçkiler',['Günün Lezzetleri','Izgara ve Ana Yemekler','Hafif Seçenekler','Tatlı ve İçecekler'],['Mevsiminde malzemelerle günlük seçenekler.','Özenle hazırlanan sıcak yemekler.','Salata ve paylaşmalık lezzetler.','Tatlı ve içecek alternatifleri.']],
+    architecture:['Mimarlık Hizmetleri',['Mimari Projelendirme','İç Mimari','Uygulama ve Takip','3D Görselleştirme'],['Konsept ve uygulama projeleri.','İşlevsel yerleşim ve malzeme kararları.','Saha süreçlerinin koordinasyonu.','Üç boyutlu tasarım sunumları.']],
+    agency:['Dijital Üretim Alanları',['Web Tasarım ve Yazılım','Marka ve Grafik Tasarım','Yapay Zekâ Çözümleri','Dijital İletişim'],['Web deneyimleri ve dijital sistemler.','Görsel kimlik ve kampanya tasarımları.','Yapay zekâ destekli üretim süreçleri.','Dijital marka iletişimi.']],
+    realestate:['Gayrimenkul Hizmetleri',['Konut Portföyü','Ticari Gayrimenkul','Piyasa Bilgilendirmesi','Alım-Satım Danışmanlığı'],['Satılık ve kiralık konutlar.','Ofis, mağaza ve yatırım portföyleri.','Bölge ve ilan özellikleri hakkında bilgi.','İlan ve gösterim koordinasyonu.']],
+    beauty:['Güzellik Hizmetleri',['Saç Tasarımı','El ve Ayak Bakımı','Cilt Bakımı','Özel Gün Hazırlığı'],['Kesim ve şekillendirme.','Bakım ve güzellik uygulamaları.','İhtiyaca göre bakım seçenekleri.','Özel gün hazırlığı.']],
+    hotel:['Konaklama Hizmetleri',['Konaklama','Yeme-İçme','Tesis Olanakları','Çevreyi Keşfedin'],['Oda ve konaklama bilgileri.','Yeme-içme alanları.','Ortak alanlar ve tesis olanakları.','Yakın çevre gezi bilgileri.']],
+    health:['Sağlık Hizmetleri',['Muayene ve Değerlendirme','Takip ve Kontrol','Danışmanlık','Randevu Planlama'],['Sağlık profesyoneli değerlendirmesi.','Kontrol ve takip süreçleri.','Başvuru adımları hakkında bilgi.','Randevu talebi oluşturma.']],
+    education:['Eğitim Programları',['Eğitim Programları','Eğitmen Kadrosu','Kaynak ve Materyaller','Gelişim Takibi'],['Seviyeye göre yapılandırılmış eğitimler.','Eğitmen desteği.','Öğrenme materyalleri.','İlerleme değerlendirmesi.']],
+    auto:['Otomotiv Hizmetleri',['Bakım ve Onarım','Lastik ve Jant','Arıza Tespiti','Araç Kontrolü'],['Araç bakım ve onarım işlemleri.','Lastik ve jant hizmetleri.','Sistem kontrolü ve arıza tespiti.','Teknik araç kontrolü.']],
+    commerce:['Ürün Kategorileri',['Yeni Gelenler','Öne Çıkanlar','Kategoriler','Sipariş Desteği'],['Yeni ürünler.','Öne çıkarılan seçenekler.','Kolay ürün gezinmesi.','Sipariş ve teslimat bilgisi.']],
+    photo:['Fotoğraf ve Video',['Portre Çekimi','Etkinlik Çekimi','Ticari Çekim','Video Prodüksiyon'],['Kişisel ve kurumsal portreler.','Özel gün çekimleri.','Ürün ve mekân çekimleri.','Kurgu ve video üretimi.']],
+    tech:['Teknoloji Çözümleri',['Bulut Sistemleri','Siber Güvenlik','Otomasyon','Veri ve Analitik'],['Bulut altyapısı ve entegrasyonlar.','Sistem güvenliği çözümleri.','İş süreçlerinin otomasyonu.','Veri odaklı çözümler.']],
+    consulting:['Danışmanlık Alanları',['Strateji','Süreç Analizi','Performans','Uygulama Desteği'],['Hedef ve önceliklerin belirlenmesi.','İşleyiş ve iyileştirme analizi.','Ölçülebilir hedefler.','Uygulama koordinasyonu.']],
+    events:['Etkinlik Hizmetleri',['Kurumsal Etkinlik','Özel Davetler','Konsept ve Tasarım','Planlama ve Koordinasyon'],['Toplantı ve lansmanlar.','Özel gün organizasyonları.','Tema ve dekor tasarımı.','Tedarik ve saha koordinasyonu.']]
+  }[family]||['Hizmetlerimiz',['Uzmanlık','Planlama','Uygulama','Destek'],['Profesyonel hizmet.','İhtiyaç analizi.','Uygulama süreci.','Süreç desteği.']];
+  const items=data[1].map((title,i)=>({icon:['✦','◈','◎','✓'][i],title,description:data[2][i],image:''}));
+  const cards=(title,list=items,bg='#ffffff')=>({type:'cards',title,text:list.map(x=>x.title).join(' • '),cards:list,bg,color:ink,btn:color});
+  const about=(title,text)=>({type:'about',title,text,bg:'#f8fafc',color:ink,btn:color});
+  const contact=(title,text)=>({type:'contact',title,text,bg:'#ffffff',color:ink,btn:color});
+  const hero=JSON.parse(JSON.stringify((prof.pages[0].blocks||[]).find(x=>x.type==='hero')||{type:'hero',title:prof.siteName,text:'İhtiyacınıza uygun profesyonel çözümler.',bg:color,color:'#fff',btn:color}));
+  const nav=()=>({type:'nav',title:'',text:'Logo',bg:'#fff',color:ink,btn:color,font:prof.font});
+  const footer=()=>({type:'footer',title:'© 2026 '+prof.siteName+' — Tüm Hakları Saklıdır.',text:'İletişim ve bilgi için bizimle bağlantı kurun.',bg:'#0f172a',color:'#e2e8f0',btn:color});
+  const page=(title,blocks)=>({id:'pg_'+Date.now()+'_'+Math.random().toString(36).slice(2,7),title,inMenu:true,blocks:[nav(),...blocks,footer()].map(b=>({...b,font:prof.font,designStyle:style,designFamily:family}))});
+  let built=[];
+  if(style==='mini'){
+    built=[page('Ana Sayfa',[hero,cards(data[0],items.slice(0,3)),contact('Hızlı İletişim','Bize ulaşın; talebinizi birlikte değerlendirelim.')])];
+  }else if(style==='standard'){
+    built=(prof.pages||[]).map(p=>page(p.title,(p.blocks||[]).map(b=>b.type==='cards'?cards(data[0],items.slice(0,3)):({...b}))));
+    if(!built.length)built=[page('Ana Sayfa',[hero,cards(data[0],items.slice(0,3)),contact('İletişim','Bilgi talepleriniz için bize ulaşın.')])];
+    if(!built[0].blocks.some(b=>b.type==='cards'))built[0].blocks.splice(2,0,cards(data[0],items.slice(0,3)));
+  }else if(style==='pro'){
+    built=[
+      page('Ana Sayfa',[hero,cards(data[0],items),about('Neden Bizi Tercih Etmelisiniz?',''+prof.siteName+' olarak '+data[0].toLocaleLowerCase('tr')+' alanında planlı ve ihtiyaca özel hizmet sunuyoruz.')]),
+      page('Hizmetlerimiz',[about('Hizmet Yaklaşımımız','İhtiyaçları dinliyor, kapsamı netleştiriyor ve uygulanabilir bir yol haritası oluşturuyoruz.'),cards('Çalışma Alanlarımız',items)]),
+      page('Çalışmalarımız',[about('Deneyimimiz','Her çalışmayı kendi hedefleri ve gereksinimleri doğrultusunda ele alıyoruz.'),{type:'gallery',title:'Seçili Çalışmalar',text:'Öne çıkan proje ve uygulamalar',bg:'#f8fafc',color:ink,btn:color}]),
+      page('İletişim',[contact('Görüşme Talebi','İhtiyacınızı paylaşın; sizinle iletişime geçelim.')])
+    ];
+  }else{
+    built=[
+      page('Ana Sayfa',[hero,about(prof.siteName,'Uzmanlık, özen ve güveni bir araya getiren yaklaşımımızla hizmet veriyoruz.'),cards('Öne Çıkan Uzmanlıklarımız',items.slice(0,3),'#f5f1e8')]),
+      page('Uzmanlık Alanları',[about('Hizmet Felsefemiz','Her ihtiyaca özel kapsam ve çözüm planı oluşturuyoruz.'),cards(data[0],items)]),
+      page('Süreç ve Yaklaşım',[about('İlk Görüşmeden Sonuca','İhtiyaçları dinliyor, kapsamı netleştiriyor, yol haritası oluşturuyor ve süreci düzenli bilgilendirmeyle yürütüyoruz.'),{type:'gallery',title:'Deneyimimizden Kesitler',text:'Proje, uygulama ve çalışma alanlarımızdan seçkiler.',bg:'#f5f1e8',color:ink,btn:color}]),
+      page('Bilgi Merkezi',[about('Sık Sorulan Konular','Hizmet kapsamı ve süreç hakkında merak ettiklerinizi bizimle paylaşabilirsiniz.'),{type:'gallery',title:'Rehberler ve Duyurular',text:'Bilgilendirici içerikler ve güncel duyurular.',bg:'#fff',color:ink,btn:color}]),
+      page('İletişim',[contact('Size Özel Görüşme','Talebinizi iletin; ilgili ekibimiz sizinle iletişime geçsin.')])
+    ];
   }
-
-  pages = sourcePages.map((p, idx) => ({
-    id: 'pg_' + idx + '_' + Date.now(),
-    title: p.title,
-    inMenu: true,
-    blocks: [
-      { type:'nav', title:'', text:'Logo', bg:'#ffffff', color:'#1e293b', btn:prof.mainColor, font:prof.font, designStyle:style, designFamily:prof.designFamily || 'general' },
-      ...p.blocks.map(b => ({ ...b, font: prof.font, designStyle:style, designFamily:prof.designFamily || 'general' })),
-      { type:'footer', title:'© 2026 ' + prof.siteName + ' — Tüm Hakları Saklıdır.', text:'İletişim & Destek', bg:'#0f172a', color:'#e2e8f0', btn:prof.mainColor, font:prof.font, designStyle:style, designFamily:prof.designFamily || 'general' }
-    ]
-  }));
-  currentPageId = pages[0].id;
-  selected = 1;
-  syncMenuToAllPages();
-  render();
+  document.getElementById('siteName').value=prof.siteName;document.getElementById('siteColor').value=color;
+  pages=built;currentPageId=pages[0].id;selected=1;syncMenuToAllPages();render();
+  notify('✓ '+prof.siteName+' için '+({mini:'Mini',standard:'Standart',pro:'Pro',premium:'Premium'}[style]||'Standart')+' seviyesinde mesleğe özel tasarım oluşturuldu.');
 }
-
 function fixAndProtectLayout(){
   pushUndo();
   const siteName = document.getElementById('siteName').value.trim() || 'Profesyonel Sitem';
