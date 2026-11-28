@@ -808,7 +808,26 @@ function renderCardsEditor(block){
       <input type="file" accept="image/*" onchange="uploadCardImage(${i},this)">
       ${card.image ? `<img class="card-image-preview" src="${card.image}" alt="Kart görseli">` : '<small style="color:#94a3b8">Henüz görsel eklenmedi.</small>'}
       ${card.image ? `<button type="button" class="mini-btn" onclick="removeCardImage(${i})">Görseli kaldır</button>` : ''}
-    </div>`).join('');
+      <button type="button" class="mini-btn del-pg" onclick="removeServiceCard(${i})">Kartı sil</button>
+    </div>`).join('') + '<button type="button" class="btn btn-teal" onclick="addServiceCard()">+ Yeni Hizmet Kartı Ekle</button>';
+}
+
+function addServiceCard(){
+  const block = getCurrentPage().blocks[selected];
+  if(!block || block.type !== 'cards') return;
+  pushUndo();
+  block.cards = block.cards || [];
+  block.cards.push({icon:'✨',title:'Yeni Hizmet',description:'Hizmet açıklamasını buraya yazın.',image:''});
+  render();
+  notify('Yeni hizmet kartı eklendi');
+}
+function removeServiceCard(index){
+  const block = getCurrentPage().blocks[selected];
+  if(!block || !block.cards || block.cards.length <= 1) { notify('En az bir hizmet kartı kalmalıdır.'); return; }
+  pushUndo();
+  block.cards.splice(index,1);
+  render();
+  notify('Hizmet kartı silindi');
 }
 
 function escapeHtml(value){
