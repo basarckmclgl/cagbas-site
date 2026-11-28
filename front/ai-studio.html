@@ -93,6 +93,7 @@ header button.btn-rescue:hover { background:#34d399; }
 .design-choice { background:#0f172a;border:1px solid #334155;border-radius:9px;padding:9px; }
 .design-choice select { width:100%;background:#1e293b;color:#e2e8f0;border:1px solid #475569;border-radius:7px;padding:8px;font-size:12px; }
 .design-choice small { display:block;color:#94a3b8;font-size:10.5px;line-height:1.45;margin-top:6px; }
+.creation-modes{display:grid;grid-template-columns:1fr 1fr;gap:6px}.creation-mode{border:1px solid #475569;background:#1e293b;color:#cbd5e1;border-radius:7px;padding:9px 6px;font-size:11px;cursor:pointer}.creation-mode.active{border-color:#a78bfa;background:#312e81;color:#fff}.creation-mode:last-child{grid-column:1/-1}.design-choice #creationModeHint{font-size:10.5px;color:#94a3b8;line-height:1.45;margin-top:7px}
 .canvas-block[data-design="mini"] .pv-hero { padding:38px 18px; }
 .canvas-block[data-design="mini"] .pv-hero h1 { font-size:28px; }
 .canvas-block[data-design="mini"] .pv-cards { padding:25px 18px;gap:10px; }
@@ -263,6 +264,17 @@ header button.btn-rescue:hover { background:#34d399; }
       <div id="blockList"></div>
     </div>
 
+    <!-- OLUŞTURMA YÖNTEMİ -->
+    <div class="design-choice">
+      <div class="panel-title"><span>🧭 Nasıl Başlamak İstersiniz?</span></div>
+      <div class="creation-modes">
+        <button type="button" class="creation-mode active" data-mode="template" onclick="setCreationMode('template')">🧩 Hazır Tasarım</button>
+        <button type="button" class="creation-mode" data-mode="custom" onclick="setCreationMode('custom')">✨ İsteğime Göre</button>
+        <button type="button" class="creation-mode" data-mode="scratch" onclick="startFromScratch()">＋ Sıfırdan Başla</button>
+      </div>
+      <p id="creationModeHint">Mesleğinize uygun hazır siteyi seçin; tüm alanları sonradan düzenleyebilirsiniz.</p>
+    </div>
+
     <!-- TASARIM SEVİYESİ -->
     <div class="design-choice">
       <div class="panel-title"><span>🎨 Tasarım Seviyesi</span></div>
@@ -427,6 +439,29 @@ let selected = -1;
 let undoStack = [];
 let currentPlan = null;
 let selectedDesignStyle = 'standard';
+let selectedCreationMode = 'template';
+function setCreationMode(mode){
+  selectedCreationMode = mode;
+  document.querySelectorAll('.creation-mode').forEach(btn => btn.classList.toggle('active',btn.dataset.mode===mode));
+  const hint = document.getElementById('creationModeHint');
+  if(hint) hint.textContent = mode === 'custom'
+    ? 'İsteğinizi aşağıdaki komut alanına yazın. Mevcut düzeni koruyarak uygulanabilir değişiklikleri yapabilirsiniz.'
+    : 'Mesleğinize uygun hazır siteyi seçin; tüm alanları sonradan düzenleyebilirsiniz.';
+  if(mode==='custom') document.getElementById('cmdInput').focus();
+}
+function startFromScratch(){
+  pushUndo();
+  pages = [{id:'home',title:'Ana Sayfa',inMenu:true,blocks:[]}];
+  currentPageId = 'home';
+  selected = -1;
+  document.getElementById('siteName').value = 'Yeni Web Sitesi';
+  selectedCreationMode = 'scratch';
+  document.querySelectorAll('.creation-mode').forEach(btn => btn.classList.toggle('active',btn.dataset.mode==='scratch'));
+  const hint = document.getElementById('creationModeHint');
+  if(hint) hint.textContent = 'Boş bir çalışma alanı açıldı. Blok ekleyin veya komut alanından sayfa ve içerik oluşturmaya başlayın.';
+  render();
+  notify('Boş çalışma alanı hazır. Tasarımınızı oluşturmaya başlayabilirsiniz.');
+}
 function changeDesignStyle(style){
   selectedDesignStyle = style || 'standard';
   let changed = false;
