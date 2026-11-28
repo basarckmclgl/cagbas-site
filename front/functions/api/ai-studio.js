@@ -23,9 +23,107 @@ function isAllowedOrigin(value) {
   }
 }
 
+const AI_INSTRUCTIONS = `Sen ÇAĞBAŞ AI STUDIO'nun Türkçe web tasarım üretim motorusun. Kullanıcı tasarım fikrini yazdıkça canlı tuval otomatik güncellenir. Sadece öneri anlatma; istenen tasarımı aşağıdaki JSON operasyonlarıyla gerçekten oluştur veya değiştir. Yanıtın HER ZAMAN geçerli JSON olmalı, Markdown veya JSON dışı metin ekleme. Şema: {"reply":"Kısa Türkçe durum açıklaması","operations":[...]}.
+
+ANA OLUŞTURMA KURALLARI:
+- Kullanıcı bir işletme, marka veya web sitesi fikri tarif ederse bunu çalışan bir web sitesi taslağına dönüştür. Sadece "anladım" deme; operations üret.
+- İlk tasarımda mevcut boş/başlangıç tuvalini kullanarak tutarlı bir sayfa oluştur: navbar, hero, uygun hizmet/özellik alanı, gerekliyse galeri veya paket alanı, iletişim/CTA. İsteğe göre 4-7 anlamlı bölüm oluştur; gereksiz blok ekleme.
+- Başlangıçta bulunan navbar ve hero bloklarını tekrar eklemek yerine mevcut ID'leri update_block ile güncelle. Mevcut features bloğunu isteğe göre güncelle. Eksik bölümleri add_block ile ekle.
+- Kullanıcının verdiği sektör, marka adı, hedef kitle, renk, içerik ve dil tercihlerine sadık kal. Belirtilmeyen alanlarda sektöre uygun, profesyonel varsayımlar yap.
+- Kullanıcı yeni ayrıntı eklediğinde mevcut tasarımı koru ve yalnızca gerekli değişiklikleri uygula; baştan kurma, var olan blokları sebepsiz çoğaltma veya silme.
+- Kullanıcı açıkça çok sayfalı site isterse add_page ile sayfaları oluştur; aksi söylenmedikçe tek sayfalı tasarım üret.
+- Yazılan metinleri Türkçe, anlaşılır, gerçekçi ve kısa tut. Gerçek olmayan ödül, referans, sertifika, fiyat veya istatistik uydurma.
+- Her üretim isteğinde tasarım operasyonlarını en fazla 20 işlemle sınırla. İşlemleri görsel ve içerik bütünlüğünü koruyacak sırada ver.
+- Kullanıcı yalnızca soru soruyor veya fikir danışıyorsa tasarımı değiştirme; operations boş dizi döndür.
+
+DESTEKLENEN OPERASYONLAR:
+- {"type":"add_block","blockType":"navbar"|"hero"|"features"|"cta"|"gallery"|"pricing"|"contact","block":{...}}
+- {"type":"update_block","blockId":"mevcut blok ID","patch":{...}}
+- {"type":"remove_block","blockId":"mevcut blok ID"}
+- {"type":"move_block","blockId":"mevcut blok ID","toIndex":0}
+- {"type":"duplicate_block","blockId":"mevcut blok ID"}
+- {"type":"set_theme","theme":"white"|"slate"|"dark"}
+- {"type":"set_accent","color":"#RRGGBB"}
+- {"type":"add_page","name":"Sayfa adı","slug":"sayfa-adi"}
+- {"type":"rename_page","pageId":"mevcut sayfa ID","name":"Yeni ad"}
+- {"type":"switch_page","pageId":"mevcut sayfa ID"}
+- {"type":"delete_page","pageId":"mevcut sayfa ID"}.
+
+Mevcut tasarım durumu mesaj içinde verilir; yalnızca mevcut ID'leri kullan. Blok alanları için mevcut bileşen şemasına uygun veri üret: navbar brand/links/cta; hero badge/title/subtitle/primaryBtn/secondaryBtn; features heading/items[{title,desc}]; gallery heading/cards[{tag,title,desc}]; pricing heading/plans[{name,price,desc}]; cta heading/subtitle/buttonText; contact heading/subtitle/submitText. HTML, CSS, JavaScript veya çalıştırılabilir kod üretme.`;
+
+async function callGemini(messages, apiKey) {
+  const conversation = messages.map(item =>
+    (item.role === "assistant" ? "ASİSTAN" : "KULLANICI") + ":\n" + item.content
+  ).join("\n\n");
+  const response = await fetch("https://generativelanguage.googleapis.com/v1beta/interactions", {
+    method: "POST",
+    headers: {
+      "x-goog-api-key": apiKey,
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      model: "gemini-3.8-flash",
+      input: AI_INSTRUCTIONS + "\n\nKONUŞMA:\n" + conversation,
+      response_format: {
+        type: "text",
+        mime_type: "application/json",
+        schema: {
+          type: "object",
+          properties: {
+            reply: { type: "string" },
+            operations: {
+              type: "array",
+              items: {
+                type: "object",
+                properties: { type: { type: "string" } },
+                required: ["type"],
+                additionalProperties: true
+              }
+            }
+          },
+          required: ["reply", "operations"],
+          additionalProperties: false
+        }
+      }
+    })
+  });
+  const result = await response.json().catch(() => ({}));
+  if (!response.ok) {
+    console.error("Gemini API error:", response.status, result?.error?.status || result?.error?.message || "unknown");
+    if (response.status === 400 || response.status === 403) {
+      throw Object.assign(new Error("Gemini API anahtarı, model erişimi veya proje yapılandırması geçersiz. Google AI Studio ayarlarını kontrol edin."), { status: 502 });
+    }
+    if (response.status === 429) {
+      throw Object.assign(new Error("Gemini ücretsiz kullanım kotası veya istek hızı sınırına ulaşıldı. Bir süre bekleyin veya Google AI Studio limitlerini kontrol edin."), { status: 429 });
+    }
+    throw Object.assign(new Error("Gemini servisine şu anda ulaşılamıyor."), { status: 502 });
+  }
+  const outputText = result.output_text ||
+    (result.steps || [])
+      .filter(step => step.type === "model_output")
+      .flatMap(step => step.content || [])
+      .filter(part => part.type === "text")
+      .map(part => part.text || "")
+      .join("\\n").trim();
+  if (!outputText) throw Object.assign(new Error("Gemini boş yanıt döndürdü."), { status: 502 });
+  let parsed;
+  try { parsed = JSON.parse(outputText); }
+  catch { throw Object.assign(new Error("Gemini yanıtı beklenen JSON biçiminde değil."), { status: 502 }); }
+  if (!parsed || typeof parsed.reply !== "string" || !Array.isArray(parsed.operations)) {
+    throw Object.assign(new Error("Gemini yanıtında gerekli tasarım alanları eksik."), { status: 502 });
+  }
+  if (parsed.operations.length > 20) throw Object.assign(new Error("Tek istekte çok fazla tasarım işlemi üretildi."), { status: 502 });
+  return { reply: parsed.reply.slice(0, 3000), operations: parsed.operations, provider: "gemini" };
+}
+
 export async function onRequestPost({ request, env }) {
-  if (!env.OPENAI_API_KEY) {
-    return json({ error: "AI bağlantısı sunucuda yapılandırılmamış." }, 503);
+  const provider = String(env.AI_PROVIDER || "").toLowerCase();
+  const useGemini = provider === "gemini" || (Boolean(env.GEMINI_API_KEY) && provider !== "openai");
+  if (useGemini && !env.GEMINI_API_KEY) {
+    return json({ error: "Gemini bağlantısı seçilmiş ancak GEMINI_API_KEY Preview ortamında tanımlanmamış." }, 503);
+  }
+  if (!useGemini && !env.OPENAI_API_KEY) {
+    return json({ error: "AI bağlantısı yapılandırılmamış. Preview için GEMINI_API_KEY ekleyin." }, 503);
   }
 
   const origin = request.headers.get("Origin");
@@ -73,6 +171,11 @@ export async function onRequestPost({ request, env }) {
   }
 
   try {
+    if (useGemini) {
+      const result = await callGemini(messages, env.GEMINI_API_KEY);
+      return json(result);
+    }
+
     const upstream = await fetch("https://api.openai.com/v1/responses", {
       method: "POST",
       headers: {
