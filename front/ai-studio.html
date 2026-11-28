@@ -132,6 +132,20 @@
       100% { height: 20px; }
     }
 
+    .panel-togglebar { min-height: 42px; }
+    @media (min-width: 1024px) {
+      #leftPanel.panel-collapsed { width: 48px !important; flex: 0 0 48px !important; padding: 4px !important; overflow: hidden !important; }
+      #rightPanel.panel-collapsed { width: 48px !important; flex: 0 0 48px !important; overflow: hidden !important; }
+      #leftPanel.panel-collapsed > :not(.panel-togglebar),
+      #rightPanel.panel-collapsed > :not(.panel-togglebar) { display: none !important; }
+      #leftPanel.panel-collapsed .panel-togglebar,
+      #rightPanel.panel-collapsed .panel-togglebar { height: 100%; min-height: 100%; flex-direction: column; justify-content: flex-start; }
+      #leftPanel.panel-collapsed .panel-togglebar span,
+      #rightPanel.panel-collapsed .panel-togglebar span { display: none; }
+    }
+    #leftPanel.panel-collapsed > :not(.panel-togglebar),
+    #rightPanel.panel-collapsed > :not(.panel-togglebar) { display: none; }
+    #voiceControlsBody.voice-controls-collapsed { display: none !important; }
     /* Clean scrollbars */
     ::-webkit-scrollbar { width: 6px; height: 6px; }
     ::-webkit-scrollbar-track { background: #f8fafc; }
@@ -194,6 +208,10 @@
 
     <!-- LEFT PANEL: LIVE BLOCKS, THEME & ACCENT SELECTOR, LAYERS -->
     <aside id="leftPanel" class="w-full lg:w-72 studio-panel border-b lg:border-b-0 lg:border-r overflow-y-auto shrink-0 max-h-[28vh] lg:max-h-none p-4 space-y-5">
+      <div class="panel-togglebar flex items-center justify-between gap-2 px-2 py-2 border-b border-slate-200 bg-white sticky top-0 z-10">
+        <span class="text-xs font-bold text-indigo-600">Tasarım Araçları</span>
+        <button type="button" id="leftPanelToggle" onclick="toggleStudioPanel('leftPanel')" aria-expanded="true" title="Tasarım araçlarını gizle" class="rounded-lg border border-slate-200 px-2 py-1 text-sm">‹</button>
+      </div>
     <!-- PAGE MANAGER -->
     <section class="px-4 pt-4 pb-3 border-b border-[#e2e8f0] bg-white">
       <div class="flex items-center justify-between mb-2">
@@ -362,6 +380,10 @@
 
     <!-- RIGHT PANEL: AI ASSISTANT (TEXT, QUICK COMMANDS, VOICE STT & TTS CHAT) -->
     <aside id="rightPanel" class="w-full lg:w-80 studio-panel border-t lg:border-t-0 lg:border-l flex flex-col shrink-0 max-h-[38vh] lg:max-h-none">
+      <div class="panel-togglebar p-2 border-b border-slate-200 bg-white flex items-center justify-between gap-2">
+        <span class="text-xs font-bold text-indigo-600">Yapay Zekâ Asistanı</span>
+        <button type="button" id="rightPanelToggle" onclick="toggleStudioPanel('rightPanel')" aria-expanded="true" title="Asistan panelini gizle" class="rounded-lg border border-slate-200 px-2 py-1 text-sm">›</button>
+      </div>
       <div class="p-3.5 border-b border-[#e2e8f0] flex items-center justify-between bg-white">
         <div>
           <h2 class="font-display font-bold text-sm text-[#0f172a] flex items-center gap-2">
@@ -400,8 +422,13 @@
         </button>
       </div>
 
+      <!-- Voice & conversation controls: independently collapsible -->
+      <div class="px-3 py-2 border-t border-slate-200 bg-white flex items-center justify-between">
+        <span id="voiceControlsStatus" class="text-[11px] font-semibold text-slate-600">Ses ve konuşma: Aktif</span>
+        <button type="button" id="voiceControlsToggle" onclick="toggleVoiceControls()" aria-expanded="true" title="Ses ve konuşma alanını gizle" class="rounded-lg border border-slate-200 px-2 py-1 text-sm">⌄</button>
+      </div>
       <!-- Voice Mic + Text Input Bar -->
-      <div class="p-3 bg-[#f8fafc] border-t border-[#e2e8f0] space-y-2 shrink-0">
+      <div id="voiceControlsBody" class="p-3 bg-[#f8fafc] border-t border-[#e2e8f0] space-y-2 shrink-0">
         <div class="flex items-center gap-2.5">
           <button id="micBtn" onclick="toggleSpeechRecognition()" title="Türkçe Sesli Komut" class="w-10 h-10 rounded-xl btn-studio-primary flex items-center justify-center shrink-0 cursor-pointer">
             <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -1369,6 +1396,29 @@
       if (!state.voiceReply && 'speechSynthesis' in window) {
         window.speechSynthesis.cancel();
       }
+    }
+
+    function toggleStudioPanel(panelId) {
+      const panel = document.getElementById(panelId);
+      if (!panel) return;
+      const collapsed = panel.classList.toggle('panel-collapsed');
+      const button = document.getElementById(panelId === 'leftPanel' ? 'leftPanelToggle' : 'rightPanelToggle');
+      if (button) {
+        button.textContent = panelId === 'leftPanel' ? (collapsed ? '›' : '‹') : (collapsed ? '‹' : '›');
+        button.setAttribute('aria-expanded', String(!collapsed));
+        button.title = collapsed ? 'Paneli aç' : 'Paneli gizle';
+      }
+    }
+    function toggleVoiceControls() {
+      const body = document.getElementById('voiceControlsBody');
+      const button = document.getElementById('voiceControlsToggle');
+      const status = document.getElementById('voiceControlsStatus');
+      if (!body || !button || !status) return;
+      const collapsed = body.classList.toggle('voice-controls-collapsed');
+      button.textContent = collapsed ? '›' : '⌄';
+      button.setAttribute('aria-expanded', String(!collapsed));
+      button.title = collapsed ? 'Ses ve konuşmayı etkinleştir' : 'Ses ve konuşmayı gizle';
+      status.textContent = collapsed ? 'Ses ve konuşma: Pasif' : 'Ses ve konuşma: Aktif';
     }
 </script>
 
