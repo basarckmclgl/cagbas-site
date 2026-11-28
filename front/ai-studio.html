@@ -188,6 +188,25 @@
   <!-- MAIN 3-PANE STUDIO WORKSPACE -->
   <div class="flex-1 flex flex-col lg:flex-row min-h-0 overflow-hidden">
 
+    <!-- PAGE MANAGER -->
+    <section class="px-4 pt-4 pb-3 border-b border-[#e2e8f0] bg-white">
+      <div class="flex items-center justify-between mb-2">
+        <h2 class="text-[11px] font-display font-bold uppercase tracking-wider text-[#4f46e5]">Sayfalar</h2>
+        <span id="pageCountLabel" class="text-[10px] text-slate-500">1 / 30</span>
+      </div>
+      <div class="flex gap-2">
+        <select id="studioPageSelect" onchange="switchStudioPage(this.value)" class="min-w-0 flex-1 rounded-lg border border-slate-200 bg-white px-2 py-2 text-xs text-slate-800">
+          <option value="page-home">Ana Sayfa</option>
+        </select>
+        <button type="button" onclick="addStudioPage()" title="Yeni sayfa" class="px-3 rounded-lg border border-slate-200 text-sm font-bold text-indigo-600 hover:bg-indigo-50">+</button>
+      </div>
+      <div class="grid grid-cols-3 gap-1.5 mt-2">
+        <button type="button" onclick="renameStudioPage()" class="py-1.5 rounded-lg border border-slate-200 text-[10px] font-semibold">Yeniden Adlandır</button>
+        <button type="button" onclick="duplicateStudioPage()" class="py-1.5 rounded-lg border border-slate-200 text-[10px] font-semibold">Çoğalt</button>
+        <button type="button" onclick="deleteStudioPage()" class="py-1.5 rounded-lg border border-rose-200 bg-rose-50 text-rose-700 text-[10px] font-semibold">Sil</button>
+      </div>
+    </section>
+
     <!-- LEFT PANEL: LIVE BLOCKS, THEME & ACCENT SELECTOR, LAYERS -->
     <aside id="leftPanel" class="w-full lg:w-72 studio-panel border-b lg:border-b-0 lg:border-r overflow-y-auto shrink-0 max-h-[28vh] lg:max-h-none p-4 space-y-5">
       <!-- Addable Live Blocks -->
@@ -532,7 +551,100 @@
       ]
     };
 
+    // Multi-page project state. Existing starter blocks become the home page.
+    const initialBlocks = state.blocks;
+    state.pages = [{ id: 'page-home', name: 'Ana Sayfa', slug: '/', blocks: initialBlocks }];
+    state.currentPageId = 'page-home';
+    Object.defineProperty(state, 'blocks', {
+      configurable: true,
+      enumerable: true,
+      get() { return this.pages.find(page => page.id === this.currentPageId)?.blocks || []; },
+      set(value) {
+        const page = this.pages.find(item => item.id === this.currentPageId);
+        if (page) page.blocks = value;
+      }
+    });
     state.selectedId = state.blocks[1].id;
+
+    function renderStudioPages() {
+      const select = document.getElementById('studioPageSelect');
+      const count = document.getElementById('pageCountLabel');
+      if (!select) return;
+      select.innerHTML = state.pages.map(page => '<option value="' + page.id + '">' +
+        page.name.replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch])) +
+        '</option>').join('');
+      select.value = state.currentPageId;
+      if (count) count.textContent = state.pages.length + ' / 30';
+    }
+
+    function switchStudioPage(pageId) {
+      if (!state.pages.some(page => page.id === pageId)) return;
+      state.currentPageId = pageId;
+      state.selectedId = null;
+      renderStudioPages();
+      renderCanvas();
+    }
+
+    function addStudioPage() {
+      if (state.pages.length >= 30) return alert('En fazla 30 sayfa oluşturabilirsiniz.');
+      const name = prompt('Yeni sayfanın adı:', 'Yeni Sayfa');
+      if (!name || !name.trim()) return;
+      const base = name.trim().toLocaleLowerCase('tr-TR').normalize('NFD')
+        .replace(/[\\u0300-\\u036f]/g, '').replace(/ı/g, 'i')
+        .replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') || 'sayfa';
+      const used = new Set(state.pages.map(page => page.slug));
+      let slug = base, n = 2;
+      while (used.has(slug) || slug === '/') slug = base + '-' + n++;
+      const page = { id: 'page-' + Date.now().toString(36), name: name.trim(), slug, blocks: [] };
+      state.pages.push(page);
+      state.currentPageId = page.id;
+      state.selectedId = null;
+      renderStudioPages();
+      renderCanvas();
+    }
+
+    function renameStudioPage() {
+      const page = state.pages.find(item => item.id === state.currentPageId);
+      if (!page) return;
+      const name = prompt('Sayfa adı:', page.name);
+      if (!name || !name.trim()) return;
+      page.name = name.trim().slice(0, 80);
+      renderStudioPages();
+    }
+
+    function duplicateStudioPage() {
+      if (state.pages.length >= 30) return alert('En fazla 30 sayfa oluşturabilirsiniz.');
+      const source = state.pages.find(item => item.id === state.currentPageId);
+      if (!source) return;
+      const copy = JSON.parse(JSON.stringify(source));
+      copy.id = 'page-' + Date.now().toString(36);
+      copy.name = (source.name + ' (Kopya)').slice(0, 80);
+      const base = source.slug === '/' ? 'ana-sayfa-kopya' : source.slug + '-kopya';
+      const used = new Set(state.pages.map(page => page.slug));
+      copy.slug = base;
+      let n = 2;
+      while (used.has(copy.slug)) copy.slug = base + '-' + n++;
+      copy.blocks.forEach(block => block.id = 'b-' + Date.now().toString(36) + '-' + Math.random().toString(36).slice(2,7));
+      state.pages.push(copy);
+      state.currentPageId = copy.id;
+      state.selectedId = null;
+      renderStudioPages();
+      renderCanvas();
+    }
+
+    function deleteStudioPage() {
+      if (state.pages.length <= 1) return alert('Son sayfa silinemez.');
+      const page = state.pages.find(item => item.id === state.currentPageId);
+      if (!page || !confirm('"' + page.name + '" sayfasını silmek istediğinize emin misiniz?')) return;
+      const index = state.pages.indexOf(page);
+      state.pages.splice(index, 1);
+      state.currentPageId = state.pages[Math.max(0, index - 1)].id;
+      state.selectedId = null;
+      renderStudioPages();
+      renderCanvas();
+    }
+
+    renderStudioPages();
 
     // =========================================================================
     // THEME & ACCENT HELPERS
@@ -997,9 +1109,11 @@
         message: document.getElementById('leadNotes').value.trim() || 'Ziyaretçi oluşturduğu tasarım hakkında iletişime geçilmesini istiyor.',
         website: document.getElementById('leadWebsite').value,
         design: {
+          schemaVersion: 1,
           theme: state.theme,
           accent: state.accent,
-          blocks: state.blocks
+          pages: state.pages,
+          currentPageId: state.currentPageId
         },
         conversation: aiConversation.slice(-20)
       };
