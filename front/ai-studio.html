@@ -118,12 +118,24 @@
       box-shadow: 0 10px 22px -4px rgba(79, 70, 229, 0.55);
     }
 
-    /* Independent scrolling: the workspace scrolls around the canvas, while the live website and its pages scroll inside the preview. */
+    /* Two independent scroll areas: the workspace and the website preview itself. */
     #canvasWorkspace { min-width: 0; min-height: 0; overflow: auto; scrollbar-gutter: stable; }
-    #canvasWorkspace.pages-scroll-horizontal { overflow-x: auto; overflow-y: auto; }
+    #canvasWorkspace.pages-scroll-horizontal,
     #canvasWorkspace.pages-scroll-vertical { overflow-x: auto; overflow-y: auto; }
-    #canvasFrame { display: flex; flex-direction: column; min-height: 0; overflow: hidden; }
-    #wysiwygCanvas { min-width: 0; min-height: 480px; max-height: calc(100dvh - 270px); overflow-x: auto; overflow-y: scroll; overscroll-behavior: contain; scrollbar-gutter: stable; }
+    #canvasFrame { display: flex; flex: 0 0 auto; flex-direction: column; min-height: 0; overflow: hidden; }
+    #wysiwygCanvas {
+      display: block;
+      flex: 0 0 auto;
+      width: 100%;
+      height: clamp(520px, 68vh, 820px);
+      min-width: 0;
+      min-height: 520px;
+      max-height: none;
+      overflow-x: auto;
+      overflow-y: auto;
+      overscroll-behavior: contain;
+      scrollbar-gutter: stable;
+    }
     #wysiwygCanvas [contenteditable="true"] { cursor: text; user-select: text !important; -webkit-user-select: text !important; pointer-events: auto; }
     #wysiwygCanvas [contenteditable="true"]:focus { outline: 1px dashed var(--accent-indigo); outline-offset: 3px; border-radius: 3px; }
     .studio-pages-layout { display: flex; gap: 18px; padding: 16px; align-items: flex-start; }
@@ -201,7 +213,7 @@
       body[data-mobile-tab="assistant"] #rightPanel { display: flex !important; }
       body[data-mobile-tab="canvas"] #canvasWorkspace { display: flex !important; }
       #canvasWorkspace #canvasFrame { width: 100%; max-width: 100%; border-radius: 12px; }
-      #canvasWorkspace #wysiwygCanvas { min-height: 65vh; }
+      #canvasWorkspace #wysiwygCanvas { height: 65vh; min-height: 520px; max-height: none; overflow-y: auto; }
       #canvasPageLayoutControls { justify-content: flex-start; flex-wrap: wrap; }
       #canvasPageLayoutControls span { display: none; }
       #studioPageStrip { max-width: 100%; }
