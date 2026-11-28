@@ -20,6 +20,18 @@ function escapeHtml(value) {
 }
 
 const ALLOWED_ORIGINS = new Set(["https://cagbas.com", "https://www.cagbas.com"]);
+
+function isAllowedOrigin(value) {
+  try {
+    const url = new URL(value);
+    return url.protocol === "https:" && (
+      ALLOWED_ORIGINS.has(url.origin) ||
+      (url.hostname.endsWith(".cagbas-site.pages.dev") && url.hostname.length > ".cagbas-site.pages.dev".length)
+    );
+  } catch {
+    return false;
+  }
+}
 const RECIPIENT_EMAIL = "cagbas.2026@gmail.com";
 const SENDER_EMAIL = "cagbas.2026@gmail.com";
 
@@ -33,7 +45,7 @@ export async function onRequestPost({ request, env }) {
   if (origin) {
     let normalized = "";
     try { normalized = new URL(origin).origin; } catch {}
-    if (!ALLOWED_ORIGINS.has(normalized)) return json({ error: "Bu kaynaktan gelen isteğe izin verilmiyor." }, 403);
+    if (!isAllowedOrigin(origin)) return json({ error: "Bu kaynaktan gelen isteğe izin verilmiyor." }, 403);
   }
   if ((request.headers.get("sec-fetch-site") || "").toLowerCase() === "cross-site") {
     return json({ error: "Çapraz site isteğine izin verilmiyor." }, 403);
