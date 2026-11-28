@@ -118,8 +118,9 @@
       box-shadow: 0 10px 22px -4px rgba(79, 70, 229, 0.55);
     }
 
-    #canvasWorkspace.pages-scroll-horizontal { overflow-x: auto; overflow-y: hidden; }
-    #canvasWorkspace.pages-scroll-vertical { overflow-x: hidden; overflow-y: auto; }
+    /* Keep the canvas scrollable at all times; horizontal mode still supports side-by-side pages. */
+    #canvasWorkspace.pages-scroll-horizontal { overflow-x: auto; overflow-y: scroll; scrollbar-gutter: stable; }
+    #canvasWorkspace.pages-scroll-vertical { overflow-x: hidden; overflow-y: scroll; scrollbar-gutter: stable; }
     #canvasFrame:has(.studio-pages-layout) { overflow: visible !important; }
     #wysiwygCanvas [contenteditable="true"] { cursor: text; user-select: text !important; -webkit-user-select: text !important; pointer-events: auto; }
     #wysiwygCanvas [contenteditable="true"]:focus { outline: 1px dashed var(--accent-indigo); outline-offset: 3px; border-radius: 3px; }
