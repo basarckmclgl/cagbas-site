@@ -300,20 +300,15 @@ header button.btn-rescue:hover { background:#34d399; }
   </div>
 </div>
 
-<!-- ÜYELİK BAŞVURU MODALI -->
+<!-- TASARIMI KULLANIMA ALMA BİLGİLENDİRMESİ -->
 <div class="modal-bg hidden" id="membershipGateModal">
   <div class="modal">
-    <h2>Üyelik başvurusu</h2>
-    <p class="sub">Tasarımlarınızı dışa aktarmak veya kullanıma almak için üyelik başvurunuzu tamamlayın.</p>
-    <div style="background:#0f172a;border:1px solid #334155;border-radius:10px;padding:16px;margin:14px 0">
-      <div style="font-size:12px;color:#94a3b8;margin-bottom:5px">SEÇİLEN PAKET</div>
-      <div id="gatePlanName" style="font-size:22px;font-weight:800;color:#38bdf8">Pro</div>
-      <p id="gatePlanDescription" style="font-size:13px;color:#cbd5e1;margin-top:8px">Paket kapsamı ve üyelik koşulları başvuru sonrasında iletilecektir.</p>
-    </div>
-    <p style="font-size:13px;color:#cbd5e1;line-height:1.6">Fiyat bilgisi bu ekranda gösterilmez. Başvurunuz sonrasında güncel üyelik koşulları hakkında sizinle iletişime geçeceğiz.</p>
+    <h2>Tasarımınızı kullanıma almak mı istiyorsunuz?</h2>
+    <p class="sub">ÇAĞBAŞ AI Studio'da tasarımınızı demo olarak oluşturabilir ve önizleyebilirsiniz. Resmî kullanım, yayınlama veya teslim aşamasına geçtiğinizde bizimle iletişime geçebilirsiniz.</p>
+    <p style="font-size:13px;color:#cbd5e1;line-height:1.6">Talebinizi bize iletin. Projenizin kapsamını ve size uygun çalışma koşullarını birlikte değerlendirelim. Bu ekranda fiyat veya ödeme bilgisi alınmaz.</p>
     <div style="display:flex;gap:10px;margin-top:16px">
-      <button class="btn btn-green" style="margin-top:0" onclick="sendMembershipRequest()">Başvuru e-postası oluştur</button>
-      <button class="btn btn-gray" style="margin-top:0" onclick="document.getElementById('membershipGateModal').classList.add('hidden')">Şimdilik değil</button>
+      <button class="btn btn-green" style="margin-top:0" onclick="sendMembershipRequest()">ÇAĞBAŞ ile iletişime geç</button>
+      <button class="btn btn-gray" style="margin-top:0" onclick="document.getElementById('membershipGateModal').classList.add('hidden')">Demoya devam et</button>
     </div>
   </div>
 </div>
@@ -390,29 +385,23 @@ function selectPlan(name){
 }
 
 function openMembershipGate(){
-  const plan = currentPlan === 'Premium' ? 'Premium' : 'Pro';
-  document.getElementById('gatePlanName').textContent = plan;
-  document.getElementById('gatePlanDescription').textContent = plan === 'Premium'
-    ? 'Pro özelliklerinin tamamı, yüksek AI kullanım kotası, müşteri projeleri yönetimi, sürüm geçmişi, yedekleme ve öncelikli destek.'
-    : 'Daha fazla proje, gelişmiş AI tasarım, çok sayfalı site oluşturma ve HTML/CSS/JS dışa aktarma.';
   document.getElementById('membershipGateModal').classList.remove('hidden');
 }
 
 function sendMembershipRequest(){
-  const plan = currentPlan === 'Premium' ? 'Premium' : 'Pro';
   const recipient = 'cagbas.2026@gmail.com';
-  const subject = 'ÇAĞBAŞ AI Studio ' + plan + ' Üyelik Başvurusu';
+  const subject = 'ÇAĞBAŞ AI Studio - Tasarımı Resmî Kullanıma Alma Talebi';
   const body = [
     'Merhaba,',
     '',
-    'ÇAĞBAŞ AI Studio ' + plan + ' üyeliği için başvuru yapmak istiyorum.',
-    'Üyelik kapsamı ve güncel koşullar hakkında benimle iletişime geçmenizi rica ederim.',
+    'ÇAĞBAŞ AI Studio üzerinde bir tasarım oluşturdum. Tasarımı demo aşamasından çıkararak resmî olarak kullanmak, yayınlamak veya teslim almak istiyorum.',
+    'Projemin kapsamı ve sonraki adımlar hakkında benimle iletişime geçmenizi rica ederim.',
     '',
     'Ad Soyad:',
     'Telefon:',
     'E-posta:',
-    'İşletme / proje adı:',
-    'Kullanım amacım:',
+    'Proje / işletme adı:',
+    'Talebimin detayları:',
     '',
     'İyi çalışmalar.'
   ].join('\\n');
@@ -438,7 +427,7 @@ function syncMenuToAllPages(){
 
 function createNewPage(customTitle){
   if(currentPlan === 'Başlangıç' && pages.length >= 3){
-    notify('Demo modunda en fazla 3 sayfa oluşturabilirsiniz. Sınırsız sayfa için Pro veya Premium seçin.');
+    notify('Demo kullanımında en fazla 3 sayfa oluşturabilirsiniz.');
     return;
   }
   const input = document.getElementById('newPageInput');
