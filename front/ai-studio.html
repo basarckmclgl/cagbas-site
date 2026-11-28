@@ -478,16 +478,11 @@
         <span class="text-xs font-bold text-indigo-600">Yapay Zekâ Asistanı</span>
         <button type="button" id="rightPanelToggle" onclick="toggleStudioPanel('rightPanel')" aria-expanded="true" title="Asistan panelini gizle" class="rounded-lg border border-slate-200 px-2 py-1 text-sm">›</button>
       </div>
-      <div class="p-3.5 border-b border-[#e2e8f0] flex items-center justify-between bg-white">
-        <div>
-          <h2 class="font-display font-bold text-sm text-[#0f172a] flex items-center gap-2">
-            <span>🤖 Yapay Zekâ Asistanı</span>
-          </h2>
-          <p class="text-[11px] text-[#475569]">Sesli veya yazılı komutla sayfayı yönetin</p>
-        </div>
-        <span id="sttBadge" class="text-[10px] font-semibold px-2 py-0.5 rounded-full bg-indigo-50 text-[#4f46e5] border border-indigo-200">
-          TR Ses
-        </span>
+      <div class="p-3.5 border-b border-[#e2e8f0] bg-white">
+        <h2 class="font-display font-bold text-sm text-[#0f172a] flex items-center gap-2">
+          <span>🤖 Yapay Zekâ Asistanı</span>
+        </h2>
+        <p class="text-[11px] text-[#475569]">Siteni tarif et; canlı tuval otomatik oluşturulsun.</p>
       </div>
 
       <!-- Live Chat & Edit History Stream -->
@@ -516,11 +511,15 @@
         </button>
       </div>
 
-      <!-- Text-only AI command input -->
+      <!-- Automatic text-to-canvas generation -->
       <div class="p-3 bg-[#f8fafc] border-t border-[#e2e8f0] shrink-0">
-        <form onsubmit="handleCommandFormSubmit(event)" class="flex items-center gap-2">
-          <input id="aiCommandInput" type="text" placeholder="Komut yazın veya site fikri girin..." class="flex-1 min-w-0 rounded-xl bg-white border border-[#cbd5e1] focus:border-[#4f46e5] focus:outline-none px-3 py-2 text-xs text-[#0f172a] placeholder-[#64748b]" />
-          <button type="submit" class="btn-studio-primary px-3.5 py-2 rounded-xl text-xs font-semibold cursor-pointer transition">Gönder</button>
+        <div id="autoBuildStatus" class="mb-2 text-[10px] leading-relaxed text-slate-500" role="status" aria-live="polite">Yazmaya başla. Yazmayı bıraktığında tasarım otomatik oluşturulur.</div>
+        <form onsubmit="handleCommandFormSubmit(event)" class="space-y-2">
+          <textarea id="aiCommandInput" rows="3" maxlength="1500" oninput="scheduleAiStudioAutoBuild()" onkeydown="if(event.key==='Enter'&&(event.ctrlKey||event.metaKey)){event.preventDefault();handleCommandFormSubmit(event)}" placeholder="Nasıl bir web sitesi istiyorsun? Örn. Modern, koyu temalı bir kahve sitesi; menü, ürün kartları ve iletişim alanı olsun..." class="w-full resize-y min-h-[76px] max-h-40 rounded-xl bg-white border border-[#cbd5e1] focus:border-[#4f46e5] focus:outline-none px-3 py-2.5 text-xs leading-relaxed text-[#0f172a] placeholder-[#64748b]"></textarea>
+          <div class="flex items-center justify-between gap-2">
+            <span class="text-[10px] text-slate-400">Otomatik oluşturma açık</span>
+            <button type="submit" class="btn-studio-primary px-3.5 py-2 rounded-xl text-xs font-semibold cursor-pointer transition">Şimdi oluştur</button>
+          </div>
         </form>
       </div>
     </aside>
@@ -1531,64 +1530,148 @@
       renderCanvas();
     }
 
-    async function sendAiStudioMessage(message) {
+    let aiAutoBuildTimer = null;
+    let aiAutoBuildController = null;
+    let aiAutoBuildRequestId = 0;
+    let lastAutoBuiltPrompt = '';
+
+    function setAutoBuildStatus(message, tone = 'normal') {
+      const status = document.getElementById('autoBuildStatus');
+      if (!status) return;
+      status.textContent = message;
+      status.className = 'mb-2 text-[10px] leading-relaxed ' + (
+        tone === 'error' ? 'text-rose-600' :
+        tone === 'success' ? 'text-emerald-700' :
+        tone === 'busy' ? 'text-indigo-600' : 'text-slate-500'
+      );
+    }
+
+    function scheduleAiStudioAutoBuild() {
+      const input = document.getElementById('aiCommandInput');
+      const prompt = String(input?.value || '').trim();
+      if (aiAutoBuildTimer) clearTimeout(aiAutoBuildTimer);
+      aiAutoBuildTimer = null;
+
+      // A newer edit invalidates an older response so stale AI output cannot overwrite it.
+      if (aiAutoBuildController) {
+        aiAutoBuildController.abort();
+        aiAutoBuildController = null;
+        aiAutoBuildRequestId++;
+      }
+
+      if (!prompt) {
+        setAutoBuildStatus('Yazmaya başla. Yazmayı bıraktığında tasarım otomatik oluşturulur.');
+        return;
+      }
+      if (prompt.length < 12) {
+        setAutoBuildStatus('Biraz daha ayrıntı yaz. En az 12 karakterden sonra otomatik oluşturma başlayabilir.');
+        return;
+      }
+      if (prompt === lastAutoBuiltPrompt) {
+        setAutoBuildStatus('Bu metin zaten tuvale uygulandı. Yeni bir ayrıntı yazarsan tasarım güncellenir.', 'success');
+        return;
+      }
+
+      setAutoBuildStatus('Yazdıkların bekleniyor… Yazmayı bitirdiğinde otomatik oluşturulacak.', 'busy');
+      aiAutoBuildTimer = setTimeout(() => {
+        aiAutoBuildTimer = null;
+        lastAutoBuiltPrompt = prompt;
+        sendAiStudioMessage(prompt, { automatic: true });
+      }, 1800);
+    }
+
+    async function sendAiStudioMessage(message, options = {}) {
       const cleanMessage = String(message || '').trim();
       if (!cleanMessage) return;
+      const automatic = options.automatic === true;
 
-      appendChatMessage('user', cleanMessage);
-      aiConversation.push({ role: 'user', content: cleanMessage });
+      if (aiAutoBuildTimer) {
+        clearTimeout(aiAutoBuildTimer);
+        aiAutoBuildTimer = null;
+      }
+      if (aiAutoBuildController) aiAutoBuildController.abort();
 
+      const requestId = ++aiAutoBuildRequestId;
+      const controller = new AbortController();
+      aiAutoBuildController = controller;
       const input = document.getElementById('aiCommandInput');
       const submitButton = input?.form?.querySelector('button[type="submit"]');
-      if (input) input.disabled = true;
+
+      if (!automatic) {
+        appendChatMessage('user', cleanMessage);
+        setAutoBuildStatus('Komut gönderildi; canlı tuval güncelleniyor…', 'busy');
+      } else {
+        setAutoBuildStatus('Tasarım oluşturuluyor…', 'busy');
+      }
       if (submitButton) {
         submitButton.disabled = true;
-        submitButton.textContent = 'Yanıtlanıyor...';
+        submitButton.textContent = 'Oluşturuluyor…';
       }
 
       try {
+        const currentDesign = {
+          theme: state.theme,
+          accent: state.accent,
+          currentPageId: state.currentPageId,
+          pages: state.pages.map(page => ({
+            id: page.id, name: page.name, slug: page.slug,
+            blocks: page.blocks.map(block => ({
+              id: block.id, type: block.type, name: block.name, title: block.title,
+              heading: block.heading, brand: block.brand, badge: block.badge,
+              subtitle: block.subtitle, cta: block.cta, buttonText: block.buttonText,
+              primaryBtn: block.primaryBtn, secondaryBtn: block.secondaryBtn,
+              items: block.items, cards: block.cards, plans: block.plans
+            }))
+          }))
+        };
+        const priorConversation = aiConversation.slice(-8);
         const response = await fetch('/api/ai-studio', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ messages: [
-            ...aiConversation.slice(-10),
-            { role: 'user', content: '[MEVCUT TASARIM DURUMU] ' + JSON.stringify({
-              theme: state.theme, accent: state.accent, currentPageId: state.currentPageId,
-              pages: state.pages.map(page => ({ id: page.id, name: page.name, slug: page.slug, blocks: page.blocks.map(block => ({ id: block.id, type: block.type, name: block.name, title: block.title, heading: block.heading, brand: block.brand, badge: block.badge, subtitle: block.subtitle, cta: block.cta, buttonText: block.buttonText, primaryBtn: block.primaryBtn, secondaryBtn: block.secondaryBtn, items: block.items, cards: block.cards, plans: block.plans })) }))
-            }).slice(0, 3500) },
-            { role: 'user', content: cleanMessage }
-          ] })
+          signal: controller.signal,
+          body: JSON.stringify({
+            messages: [
+              ...priorConversation,
+              { role: 'user', content: '[MEVCUT TASARIM DURUMU] ' + JSON.stringify(currentDesign).slice(0, 3500) },
+              { role: 'user', content: cleanMessage }
+            ]
+          })
         });
         const data = await response.json().catch(() => ({}));
+        if (requestId !== aiAutoBuildRequestId) return;
         if (!response.ok) throw new Error(data.error || 'Yapay zekâ şu anda yanıt veremiyor.');
         if (!data.reply) throw new Error('Yapay zekâdan boş yanıt alındı.');
 
+        let finalReply = data.reply;
         if (Array.isArray(data.operations) && data.operations.length) {
           try {
             applyAiStudioOperations(data.operations);
-            const doneText = data.reply + ' (' + data.operations.length + ' tasarım işlemi uygulandı.)';
-            aiConversation.push({ role: 'assistant', content: doneText });
-            replyAssistant(doneText);
+            finalReply += ' (' + data.operations.length + ' tasarım işlemi uygulandı.)';
+            setAutoBuildStatus('Canlı tuval güncellendi. Yeni ayrıntılar yazarak tasarımı geliştirebilirsin.', 'success');
           } catch (operationError) {
-            const failedText = data.reply + ' Ancak işlem uygulanamadı: ' + operationError.message;
-            aiConversation.push({ role: 'assistant', content: failedText });
-            replyAssistant(failedText);
+            finalReply += ' Ancak tasarım işlemi uygulanamadı: ' + operationError.message;
+            setAutoBuildStatus('Tasarım işlemi uygulanamadı. İsteğini farklı şekilde ifade ederek tekrar deneyebilirsin.', 'error');
           }
         } else {
-          aiConversation.push({ role: 'assistant', content: data.reply });
-          replyAssistant(data.reply);
+          setAutoBuildStatus('Asistan yanıt verdi ancak tuvalde değişiklik yapmadı. İstediğin tasarım değişikliğini daha açık yaz.', 'normal');
         }
+
+        appendChatMessage('user', cleanMessage);
+        aiConversation.push({ role: 'user', content: cleanMessage });
+        aiConversation.push({ role: 'assistant', content: finalReply });
+        replyAssistant(finalReply);
       } catch (error) {
+        if (error.name === 'AbortError' || requestId !== aiAutoBuildRequestId) return;
         const messageText = error.message || 'Bağlantı kurulamadı. Lütfen tekrar deneyin.';
         replyAssistant('Bağlantı hatası: ' + messageText);
+        setAutoBuildStatus('Otomatik oluşturma tamamlanamadı: ' + messageText, 'error');
       } finally {
-        if (input) {
-          input.disabled = false;
-          input.focus();
-        }
-        if (submitButton) {
-          submitButton.disabled = false;
-          submitButton.textContent = 'Gönder';
+        if (requestId === aiAutoBuildRequestId) {
+          aiAutoBuildController = null;
+          if (submitButton) {
+            submitButton.disabled = false;
+            submitButton.textContent = 'Şimdi oluştur';
+          }
         }
       }
     }
@@ -1598,8 +1681,11 @@
       const input = document.getElementById('aiCommandInput');
       const message = input?.value || '';
       if (!message.trim()) return;
-      input.value = '';
+      if (aiAutoBuildTimer) clearTimeout(aiAutoBuildTimer);
+      aiAutoBuildTimer = null;
+      lastAutoBuiltPrompt = message.trim();
       sendAiStudioMessage(message);
+      input.value = '';
     }
 
     function runAiCommand(command) {
