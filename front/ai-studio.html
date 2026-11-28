@@ -1413,6 +1413,72 @@
     // =========================================================================
     const aiConversation = [];
 
+    function applyAiStudioOperations(operations) {
+      if (!Array.isArray(operations) || operations.length > 20) throw new Error('Geçersiz tasarım işlemi listesi.');
+      const allowedTypes = new Set(['navbar','hero','features','cta','gallery','pricing','contact']);
+      const allowedFields = new Set(['name','brand','cta','badge','title','subtitle','primaryBtn','secondaryBtn','heading','buttonText','submitText','links','items','cards','plans']);
+      for (const op of operations) {
+        if (!op || typeof op !== 'object') throw new Error('Geçersiz tasarım işlemi.');
+        switch (op.type) {
+          case 'add_block': {
+            if (!allowedTypes.has(op.blockType)) throw new Error('Desteklenmeyen blok türü.');
+            const presets = {
+              navbar: { name:'Üst Menü', brand:'MARKAM', links:['Ana Sayfa','Hizmetler','İletişim'], cta:'Teklif Al' },
+              hero: { name:'Hero Başlık', badge:'MERHABA', title:'Markanız için modern bir web sitesi', subtitle:'Hikâyenizi dijital dünyaya taşıyın.', primaryBtn:'Başlayın', secondaryBtn:'Detayları Gör' },
+              features: { name:'Özellik Kartları', heading:'Hizmetlerimiz', items:[{title:'Hizmet 1',desc:'Hizmet açıklaması'},{title:'Hizmet 2',desc:'Hizmet açıklaması'},{title:'Hizmet 3',desc:'Hizmet açıklaması'}] },
+              cta: { name:'Çağrı Alanı', heading:'Projenizi başlatalım', subtitle:'Bizimle iletişime geçin.', buttonText:'İletişime Geç' },
+              gallery: { name:'Galeri', heading:'Çalışmalarımız', cards:[{tag:'PROJE',title:'Proje 1',desc:'Proje açıklaması'}] },
+              pricing: { name:'Fiyat / Plan', heading:'Paketler', plans:[{name:'Başlangıç',price:'Teklif Al',desc:'Paket açıklaması'}] },
+              contact: { name:'İletişim Formu', heading:'Bize Ulaşın', subtitle:'Mesajınızı iletin.', submitText:'Gönder' }
+            };
+            const block = { ...presets[op.blockType], ...(op.block || {}), type:op.blockType, id:'b-ai-'+Date.now().toString(36)+'-'+Math.random().toString(36).slice(2,7) };
+            checkpointStudio(); state.blocks.push(block); state.selectedId=block.id; break;
+          }
+          case 'update_block': {
+            const block=state.blocks.find(item=>item.id===op.blockId);
+            if(!block || !op.patch || typeof op.patch!=='object' || Array.isArray(op.patch)) throw new Error('Güncellenecek blok bulunamadı.');
+            const patch={}; Object.entries(op.patch).forEach(([key,value])=>{ if(!allowedFields.has(key)) throw new Error('İzin verilmeyen blok alanı: '+key); patch[key]=value; });
+            checkpointStudio(); Object.assign(block,patch); state.selectedId=block.id; break;
+          }
+          case 'remove_block': {
+            const i=state.blocks.findIndex(item=>item.id===op.blockId); if(i<0) throw new Error('Silinecek blok bulunamadı.');
+            checkpointStudio(); state.blocks.splice(i,1); state.selectedId=state.blocks[Math.max(0,i-1)]?.id||null; break;
+          }
+          case 'move_block': {
+            const i=state.blocks.findIndex(item=>item.id===op.blockId); if(i<0 || !Number.isInteger(op.toIndex)) throw new Error('Taşınacak blok veya sıra bulunamadı.');
+            const target=Math.max(0,Math.min(state.blocks.length-1,op.toIndex)); checkpointStudio(); const [item]=state.blocks.splice(i,1); state.blocks.splice(target,0,item); state.selectedId=item.id; break;
+          }
+          case 'duplicate_block': {
+            const item=state.blocks.find(b=>b.id===op.blockId); if(!item) throw new Error('Çoğaltılacak blok bulunamadı.');
+            checkpointStudio(); const copy=JSON.parse(JSON.stringify(item)); copy.id='b-ai-'+Date.now().toString(36)+'-'+Math.random().toString(36).slice(2,7); copy.name=(copy.name||copy.type)+' (Kopya)'; state.blocks.push(copy); state.selectedId=copy.id; break;
+          }
+          case 'set_theme': if(!['white','slate','dark'].includes(op.theme)) throw new Error('Geçersiz tema.'); else { checkpointStudio(); state.theme=op.theme; break; }
+          case 'set_accent': if(!/^#[0-9a-fA-F]{6}$/.test(op.color||'')) throw new Error('Geçersiz vurgu rengi.'); else { checkpointStudio(); state.accent=op.color; break; }
+          case 'add_page': {
+            if(state.pages.length>=30) throw new Error('En fazla 30 sayfa oluşturabilirsiniz.');
+            const name=String(op.name||'Yeni Sayfa').slice(0,80); const base=String(op.slug||name.toLocaleLowerCase('tr-TR').replace(/ı/g,'i').normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')||'sayfa').slice(0,100);
+            const used=new Set(state.pages.map(p=>p.slug)); let slug=base,n=2; while(used.has(slug)||slug==='/') slug=base+'-'+n++;
+            checkpointStudio(); const page={id:'page-ai-'+Date.now().toString(36),name,slug,blocks:[]}; state.pages.push(page); state.currentPageId=page.id; state.selectedId=null; break;
+          }
+          case 'rename_page': {
+            const page=state.pages.find(p=>p.id===op.pageId); if(!page || !String(op.name||'').trim()) throw new Error('Sayfa bulunamadı veya adı boş.');
+            checkpointStudio(); page.name=String(op.name).trim().slice(0,80); break;
+          }
+          case 'switch_page': if(!state.pages.some(p=>p.id===op.pageId)) throw new Error('Sayfa bulunamadı.'); else { state.currentPageId=op.pageId; state.selectedId=null; break; }
+          case 'delete_page': {
+            if(state.pages.length<=1) throw new Error('Son sayfa silinemez.');
+            const i=state.pages.findIndex(p=>p.id===op.pageId); if(i<0) throw new Error('Silinecek sayfa bulunamadı.');
+            checkpointStudio(); state.pages.splice(i,1); if(state.currentPageId===op.pageId) state.currentPageId=state.pages[Math.max(0,i-1)].id; state.selectedId=null; break;
+          }
+          default: throw new Error('Desteklenmeyen işlem: '+String(op.type));
+        }
+      }
+      document.documentElement.style.setProperty('--accent-indigo',state.accent);
+      syncThemeButtons();
+      renderStudioPages();
+      renderCanvas();
+    }
+
     async function sendAiStudioMessage(message) {
       const cleanMessage = String(message || '').trim();
       if (!cleanMessage) return;
@@ -1432,14 +1498,34 @@
         const response = await fetch('/api/ai-studio', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ messages: aiConversation.slice(-12) })
+          body: JSON.stringify({ messages: [
+            ...aiConversation.slice(-11),
+            { role: 'user', content: '[MEVCUT TASARIM DURUMU] ' + JSON.stringify({
+              theme: state.theme, accent: state.accent, currentPageId: state.currentPageId,
+              pages: state.pages.map(page => ({ id: page.id, name: page.name, slug: page.slug, blocks: page.blocks }))
+            }).slice(0, 12000) },
+            { role: 'user', content: cleanMessage }
+          ] })
         });
         const data = await response.json().catch(() => ({}));
         if (!response.ok) throw new Error(data.error || 'Yapay zekâ şu anda yanıt veremiyor.');
         if (!data.reply) throw new Error('Yapay zekâdan boş yanıt alındı.');
 
-        aiConversation.push({ role: 'assistant', content: data.reply });
-        replyAssistant(data.reply);
+        if (Array.isArray(data.operations) && data.operations.length) {
+          try {
+            applyAiStudioOperations(data.operations);
+            const doneText = data.reply + ' (' + data.operations.length + ' tasarım işlemi uygulandı.)';
+            aiConversation.push({ role: 'assistant', content: doneText });
+            replyAssistant(doneText);
+          } catch (operationError) {
+            const failedText = data.reply + ' Ancak işlem uygulanamadı: ' + operationError.message;
+            aiConversation.push({ role: 'assistant', content: failedText });
+            replyAssistant(failedText);
+          }
+        } else {
+          aiConversation.push({ role: 'assistant', content: data.reply });
+          replyAssistant(data.reply);
+        }
       } catch (error) {
         const messageText = error.message || 'Bağlantı kurulamadı. Lütfen tekrar deneyin.';
         replyAssistant('Bağlantı hatası: ' + messageText);
