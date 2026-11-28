@@ -118,7 +118,16 @@ Mevcut tasarım durumu mesaj içinde verilir; yalnızca mevcut ID'leri kullan. B
     if (!upstream.ok) {
       console.error("OpenAI API error:", upstream.status, result?.error?.code || "unknown");
       if (upstream.status === 401) return json({ error: "API anahtarı doğrulanamadı. Cloudflare secret ayarını kontrol edin." }, 502);
-      if (upstream.status === 429) return json({ error: "API kullanım limiti veya bakiye sınırına ulaşıldı." }, 429);
+      if (upstream.status === 429) {
+        const apiCode = String(result?.error?.code || result?.error?.type || "");
+        if (apiCode === "insufficient_quota" || apiCode === "billing_hard_limit_reached") {
+          return json({ error: "OpenAI API kullanım bakiyesi veya aylık harcama limiti dolmuş. OpenAI Platform Billing bölümünü kontrol edin.", code: "insufficient_quota" }, 429);
+        }
+        if (apiCode === "rate_limit_exceeded") {
+          return json({ error: "OpenAI API istek hızı sınırına ulaşıldı. Biraz bekleyip tekrar deneyin.", code: "rate_limit_exceeded" }, 429);
+        }
+        return json({ error: "OpenAI API isteği 429 ile reddetti. Bakiye, aylık bütçe ve istek hızı sınırlarını kontrol edin.", code: apiCode || "rate_limit_or_quota" }, 429);
+      }
       return json({ error: "Yapay zekâ servisine şu anda ulaşılamıyor." }, 502);
     }
 
