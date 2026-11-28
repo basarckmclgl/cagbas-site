@@ -52,10 +52,17 @@ DESTEKLENEN OPERASYONLAR:
 Mevcut tasarım durumu mesaj içinde verilir; yalnızca mevcut ID'leri kullan. Blok alanları için mevcut bileşen şemasına uygun veri üret: navbar brand/links/cta; hero badge/title/subtitle/primaryBtn/secondaryBtn; features heading/items[{title,desc}]; gallery heading/cards[{tag,title,desc}]; pricing heading/plans[{name,price,desc}]; cta heading/subtitle/buttonText; contact heading/subtitle/submitText. HTML, CSS, JavaScript veya çalıştırılabilir kod üretme.`;
 
 async function callGemini(messages, apiKey) {
-  const contents = messages.map(item => ({
-    role: item.role === "assistant" ? "model" : "user",
-    parts: [{ text: item.content }]
-  }));
+  // Gemini requires alternating user/model turns. Merge adjacent messages with the same role.
+  const contents = [];
+  for (const item of messages) {
+    const role = item.role === "assistant" ? "model" : "user";
+    const previous = contents[contents.length - 1];
+    if (previous && previous.role === role) {
+      previous.parts[0].text += "\\n\\n" + item.content;
+    } else {
+      contents.push({ role, parts: [{ text: item.content }] });
+    }
+  }
 
   const response = await fetch("https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent", {
     method: "POST",
@@ -261,8 +268,9 @@ Mevcut tasarım durumu mesaj içinde verilir; yalnızca mevcut ID'leri kullan. B
     if (parsed.operations.length > 20) return json({ error: "Tek istekte çok fazla tasarım işlemi üretildi." }, 502);
     return json({ reply: parsed.reply.slice(0, 3000), operations: parsed.operations });
   } catch (error) {
-    console.error("AI Studio request failed:", error?.message || "unknown");
-    return json({ error: "Bağlantı sırasında beklenmeyen bir hata oluştu." }, 502);
+    const safeMessage = String(error?.message || "Bilinmeyen bağlantı hatası").slice(0, 500);
+    console.error("AI Studio request failed:", safeMessage);
+    return json({ error: safeMessage }, Number.isInteger(error?.status) ? error.status : 502);
   }
 }
 
