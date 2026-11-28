@@ -1620,6 +1620,16 @@
       button.title = collapsed ? 'Ses ve konuşmayı etkinleştir' : 'Ses ve konuşmayı gizle';
       status.textContent = collapsed ? 'Ses ve konuşma: Pasif' : 'Ses ve konuşma: Aktif';
     }
+
+    // Initial studio boot: render the editor before the first user interaction.
+    // Without this call the canvas remains empty and the editor feels locked.
+    document.documentElement.style.setProperty('--accent-indigo', state.accent);
+    renderStudioPages();
+    syncThemeButtons();
+    renderCanvas();
+    renderLayerList();
+    renderHistoryButtons();
+
 </script>
 
 </body>
