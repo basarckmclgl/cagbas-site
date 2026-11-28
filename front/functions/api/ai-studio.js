@@ -81,7 +81,21 @@ export async function onRequestPost({ request, env }) {
       },
       body: JSON.stringify({
         model: "gpt-6.2-astra",
-        instructions: "Sen ÇAĞBAŞ AI STUDIO'nun Türkçe konuşan dijital tasarım asistanısın. Web tasarımı, kullanıcı deneyimi, içerik, marka ve dijital çözümler konusunda açık, uygulanabilir ve güvenli öneriler ver. Şu aşamada kullanıcının mesajlarını yanıtlayabilirsin; web sitesi tuvalinde değişiklik yaptığını veya dosya kaydettiğini iddia etme. Kısa ve anlaşılır yanıt ver.",
+        instructions: `Sen ÇAĞBAŞ AI STUDIO'nun Türkçe konuşan web tasarım asistanısın. Kullanıcı web sitesi tasarımında bir değişiklik, düzenleme veya işlem istediğinde bunu sadece anlatma; aşağıdaki JSON biçiminde uygulanabilir operasyonlar üret. Yanıtın HER ZAMAN geçerli JSON olmalı ve başka metin içermemeli. Şema: {"reply":"Kullanıcıya kısa Türkçe açıklama","operations":[...]}.
+Operasyon türleri:
+- {"type":"add_block","blockType":"navbar"|"hero"|"features"|"cta"|"gallery"|"pricing"|"contact","block":{...}} (block isteğe bağlı)
+- {"type":"update_block","blockId":"mevcut blok ID","patch":{...}}
+- {"type":"remove_block","blockId":"mevcut blok ID"}
+- {"type":"move_block","blockId":"mevcut blok ID","toIndex":0}
+- {"type":"duplicate_block","blockId":"mevcut blok ID"}
+- {"type":"set_theme","theme":"white"|"slate"|"dark"}
+- {"type":"set_accent","color":"#RRGGBB"}
+- {"type":"add_page","name":"Sayfa adı","slug":"sayfa-adı"}
+- {"type":"rename_page","pageId":"mevcut sayfa ID","name":"Yeni ad"}
+- {"type":"switch_page","pageId":"mevcut sayfa ID"}
+- {"type":"delete_page","pageId":"mevcut sayfa ID"}.
+Mevcut tasarım durumu kullanıcı mesajıyla birlikte verilir; yalnızca mevcut ID'leri kullan. Kullanıcı belirsiz şekilde fikir soruyorsa operations boş dizi olsun. İstenen değişiklikleri doğrudan ve en az sayıda operasyonla uygula. Metinleri güvenli, kısa ve Türkçe tut. HTML, CSS, JavaScript veya çalıştırılabilir kod üretme.`,
+
         input: messages,
         max_output_tokens: 700
       })
@@ -95,7 +109,7 @@ export async function onRequestPost({ request, env }) {
       return json({ error: "Yapay zekâ servisine şu anda ulaşılamıyor." }, 502);
     }
 
-    const reply = (result.output || [])
+    const outputText = (result.output || [])
       .filter(item => item.type === "message")
       .flatMap(item => item.content || [])
       .filter(item => item.type === "output_text")
@@ -103,8 +117,15 @@ export async function onRequestPost({ request, env }) {
       .join("\n")
       .trim();
 
-    if (!reply) return json({ error: "Yapay zekâ boş yanıt döndürdü." }, 502);
-    return json({ reply });
+    if (!outputText) return json({ error: "Yapay zekâ boş yanıt döndürdü." }, 502);
+    let parsed;
+    try { parsed = JSON.parse(outputText); }
+    catch { return json({ error: "Yapay zekâ yanıtı beklenen biçimde değil." }, 502); }
+    if (!parsed || typeof parsed.reply !== "string" || !Array.isArray(parsed.operations)) {
+      return json({ error: "Yapay zekâ yanıtı eksik alan içeriyor." }, 502);
+    }
+    if (parsed.operations.length > 20) return json({ error: "Tek istekte çok fazla tasarım işlemi üretildi." }, 502);
+    return json({ reply: parsed.reply.slice(0, 3000), operations: parsed.operations });
   } catch (error) {
     console.error("AI Studio request failed:", error?.message || "unknown");
     return json({ error: "Bağlantı sırasında beklenmeyen bir hata oluştu." }, 502);
