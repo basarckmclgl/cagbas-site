@@ -1,825 +1,353 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Web Tasarım & Paket Yönetim Paneli (Sınırsız)</title>
-  <style>
-    :root {
-      --bg: #0f172a;
-      --panel: #1e293b;
-      --panel-2: #0b1120;
-      --text: #f8fafc;
-      --muted: #94a3b8;
-      --border: #334155;
-      --accent: #3b82f6;
-      --accent-hover: #2563eb;
-      --success: #10b981;
-      --danger: #ef4444;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WebPanel Pro - Kod Bilmeden Web Tasarım</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; font-family:'Segoe UI',Tahoma,sans-serif; }
+body { background:#0f172a; color:#e2e8f0; min-height:100vh; }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
-    }
+/* ===== ÜST BAR ===== */
+header { background:#1e293b; padding:14px 24px; display:flex; justify-content:space-between; align-items:center; border-bottom:2px solid #38bdf8; position:sticky; top:0; z-index:100; }
+.logo { font-size:22px; font-weight:800; color:#38bdf8; }
+.logo span { color:#f472b6; }
+header button { background:#38bdf8; border:none; color:#0f172a; padding:10px 20px; border-radius:8px; font-weight:700; cursor:pointer; transition:.2s; }
+header button:hover { background:#0ea5e9; transform:translateY(-2px); }
 
-    body {
-      background: var(--bg);
-      color: var(--text);
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-    }
+/* ===== PAKET MODALI ===== */
+.modal-bg { position:fixed; inset:0; background:rgba(0,0,0,.75); display:flex; align-items:center; justify-content:center; z-index:200; }
+.modal-bg.hidden { display:none; }
+.modal { background:#1e293b; border-radius:16px; padding:32px; max-width:1000px; width:92%; max-height:90vh; overflow-y:auto; }
+.modal h2 { text-align:center; margin-bottom:8px; color:#38bdf8; }
+.modal p.sub { text-align:center; color:#94a3b8; margin-bottom:24px; }
+.packages { display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:16px; }
+.pkg { background:#0f172a; border:2px solid #334155; border-radius:14px; padding:24px; text-align:center; cursor:pointer; transition:.25s; }
+.pkg:hover { transform:translateY(-6px); border-color:#38bdf8; }
+.pkg.featured { border-color:#f472b6; position:relative; }
+.pkg .badge { position:absolute; top:-12px; left:50%; transform:translateX(-50%); background:#f472b6; color:#fff; font-size:11px; padding:3px 12px; border-radius:20px; font-weight:700; }
+.pkg h3 { color:#38bdf8; margin-bottom:6px; }
+.pkg .price { font-size:30px; font-weight:800; margin:8px 0; }
+.pkg .price small { font-size:14px; color:#94a3b8; font-weight:400; }
+.pkg ul { list-style:none; text-align:left; margin:14px 0; font-size:13px; color:#cbd5e1; }
+.pkg ul li { padding:5px 0; border-bottom:1px dashed #334155; }
+.pkg ul li::before { content:"✔ "; color:#4ade80; }
+.pkg button { width:100%; padding:10px; border:none; border-radius:8px; background:#38bdf8; color:#0f172a; font-weight:700; cursor:pointer; }
+.pkg.featured button { background:#f472b6; color:#fff; }
 
-    header {
-      background: var(--panel-2);
-      border-bottom: 1px solid var(--border);
-      padding: 14px 24px;
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-    }
+/* ===== ANA PANEL ===== */
+.panel { display:none; grid-template-columns:280px 1fr 340px; gap:14px; padding:14px; height:calc(100vh - 64px); }
+.panel.active { display:grid; }
 
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-weight: 700;
-      font-size: 1.05rem;
-    }
+/* Sol: Bloklar */
+.blocks { background:#1e293b; border-radius:12px; padding:14px; overflow-y:auto; }
+.blocks h4, .settings h4 { color:#38bdf8; margin-bottom:10px; font-size:14px; text-transform:uppercase; letter-spacing:1px; }
+.block-item { background:#0f172a; border:1px solid #334155; border-radius:10px; padding:12px; margin-bottom:10px; cursor:grab; transition:.2s; display:flex; align-items:center; gap:10px; }
+.block-item:hover { border-color:#38bdf8; transform:scale(1.02); }
+.block-item .icon { font-size:20px; }
+.block-item small { display:block; color:#94a3b8; font-size:11px; }
 
-    .badge {
-      background: rgba(16, 185, 129, 0.15);
-      color: #34d399;
-      border: 1px solid rgba(16, 185, 129, 0.35);
-      padding: 3px 10px;
-      border-radius: 999px;
-      font-size: 0.78rem;
-      font-weight: 600;
-    }
+/* Orta: Önizleme */
+.preview-wrap { background:#1e293b; border-radius:12px; display:flex; flex-direction:column; overflow:hidden; }
+.preview-bar { padding:8px 14px; background:#0f172a; display:flex; gap:8px; align-items:center; font-size:12px; color:#94a3b8; }
+.dot { width:10px; height:10px; border-radius:50%; }
+#preview { flex:1; overflow-y:auto; background:#fff; }
+#preview .empty-hint { color:#94a3b8; text-align:center; padding-top:120px; font-size:15px; }
+.canvas-block { position:relative; margin:6px 0; }
+.canvas-block:hover { outline:2px dashed #38bdf8; }
+.canvas-block .del { position:absolute; top:6px; right:6px; background:#ef4444; color:#fff; border:none; border-radius:6px; width:24px; height:24px; cursor:pointer; display:none; z-index:5; font-weight:700; }
+.canvas-block:hover .del { display:block; }
 
-    .top-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
+/* Sağ: Ayarlar */
+.settings { background:#1e293b; border-radius:12px; padding:14px; overflow-y:auto; }
+.settings label { font-size:12px; color:#94a3b8; display:block; margin:12px 0 4px; }
+.settings input, .settings select, .settings textarea { width:100%; background:#0f172a; border:1px solid #334155; color:#e2e8f0; border-radius:8px; padding:9px; font-size:13px; }
+.settings input[type=color] { padding:2px; height:40px; cursor:pointer; }
+.settings textarea { resize:vertical; min-height:70px; }
+.row2 { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+.btn { width:100%; padding:11px; border:none; border-radius:8px; font-weight:700; cursor:pointer; margin-top:10px; transition:.2s; }
+.btn-pink { background:#f472b6; color:#fff; }
+.btn-green { background:#4ade80; color:#0f172a; }
+.btn-gray { background:#475569; color:#fff; }
+.btn:hover { opacity:.85; }
 
-    button {
-      cursor: pointer;
-      border: none;
-      border-radius: 8px;
-      padding: 8px 14px;
-      font-size: 0.88rem;
-      font-weight: 600;
-      transition: 0.15s ease;
-    }
+/* Hazır blok içerikleri (önizlemede görünen) */
+.pv-nav { display:flex; justify-content:space-between; align-items:center; padding:16px 28px; }
+.pv-nav .links a { margin-left:16px; text-decoration:none; font-size:14px; }
+.pv-hero { text-align:center; padding:80px 24px; }
+.pv-hero h1 { font-size:38px; margin-bottom:14px; }
+.pv-hero p { font-size:17px; opacity:.85; margin-bottom:22px; }
+.pv-btn { display:inline-block; padding:12px 30px; border-radius:30px; text-decoration:none; font-weight:700; }
+.pv-about { padding:60px 24px; max-width:800px; margin:auto; text-align:center; }
+.pv-about h2 { margin-bottom:14px; font-size:28px; }
+.pv-about p { line-height:1.7; opacity:.85; }
+.pv-cards { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:18px; padding:50px 28px; max-width:1000px; margin:auto; }
+.pv-card { border-radius:14px; padding:26px; text-align:center; }
+.pv-card .ic { font-size:36px; margin-bottom:10px; }
+.pv-gallery { display:grid; grid-template-columns:repeat(3,1fr); gap:8px; padding:40px 28px; max-width:900px; margin:auto; }
+.pv-gallery div { height:110px; border-radius:10px; }
+.pv-contact { padding:50px 28px; max-width:500px; margin:auto; }
+.pv-contact input, .pv-contact textarea { width:100%; margin-bottom:10px; padding:11px; border-radius:8px; border:1px solid #ddd; font-size:14px; }
+.pv-footer { text-align:center; padding:26px; font-size:14px; }
 
-    .btn-primary {
-      background: var(--accent);
-      color: #fff;
-    }
-
-    .btn-primary:hover {
-      background: var(--accent-hover);
-    }
-
-    .btn-success {
-      background: var(--success);
-      color: #fff;
-    }
-
-    .btn-outline {
-      background: transparent;
-      color: var(--text);
-      border: 1px solid var(--border);
-    }
-
-    .btn-outline:hover {
-      background: rgba(255, 255, 255, 0.06);
-    }
-
-    .btn-danger {
-      background: rgba(239, 68, 68, 0.15);
-      color: #fca5a5;
-      border: 1px solid rgba(239, 68, 68, 0.35);
-    }
-
-    .workspace {
-      display: grid;
-      grid-template-columns: 420px 1fr;
-      flex: 1;
-      min-height: calc(100vh - 62px);
-    }
-
-    @media (max-width: 980px) {
-      .workspace {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    .editor {
-      background: var(--panel);
-      border-right: 1px solid var(--border);
-      padding: 20px;
-      overflow-y: auto;
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-    }
-
-    .section-box {
-      background: var(--panel-2);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 14px;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-
-    .section-box h3 {
-      font-size: 0.95rem;
-      color: #e2e8f0;
-      border-bottom: 1px solid var(--border);
-      padding-bottom: 8px;
-    }
-
-    label {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-      font-size: 0.84rem;
-      color: var(--muted);
-    }
-
-    input[type="text"],
-    input[type="number"],
-    textarea,
-    select {
-      width: 100%;
-      background: var(--panel);
-      color: var(--text);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 9px 11px;
-      font-size: 0.9rem;
-    }
-
-    textarea {
-      min-height: 70px;
-      resize: vertical;
-    }
-
-    .row-2 {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-    }
-
-    .packages-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 8px;
-    }
-
-    .pkg-card {
-      background: var(--panel);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 10px;
-      text-align: left;
-      color: var(--text);
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-    }
-
-    .pkg-card.active {
-      border-color: var(--accent);
-      background: rgba(59, 130, 246, 0.14);
-    }
-
-    .pkg-name {
-      font-weight: 700;
-      font-size: 0.88rem;
-    }
-
-    .pkg-price {
-      font-size: 0.84rem;
-      color: #60a5fa;
-      font-weight: 600;
-    }
-
-    .block-item {
-      background: var(--panel);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 10px;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-
-    .block-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 6px;
-      font-size: 0.84rem;
-      font-weight: 600;
-    }
-
-    .block-btns {
-      display: flex;
-      gap: 4px;
-    }
-
-    .block-btns button {
-      padding: 4px 8px;
-      font-size: 0.76rem;
-    }
-
-    .preview-area {
-      padding: 24px;
-      overflow-y: auto;
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
-
-    .preview-bar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
-
-    .live-site {
-      background: #ffffff;
-      color: #0f172a;
-      border-radius: 14px;
-      overflow: hidden;
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
-      min-height: 520px;
-    }
-
-    .live-nav {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 16px 28px;
-      border-bottom: 1px solid #e2e8f0;
-    }
-
-    .live-hero {
-      padding: 48px 28px;
-      text-align: center;
-      color: #ffffff;
-    }
-
-    .live-hero h1 {
-      margin-bottom: 12px;
-      line-height: 1.2;
-    }
-
-    .live-hero p {
-      max-width: 640px;
-      margin: 0 auto 22px;
-      opacity: 0.92;
-      line-height: 1.55;
-    }
-
-    .live-cta {
-      display: inline-block;
-      padding: 11px 22px;
-      border-radius: 8px;
-      background: #ffffff;
-      font-weight: 700;
-      text-decoration: none;
-    }
-
-    .live-section {
-      padding: 32px 28px;
-      border-top: 1px solid #f1f5f9;
-    }
-
-    .live-section h2 {
-      font-size: 1.3rem;
-      margin-bottom: 10px;
-    }
-
-    .live-section p {
-      color: #475569;
-      line-height: 1.6;
-    }
-
-    .summary-strip {
-      background: #f8fafc;
-      border-top: 1px solid #e2e8f0;
-      padding: 18px 28px;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .code-modal {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(2, 6, 23, 0.8);
-      z-index: 50;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-    }
-
-    .code-modal.open {
-      display: flex;
-    }
-
-    .code-box {
-      background: var(--panel);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      width: 100%;
-      max-width: 780px;
-      max-height: 85vh;
-      display: flex;
-      flex-direction: column;
-      overflow: hidden;
-    }
-
-    .code-box-head {
-      padding: 14px 18px;
-      border-bottom: 1px solid var(--border);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .code-box pre {
-      padding: 16px;
-      overflow: auto;
-      font-size: 0.82rem;
-      line-height: 1.5;
-      color: #cbd5e1;
-      flex: 1;
-    }
-
-    .toast {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background: var(--success);
-      color: #fff;
-      padding: 10px 16px;
-      border-radius: 8px;
-      font-weight: 600;
-      font-size: 0.86rem;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.2s ease;
-    }
-
-    .toast.show {
-      opacity: 1;
-    }
-  </style>
+@media(max-width:900px){ .panel{ grid-template-columns:1fr; height:auto; } }
+</style>
+<base target="_blank">
 </head>
 <body>
-  <header>
-    <div class="brand">
-      <span>Web Tasarım Stüdyo Paneli</span>
-      <span class="badge">Sınırsız Erişim • Kısıtsız</span>
-    </div>
-    <div class="top-actions">
-      <button class="btn-outline" id="btnExportHtml">HTML Kodunu Al</button>
-      <button class="btn-success" id="btnSaveManual">Kaydedildi (Otomatik)</button>
-      <button class="btn-danger" id="btnReset">Varsayılana Dön</button>
-    </div>
-  </header>
 
-  <main class="workspace">
-    <aside class="editor">
-      <div class="section-box">
-        <h3>1. Paket Seçimi</h3>
-        <div class="packages-grid" id="packagesContainer"></div>
-        <div class="row-2">
-          <label>
-            Özel Paket Adı
-            <input type="text" id="customPkgName" placeholder="Örn: Özel Kampanya" />
-          </label>
-          <label>
-            Paket Ücreti (₺)
-            <input type="number" id="customPkgPrice" min="0" step="100" />
-          </label>
-        </div>
-        <label>
-          Ek Özellikler / Notlar
-          <input type="text" id="pkgNotes" placeholder="Örn: SEO kurulumu, iletişim formu, çoklu dil" />
-        </label>
-      </div>
+<header>
+  <div class="logo">WebPanel <span>Pro</span></div>
+  <div>
+    <span id="planBadge" style="margin-right:12px; font-size:13px; color:#94a3b8;"></span>
+    <button onclick="document.getElementById('exportModal').classList.remove('hidden')">⬇ Kodu İndir</button>
+  </div>
+</header>
 
-      <div class="section-box">
-        <h3>2. Görünüm ve Renkler</h3>
-        <div class="row-2">
-          <label>
-            Ana Renk
-            <input type="color" id="accentColor" />
-          </label>
-          <label>
-            Başlık Boyutu (px)
-            <input type="number" id="heroSize" min="24" max="64" />
-          </label>
-        </div>
-        <label>
-          Marka / Site Adı
-          <input type="text" id="brandName" />
-        </label>
-        <label>
-          Ana Başlık (Hero)
-          <input type="text" id="heroTitle" />
-        </label>
-        <label>
-          Açıklama Metni
-          <textarea id="heroSubtitle"></textarea>
-        </label>
-        <label>
-          Buton Metni
-          <input type="text" id="heroCta" />
-        </label>
+<!-- PAKET SEÇİM EKRANI -->
+<div class="modal-bg" id="packageModal">
+  <div class="modal">
+    <h2>🚀 Paketini Seç, Hemen Tasarlamaya Başla</h2>
+    <p class="sub">Kod bilmeden profesyonel web sitenizi oluşturun. Tüm paketlerde sınırsız proje!</p>
+    <div class="packages">
+      <div class="pkg" onclick="selectPlan('Başlangıç','0')">
+        <h3>Başlangıç</h3>
+        <div class="price">Ücretsiz</div>
+        <ul><li>Sınırsız proje</li><li>10 hazır blok</li><li>Temel ayarlar</li><li>Web yayını</li></ul>
+        <button>Ücretsiz Başla</button>
       </div>
-
-      <div class="section-box">
-        <h3>3. Sayfa Bölümleri (Sınırsız Ekle / Düzenle)</h3>
-        <button class="btn-primary" id="btnAddBlock">+ Yeni Bölüm Ekle</button>
-        <div id="blocksList"></div>
+      <div class="pkg featured" onclick="selectPlan('Pro','99₺/ay')">
+        <div class="badge">EN POPÜLER</div>
+        <h3>Pro</h3>
+        <div class="price">99₺<small>/ay</small></div>
+        <ul><li>Sınırsız proje</li><li>Tüm bloklar + animasyonlar</li><li>Özel renk & font ayarları</li><li>SEO ayarları</li><li>Kod dışa aktarımı</li></ul>
+        <button>Pro'yu Seç</button>
       </div>
-    </aside>
-
-    <section class="preview-area">
-      <div class="preview-bar">
-        <strong>Canlı Tasarım Önizlemesi</strong>
-        <span id="statsLabel" style="color: var(--muted); font-size: 0.85rem;"></span>
+      <div class="pkg" onclick="selectPlan('Premium','249₺/ay')">
+        <h3>Premium</h3>
+        <div class="price">249₺<small>/ay</small></div>
+        <ul><li>Pro'daki her şey</li><li>Özel alan adı bağlama</li><li>E-ticaret blokları</li><li>Öncelikli destek</li></ul>
+        <button>Premium'u Seç</button>
       </div>
-      <div class="live-site" id="liveSite"></div>
-    </section>
-  </main>
-
-  <div class="code-modal" id="codeModal">
-    <div class="code-box">
-      <div class="code-box-head">
-        <strong>Oluşturulan HTML Kodu</strong>
-        <div style="display:flex; gap:8px;">
-          <button class="btn-primary" id="btnCopyCode">Kopyala</button>
-          <button class="btn-outline" id="btnCloseModal">Kapat</button>
-        </div>
-      </div>
-      <pre id="generatedCode"></pre>
     </div>
   </div>
+</div>
 
-  <div class="toast" id="toast">İşlem tamamlandı</div>
+<!-- ANA PANEL -->
+<div class="panel" id="mainPanel">
+  <!-- SOL: BLOK LİSTESİ -->
+  <div class="blocks">
+    <h4>📦 Bloklar</h4>
+    <div id="blockList"></div>
+  </div>
 
-  <script>
-    const STORAGE_KEY = "unlimited_web_design_panel_v1";
+  <!-- ORTA: ÖNİZLEME -->
+  <div class="preview-wrap">
+    <div class="preview-bar">
+      <span class="dot" style="background:#ef4444"></span>
+      <span class="dot" style="background:#facc15"></span>
+      <span class="dot" style="background:#4ade80"></span>
+      <span style="margin-left:8px">🖥 Canlı Önizleme — siten.com</span>
+    </div>
+    <div id="preview"><div class="empty-hint">👈 Sol menüden blok ekleyerek başlayın.<br>Bloklar buraya sürüklenebilir veya tıklanabilir.</div></div>
+  </div>
 
-    const PACKAGES = [
-      { id: "starter", name: "Başlangıç Paketi", price: 7500, desc: "Tek sayfa tanıtım sitesi, mobil uyum" },
-      { id: "pro", name: "Profesyonel Paket", price: 16500, desc: "Çoklu sayfa, özel tasarım, form & SEO" },
-      { id: "enterprise", name: "Kurumsal Paket", price: 32000, desc: "Gelişmiş modüller, yüksek performans, özel entegrasyon" },
-      { id: "custom", name: "Özel Paket", price: 12000, desc: "İhtiyaca göre esnek kapsam" }
-    ];
-
-    const DEFAULT_STATE = {
-      selectedPackageId: "pro",
-      customPkgName: "Özel Paket",
-      customPkgPrice: 12000,
-      pkgNotes: "Mobil uyumlu yapı, hızlı açılış, temel SEO ayarları",
-      accentColor: "#2563eb",
-      heroSize: 40,
-      brandName: "Yeni Web Projem",
-      heroTitle: "Markanızı Dijitalde Güçlü Bir Şekilde Sunun",
-      heroSubtitle: "Kod yazmadan sayfa bölümlerini düzenleyin, paketinizi seçin ve tasarımı anında canlı görün.",
-      heroCta: "Hemen Başla",
-      blocks: [
-        {
-          id: crypto.randomUUID(),
-          title: "Hizmetlerimiz",
-          content: "İhtiyacınıza özel modern arayüzler, hızlı sayfa yapıları ve kullanıcı dostu deneyimler tasarlıyoruz."
-        },
-        {
-          id: crypto.randomUUID(),
-          title: "Neden Biz?",
-          content: "Esnek yapı, şeffaf paket seçenekleri ve kolay güncellenebilir içerik akışı sunar."
-        }
-      ]
-    };
-
-    let state = loadState();
-
-    function loadState() {
-      try {
-        const raw = localStorage.getItem(STORAGE_KEY);
-        if (!raw) return structuredClone(DEFAULT_STATE);
-        return { ...structuredClone(DEFAULT_STATE), ...JSON.parse(raw) };
-      } catch {
-        return structuredClone(DEFAULT_STATE);
-      }
-    }
-
-    function saveState() {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
-      renderAll();
-    }
-
-    function showToast(msg) {
-      const toast = document.getElementById("toast");
-      toast.textContent = msg;
-      toast.classList.add("show");
-      setTimeout(() => toast.classList.remove("show"), 1800);
-    }
-
-    function getActivePackage() {
-      const base = PACKAGES.find((p) => p.id === state.selectedPackageId) || PACKAGES[0];
-      if (base.id === "custom") {
-        return {
-          ...base,
-          name: state.customPkgName.trim() || "Özel Paket",
-          price: Number(state.customPkgPrice) || 0
-        };
-      }
-      return base;
-    }
-
-    function renderPackages() {
-      const container = document.getElementById("packagesContainer");
-      container.innerHTML = "";
-      PACKAGES.forEach((pkg) => {
-        const btn = document.createElement("button");
-        btn.type = "button";
-        btn.className = `pkg-card ${state.selectedPackageId === pkg.id ? "active" : ""}`;
-        const displayPrice = pkg.id === "custom" ? (Number(state.customPkgPrice) || 0) : pkg.price;
-        const displayName = pkg.id === "custom" ? (state.customPkgName.trim() || "Özel Paket") : pkg.name;
-        btn.innerHTML = `
-          <span class="pkg-name">${escapeHtml(displayName)}</span>
-          <span class="pkg-price">${displayPrice.toLocaleString("tr-TR")} ₺</span>
-        `;
-        btn.onclick = () => {
-          state.selectedPackageId = pkg.id;
-          saveState();
-        };
-        container.appendChild(btn);
-      });
-    }
-
-    function renderBlocksEditor() {
-      const list = document.getElementById("blocksList");
-      list.innerHTML = "";
-      state.blocks.forEach((block, idx) => {
-        const item = document.createElement("div");
-        item.className = "block-item";
-        item.innerHTML = `
-          <div class="block-header">
-            <span>Bölüm #${idx + 1}</span>
-            <div class="block-btns">
-              <button type="button" class="btn-outline" data-move-up="${idx}">↑</button>
-              <button type="button" class="btn-outline" data-move-down="${idx}">↓</button>
-              <button type="button" class="btn-danger" data-del="${idx}">Sil</button>
-            </div>
-          </div>
-          <input type="text" value="${escapeAttr(block.title)}" placeholder="Bölüm başlığı" data-title="${idx}" />
-          <textarea placeholder="Bölüm içeriği" data-content="${idx}">${escapeHtml(block.content)}</textarea>
-        `;
-        list.appendChild(item);
-      });
-
-      list.querySelectorAll("[data-title]").forEach((el) => {
-        el.oninput = (e) => {
-          state.blocks[e.target.dataset.title].title = e.target.value;
-          saveState();
-        };
-      });
-
-      list.querySelectorAll("[data-content]").forEach((el) => {
-        el.oninput = (e) => {
-          state.blocks[e.target.dataset.content].content = e.target.value;
-          saveState();
-        };
-      });
-
-      list.querySelectorAll("[data-move-up]").forEach((el) => {
-        el.onclick = () => {
-          const i = Number(el.dataset.moveUp);
-          if (i > 0) {
-            [state.blocks[i - 1], state.blocks[i]] = [state.blocks[i], state.blocks[i - 1]];
-            saveState();
-          }
-        };
-      });
-
-      list.querySelectorAll("[data-move-down]").forEach((el) => {
-        el.onclick = () => {
-          const i = Number(el.dataset.moveDown);
-          if (i < state.blocks.length - 1) {
-            [state.blocks[i + 1], state.blocks[i]] = [state.blocks[i], state.blocks[i + 1]];
-            saveState();
-          }
-        };
-      });
-
-      list.querySelectorAll("[data-del]").forEach((el) => {
-        el.onclick = () => {
-          const i = Number(el.dataset.del);
-          state.blocks.splice(i, 1);
-          saveState();
-        };
-      });
-    }
-
-    function renderPreview() {
-      const pkg = getActivePackage();
-      const liveSite = document.getElementById("liveSite");
-      const statsLabel = document.getElementById("statsLabel");
-
-      statsLabel.textContent = `Paket: ${pkg.name} | Bölüm Sayısı: ${state.blocks.length}`;
-
-      const sectionsHtml = state.blocks
-        .map(
-          (b) => `
-          <div class="live-section">
-            <h2>${escapeHtml(b.title || "Başlıksız Bölüm")}</h2>
-            <p>${escapeHtml(b.content || "")}</p>
-          </div>
-        `
-        )
-        .join("");
-
-      liveSite.innerHTML = `
-        <nav class="live-nav">
-          <strong style="color:${state.accentColor}; font-size:1.1rem;">${escapeHtml(state.brandName)}</strong>
-          <span style="font-size:0.88rem; color:#475569;">${escapeHtml(pkg.name)}</span>
-        </nav>
-        <header class="live-hero" style="background:${state.accentColor};">
-          <h1 style="font-size:${Number(state.heroSize) || 40}px;">${escapeHtml(state.heroTitle)}</h1>
-          <p>${escapeHtml(state.heroSubtitle)}</p>
-          <a href="#paket-ozeti" class="live-cta" style="color:${state.accentColor};">${escapeHtml(state.heroCta)}</a>
-        </header>
-        ${sectionsHtml}
-        <div class="summary-strip" id="paket-ozeti">
-          <div>
-            <strong>Seçili Paket: ${escapeHtml(pkg.name)}</strong>
-            <div style="font-size:0.85rem; color:#475569;">${escapeHtml(state.pkgNotes || pkg.desc)}</div>
-          </div>
-          <div style="font-size:1.25rem; font-weight:800; color:${state.accentColor};">
-            ${pkg.price.toLocaleString("tr-TR")} ₺
-          </div>
+  <!-- SAĞ: AYARLAR -->
+  <div class="settings">
+    <h4>⚙ Blok Ayarları</h4>
+    <div id="noSel" style="color:#64748b;font-size:13px;margin-top:10px">Önizlemeden bir blok seçin.</div>
+    <div id="editArea" style="display:none">
+      <label>Seçili Blok</label>
+      <input id="bTitle" placeholder="Başlık">
+      <label>Alt Metin / Açıklama</label>
+      <textarea id="bText" placeholder="Metin..."></textarea>
+      <div class="row2">
+        <div><label>Arka Plan</label><input type="color" id="bBg" value="#ffffff"></div>
+        <div><label>Metin Rengi</label><input type="color" id="bColor" value="#1f2937"></div>
+      </div>
+      <div class="row2">
+        <div><label>Buton Rengi</label><input type="color" id="bBtn" value="#3b82f6"></div>
+        <div><label>Yazı Tipi</label>
+          <select id="bFont">
+            <option value="'Segoe UI',sans-serif">Modern</option>
+            <option value="Georgia,serif">Klasik</option>
+            <option value="'Courier New',monospace">Teknik</option>
+            <option value="'Comic Sans MS',cursive">Eğlenceli</option>
+          </select>
         </div>
-      `;
-    }
+      </div>
+      <button class="btn btn-pink" onclick="applyEdit()">✔ Değişiklikleri Uygula</button>
+      <button class="btn btn-gray" onclick="deleteSelected()">🗑 Bloğu Sil</button>
+    </div>
+    <h4 style="margin-top:22px">🎨 Site Geneli</h4>
+    <label>Site Adı</label><input id="siteName" value="Benim Sitem" oninput="render()">
+    <label>Ana Renk</label><input type="color" id="siteColor" value="#3b82f6" oninput="render()">
+    <button class="btn btn-green" onclick="document.getElementById('exportModal').classList.remove('hidden')">⬇ HTML Kodunu Al</button>
+    <button class="btn btn-gray" onclick="clearAll()">🧹 Tümünü Temizle</button>
+  </div>
+</div>
 
-    function syncInputs() {
-      document.getElementById("customPkgName").value = state.customPkgName;
-      document.getElementById("customPkgPrice").value = state.customPkgPrice;
-      document.getElementById("pkgNotes").value = state.pkgNotes;
-      document.getElementById("accentColor").value = state.accentColor;
-      document.getElementById("heroSize").value = state.heroSize;
-      document.getElementById("brandName").value = state.brandName;
-      document.getElementById("heroTitle").value = state.heroTitle;
-      document.getElementById("heroSubtitle").value = state.heroSubtitle;
-      document.getElementById("heroCta").value = state.heroCta;
-    }
+<!-- KOD İNDİRME MODALI -->
+<div class="modal-bg hidden" id="exportModal">
+  <div class="modal">
+    <h2>📄 Sitenizin HTML Kodu</h2>
+    <p class="sub">Bu kodu kopyalayıp .html uzantısıyla kaydederek her yerde yayınlayabilirsiniz.</p>
+    <textarea id="codeOut" style="width:100%;height:300px;background:#0f172a;color:#4ade80;border:1px solid #334155;border-radius:10px;padding:12px;font-size:12px;font-family:monospace"></textarea>
+    <div style="display:flex;gap:10px;margin-top:12px">
+      <button class="btn btn-green" style="margin-top:0" onclick="copyCode()">📋 Kopyala</button>
+      <button class="btn btn-gray" style="margin-top:0" onclick="downloadCode()">💾 Dosya İndir</button>
+      <button class="btn btn-gray" style="margin-top:0" onclick="document.getElementById('exportModal').classList.add('hidden')">Kapat</button>
+    </div>
+  </div>
+</div>
 
-    function renderAll() {
-      syncInputs();
-      renderPackages();
-      renderBlocksEditor();
-      renderPreview();
-    }
+<script>
+// ========== VERİ ==========
+const BLOCKS = [
+ {type:'nav',    icon:'🧭', name:'Menü',        desc:'Sayfa üstü gezinme'},
+ {type:'hero',   icon:'🦸', name:'Hero / Karşılama', desc:'Büyük başlık + buton'},
+ {type:'about',  icon:'ℹ️', name:'Hakkımızda',  desc:'Metin bölümü'},
+ {type:'cards',  icon:'🃏', name:'Özellik Kartları', desc:'3\'lü hizmet kutusu'},
+ {type:'gallery',icon:'🖼️', name:'Galeri',      desc:'Görsel ızgarası'},
+ {type:'contact',icon:'✉️', name:'İletişim Formu', desc:'Ziyaretçi formu'},
+ {type:'footer', icon:'🔻', name:'Alt Bilgi',   desc:'Telif + sosyal ikonlar'},
+];
+let canvas = []; // {type,title,text,bg,color,btn,font}
+let selected = -1;
+let plan = {name:'',price:''};
 
-    function buildExportHtml() {
-      const pkg = getActivePackage();
-      const bodyBlocks = state.blocks
-        .map(
-          (b) =>
-            `<section style="padding:32px 24px;max-width:860px;margin:0 auto;"><h2>${escapeHtml(b.title)}</h2><p>${escapeHtml(b.content)}</p></section>`
-        )
-        .join("\n  ");
+// ========== PAKET ==========
+function selectPlan(name,price){
+  plan={name,price};
+  document.getElementById('planBadge').textContent = '✅ '+name+' paketi aktif — sınırsız kullanım';
+  document.getElementById('packageModal').classList.add('hidden');
+  document.getElementById('mainPanel').classList.add('active');
+}
 
-      return `<!DOCTYPE html>
+// ========== BLOK LİSTESİ ==========
+const list = document.getElementById('blockList');
+BLOCKS.forEach(b=>{
+  const d = document.createElement('div');
+  d.className='block-item';
+  d.innerHTML = `<span class="icon">${b.icon}</span><div>${b.name}<small>${b.desc}</small></div>`;
+  d.onclick = ()=>addBlock(b.type);
+  list.appendChild(d);
+});
+
+// ========== EKLEME / RENDER ==========
+const defaults = {
+  nav:    {title:'Ana Sayfa | Hakkımızda | İletişim', text:'Logo', bg:'#ffffff', color:'#1f2937', btn:'#3b82f6'},
+  hero:   {title:'Hayalindeki Siteye Hoş Geldin', text:'Kod bilmeden dakikalar içinde harika siteler oluştur.', bg:'#3b82f6', color:'#ffffff', btn:'#f59e0b'},
+  about:  {title:'Hakkımızda', text:'Biz, işinizi büyütmek için çalışan tutkulu bir ekibiz...', bg:'#f8fafc', color:'#1f2937', btn:'#3b82f6'},
+  cards:  {title:'Hizmetlerimiz', text:'Hızlı • Güvenilir • Ekonomik', bg:'#ffffff', color:'#1f2937', btn:'#3b82f6'},
+  gallery:{title:'Galeri', text:'Projelerimizden örnekler', bg:'#f1f5f9', color:'#1f2937', btn:'#3b82f6'},
+  contact:{title:'Bize Ulaşın', text:'Mesajınızı gönderin, 24 saat içinde dönelim.', bg:'#ffffff', color:'#1f2937', btn:'#3b82f6'},
+  footer: {title:'© 2026 Tüm hakları saklıdır.', text:'🐦 📷 💼', bg:'#1e293b', color:'#e2e8f0', btn:'#3b82f6'},
+};
+
+function addBlock(type){
+  canvas.push({type, ...JSON.parse(JSON.stringify(defaults[type])), font:"'Segoe UI',sans-serif"});
+  selected = canvas.length-1;
+  render();
+}
+
+function blockHTML(b,i,forExport=false){
+  const s = `background:${b.bg};color:${b.color};font-family:${b.font}`;
+  const sel = forExport?'':`onclick="selectBlock(${i})"`;
+  const del = forExport?'':`<button class="del" onclick="event.stopPropagation();removeBlock(${i})">×</button>`;
+  let inner='';
+  switch(b.type){
+    case 'nav': inner = `<div class="pv-nav" style="${s}"><b style="font-size:18px">${document.getElementById('siteName').value}</b><div class="links">${b.title.split('|').map(l=>`<a href="#" style="color:${b.color}">${l.trim()}</a>`).join('')}</div></div>`; break;
+    case 'hero': inner = `<div class="pv-hero" style="${s}"><h1>${b.title}</h1><p>${b.text}</p><a class="pv-btn" href="#" style="background:${b.btn};color:#fff">Hemen Başla</a></div>`; break;
+    case 'about': inner = `<div class="pv-about" style="${s}"><h2>${b.title}</h2><p>${b.text}</p></div>`; break;
+    case 'cards': inner = `<div class="pv-cards" style="${s}"><h2 style="grid-column:1/-1;text-align:center">${b.title}</h2>${['🚀','🛡️','💎'].map((ic,k)=>`<div class="pv-card" style="background:${b.color}11;border:1px solid ${b.color}33"><div class="ic">${ic}</div><h3>${b.text.split('•')[k]?.trim()||'Özellik '+(k+1)}</h3><p>Detaylı açıklama metni buraya gelir.</p></div>`).join('')}</div>`; break;
+    case 'gallery': inner = `<div class="pv-gallery" style="${s}"><h2 style="grid-column:1/-1;text-align:center">${b.title}</h2>${[0,1,2,3,4,5].map(k=>`<div style="background:${b.btn};opacity:${.4+k*.1}"></div>`).join('')}</div>`; break;
+    case 'contact': inner = `<div class="pv-contact" style="${s}"><h2 style="text-align:center;margin-bottom:12px">${b.title}</h2><p style="text-align:center;margin-bottom:14px">${b.text}</p><input placeholder="Adınız"><input placeholder="E-posta"><textarea placeholder="Mesajınız" rows="3"></textarea><button class="pv-btn" style="background:${b.btn};color:#fff;border:none;width:100%">Gönder</button></div>`; break;
+    case 'footer': inner = `<div class="pv-footer" style="${s}"><b>${document.getElementById('siteName').value}</b><br>${b.title}<br><span style="font-size:18px;letter-spacing:6px">${b.text}</span></div>`; break;
+  }
+  return `<div class="canvas-block" ${sel}>${del}${inner}</div>`;
+}
+
+function render(){
+  const pv = document.getElementById('preview');
+  pv.innerHTML = canvas.length ? canvas.map((b,i)=>blockHTML(b,i)).join('')
+                               : `<div class="empty-hint">👈 Sol menüden blok ekleyerek başlayın.</div>`;
+  loadSettings();
+}
+
+function selectBlock(i){ selected=i; render(); }
+function removeBlock(i){ canvas.splice(i,1); if(selected>=canvas.length) selected=canvas.length-1; render(); }
+function clearAll(){ canvas=[]; selected=-1; render(); }
+
+// ========== AYARLAR ==========
+function loadSettings(){
+  const has = selected>=0 && canvas[selected];
+  document.getElementById('noSel').style.display = has?'none':'block';
+  document.getElementById('editArea').style.display = has?'block':'none';
+  if(has){
+    const b = canvas[selected];
+    bTitle.value=b.title; bText.value=b.text; bBg.value=b.bg; bColor.value=b.color; bBtn.value=b.btn; bFont.value=b.font;
+  }
+}
+function applyEdit(){
+  if(selected<0) return;
+  Object.assign(canvas[selected],{title:bTitle.value,text:bText.value,bg:bBg.value,color:bColor.value,btn:bBtn.value,font:bFont.value});
+  render();
+}
+function deleteSelected(){ if(selected>=0) removeBlock(selected); }
+
+// ========== KOD DIŞA AKTARIM ==========
+function buildCode(){
+  const sc = document.getElementById('siteColor').value;
+  const body = canvas.map((b,i)=>blockHTML(b,i,true)).join('\n');
+  return `<!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>${escapeHtml(state.brandName)}</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>${document.getElementById('siteName').value}</title>
+<style>
+body{margin:0;font-family:'Segoe UI',sans-serif;color:#1f2937}
+a{text-decoration:none}
+.pv-nav{display:flex;justify-content:space-between;align-items:center;padding:16px 28px}
+.pv-nav .links a{margin-left:16px}
+.pv-hero{text-align:center;padding:80px 24px}
+.pv-hero h1{font-size:38px;margin-bottom:14px}
+.pv-hero p{font-size:17px;opacity:.85;margin-bottom:22px}
+.pv-btn{display:inline-block;padding:12px 30px;border-radius:30px;font-weight:700}
+.pv-about{padding:60px 24px;max-width:800px;margin:auto;text-align:center}
+.pv-about h2{font-size:28px;margin-bottom:14px}
+.pv-about p{line-height:1.7;opacity:.85}
+.pv-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:18px;padding:50px 28px;max-width:1000px;margin:auto}
+.pv-card{border-radius:14px;padding:26px;text-align:center}
+.pv-card .ic{font-size:36px;margin-bottom:10px}
+.pv-gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;padding:40px 28px;max-width:900px;margin:auto}
+.pv-gallery div{height:110px;border-radius:10px}
+.pv-contact{padding:50px 28px;max-width:500px;margin:auto}
+.pv-contact input,.pv-contact textarea{width:100%;margin-bottom:10px;padding:11px;border-radius:8px;border:1px solid #ddd;font-size:14px}
+.pv-footer{text-align:center;padding:26px;font-size:14px}
+</style>
 </head>
-<body style="margin:0;font-family:sans-serif;color:#0f172a;">
-  <header style="background:${state.accentColor};color:#fff;padding:56px 24px;text-align:center;">
-    <h1 style="font-size:${Number(state.heroSize) || 40}px;margin-bottom:12px;">${escapeHtml(state.heroTitle)}</h1>
-    <p style="max-width:640px;margin:0 auto 20px;">${escapeHtml(state.heroSubtitle)}</p>
-    <span style="display:inline-block;background:#fff;color:${state.accentColor};padding:10px 20px;border-radius:8px;font-weight:bold;">${escapeHtml(state.heroCta)}</span>
-  </header>
-  ${bodyBlocks}
-  <footer style="background:#f1f5f9;padding:20px 24px;text-align:center;font-size:14px;">
-    <strong>${escapeHtml(pkg.name)}</strong> — ${pkg.price.toLocaleString("tr-TR")} ₺ | ${escapeHtml(state.pkgNotes)}
-  </footer>
+<body>
+${body}
 </body>
 </html>`;
-    }
-
-    function escapeHtml(str) {
-      return String(str ?? "")
-        .replaceAll("&", "&amp;")
-        .replaceAll("<", "&lt;")
-        .replaceAll(">", "&gt;")
-        .replaceAll('"', "&quot;");
-    }
-
-    function escapeAttr(str) {
-      return escapeHtml(str).replaceAll("'", "&#39;");
-    }
-
-    document.getElementById("customPkgName").oninput = (e) => {
-      state.customPkgName = e.target.value;
-      saveState();
-    };
-    document.getElementById("customPkgPrice").oninput = (e) => {
-      state.customPkgPrice = Number(e.target.value) || 0;
-      saveState();
-    };
-    document.getElementById("pkgNotes").oninput = (e) => {
-      state.pkgNotes = e.target.value;
-      saveState();
-    };
-    document.getElementById("accentColor").oninput = (e) => {
-      state.accentColor = e.target.value;
-      saveState();
-    };
-    document.getElementById("heroSize").oninput = (e) => {
-      state.heroSize = Number(e.target.value) || 40;
-      saveState();
-    };
-    document.getElementById("brandName").oninput = (e) => {
-      state.brandName = e.target.value;
-      saveState();
-    };
-    document.getElementById("heroTitle").oninput = (e) => {
-      state.heroTitle = e.target.value;
-      saveState();
-    };
-    document.getElementById("heroSubtitle").oninput = (e) => {
-      state.heroSubtitle = e.target.value;
-      saveState();
-    };
-    document.getElementById("heroCta").oninput = (e) => {
-      state.heroCta = e.target.value;
-      saveState();
-    };
-
-    document.getElementById("btnAddBlock").onclick = () => {
-      state.blocks.push({
-        id: crypto.randomUUID(),
-        title: "Yeni Bölüm",
-        content: "Bu alana dilediğiniz açıklamayı yazabilirsiniz."
-      });
-      saveState();
-      showToast("Yeni bölüm eklendi");
-    };
-
-    document.getElementById("btnSaveManual").onclick = () => {
-      saveState();
-      showToast("Tüm değişiklikler sınırsız hafızaya kaydedildi");
-    };
-
-    document.getElementById("btnReset").onclick = () => {
-      state = structuredClone(DEFAULT_STATE);
-      saveState();
-      showToast("Varsayılan ayarlara dönüldü");
-    };
-
-    document.getElementById("btnExportHtml").onclick = () => {
-      document.getElementById("generatedCode").textContent = buildExportHtml();
-      document.getElementById("codeModal").classList.add("open");
-    };
-
-    document.getElementById("btnCloseModal").onclick = () => {
-      document.getElementById("codeModal").classList.remove("open");
-    };
-
-    document.getElementById("btnCopyCode").onclick = () => {
-      const text = document.getElementById("generatedCode").textContent;
-      navigator.clipboard.writeText(text);
-      showToast("HTML kodu panoya kopyalandı");
-    };
-
-    renderAll();
-  </script>
+}
+document.getElementById('exportModal').addEventListener('transitionstart',()=>{});
+// modal açılınca kodu doldur
+const mo = new MutationObserver(()=>{
+  const m=document.getElementById('exportModal');
+  if(!m.classList.contains('hidden')) document.getElementById('codeOut').value = buildCode();
+});
+mo.observe(document.getElementById('exportModal'),{attributes:true});
+function copyCode(){ codeOut.select(); document.execCommand('copy'); alert('Kod kopyalandı! 📋'); }
+function downloadCode(){
+  const blob = new Blob([buildCode()],{type:'text/html'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = (document.getElementById('siteName').value||'site')+'.html';
+  a.click();
+}
+</script>
 </body>
 </html>
