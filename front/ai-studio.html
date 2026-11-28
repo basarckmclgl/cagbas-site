@@ -135,6 +135,8 @@
     #canvasWorkspace.pages-scroll-horizontal { overflow-x: auto; overflow-y: hidden; }
     #canvasWorkspace.pages-scroll-vertical { overflow-x: hidden; overflow-y: auto; }
     #canvasFrame:has(.studio-pages-layout) { overflow: visible !important; }
+    #wysiwygCanvas [contenteditable="true"] { cursor: text; user-select: text !important; -webkit-user-select: text !important; pointer-events: auto; }
+    #wysiwygCanvas [contenteditable="true"]:focus { outline: 1px dashed var(--accent-indigo); outline-offset: 3px; border-radius: 3px; }
     .studio-pages-layout { display: flex; gap: 18px; padding: 16px; align-items: flex-start; }
     .studio-pages-layout.layout-horizontal { flex-direction: row; width: max-content; min-width: 100%; }
     .studio-pages-layout.layout-vertical { flex-direction: column; width: 100%; }
@@ -949,6 +951,26 @@
       if (state.previewOnly) return;
       if (event) event.stopPropagation();
       state.selectedId = id;
+
+      // Do not rebuild the canvas when a text field is clicked: doing so
+      // destroys the focused contenteditable element before the user can type.
+      const editingText = event && event.target && event.target.closest
+        ? event.target.closest('[contenteditable="true"]')
+        : null;
+      if (editingText) {
+        document.querySelectorAll('#wysiwygCanvas .canvas-block').forEach(block => {
+          const blockId = (block.getAttribute('onclick') || '').match(/selectBlock\\('([^']+)'/)?.[1];
+          block.classList.toggle('is-selected', blockId === id);
+        });
+        const selected = state.blocks.find(block => block.id === id);
+        const badge = document.getElementById('selectedBlockBadge');
+        const actionBar = document.getElementById('canvasActionBar');
+        const actionTitle = document.getElementById('actionBarTitle');
+        if (badge && selected) badge.textContent = selected.name;
+        if (actionTitle && selected) actionTitle.textContent = selected.name;
+        if (actionBar) { actionBar.classList.remove('hidden'); actionBar.classList.add('flex'); }
+        return;
+      }
       renderCanvas();
     }
 
