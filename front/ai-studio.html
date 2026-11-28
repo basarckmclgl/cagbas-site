@@ -118,10 +118,12 @@
       box-shadow: 0 10px 22px -4px rgba(79, 70, 229, 0.55);
     }
 
-    /* Keep the canvas scrollable at all times; horizontal mode still supports side-by-side pages. */
-    #canvasWorkspace.pages-scroll-horizontal { overflow-x: auto; overflow-y: scroll; scrollbar-gutter: stable; }
-    #canvasWorkspace.pages-scroll-vertical { overflow-x: hidden; overflow-y: scroll; scrollbar-gutter: stable; }
-    #canvasFrame:has(.studio-pages-layout) { overflow: visible !important; }
+    /* Independent scrolling: the workspace scrolls around the canvas, while the live website and its pages scroll inside the preview. */
+    #canvasWorkspace { min-width: 0; min-height: 0; overflow: auto; scrollbar-gutter: stable; }
+    #canvasWorkspace.pages-scroll-horizontal { overflow-x: auto; overflow-y: auto; }
+    #canvasWorkspace.pages-scroll-vertical { overflow-x: auto; overflow-y: auto; }
+    #canvasFrame { display: flex; flex-direction: column; min-height: 0; overflow: hidden; }
+    #wysiwygCanvas { min-width: 0; min-height: 480px; max-height: calc(100dvh - 270px); overflow-x: auto; overflow-y: scroll; overscroll-behavior: contain; scrollbar-gutter: stable; }
     #wysiwygCanvas [contenteditable="true"] { cursor: text; user-select: text !important; -webkit-user-select: text !important; pointer-events: auto; }
     #wysiwygCanvas [contenteditable="true"]:focus { outline: 1px dashed var(--accent-indigo); outline-offset: 3px; border-radius: 3px; }
     .studio-pages-layout { display: flex; gap: 18px; padding: 16px; align-items: flex-start; }
@@ -420,7 +422,7 @@
     </aside>
 
     <!-- CENTER PANEL: WYSIWYG LIVE PREVIEW CANVAS -->
-    <main id="canvasWorkspace" class="flex-1 studio-workspace-bg p-3 sm:p-6 flex flex-col items-center relative pages-scroll-horizontal">
+    <main id="canvasWorkspace" class="flex-1 min-h-0 min-w-0 studio-workspace-bg p-3 sm:p-6 flex flex-col items-center relative pages-scroll-horizontal">
       <!-- Floating Action Bar for Selected Block -->
       <div id="canvasActionBar" class="hidden sticky top-1 z-20 mb-3 px-3 py-1.5 rounded-full bg-white border border-[#cbd5e1] shadow-md items-center gap-1.5 text-xs text-[#0f172a]">
         <span id="actionBarTitle" class="px-2 font-bold text-[#4f46e5]">Blok</span>
