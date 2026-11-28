@@ -72,6 +72,29 @@ header button.btn-rescue:hover { background:#34d399; }
 
 .prof-chip { display:inline-block; background:#0f172a; border:1px solid #475569; color:#cbd5e1; font-size:11px; padding:4px 8px; border-radius:14px; margin:2px; cursor:pointer; }
 .prof-chip:hover { border-color:#f472b6; color:#fff; }
+.design-choice { background:#0f172a;border:1px solid #334155;border-radius:9px;padding:9px; }
+.design-choice select { width:100%;background:#1e293b;color:#e2e8f0;border:1px solid #475569;border-radius:7px;padding:8px;font-size:12px; }
+.design-choice small { display:block;color:#94a3b8;font-size:10.5px;line-height:1.45;margin-top:6px; }
+.canvas-block[data-design="mini"] .pv-hero { padding:38px 18px; }
+.canvas-block[data-design="mini"] .pv-hero h1 { font-size:28px; }
+.canvas-block[data-design="mini"] .pv-cards { padding:25px 18px;gap:10px; }
+.canvas-block[data-design="mini"] .pv-card { padding:15px;border-radius:9px; }
+.canvas-block[data-design="standard"] .pv-hero { padding:65px 24px; }
+.canvas-block[data-design="standard"] .pv-card { box-shadow:0 5px 18px rgba(15,23,42,.06); }
+.canvas-block[data-design="pro"] .pv-hero { padding:100px 32px;text-align:left; }
+.canvas-block[data-design="pro"] .pv-hero h1 { max-width:760px;font-size:46px;letter-spacing:-1.4px; }
+.canvas-block[data-design="pro"] .pv-hero p { margin-left:0;max-width:620px; }
+.canvas-block[data-design="pro"] .pv-cards { max-width:1120px;gap:22px; }
+.canvas-block[data-design="pro"] .pv-card { text-align:left;padding:30px;border-radius:18px;box-shadow:0 12px 32px rgba(15,23,42,.10); }
+.canvas-block[data-design="pro"] .pv-nav { padding:22px 36px; }
+.canvas-block[data-design="premium"] .pv-hero { padding:130px 40px;text-align:left;min-height:430px;display:flex;flex-direction:column;align-items:flex-start;justify-content:center; }
+.canvas-block[data-design="premium"] .pv-hero h1 { max-width:820px;font-size:clamp(42px,5vw,64px);line-height:1.04;letter-spacing:-2px; }
+.canvas-block[data-design="premium"] .pv-hero p { margin-left:0;max-width:650px;font-size:19px; }
+.canvas-block[data-design="premium"] .pv-cards { max-width:1180px;padding:76px 36px;gap:24px; }
+.canvas-block[data-design="premium"] .pv-card { text-align:left;padding:34px;border-radius:22px;box-shadow:0 18px 45px rgba(15,23,42,.13); }
+.canvas-block[data-design="premium"] .pv-card img { height:190px!important; }
+.canvas-block[data-design="premium"] .pv-nav { padding:26px 42px; }
+.canvas-block[data-design="premium"] .pv-about { max-width:980px;padding:90px 32px;font-size:18px; }
 .card-edit-item { background:#0f172a; border:1px solid #334155; border-radius:8px; padding:9px; margin:8px 0; }
 .card-edit-item input, .card-edit-item textarea { width:100%; background:#1e293b; border:1px solid #475569; color:#e2e8f0; border-radius:6px; padding:7px; font-size:12px; margin:4px 0; }
 .card-edit-item textarea { min-height:48px; resize:vertical; }
@@ -220,6 +243,18 @@ header button.btn-rescue:hover { background:#34d399; }
     <div>
       <div class="panel-title"><span>📦 Sayfaya Blok Ekle</span></div>
       <div id="blockList"></div>
+    </div>
+
+    <!-- TASARIM SEVİYESİ -->
+    <div class="design-choice">
+      <div class="panel-title"><span>🎨 Tasarım Seviyesi</span></div>
+      <select id="designStyleSelect" onchange="selectedDesignStyle=this.value;notify('Tasarım seviyesi: '+this.options[this.selectedIndex].text)">
+        <option value="mini">Mini Tasarım</option>
+        <option value="standard" selected>Standart Tasarım</option>
+        <option value="pro">Pro Tasarım</option>
+        <option value="premium">Premium Tasarım</option>
+      </select>
+      <small>Meslek şablonunu seçtiğiniz seviyenin tasarım dili ve kapsamıyla oluşturur.</small>
     </div>
 
     <!-- HIZLI MESLEK ŞABLONLARI -->
@@ -373,6 +408,7 @@ let currentPageId = 'home';
 let selected = -1;
 let undoStack = [];
 let currentPlan = null;
+let selectedDesignStyle = 'standard';
 
 const COLORS = {
   kırmızı:'#ef4444', mavi:'#3b82f6', lacivert:'#1e3a8a', yeşil:'#22c55e',
@@ -673,6 +709,7 @@ function onInlineEdit(blockIdx, field, el){
 function blockHTML(b, i, forExport=false){
   const s = `background:${b.bg};color:${b.color};font-family:${b.font}`;
   const sel = forExport ? '' : `onclick="selectBlock(${i})"`;
+  const designAttr = ` data-design="${b.designStyle || 'standard'}"`;
   const del = forExport ? '' : `<button class="del" onclick="event.stopPropagation();pushUndo();removeBlock(${i})">×</button>`;
   const activeClass = (!forExport && i === selected) ? ' selected-block' : '';
   const siteTitle = document.getElementById('siteName').value || 'Benim Sitem';
@@ -713,7 +750,7 @@ function blockHTML(b, i, forExport=false){
       inner = `<div class="pv-footer" style="${s}"><b>${siteTitle}</b><br><span style="opacity:.85" ${ceTitle}>${b.title}</span><br><span style="font-size:13px;opacity:.75" ${ceText}>${b.text}</span></div>`;
       break;
   }
-  return `<div class="canvas-block${activeClass}" ${sel}>${del}${inner}</div>`;
+  return `<div class="canvas-block${activeClass}"${designAttr} ${sel}>${del}${inner}</div>`;
 }
 
 function renderPreviewOnly(){
@@ -1086,17 +1123,39 @@ const PROFESSIONS = [
 
 function buildMultiPageProfession(prof){
   pushUndo();
+  const style = selectedDesignStyle || 'standard';
   document.getElementById('siteName').value = prof.siteName;
   document.getElementById('siteColor').value = prof.mainColor;
 
-  pages = prof.pages.map((p, idx) => ({
+  let sourcePages = JSON.parse(JSON.stringify(prof.pages));
+  if(style === 'mini'){
+    sourcePages = sourcePages.slice(0,1);
+    sourcePages[0].blocks = sourcePages[0].blocks.filter(b => ['hero','cards','contact'].includes(b.type));
+    if(!sourcePages[0].blocks.some(b => b.type === 'contact')){
+      sourcePages[0].blocks.push({type:'contact',title:'Bize Ulaşın',text:'Bilgi ve iletişim için bize ulaşın.',bg:'#ffffff',color:'#1e293b',btn:prof.mainColor});
+    }
+  } else if(style === 'pro'){
+    sourcePages.push({title:'Projelerimiz',blocks:[{type:'gallery',title:'Çalışmalarımızdan Seçkiler',text:'Öne çıkan projeler ve uygulamalar',bg:'#f8fafc',color:'#1e293b',btn:prof.mainColor}]});
+    sourcePages[0].blocks.push({type:'about',title:'Neden Bizi Tercih Etmelisiniz?',text:'Deneyim, şeffaf iletişim ve ihtiyacınıza özel çözümlerle yanınızdayız.',bg:'#f8fafc',color:'#1e293b',btn:prof.mainColor});
+  } else if(style === 'premium'){
+    sourcePages.push(
+      {title:'Projelerimiz',blocks:[{type:'gallery',title:'Seçilmiş Projeler',text:'Kalite ve detay odaklı çalışmalarımız',bg:'#f8fafc',color:'#1e293b',btn:prof.mainColor}]},
+      {title:'Yaklaşımımız',blocks:[{type:'about',title:'Ayrıcalıklı Hizmet Anlayışı',text:'İlk görüşmeden teslimata kadar planlı, özenli ve kişiselleştirilmiş bir deneyim sunuyoruz.',bg:'#ffffff',color:'#1e293b',btn:prof.mainColor}]}
+    );
+    sourcePages[0].blocks.push(
+      {type:'about',title:'Marka Hikâyemiz',text:'Uzmanlık, estetik ve güveni bir araya getiren yaklaşımımızla hizmet veriyoruz.',bg:'#f8fafc',color:'#1e293b',btn:prof.mainColor},
+      {type:'cards',title:'Bizi Farklı Kılanlar',text:'Kişiye Özel Yaklaşım • Nitelikli İşçilik • Süreç Takibi',bg:'#ffffff',color:'#1e293b',btn:prof.mainColor}
+    );
+  }
+
+  pages = sourcePages.map((p, idx) => ({
     id: 'pg_' + idx + '_' + Date.now(),
     title: p.title,
     inMenu: true,
     blocks: [
-      { type:'nav', title:'', text:'Logo', bg:'#ffffff', color:'#1e293b', btn:prof.mainColor, font:prof.font },
-      ...p.blocks.map(b => ({ ...b, font: prof.font })),
-      { type:'footer', title:'© 2026 ' + prof.siteName + ' — Tüm Hakları Saklıdır.', text:'İletişim & Destek', bg:'#0f172a', color:'#e2e8f0', btn:prof.mainColor, font:prof.font }
+      { type:'nav', title:'', text:'Logo', bg:'#ffffff', color:'#1e293b', btn:prof.mainColor, font:prof.font, designStyle:style },
+      ...p.blocks.map(b => ({ ...b, font: prof.font, designStyle:style })),
+      { type:'footer', title:'© 2026 ' + prof.siteName + ' — Tüm Hakları Saklıdır.', text:'İletişim & Destek', bg:'#0f172a', color:'#e2e8f0', btn:prof.mainColor, font:prof.font, designStyle:style }
     ]
   }));
   currentPageId = pages[0].id;
@@ -1178,7 +1237,7 @@ function runCommand(override){
   const matchedProf = PROFESSIONS.find(p => p.keys.some(k => cmd.includes(norm(k))));
   if(matchedProf){
     buildMultiPageProfession(matchedProf);
-    notify('🏗️ "' + matchedProf.siteName + '" çoklu sayfa olarak kuruldu');
+    notify('🏗️ ' + matchedProf.siteName + ' — ' + ({mini:'Mini',standard:'Standart',pro:'Pro',premium:'Premium'}[selectedDesignStyle]||'Standart') + ' tasarım oluşturuldu');
     return;
   }
 
