@@ -1697,6 +1697,10 @@
       sendAiStudioMessage(command);
     }
 
+    function replyAssistant(message) {
+      appendChatMessage('assistant', String(message || ''));
+    }
+
     function appendChatMessage(role, text) {
       const stream = document.getElementById('aiChatStream');
       const bubble = document.createElement('div');
