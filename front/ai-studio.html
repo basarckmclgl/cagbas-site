@@ -1609,6 +1609,58 @@
         button.title = collapsed ? 'Paneli aç' : 'Paneli gizle';
       }
     }
+    let studioSpeechRecognition = null;
+    let studioSpeechActive = false;
+
+    function toggleSpeechRecognition() {
+      const SpeechRecognitionAPI = window.SpeechRecognition || window.webkitSpeechRecognition;
+      const micButton = document.getElementById('micBtn');
+      const idleText = document.getElementById('micIdleText');
+      const activeWave = document.getElementById('micActiveWave');
+
+      if (!SpeechRecognitionAPI) {
+        if (idleText) idleText.textContent = 'Tarayıcınız sesli komutu desteklemiyor. Yazılı komutu kullanabilirsiniz.';
+        return;
+      }
+      if (studioSpeechActive && studioSpeechRecognition) {
+        studioSpeechRecognition.stop();
+        return;
+      }
+      try {
+        studioSpeechRecognition = new SpeechRecognitionAPI();
+        studioSpeechRecognition.lang = 'tr-TR';
+        studioSpeechRecognition.continuous = false;
+        studioSpeechRecognition.interimResults = false;
+        studioSpeechRecognition.onstart = () => {
+          studioSpeechActive = true;
+          if (micButton) micButton.setAttribute('aria-pressed', 'true');
+          if (idleText) idleText.textContent = 'Dinliyorum...';
+          if (activeWave) activeWave.classList.remove('hidden');
+        };
+        studioSpeechRecognition.onresult = (event) => {
+          const transcript = Array.from(event.results || []).map(result => result[0] && result[0].transcript ? result[0].transcript : '').join(' ').trim();
+          if (!transcript) return;
+          const input = document.getElementById('aiCommandInput');
+          if (input) input.value = transcript;
+          sendAiStudioMessage(transcript);
+        };
+        studioSpeechRecognition.onerror = (event) => {
+          if (idleText) idleText.textContent = event.error === 'not-allowed' ? 'Mikrofon izni verilmedi. Tarayıcı ayarlarından izin verin.' : 'Ses algılanamadı. Tekrar deneyin veya komutu yazın.';
+        };
+        studioSpeechRecognition.onend = () => {
+          studioSpeechActive = false;
+          if (micButton) micButton.setAttribute('aria-pressed', 'false');
+          if (activeWave) activeWave.classList.add('hidden');
+          if (idleText && idleText.textContent === 'Dinliyorum...') idleText.textContent = 'Mikrofona tıkla ve konuş...';
+        };
+        studioSpeechRecognition.start();
+      } catch (error) {
+        studioSpeechActive = false;
+        if (idleText) idleText.textContent = 'Mikrofon başlatılamadı. Yazılı komutu kullanabilirsiniz.';
+        if (activeWave) activeWave.classList.add('hidden');
+      }
+    }
+
     function toggleVoiceControls() {
       const body = document.getElementById('voiceControlsBody');
       const button = document.getElementById('voiceControlsToggle');
