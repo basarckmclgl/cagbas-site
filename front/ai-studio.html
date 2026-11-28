@@ -1605,7 +1605,7 @@
       stream.scrollTop = stream.scrollHeight;
     }
 
-    function toggleStudioPanel(panelId) {    function toggleStudioPanel(panelId) {
+    function toggleStudioPanel(panelId) {
       const panel = document.getElementById(panelId);
       if (!panel) return;
       const collapsed = panel.classList.toggle('panel-collapsed');
@@ -1616,7 +1616,7 @@
         button.title = collapsed ? 'Paneli aç' : 'Paneli gizle';
       }
     }
-    // Initial studio boot:    // Initial studio boot: render the editor before the first user interaction.
+    // Initial studio boot: render the editor before the first user interaction.
     // Without this call the canvas remains empty and the editor feels locked.
     document.documentElement.style.setProperty('--accent-indigo', state.accent);
     renderStudioPages();
