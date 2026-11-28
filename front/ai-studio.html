@@ -72,6 +72,11 @@ header button.btn-rescue:hover { background:#34d399; }
 
 .prof-chip { display:inline-block; background:#0f172a; border:1px solid #475569; color:#cbd5e1; font-size:11px; padding:4px 8px; border-radius:14px; margin:2px; cursor:pointer; }
 .prof-chip:hover { border-color:#f472b6; color:#fff; }
+.card-edit-item { background:#0f172a; border:1px solid #334155; border-radius:8px; padding:9px; margin:8px 0; }
+.card-edit-item input, .card-edit-item textarea { width:100%; background:#1e293b; border:1px solid #475569; color:#e2e8f0; border-radius:6px; padding:7px; font-size:12px; margin:4px 0; }
+.card-edit-item textarea { min-height:48px; resize:vertical; }
+.card-edit-item input[type=file] { font-size:11px; }
+.card-image-preview { width:100%; max-height:110px; object-fit:cover; border-radius:6px; margin-top:5px; }
 
 /* Orta Panel: Maksimum Genişlikte Önizleme */
 .preview-wrap { background:#1e293b; border-radius:12px; display:flex; flex-direction:column; overflow:hidden; min-height:0; }
@@ -226,6 +231,16 @@ header button.btn-rescue:hover { background:#34d399; }
       <span class="prof-chip" onclick="runCommand('Bana bir mimarlık web sitesi yap')">🏗️ Mimarlık</span>
       <span class="prof-chip" onclick="runCommand('Bana bir yazılım ajansı web sitesi yap')">💻 Yazılım</span>
       <span class="prof-chip" onclick="runCommand('Bana bir emlak web sitesi yap')">🏠 Emlak</span>
+      <span class="prof-chip" onclick="runCommand('Bana bir kuaför ve güzellik salonu web sitesi yap')">💇 Kuaför & Güzellik</span>
+      <span class="prof-chip" onclick="runCommand('Bana bir otel ve turizm web sitesi yap')">🏨 Otel & Turizm</span>
+      <span class="prof-chip" onclick="runCommand('Bana bir sağlık merkezi web sitesi yap')">🏥 Sağlık Merkezi</span>
+      <span class="prof-chip" onclick="runCommand('Bana bir eğitim ve kurs web sitesi yap')">🎓 Eğitim & Kurs</span>
+      <span class="prof-chip" onclick="runCommand('Bana bir oto servis web sitesi yap')">🚗 Oto Servis</span>
+      <span class="prof-chip" onclick="runCommand('Bana bir e-ticaret web sitesi yap')">🛍️ E-Ticaret</span>
+      <span class="prof-chip" onclick="runCommand('Bana bir fotoğrafçı web sitesi yap')">📸 Fotoğrafçı</span>
+      <span class="prof-chip" onclick="runCommand('Bana bir teknik servis web sitesi yap')">🧰 Teknik Servis</span>
+      <span class="prof-chip" onclick="runCommand('Bana bir danışmanlık web sitesi yap')">💼 Danışmanlık</span>
+      <span class="prof-chip" onclick="runCommand('Bana bir organizasyon ve etkinlik web sitesi yap')">🎉 Organizasyon</span>
     </div>
   </div>
 
@@ -285,6 +300,11 @@ header button.btn-rescue:hover { background:#34d399; }
             <option value="'Comic Sans MS',cursive">Eğlenceli</option>
           </select>
         </div>
+      </div>
+      <div id="cardsEditor" style="display:none;margin-top:12px">
+        <label>Hizmet Kartları</label>
+        <p style="font-size:11px;color:#94a3b8;line-height:1.5">Her kartın başlığını, açıklamasını, simgesini ve görselini ayrı ayrı düzenleyebilirsiniz.</p>
+        <div id="cardsEditorItems"></div>
       </div>
       <button class="btn btn-gray" onclick="deleteSelected()">🗑 Seçili Bloğu Sil</button>
     </div>
@@ -610,7 +630,11 @@ const defaults = {
   nav:    {title:'Ana Sayfa', text:'Logo', bg:'#ffffff', color:'#1f2937', btn:'#3b82f6'},
   hero:   {title:'Hayalindeki Siteye Hoş Geldin', text:'Metinlerin üzerine tıklayarak doğrudan düzenleyebilir, soldan yeni sayfalar ekleyebilirsin.', bg:'#3b82f6', color:'#ffffff', btn:'#f59e0b'},
   about:  {title:'Hakkımızda', text:'İşinizi büyütmek için çalışan uzman ekibimizle tanışın. Bu metni doğrudan tıklayıp düzenleyebilirsiniz.', bg:'#f8fafc', color:'#1f2937', btn:'#3b82f6'},
-  cards:  {title:'Hizmetlerimiz', text:'Hızlı Çözüm • Güvenilir Hizmet • Uygun Fiyat', bg:'#ffffff', color:'#1f2937', btn:'#3b82f6'},
+  cards:  {title:'Hizmetlerimiz', text:'Hızlı Çözüm • Güvenilir Hizmet • Uygun Fiyat', cards:[
+    {icon:'🚀',title:'Hızlı Çözüm',description:'İhtiyacınıza uygun, hızlı ve etkili hizmet.',image:''},
+    {icon:'🛡️',title:'Güvenilir Hizmet',description:'Şeffaf süreç ve güvenilir çalışma anlayışı.',image:''},
+    {icon:'💎',title:'Uygun Fiyat',description:'Bütçenize uygun, kaliteli çözümler.',image:''}
+  ], bg:'#ffffff', color:'#1f2937', btn:'#3b82f6'},
   gallery:{title:'Galeri', text:'Projelerimizden örnekler', bg:'#f1f5f9', color:'#1f2937', btn:'#3b82f6'},
   contact:{title:'Bize Ulaşın', text:'Mesajınızı gönderin, en kısa sürede dönüş yapalım.', bg:'#ffffff', color:'#1f2937', btn:'#3b82f6'},
   footer: {title:'© 2026 Tüm hakları saklıdır.', text:'📞 İletişim • 📍 Merkez Ofis', bg:'#1e293b', color:'#e2e8f0', btn:'#3b82f6'},
@@ -676,7 +700,8 @@ function blockHTML(b, i, forExport=false){
       inner = `<div class="pv-about" style="${s}"><h2 ${ceTitle}>${b.title}</h2><p ${ceText}>${b.text}</p></div>`;
       break;
     case 'cards':
-      inner = `<div class="pv-cards" style="${s}"><h2 style="grid-column:1/-1;text-align:center" ${ceTitle}>${b.title}</h2>${['🚀','🛡️','💎'].map((ic,k)=>`<div class="pv-card" style="background:${b.color}0d;border:1px solid ${b.color}26"><div class="ic">${ic}</div><h3>${b.text.split('•')[k]?.trim()||'Hizmet '+(k+1)}</h3><p style="font-size:13.5px;opacity:.8;margin-top:6px">Profesyonel standartlarda sunulan özel çözüm detayı.</p></div>`).join('')}</div>`;
+      const serviceCards = b.cards || b.text.split('•').map((name,k)=>({icon:['🚀','🛡️','💎'][k]||'✨',title:name.trim(),description:'Profesyonel standartlarda sunulan özel çözüm detayı.',image:''}));
+      inner = `<div class="pv-cards" style="${s}"><h2 style="grid-column:1/-1;text-align:center" ${ceTitle}>${b.title}</h2>${serviceCards.map(card=>`<div class="pv-card" style="background:${b.color}0d;border:1px solid ${b.color}26">${card.image ? `<img src="${card.image}" alt="${escapeAttr(card.title)}" style="width:100%;height:150px;object-fit:cover;border-radius:10px;margin-bottom:12px">` : `<div class="ic">${escapeHtml(card.icon||'✨')}</div>`}<h3>${escapeHtml(card.title)}</h3><p style="font-size:13.5px;opacity:.8;margin-top:6px">${escapeHtml(card.description)}</p></div>`).join('')}</div>`;
       break;
     case 'gallery':
       inner = `<div class="pv-gallery" style="${s}"><h2 style="grid-column:1/-1;text-align:center" ${ceTitle}>${b.title}</h2>${['Proje 1','Proje 2','Proje 3','Proje 4','Proje 5','Proje 6'].map((lbl,k)=>`<div style="background:${b.btn};opacity:${.45+k*.09}">${lbl}</div>`).join('')}</div>`;
@@ -732,12 +757,18 @@ function loadSettings(){
     bBtn.value = b.btn;
     bFont.value = b.font;
   }
+  const cardsEditor = document.getElementById('cardsEditor');
+  if(cardsEditor){
+    cardsEditor.style.display = has && pg.blocks[selected].type === 'cards' ? 'block' : 'none';
+    if(has && pg.blocks[selected].type === 'cards') renderCardsEditor(pg.blocks[selected]);
+  }
 }
 
 function liveSideEdit(){
   const pg = getCurrentPage();
   if(selected < 0 || !pg.blocks[selected]) return;
-  Object.assign(pg.blocks[selected], {
+  const block = pg.blocks[selected];
+  Object.assign(block, {
     title: bTitle.value,
     text: bText.value,
     bg: bBg.value,
@@ -745,7 +776,70 @@ function liveSideEdit(){
     btn: bBtn.value,
     font: bFont.value
   });
+  if(block.type === 'cards'){
+    block.cards = block.cards || [];
+    block.cards.forEach((card,i) => {
+      const title = document.getElementById('cardTitle'+i);
+      const desc = document.getElementById('cardDesc'+i);
+      const icon = document.getElementById('cardIcon'+i);
+      if(title) card.title = title.value;
+      if(desc) card.description = desc.value;
+      if(icon) card.icon = icon.value;
+    });
+  }
   renderPreviewOnly();
+}
+
+function renderCardsEditor(block){
+  const host = document.getElementById('cardsEditorItems');
+  if(!host) return;
+  block.cards = block.cards || block.text.split('•').map((name,i)=>({
+    icon:['🚀','🛡️','💎'][i]||'✨', title:name.trim(), description:'Hizmetiniz hakkında kısa açıklama.', image:''
+  }));
+  host.innerHTML = block.cards.map((card,i)=>`
+    <div class="card-edit-item">
+      <label>Kart ${i+1} — Simge</label>
+      <input id="cardIcon${i}" value="${escapeAttr(card.icon||'✨')}" oninput="liveSideEdit()">
+      <label>Kart başlığı</label>
+      <input id="cardTitle${i}" value="${escapeAttr(card.title||'')}" oninput="liveSideEdit()">
+      <label>Kart açıklaması</label>
+      <textarea id="cardDesc${i}" oninput="liveSideEdit()">${escapeHtml(card.description||'')}</textarea>
+      <label>Kart görseli</label>
+      <input type="file" accept="image/*" onchange="uploadCardImage(${i},this)">
+      ${card.image ? `<img class="card-image-preview" src="${card.image}" alt="Kart görseli">` : '<small style="color:#94a3b8">Henüz görsel eklenmedi.</small>'}
+      ${card.image ? `<button type="button" class="mini-btn" onclick="removeCardImage(${i})">Görseli kaldır</button>` : ''}
+    </div>`).join('');
+}
+
+function escapeHtml(value){
+  return String(value||'').replace(/[&<>"]/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[ch]));
+}
+function escapeAttr(value){ return escapeHtml(value).replace(/'/g,'&#39;'); }
+
+function uploadCardImage(index,input){
+  const file = input.files && input.files[0];
+  if(!file) return;
+  if(!file.type.startsWith('image/')){ notify('Lütfen bir görsel dosyası seçin.'); return; }
+  if(file.size > 5*1024*1024){ notify('Görsel en fazla 5 MB olabilir.'); input.value=''; return; }
+  const reader = new FileReader();
+  reader.onload = () => {
+    const block = getCurrentPage().blocks[selected];
+    if(!block || block.type !== 'cards') return;
+    pushUndo();
+    block.cards = block.cards || [];
+    block.cards[index].image = reader.result;
+    render();
+    notify('Kart görseli eklendi');
+  };
+  reader.readAsDataURL(file);
+}
+function removeCardImage(index){
+  const block = getCurrentPage().blocks[selected];
+  if(!block || !block.cards || !block.cards[index]) return;
+  pushUndo();
+  block.cards[index].image = '';
+  render();
+  notify('Kart görseli kaldırıldı');
 }
 
 function deleteSelected(){
@@ -878,6 +972,97 @@ const PROFESSIONS = [
         { type:'contact', title:'Değerleme & Bilgi Talebi', text:'Aradığınız kriterleri bize iletin.', bg:'#ffffff', color:'#1e293b', btn:'#0f766e' }
       ]}
     ]
+
+  {
+    keys:['kuaför','kuafor','güzellik','guzellik','estetik salonu'],
+    siteName:'Luna Güzellik & Kuaför', mainColor:'#be185d', font:"'Segoe UI',sans-serif",
+    pages:[
+      {title:'Ana Sayfa',blocks:[{type:'hero',title:'Kendinize Zaman Ayırın',text:'Saç, bakım ve güzellik uygulamalarında profesyonel dokunuş.',bg:'#be185d',color:'#ffffff',btn:'#f9a8d4'},{type:'cards',title:'Hizmetlerimiz',text:'Saç Tasarımı • Cilt Bakımı • Profesyonel Makyaj',bg:'#ffffff',color:'#1e293b',btn:'#be185d'}]},
+      {title:'Hizmetlerimiz',blocks:[{type:'cards',title:'Bakım ve Güzellik Uygulamaları',text:'Saç Kesim & Renklendirme • Cilt Bakımı • Özel Gün Hazırlığı',bg:'#fff1f2',color:'#1e293b',btn:'#be185d'}]},
+      {title:'Randevu',blocks:[{type:'contact',title:'Randevunuzu Oluşturun',text:'Size uygun gün ve saat için bize ulaşın.',bg:'#ffffff',color:'#1e293b',btn:'#be185d'}]}
+    ]
+  },
+  {
+    keys:['otel','turizm','konaklama'],
+    siteName:'Mavi Kıyı Hotel',mainColor:'#0e7490',font:"'Segoe UI',sans-serif",
+    pages:[
+      {title:'Ana Sayfa',blocks:[{type:'hero',title:'Konforun ve Huzurun Adresi',text:'Unutulmaz bir konaklama deneyimi için sizi bekliyoruz.',bg:'#0e7490',color:'#ffffff',btn:'#fbbf24'},{type:'cards',title:'Konaklama Seçenekleri',text:'Standart Odalar • Aile Süitleri • Deniz Manzaralı Odalar',bg:'#ffffff',color:'#1e293b',btn:'#0e7490'}]},
+      {title:'Odalar',blocks:[{type:'gallery',title:'Odalarımızı Keşfedin',text:'Konforlu yaşam alanları',bg:'#f0fdfa',color:'#1e293b',btn:'#0e7490'}]},
+      {title:'İletişim & Rezervasyon',blocks:[{type:'contact',title:'Rezervasyon Talebi',text:'Konaklama tarihinizi bize iletin.',bg:'#ffffff',color:'#1e293b',btn:'#0e7490'}]}
+    ]
+  },
+  {
+    keys:['sağlık merkezi','saglik merkezi','sağlık','saglik','poliklinik'],
+    siteName:'Yaşam Sağlık Merkezi',mainColor:'#0f766e',font:"'Segoe UI',sans-serif",
+    pages:[
+      {title:'Ana Sayfa',blocks:[{type:'hero',title:'Sağlığınız İçin Yanınızdayız',text:'Bilgilendirme ve randevu süreçlerinde güvenilir sağlık hizmeti.',bg:'#0f766e',color:'#ffffff',btn:'#14b8a6'},{type:'cards',title:'Birimlerimiz',text:'Genel Sağlık • Danışmanlık • Kontrol ve Takip',bg:'#ffffff',color:'#1e293b',btn:'#0f766e'}]},
+      {title:'Birimlerimiz',blocks:[{type:'about',title:'Sağlık Birimlerimiz',text:'Hizmet kapsamı ve başvuru süreçleri hakkında bilgi alın.',bg:'#f0fdfa',color:'#1e293b',btn:'#0f766e'}]},
+      {title:'Randevu',blocks:[{type:'contact',title:'Randevu Talebi',text:'İletişim bilgilerinizi bırakın.',bg:'#ffffff',color:'#1e293b',btn:'#0f766e'}]}
+    ]
+  },
+  {
+    keys:['eğitim','egitim','kurs','akademi'],
+    siteName:'Pusula Eğitim Akademisi',mainColor:'#4338ca',font:"'Segoe UI',sans-serif",
+    pages:[
+      {title:'Ana Sayfa',blocks:[{type:'hero',title:'Hedeflerinize Birlikte Ulaşalım',text:'Eğitim programları ve uzman eğitmen kadrosuyla öğrenme yolculuğunuz.',bg:'#4338ca',color:'#ffffff',btn:'#fbbf24'},{type:'cards',title:'Programlarımız',text:'Yabancı Dil • Sınav Hazırlık • Mesleki Eğitim',bg:'#ffffff',color:'#1e293b',btn:'#4338ca'}]},
+      {title:'Eğitimler',blocks:[{type:'cards',title:'Eğitim Programları',text:'Grup Dersleri • Birebir Eğitim • Online Eğitim',bg:'#eef2ff',color:'#1e293b',btn:'#4338ca'}]},
+      {title:'Kayıt & İletişim',blocks:[{type:'contact',title:'Bilgi ve Kayıt Talebi',text:'Programlar hakkında bilgi alın.',bg:'#ffffff',color:'#1e293b',btn:'#4338ca'}]}
+    ]
+  },
+  {
+    keys:['oto servis','oto','otomotiv','tamirhane'],
+    siteName:'Usta Garaj Oto Servis',mainColor:'#334155',font:"'Segoe UI',sans-serif",
+    pages:[
+      {title:'Ana Sayfa',blocks:[{type:'hero',title:'Aracınız Emin Ellerde',text:'Bakım, onarım ve arıza tespitinde deneyimli servis ekibi.',bg:'#334155',color:'#ffffff',btn:'#f97316'},{type:'cards',title:'Servis Hizmetlerimiz',text:'Periyodik Bakım • Mekanik Onarım • Arıza Tespiti',bg:'#ffffff',color:'#1e293b',btn:'#334155'}]},
+      {title:'Hizmetler',blocks:[{type:'cards',title:'Bakım ve Onarım',text:'Motor Bakımı • Fren Sistemi • Elektrik & Elektronik',bg:'#f8fafc',color:'#1e293b',btn:'#334155'}]},
+      {title:'Randevu',blocks:[{type:'contact',title:'Servis Randevusu',text:'Aracınız ve ihtiyacınız hakkında bilgi verin.',bg:'#ffffff',color:'#1e293b',btn:'#334155'}]}
+    ]
+  },
+  {
+    keys:['e-ticaret','eticaret','online mağaza','online magaza'],
+    siteName:'NovaShop',mainColor:'#7c3aed',font:"'Segoe UI',sans-serif",
+    pages:[
+      {title:'Ana Sayfa',blocks:[{type:'hero',title:'Yeni Sezonu Keşfedin',text:'Özenle seçilmiş ürünlerle alışveriş deneyiminizi yenileyin.',bg:'#7c3aed',color:'#ffffff',btn:'#fbbf24'},{type:'cards',title:'Kategoriler',text:'Yeni Gelenler • Çok Satanlar • Kampanyalar',bg:'#ffffff',color:'#1e293b',btn:'#7c3aed'}]},
+      {title:'Kategoriler',blocks:[{type:'gallery',title:'Ürün Koleksiyonu',text:'Öne çıkan ürünler',bg:'#f5f3ff',color:'#1e293b',btn:'#7c3aed'}]},
+      {title:'İletişim',blocks:[{type:'contact',title:'Sipariş ve Destek',text:'Ürün ve siparişleriniz için bize ulaşın.',bg:'#ffffff',color:'#1e293b',btn:'#7c3aed'}]}
+    ]
+  },
+  {
+    keys:['fotoğrafçı','fotografci','fotoğraf','fotograf'],
+    siteName:'Kare Fotoğraf Stüdyosu',mainColor:'#475569',font:"'Segoe UI',sans-serif",
+    pages:[
+      {title:'Ana Sayfa',blocks:[{type:'hero',title:'Anlarınızı Ölümsüzleştiriyoruz',text:'Düğün, portre ve kurumsal çekimlerde yaratıcı fotoğrafçılık.',bg:'#475569',color:'#ffffff',btn:'#c084fc'},{type:'cards',title:'Çekim Paketlerimiz',text:'Düğün & Nişan • Portre • Kurumsal Çekim',bg:'#ffffff',color:'#1e293b',btn:'#475569'}]},
+      {title:'Portfolyo',blocks:[{type:'gallery',title:'Fotoğraf Galerisi',text:'Seçilmiş çalışmalar',bg:'#f8fafc',color:'#1e293b',btn:'#475569'}]},
+      {title:'İletişim',blocks:[{type:'contact',title:'Çekim Talebi',text:'Etkinlik ve çekim detaylarını paylaşın.',bg:'#ffffff',color:'#1e293b',btn:'#475569'}]}
+    ]
+  },
+  {
+    keys:['teknik servis','teknik','bilgisayar servisi'],
+    siteName:'TeknoFix Teknik Servis',mainColor:'#0369a1',font:"'Segoe UI',sans-serif",
+    pages:[
+      {title:'Ana Sayfa',blocks:[{type:'hero',title:'Teknolojiniz İçin Hızlı Destek',text:'Bilgisayar, telefon ve elektronik cihazlar için bakım ve onarım.',bg:'#0369a1',color:'#ffffff',btn:'#38bdf8'},{type:'cards',title:'Teknik Hizmetler',text:'Arıza Tespiti • Bakım & Onarım • Veri Kurtarma',bg:'#ffffff',color:'#1e293b',btn:'#0369a1'}]},
+      {title:'Hizmetler',blocks:[{type:'cards',title:'Onarım Çözümleri',text:'Bilgisayar • Telefon • Ağ Sistemleri',bg:'#f0f9ff',color:'#1e293b',btn:'#0369a1'}]},
+      {title:'Destek',blocks:[{type:'contact',title:'Servis Talebi Oluşturun',text:'Cihazınız ve arızası hakkında bilgi verin.',bg:'#ffffff',color:'#1e293b',btn:'#0369a1'}]}
+    ]
+  },
+  {
+    keys:['danışmanlık','danismanlik','danışman','danisman'],
+    siteName:'Pusula Danışmanlık',mainColor:'#1d4ed8',font:"'Segoe UI',sans-serif",
+    pages:[
+      {title:'Ana Sayfa',blocks:[{type:'hero',title:'Doğru Kararlar, Güçlü Adımlar',text:'İşletmelere strateji, süreç ve gelişim danışmanlığı.',bg:'#1d4ed8',color:'#ffffff',btn:'#fbbf24'},{type:'cards',title:'Danışmanlık Alanlarımız',text:'İş Geliştirme • Proje Yönetimi • Kurumsal Eğitim',bg:'#ffffff',color:'#1e293b',btn:'#1d4ed8'}]},
+      {title:'Hizmetlerimiz',blocks:[{type:'about',title:'Çözüm Odaklı Danışmanlık',text:'İhtiyaç analiziyle başlayan, ölçülebilir hedeflere odaklanan çalışma modeli.',bg:'#eff6ff',color:'#1e293b',btn:'#1d4ed8'}]},
+      {title:'İletişim',blocks:[{type:'contact',title:'Ön Görüşme Talebi',text:'İhtiyacınızı paylaşın, birlikte değerlendirelim.',bg:'#ffffff',color:'#1e293b',btn:'#1d4ed8'}]}
+    ]
+  },
+  {
+    keys:['organizasyon','etkinlik','düğün','dugun'],
+    siteName:'Anı Organizasyon',mainColor:'#a21caf',font:"'Segoe UI',sans-serif",
+    pages:[
+      {title:'Ana Sayfa',blocks:[{type:'hero',title:'Hayallerinizdeki Etkinliği Tasarlıyoruz',text:'Düğün, davet ve kurumsal organizasyonlarda yaratıcı çözümler.',bg:'#a21caf',color:'#ffffff',btn:'#f0abfc'},{type:'cards',title:'Organizasyonlarımız',text:'Düğün & Nişan • Kurumsal Etkinlik • Özel Davet',bg:'#ffffff',color:'#1e293b',btn:'#a21caf'}]},
+      {title:'Hizmetler',blocks:[{type:'gallery',title:'Etkinliklerimizden Kareler',text:'Özel anlardan seçkiler',bg:'#fdf4ff',color:'#1e293b',btn:'#a21caf'}]},
+      {title:'Teklif Al',blocks:[{type:'contact',title:'Etkinliğinizi Planlayalım',text:'Tarih ve etkinlik detaylarını paylaşın.',bg:'#ffffff',color:'#1e293b',btn:'#a21caf'}]}
+    ]
+  }
   }
 ];
 
