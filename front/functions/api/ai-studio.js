@@ -66,13 +66,13 @@ async function callGemini(messages, apiKey) {
 
   let response;
   try {
-    response = await fetch("https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent", {
+    response = await fetch("https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash-lite:generateContent", {
       method: "POST",
       headers: {
         "x-goog-api-key": apiKey,
         "Content-Type": "application/json"
       },
-      signal: AbortSignal.timeout(35000),
+      signal: AbortSignal.timeout(25000),
       body: JSON.stringify({
         systemInstruction: {
           parts: [{ text: AI_INSTRUCTIONS }]
@@ -81,7 +81,7 @@ async function callGemini(messages, apiKey) {
         generationConfig: {
           responseMimeType: "application/json",
           temperature: 0.2,
-          maxOutputTokens: 4096
+          maxOutputTokens: 2048
         }
       })
     });
