@@ -132,6 +132,17 @@
       100% { height: 20px; }
     }
 
+    .studio-pages-layout { display: flex; gap: 18px; padding: 16px; align-items: flex-start; }
+    .studio-pages-layout.layout-horizontal { flex-direction: row; width: max-content; min-width: 100%; }
+    .studio-pages-layout.layout-vertical { flex-direction: column; width: 100%; }
+    .studio-page-sheet { flex: 0 0 min(720px, 78vw); min-width: 280px; background: #fff; border: 1px solid #cbd5e1; border-radius: 14px; overflow: hidden; box-shadow: 0 8px 24px -12px rgba(15,23,42,.22); }
+    .layout-vertical .studio-page-sheet { width: 100%; max-width: 860px; flex-basis: auto; }
+    .studio-page-heading { display:flex; align-items:center; justify-content:space-between; padding:8px 12px; background:#f8fafc; border-bottom:1px solid #e2e8f0; font-size:11px; font-weight:700; color:#475569; }
+    .studio-page-heading button { border:1px solid #c7d2fe; color:#4338ca; background:#eef2ff; border-radius:7px; padding:4px 9px; font-size:10px; }
+    .studio-page-current { outline:2px solid #6366f1; outline-offset:2px; }
+    .studio-page-content { min-height:480px; }
+    .studio-pages-layout.layout-horizontal .studio-page-content { min-height:480px; }
+    .studio-pages-layout.layout-vertical .studio-page-content { min-height:300px; }
     .panel-togglebar { min-height: 42px; }
     @media (min-width: 1024px) {
       #leftPanel.panel-collapsed { width: 48px !important; flex: 0 0 48px !important; padding: 4px !important; overflow: hidden !important; }
@@ -361,6 +372,11 @@
         <button onclick="deleteSelectedBlock()" class="px-2 py-1 rounded-full hover:bg-rose-50 text-rose-700 font-semibold cursor-pointer" title="Sil">🗑️ Sil</button>
       </div>
 
+      <div id="canvasPageLayoutControls" class="w-full max-w-4xl flex items-center justify-end gap-2 mb-2">
+        <span class="text-[11px] text-slate-500 mr-1">Sayfa görünümü</span>
+        <button type="button" id="pagesSideBySideBtn" onclick="setPagesLayout('horizontal')" class="px-3 py-1.5 rounded-lg border border-indigo-500 bg-indigo-50 text-indigo-700 text-xs font-semibold">Yan yana</button>
+        <button type="button" id="pagesVerticalBtn" onclick="setPagesLayout('vertical')" class="px-3 py-1.5 rounded-lg border border-slate-200 bg-white text-slate-600 text-xs font-semibold">Dikey</button>
+      </div>
       <!-- Simulated Browser Frame -->
       <div id="canvasFrame" class="w-full max-w-4xl rounded-2xl overflow-hidden border border-[#cbd5e1] shadow-[0_20px_50px_-15px_rgba(15,23,42,0.16)] transition-all duration-300 bg-[#ffffff]">
         <div class="h-9 px-4 bg-[#f8fafc] border-b border-[#e2e8f0] flex items-center justify-between text-[11px]">
@@ -910,6 +926,11 @@
     }
 
     function selectBlock(id, event) {
+      const pageSheet = event && event.target && event.target.closest ? event.target.closest('[data-page-id]') : null;
+      if (pageSheet && pageSheet.dataset.pageId && pageSheet.dataset.pageId !== state.currentPageId) {
+        state.currentPageId = pageSheet.dataset.pageId;
+        renderStudioPages();
+      }
       if (state.previewOnly) return;
       if (event) event.stopPropagation();
       state.selectedId = id;
@@ -1042,7 +1063,7 @@
       });
     }
 
-    function renderCanvas() {
+    function renderCanvasSingle() {
       const canvas = document.getElementById('wysiwygCanvas');
       const pal = getThemePalette();
       const accent = state.accent;
@@ -1207,6 +1228,53 @@
         actionBar.classList.add('hidden');
         actionBar.classList.remove('flex');
       }
+    }
+
+
+    // All project pages can be viewed together horizontally or vertically.
+    let pagesLayout = 'horizontal';
+    function setPagesLayout(mode) {
+      pagesLayout = mode === 'vertical' ? 'vertical' : 'horizontal';
+      const sideBtn = document.getElementById('pagesSideBySideBtn');
+      const verticalBtn = document.getElementById('pagesVerticalBtn');
+      const active = 'px-3 py-1.5 rounded-lg border border-indigo-500 bg-indigo-50 text-indigo-700 text-xs font-semibold';
+      const inactive = 'px-3 py-1.5 rounded-lg border border-slate-200 bg-white text-slate-600 text-xs font-semibold';
+      if (sideBtn) sideBtn.className = pagesLayout === 'horizontal' ? active : inactive;
+      if (verticalBtn) verticalBtn.className = pagesLayout === 'vertical' ? active : inactive;
+      renderCanvas();
+    }
+
+    function renderCanvas() {
+      const canvas = document.getElementById('wysiwygCanvas');
+      if (!canvas || !state.pages || state.pages.length <= 1) {
+        renderCanvasSingle();
+        return;
+      }
+      const originalPageId = state.currentPageId;
+      const renderedPages = [];
+      state.pages.forEach(page => {
+        state.currentPageId = page.id;
+        renderCanvasSingle();
+        const pageName = page.name.replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
+        renderedPages.push('<section class="studio-page-sheet" data-page-id="' + page.id + '">' +
+          '<div class="studio-page-heading"><span>' + pageName + '</span><button type="button" onclick="activateStudioPage(\'' + page.id + '\')">Düzenle</button></div>' +
+          '<div class="studio-page-content">' + canvas.innerHTML + '</div></section>');
+      });
+      state.currentPageId = originalPageId;
+      renderCanvasSingle();
+      canvas.innerHTML = '<div class="studio-pages-layout ' + (pagesLayout === 'vertical' ? 'layout-vertical' : 'layout-horizontal') + '">' + renderedPages.join('') + '</div>';
+      const sheets = canvas.querySelectorAll('.studio-page-sheet');
+      sheets.forEach(sheet => {
+        if (sheet.dataset.pageId === originalPageId) sheet.classList.add('studio-page-current');
+      });
+    }
+
+    function activateStudioPage(pageId) {
+      if (!state.pages.some(page => page.id === pageId)) return;
+      state.currentPageId = pageId;
+      state.selectedId = null;
+      renderStudioPages();
+      renderCanvas();
     }
 
 
