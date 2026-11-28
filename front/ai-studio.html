@@ -64,6 +64,50 @@
     }
 
     /* Editable blocks in WYSIWYG canvas */
+    /* AI-generated composition system: layout metadata changes real canvas geometry. */
+    .ai-composition { isolation:isolate; }
+    .ai-composition .ai-eyebrow { letter-spacing:.16em; text-transform:uppercase; font-size:10px; font-weight:800; }
+    .ai-composition .ai-display { font-family:'Plus Jakarta Sans',sans-serif; letter-spacing:-.055em; }
+    .ai-composition .ai-muted { opacity:.76; }
+    .ai-composition .ai-card { border-radius:20px; overflow:hidden; transition:transform .25s ease,box-shadow .25s ease; }
+    .ai-composition .ai-card:hover { transform:translateY(-3px); box-shadow:0 18px 36px -22px rgba(15,23,42,.35); }
+    .ai-composition .ai-media {
+      min-height:190px; background-size:cover; background-position:center;
+      background-image:linear-gradient(135deg,rgba(15,23,42,.08),rgba(15,23,42,.34)),var(--ai-image,linear-gradient(135deg,#dbeafe,#c7d2fe));
+    }
+    .ai-hero-split { display:grid; grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr); align-items:center; gap:clamp(24px,5vw,64px); text-align:left; }
+    .ai-hero-split .ai-hero-copy { max-width:600px; }
+    .ai-hero-split .ai-hero-visual { min-height:310px; border-radius:28px; overflow:hidden; position:relative; background:linear-gradient(145deg,#dbeafe,#e0e7ff 48%,#c7d2fe); }
+    .ai-hero-split .ai-hero-visual img { width:100%; height:100%; min-height:310px; object-fit:cover; display:block; }
+    .ai-hero-split .ai-hero-visual:empty:after { content:' '; position:absolute; inset:12% 10%; border-radius:24px; background:linear-gradient(145deg,rgba(255,255,255,.74),rgba(255,255,255,.16)); box-shadow:0 24px 55px rgba(30,41,59,.12); }
+    .ai-hero-centered { text-align:center; }
+    .ai-hero-centered .ai-hero-visual { display:none; }
+    .ai-hero-wide { text-align:left; }
+    .ai-hero-wide .ai-hero-copy { max-width:850px; }
+    .ai-hero-wide .ai-hero-title { max-width:820px; }
+    .ai-grid-bento { display:grid; grid-template-columns:repeat(6,minmax(0,1fr)); gap:14px; }
+    .ai-grid-bento > .ai-card:nth-child(1) { grid-column:span 3; grid-row:span 2; min-height:260px; }
+    .ai-grid-bento > .ai-card:nth-child(2), .ai-grid-bento > .ai-card:nth-child(3) { grid-column:span 3; }
+    .ai-grid-bento > .ai-card:nth-child(n+4) { grid-column:span 2; }
+    .ai-grid-2 { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:18px; }
+    .ai-grid-4 { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:14px; }
+    .ai-feature-editorial { display:grid; grid-template-columns:minmax(180px,.72fr) minmax(0,1.5fr); gap:30px; align-items:start; }
+    .ai-feature-list { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; }
+    .ai-gallery-editorial { display:grid; grid-template-columns:1.25fr .75fr; gap:16px; }
+    .ai-gallery-editorial > .ai-card:first-child { grid-row:span 2; }
+    .ai-gallery-editorial .ai-media { min-height:230px; }
+    .ai-section-heading { max-width:680px; margin-inline:auto; }
+    .ai-section-heading.is-left { margin-left:0; margin-right:auto; }
+    @media (max-width:700px) {
+      .ai-hero-split,.ai-feature-editorial,.ai-gallery-editorial { grid-template-columns:1fr; }
+      .ai-hero-split .ai-hero-visual { min-height:220px; }
+      .ai-grid-bento { grid-template-columns:repeat(2,minmax(0,1fr)); }
+      .ai-grid-bento > .ai-card { grid-column:span 1 !important; grid-row:auto !important; }
+      .ai-grid-4 { grid-template-columns:repeat(2,minmax(0,1fr)); }
+      .ai-feature-list { grid-template-columns:1fr; }
+      .ai-gallery-editorial > .ai-card:first-child { grid-row:auto; }
+    }
+
     .canvas-block {
       position: relative;
       transition: outline-color 0.18s ease, box-shadow 0.18s ease, background-color 0.25s ease;
@@ -1192,32 +1236,47 @@
           }
 
           if (blk.type === 'hero') {
+            const heroLayout = ['split','centered','wide'].includes(blk.layout) ? blk.layout : 'split';
+            const heroClass = heroLayout === 'split' ? 'ai-hero-split' : heroLayout === 'wide' ? 'ai-hero-wide' : 'ai-hero-centered';
+            const heroImage = String(blk.imageUrl || '').trim();
+            const heroImageMarkup = heroImage
+              ? '<img src="' + heroImage.replace(/&/g,'&amp;').replace(/"/g,'&quot;') + '" alt="' + String(blk.imageAlt || '').replace(/&/g,'&amp;').replace(/"/g,'&quot;') + '" loading="lazy">'
+              : '';
             return `
-              <section onclick="selectBlock('${blk.id}', event)" style="border-bottom:1px solid ${pal.border}" class="canvas-block ${selCls} px-6 py-14 text-center">
+              <section onclick="selectBlock('${blk.id}', event)" style="border-bottom:1px solid ${pal.border};background:${blk.background || pal.bg};color:${blk.textColor || pal.text}" class="canvas-block ai-composition ${heroClass} ${selCls} px-6 sm:px-10 py-12 sm:py-16">
                 ${dots}
-                <span contenteditable="${editable}" onblur="updateField('${blk.id}','badge',this.innerText)" style="background:${accent}14; color:${accent}; border:1px solid ${accent}38" class="inline-block px-3 py-1 rounded-full text-[10px] font-bold tracking-widest uppercase mb-4 outline-none">${blk.badge}</span>
-                <h1 contenteditable="${editable}" onblur="updateField('${blk.id}','title',this.innerText)" class="font-display font-extrabold text-2xl sm:text-4xl max-w-2xl mx-auto leading-tight outline-none">${blk.title}</h1>
-                <p contenteditable="${editable}" onblur="updateField('${blk.id}','subtitle',this.innerText)" style="color:${pal.muted}" class="mt-3.5 text-xs sm:text-sm max-w-xl mx-auto leading-relaxed outline-none">${blk.subtitle}</p>
-                <div class="mt-6 flex items-center justify-center gap-3 flex-wrap">
-                  <span contenteditable="${editable}" onblur="updateField('${blk.id}','primaryBtn',this.innerText)" style="background:${accent}" class="px-5 py-2.5 rounded-xl text-xs font-semibold text-white shadow-sm outline-none">${blk.primaryBtn}</span>
-                  <span contenteditable="${editable}" onblur="updateField('${blk.id}','secondaryBtn',this.innerText)" style="background:${pal.surface}; border:1px solid ${pal.border}; color:${pal.text}" class="px-5 py-2.5 rounded-xl text-xs font-semibold outline-none">${blk.secondaryBtn}</span>
+                <div class="ai-hero-copy">
+                  <span contenteditable="${editable}" onblur="updateField('${blk.id}','badge',this.innerText)" style="background:${accent}14;color:${accent};border:1px solid ${accent}38" class="inline-block px-3 py-1 rounded-full ai-eyebrow mb-5 outline-none">${blk.badge || ''}</span>
+                  <h1 contenteditable="${editable}" onblur="updateField('${blk.id}','title',this.innerText)" class="font-display ai-display font-extrabold text-3xl sm:text-5xl lg:text-6xl max-w-3xl leading-[1.04] outline-none ai-hero-title">${blk.title || ''}</h1>
+                  <p contenteditable="${editable}" onblur="updateField('${blk.id}','subtitle',this.innerText)" style="color:${blk.mutedColor || pal.muted}" class="mt-5 text-sm sm:text-base max-w-xl leading-relaxed outline-none">${blk.subtitle || ''}</p>
+                  <div class="mt-7 flex items-center ${heroLayout === 'centered' ? 'justify-center' : 'justify-start'} gap-3 flex-wrap">
+                    <span contenteditable="${editable}" onblur="updateField('${blk.id}','primaryBtn',this.innerText)" style="background:${accent}" class="px-6 py-3 rounded-xl text-xs sm:text-sm font-bold text-white shadow-sm outline-none">${blk.primaryBtn || ''}</span>
+                    <span contenteditable="${editable}" onblur="updateField('${blk.id}','secondaryBtn',this.innerText)" style="background:${pal.surface};border:1px solid ${pal.border};color:${pal.text}" class="px-6 py-3 rounded-xl text-xs sm:text-sm font-semibold outline-none">${blk.secondaryBtn || ''}</span>
+                  </div>
                 </div>
+                <div class="ai-hero-visual">${heroImageMarkup}</div>
               </section>`;
           }
 
           if (blk.type === 'features') {
+            const featureLayout = ['bento','editorial','grid-2','grid-4','grid-3'].includes(blk.layout) ? blk.layout : 'bento';
+            const featureCards = (blk.items || []).map((it, idx) => `
+              <article style="background:${pal.surface};border:1px solid ${pal.border}" class="ai-card p-5 sm:p-6">
+                <div class="w-9 h-9 rounded-xl flex items-center justify-center text-white text-xs font-bold mb-5" style="background:${accent}">0${idx + 1}</div>
+                <h3 contenteditable="${editable}" onblur="updateNestedField('${blk.id}','items',${idx},'title',this.innerText)" class="font-display font-bold text-base sm:text-lg outline-none">${it.title}</h3>
+                <p contenteditable="${editable}" onblur="updateNestedField('${blk.id}','items',${idx},'desc',this.innerText)" style="color:${pal.muted}" class="text-sm mt-2 leading-relaxed outline-none">${it.desc}</p>
+              </article>`).join('');
+            const gridClass = featureLayout === 'bento' ? 'ai-grid-bento' : featureLayout === 'editorial' ? 'ai-feature-list' : featureLayout === 'grid-2' ? 'ai-grid-2' : featureLayout === 'grid-4' ? 'ai-grid-4' : 'grid grid-cols-1 sm:grid-cols-3 gap-4';
             return `
-              <section onclick="selectBlock('${blk.id}', event)" style="border-bottom:1px solid ${pal.border}" class="canvas-block ${selCls} px-6 py-12">
+              <section onclick="selectBlock('${blk.id}', event)" style="border-bottom:1px solid ${pal.border};background:${blk.background || pal.bg}" class="canvas-block ai-composition ${selCls} px-6 sm:px-10 py-12 sm:py-16">
                 ${dots}
-                <h2 contenteditable="${editable}" onblur="updateField('${blk.id}','heading',this.innerText)" class="font-display font-bold text-xl sm:text-2xl text-center mb-8 outline-none">${blk.heading}</h2>
-                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                  ${blk.items.map((it, idx) => `
-                    <div style="background:${pal.surface}; border:1px solid ${pal.border}" class="p-5 rounded-2xl">
-                      <div class="w-8 h-8 rounded-lg flex items-center justify-center text-white text-xs font-bold mb-3" style="background:${accent}">0${idx + 1}</div>
-                      <h3 contenteditable="${editable}" onblur="updateNestedField('${blk.id}','items',${idx},'title',this.innerText)" class="font-display font-bold text-sm outline-none">${it.title}</h3>
-                      <p contenteditable="${editable}" onblur="updateNestedField('${blk.id}','items',${idx},'desc',this.innerText)" style="color:${pal.muted}" class="text-xs mt-1.5 leading-relaxed outline-none">${it.desc}</p>
-                    </div>
-                  `).join('')}
+                <div class="${featureLayout === 'editorial' ? 'ai-feature-editorial' : ''}">
+                  <div class="ai-section-heading ${blk.align === 'left' || featureLayout === 'editorial' ? 'is-left' : 'text-center'} mb-8">
+                    <span class="ai-eyebrow" style="color:${accent}">${blk.eyebrow || 'BİZİ FARKLI KILANLAR'}</span>
+                    <h2 contenteditable="${editable}" onblur="updateField('${blk.id}','heading',this.innerText)" class="font-display ai-display font-bold text-2xl sm:text-4xl mt-3 outline-none">${blk.heading}</h2>
+                    ${blk.subtitle ? '<p class="mt-3 text-sm leading-relaxed" style="color:' + pal.muted + '">' + blk.subtitle + '</p>' : ''}
+                  </div>
+                  <div class="${gridClass}">${featureCards}</div>
                 </div>
               </section>`;
           }
@@ -1235,23 +1294,26 @@
           }
 
           if (blk.type === 'gallery') {
-            return `
-              <section onclick="selectBlock('${blk.id}', event)" style="border-bottom:1px solid ${pal.border}" class="canvas-block ${selCls} px-6 py-12">
-                ${dots}
-                <h2 contenteditable="${editable}" onblur="updateField('${blk.id}','heading',this.innerText)" class="font-display font-bold text-xl sm:text-2xl text-center mb-8 outline-none">${blk.heading}</h2>
-                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                  ${blk.cards.map((c, idx) => `
-                    <div style="background:${pal.surface}; border:1px solid ${pal.border}" class="rounded-2xl overflow-hidden">
-                      <div style="background:${accent}16; border-bottom:1px solid ${pal.border}" class="h-28 p-4 flex items-end justify-between">
-                        <span contenteditable="${editable}" onblur="updateNestedField('${blk.id}','cards',${idx},'tag',this.innerText)" style="color:${accent}" class="text-[10px] font-mono font-bold tracking-wider uppercase outline-none">${c.tag}</span>
-                      </div>
-                      <div class="p-4">
-                        <h3 contenteditable="${editable}" onblur="updateNestedField('${blk.id}','cards',${idx},'title',this.innerText)" class="font-display font-bold text-sm outline-none">${c.title}</h3>
-                        <p contenteditable="${editable}" onblur="updateNestedField('${blk.id}','cards',${idx},'desc',this.innerText)" style="color:${pal.muted}" class="text-xs mt-1 leading-relaxed outline-none">${c.desc}</p>
-                      </div>
-                    </div>
-                  `).join('')}
+            const galleryLayout = ['editorial','grid-2','grid-3','bento'].includes(blk.layout) ? blk.layout : 'editorial';
+            const galleryCards = (blk.cards || []).map((c, idx) => `
+              <article style="background:${pal.surface};border:1px solid ${pal.border}" class="ai-card">
+                <div class="ai-media p-5 flex items-end" style="background-color:${accent}16">
+                  <span contenteditable="${editable}" onblur="updateNestedField('${blk.id}','cards',${idx},'tag',this.innerText)" style="color:${accent};background:white;padding:5px 9px;border-radius:999px" class="text-[10px] font-bold tracking-wider uppercase outline-none">${c.tag || ''}</span>
                 </div>
+                <div class="p-5">
+                  <h3 contenteditable="${editable}" onblur="updateNestedField('${blk.id}','cards',${idx},'title',this.innerText)" class="font-display font-bold text-base outline-none">${c.title}</h3>
+                  <p contenteditable="${editable}" onblur="updateNestedField('${blk.id}','cards',${idx},'desc',this.innerText)" style="color:${pal.muted}" class="text-sm mt-2 leading-relaxed outline-none">${c.desc}</p>
+                </div>
+              </article>`).join('');
+            const galleryClass = galleryLayout === 'editorial' ? 'ai-gallery-editorial' : galleryLayout === 'grid-2' ? 'ai-grid-2' : galleryLayout === 'bento' ? 'ai-grid-bento' : 'grid grid-cols-1 sm:grid-cols-3 gap-4';
+            return `
+              <section onclick="selectBlock('${blk.id}', event)" style="border-bottom:1px solid ${pal.border};background:${blk.background || pal.bg}" class="canvas-block ai-composition ${selCls} px-6 sm:px-10 py-12 sm:py-16">
+                ${dots}
+                <div class="ai-section-heading ${blk.align === 'left' ? 'is-left' : 'text-center'} mb-8">
+                  <span class="ai-eyebrow" style="color:${accent}">${blk.eyebrow || 'SEÇİLMİŞ İŞLER'}</span>
+                  <h2 contenteditable="${editable}" onblur="updateField('${blk.id}','heading',this.innerText)" class="font-display ai-display font-bold text-2xl sm:text-4xl mt-3 outline-none">${blk.heading}</h2>
+                </div>
+                <div class="${galleryClass}">${galleryCards}</div>
               </section>`;
           }
 
@@ -1467,7 +1529,7 @@
     function applyAiStudioOperations(operations) {
       if (!Array.isArray(operations) || operations.length > 20) throw new Error('Geçersiz tasarım işlemi listesi.');
       const allowedTypes = new Set(['navbar','hero','features','cta','gallery','pricing','contact']);
-      const allowedFields = new Set(['name','brand','cta','badge','title','subtitle','primaryBtn','secondaryBtn','heading','buttonText','submitText','links','items','cards','plans']);
+      const allowedFields = new Set(['name','brand','cta','badge','title','subtitle','primaryBtn','secondaryBtn','heading','buttonText','submitText','links','items','cards','plans','layout','imageUrl','imageAlt','background','textColor','mutedColor','eyebrow','align']);
       for (const op of operations) {
         if (!op || typeof op !== 'object') throw new Error('Geçersiz tasarım işlemi.');
         switch (op.type) {
@@ -1626,7 +1688,10 @@
               badge: block.badge, subtitle: block.subtitle,
               cta: block.cta, buttonText: block.buttonText,
               primaryBtn: block.primaryBtn, secondaryBtn: block.secondaryBtn,
-              items: block.items, cards: block.cards, plans: block.plans
+              items: block.items, cards: block.cards, plans: block.plans,
+              layout: block.layout, imageUrl: block.imageUrl, imageAlt: block.imageAlt,
+              background: block.background, textColor: block.textColor, mutedColor: block.mutedColor,
+              eyebrow: block.eyebrow, align: block.align
             }))
           }))
         };
