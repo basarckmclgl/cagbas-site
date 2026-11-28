@@ -157,6 +157,12 @@ header button.btn-rescue:hover { background:#34d399; }
     <h2>🚀 Paketini Seç, Çoklu Sayfa Web Siteni Tasarla</h2>
     <p class="sub">Tüm paketlerde sınırsız sayfa ekleme, menü yönetimi ve doğrudan yazı düzenleme aktif!</p>
     <div class="packages">
+      <div class="pkg">
+        <h3>Başlangıç</h3>
+        <div class="price">Ücretsiz demo</div>
+        <ul><li>1 deneme projesi</li><li>Temel bloklarla tasarım önizlemesi</li><li>Metin ve görünüm düzenleme</li><li>En fazla 3 sayfa</li><li>HTML indirme ve yayınlama yok</li></ul>
+        <button type="button" onclick="selectPlan('Başlangıç')">Ücretsiz Dene</button>
+      </div>
       <div class="pkg featured">
         <div class="badge">PROFESYONEL</div>
         <h3>Pro</h3>
@@ -313,6 +319,7 @@ let pages = [
 let currentPageId = 'home';
 let selected = -1;
 let undoStack = [];
+let currentPlan = null;
 
 const COLORS = {
   kırmızı:'#ef4444', mavi:'#3b82f6', lacivert:'#1e3a8a', yeşil:'#22c55e',
@@ -331,6 +338,22 @@ function notify(msg){
 
 function norm(s){
   return String(s || '').toLocaleLowerCase('tr').replace(/[İI]/g,'i').replace(/ı/g,'i');
+}
+
+function selectPlan(name){
+  currentPlan = name;
+  document.getElementById('planBadge').textContent = name === 'Başlangıç' ? 'Demo Modu' : '✅ ' + name;
+  document.getElementById('packageModal').classList.add('hidden');
+  document.getElementById('mainPanel').classList.add('active');
+  const exportButtons = document.querySelectorAll('header button[onclick="openExport()"], .settings button[onclick="openExport()"]');
+  exportButtons.forEach(button => {
+    button.disabled = name === 'Başlangıç';
+    button.title = name === 'Başlangıç' ? 'HTML dışa aktarma Pro ve Premium üyeliklerinde kullanılabilir.' : '';
+    button.style.opacity = name === 'Başlangıç' ? '.45' : '';
+    button.style.cursor = name === 'Başlangıç' ? 'not-allowed' : '';
+  });
+  if(name === 'Başlangıç') notify('Demo modu: En fazla 3 sayfa. HTML indirme ve yayınlama kapalı.');
+  render();
 }
 
 function applyForPlan(plan){
@@ -370,6 +393,10 @@ function syncMenuToAllPages(){
 }
 
 function createNewPage(customTitle){
+  if(currentPlan === 'Başlangıç' && pages.length >= 3){
+    notify('Demo modunda en fazla 3 sayfa oluşturabilirsiniz. Sınırsız sayfa için Pro veya Premium seçin.');
+    return;
+  }
   const input = document.getElementById('newPageInput');
   const title = (customTitle || input.value).trim();
   if(!title){
@@ -973,17 +1000,29 @@ document.querySelectorAll('.pv-nav .links a').forEach(link => {
 }
 
 function openExport(){
+  if(currentPlan === 'Başlangıç'){
+    notify('HTML dışa aktarma Pro ve Premium üyeliklerinde kullanılabilir.');
+    return;
+  }
   document.getElementById('codeOut').value = buildCode();
   document.getElementById('exportModal').classList.remove('hidden');
 }
 
 function copyCode(){
+  if(currentPlan === 'Başlangıç'){
+    notify('Kod kopyalama Pro ve Premium üyeliklerinde kullanılabilir.');
+    return;
+  }
   codeOut.select();
   navigator.clipboard.writeText(codeOut.value);
   notify('📋 Çoklu sayfa HTML kodu kopyalandı');
 }
 
 function downloadCode(){
+  if(currentPlan === 'Başlangıç'){
+    notify('HTML indirme Pro ve Premium üyeliklerinde kullanılabilir.');
+    return;
+  }
   const blob = new Blob([buildCode()], {type:'text/html'});
   const a = document.createElement('a');
   a.href = URL.createObjectURL(blob);
