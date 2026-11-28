@@ -1630,18 +1630,30 @@
           }))
         };
         const priorConversation = aiConversation.slice(-8);
-        const response = await fetch('/api/ai-studio', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          signal: controller.signal,
+        const requestTimeout = setTimeout(() => controller.abort(new DOMException('İstek 50 saniyede tamamlanmadı.', 'TimeoutError')), 50000);
+        let response;
+        try {
+          response = await fetch('/api/ai-studio', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            signal: controller.signal,
           body: JSON.stringify({
             messages: [
               ...priorConversation,
               { role: 'user', content: '[MEVCUT TASARIM DURUMU] ' + JSON.stringify(currentDesign).slice(0, 3500) },
               { role: 'user', content: cleanMessage }
             ]
-          })
-        });
+            })
+          });
+        } catch (fetchError) {
+          if (fetchError?.name === 'TimeoutError') {
+            throw new Error('İstek 50 saniyede tamamlanmadı. Lütfen tekrar deneyin.');
+          }
+          if (fetchError?.name === 'AbortError') throw fetchError;
+          throw new Error('Sunucuya bağlanılamadı: ' + (fetchError?.message || 'ağ hatası'));
+        } finally {
+          clearTimeout(requestTimeout);
+        }
         const data = await response.json().catch(() => ({}));
         if (requestId !== aiAutoBuildRequestId) return;
         if (!response.ok) throw new Error(data.error || 'Yapay zekâ şu anda yanıt veremiyor.');
