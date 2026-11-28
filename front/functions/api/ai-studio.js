@@ -9,10 +9,19 @@ function json(data, status = 200) {
   });
 }
 
-const ALLOWED_ORIGINS = new Set([
-  "https://cagbas.com",
-  "https://www.cagbas.com"
-]);
+const ALLOWED_ORIGINS = new Set(["https://cagbas.com", "https://www.cagbas.com"]);
+
+function isAllowedOrigin(value) {
+  try {
+    const url = new URL(value);
+    return url.protocol === "https:" && (
+      ALLOWED_ORIGINS.has(url.origin) ||
+      (url.hostname.endsWith(".cagbas-site.pages.dev") && url.hostname.length > ".cagbas-site.pages.dev".length)
+    );
+  } catch {
+    return false;
+  }
+}
 
 export async function onRequestPost({ request, env }) {
   if (!env.OPENAI_API_KEY) {
@@ -23,7 +32,7 @@ export async function onRequestPost({ request, env }) {
   if (origin) {
     let normalizedOrigin = "";
     try { normalizedOrigin = new URL(origin).origin; } catch {}
-    if (!ALLOWED_ORIGINS.has(normalizedOrigin)) {
+    if (!isAllowedOrigin(origin)) {
       return json({ error: "Bu kaynaktan gelen isteğe izin verilmiyor." }, 403);
     }
   }
