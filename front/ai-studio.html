@@ -295,6 +295,12 @@ header button.btn-rescue:hover { background:#34d399; }
     <label>Ana Marka Rengi</label>
     <input type="color" id="siteColor" value="#3b82f6" oninput="render()">
 
+    <h4 style="margin-top:16px">🌐 Alan Adı</h4>
+    <label>Bağlamak istediğiniz alan adı</label>
+    <input id="customDomainInput" type="text" placeholder="ornek.com" autocomplete="url">
+    <p style="font-size:11px;color:#94a3b8;line-height:1.5;margin:6px 0">Demo sırasında alan adınızı belirleyebilirsiniz. Gerçek DNS bağlantısı ve yayınlama, resmî kullanıma geçişte yapılır.</p>
+    <button class="btn btn-blue" type="button" onclick="requestDomainConnection()">Alan Adı Bağlama Talebi</button>
+
     <button class="btn btn-green" onclick="openExport()">⬇ HTML Kodunu Al</button>
     <button class="btn btn-gray" onclick="clearAll()">🧹 Aktif Sayfayı Temizle</button>
   </div>
@@ -384,18 +390,49 @@ function selectPlan(name){
   render();
 }
 
+function requestDomainConnection(){
+  const domainInput = document.getElementById('customDomainInput');
+  const domain = (domainInput.value || '').trim();
+  if(domain && !/^(?!-)[a-z0-9-]+(\\.[a-z0-9-]+)+$/i.test(domain)){
+    notify('Lütfen geçerli bir alan adı girin. Örnek: ornek.com');
+    domainInput.focus();
+    return;
+  }
+  document.getElementById('membershipGateModal').classList.remove('hidden');
+  const heading = document.querySelector('#membershipGateModal h2');
+  const description = document.querySelector('#membershipGateModal .sub');
+  heading.textContent = 'Alan adınızı bağlamak mı istiyorsunuz?';
+  description.textContent = 'Alan adı ve DNS bağlantısını, projenizi resmî olarak kullanıma alırken birlikte tamamlayabiliriz.';
+  const action = document.querySelector('#membershipGateModal .btn.btn-green');
+  action.textContent = 'Alan adı talebi oluştur';
+  action.onclick = () => sendMembershipRequest('domain');
+}
+
 function openMembershipGate(){
+  const heading = document.querySelector('#membershipGateModal h2');
+  const description = document.querySelector('#membershipGateModal .sub');
+  const action = document.querySelector('#membershipGateModal .btn.btn-green');
+  heading.textContent = 'Tasarımınızı kullanıma almak mı istiyorsunuz?';
+  description.textContent = 'ÇAĞBAŞ AI Studio’da tasarımınızı demo olarak oluşturabilir ve önizleyebilirsiniz. Resmî kullanım, yayınlama veya teslim aşamasına geçtiğinizde bizimle iletişime geçebilirsiniz.';
+  action.textContent = 'ÇAĞBAŞ ile iletişime geç';
+  action.onclick = () => sendMembershipRequest('official-use');
   document.getElementById('membershipGateModal').classList.remove('hidden');
 }
 
-function sendMembershipRequest(){
+function sendMembershipRequest(requestKind){
   const recipient = 'cagbas.2026@gmail.com';
-  const subject = 'ÇAĞBAŞ AI Studio - Tasarımı Resmî Kullanıma Alma Talebi';
+  const domain = (document.getElementById('customDomainInput')?.value || '').trim();
+  const isDomainRequest = requestKind === 'domain';
+  const subject = isDomainRequest
+    ? 'ÇAĞBAŞ AI Studio - Alan Adı Bağlama Talebi'
+    : 'ÇAĞBAŞ AI Studio - Tasarımı Resmî Kullanıma Alma Talebi';
   const body = [
     'Merhaba,',
     '',
-    'ÇAĞBAŞ AI Studio üzerinde bir tasarım oluşturdum. Tasarımı demo aşamasından çıkararak resmî olarak kullanmak, yayınlamak veya teslim almak istiyorum.',
-    'Projemin kapsamı ve sonraki adımlar hakkında benimle iletişime geçmenizi rica ederim.',
+    isDomainRequest
+      ? 'ÇAĞBAŞ AI Studio projem için alan adı bağlama desteği almak istiyorum.'
+      : 'ÇAĞBAŞ AI Studio üzerinde bir tasarım oluşturdum. Tasarımı demo aşamasından çıkararak resmî olarak kullanmak, yayınlamak veya teslim almak istiyorum.',
+    isDomainRequest ? 'Bağlamak istediğim alan adı: ' + (domain || 'Henüz karar vermedim') : 'Projemin kapsamı ve sonraki adımlar hakkında benimle iletişime geçmenizi rica ederim.',
     '',
     'Ad Soyad:',
     'Telefon:',
