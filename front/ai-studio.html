@@ -965,6 +965,56 @@
     // =========================================================================
     // WYSIWYG CANVAS RENDERER
     // =========================================================================
+    // Canvas drag-and-drop: reorder blocks without changing their content.
+    let draggedStudioBlockId = null;
+    let canvasDnDBound = false;
+
+    function bindCanvasDragAndDrop() {
+      const canvas = document.getElementById('wysiwygCanvas');
+      if (!canvas) return;
+      canvas.querySelectorAll('.canvas-block').forEach(block => {
+        block.draggable = !state.previewOnly;
+        block.dataset.blockId = (block.getAttribute('onclick') || '').match(/selectBlock\('([^']+)'/)?.[1] || '';
+        block.classList.toggle('cursor-grab', !state.previewOnly);
+      });
+      if (canvasDnDBound) return;
+      canvasDnDBound = true;
+      canvas.addEventListener('dragstart', event => {
+        const block = event.target.closest('.canvas-block');
+        if (!block || state.previewOnly || !block.dataset.blockId) { event.preventDefault(); return; }
+        draggedStudioBlockId = block.dataset.blockId;
+        event.dataTransfer.effectAllowed = 'move';
+        event.dataTransfer.setData('text/plain', draggedStudioBlockId);
+        block.classList.add('opacity-50');
+      });
+      canvas.addEventListener('dragover', event => {
+        if (!draggedStudioBlockId || state.previewOnly) return;
+        const target = event.target.closest('.canvas-block');
+        if (!target || target.dataset.blockId === draggedStudioBlockId) return;
+        event.preventDefault();
+        event.dataTransfer.dropEffect = 'move';
+      });
+      canvas.addEventListener('drop', event => {
+        if (!draggedStudioBlockId || state.previewOnly) return;
+        const target = event.target.closest('.canvas-block');
+        if (!target || target.dataset.blockId === draggedStudioBlockId) return;
+        event.preventDefault();
+        const from = state.blocks.findIndex(item => item.id === draggedStudioBlockId);
+        const to = state.blocks.findIndex(item => item.id === target.dataset.blockId);
+        if (from < 0 || to < 0 || from === to) return;
+        checkpointStudio();
+        const [moved] = state.blocks.splice(from, 1);
+        state.blocks.splice(to, 0, moved);
+        state.selectedId = moved.id;
+        draggedStudioBlockId = null;
+        renderCanvas();
+      });
+      canvas.addEventListener('dragend', () => {
+        canvas.querySelectorAll('.canvas-block.opacity-50').forEach(block => block.classList.remove('opacity-50'));
+        draggedStudioBlockId = null;
+      });
+    }
+
     function renderCanvas() {
       const canvas = document.getElementById('wysiwygCanvas');
       const pal = getThemePalette();
@@ -1109,6 +1159,7 @@
         }).join('');
       }
 
+      bindCanvasDragAndDrop();
       renderHistoryButtons();
       renderStudioPages();
 
