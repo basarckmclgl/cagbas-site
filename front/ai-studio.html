@@ -680,7 +680,7 @@
       if (count) count.textContent = state.pages.length + ' / 30';
       const strip = document.getElementById('studioPageStripItems');
       if (strip) strip.innerHTML = state.pages.map((page, index) =>
-        '<button type="button" onclick="switchStudioPage(\\'' + page.id + '\\')" class="min-w-[112px] max-w-[180px] px-3 py-2 rounded-lg border text-left shrink-0 ' +
+        '<button type="button" onclick="switchStudioPage(\'' + page.id + '\')" class="min-w-[112px] max-w-[180px] px-3 py-2 rounded-lg border text-left shrink-0 ' +
         (page.id === state.currentPageId ? 'border-indigo-500 bg-indigo-50 text-indigo-700' : 'border-slate-200 bg-white text-slate-600 hover:border-indigo-300') +
         '"><span class="block text-[10px] opacity-70">Sayfa ' + (index + 1) + '</span><span class="block text-xs font-semibold truncate">' +
         page.name.replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch])) +
@@ -959,7 +959,7 @@
         : null;
       if (editingText) {
         document.querySelectorAll('#wysiwygCanvas .canvas-block').forEach(block => {
-          const blockId = (block.getAttribute('onclick') || '').match(/selectBlock\\('([^']+)'/)?.[1];
+          const blockId = (block.getAttribute('onclick') || '').match(/selectBlock\('([^']+)'/)?.[1];
           block.classList.toggle('is-selected', blockId === id);
         });
         const selected = state.blocks.find(block => block.id === id);
