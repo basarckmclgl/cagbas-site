@@ -166,14 +166,30 @@ header button.btn-rescue:hover { background:#34d399; }
       <div class="pkg featured">
         <div class="badge">PROFESYONEL</div>
         <h3>Pro</h3>
-        <div class="price">Üyelik başvurusu</div>
-        <ul><li>Sınırsız sayfa & proje</li><li>Akıllı yazılı asistan</li><li>Mesleğe özel çoklu sayfa kurulumu</li><li>Düzen koruma & otomatik menü</li><li>Tam HTML kod çıktısı</li></ul>
+        <div class="price">6.999,99 TL<small>/ay</small></div>
+        <ul>
+          <li><strong>Üret</strong></li>
+          <li>Daha fazla proje</li>
+          <li>Gelişmiş AI tasarım</li>
+          <li>Çok sayfalı site oluşturma</li>
+          <li>HTML/CSS/JS dışa aktarma</li>
+          <li>Kendi hostingine aktarma</li>
+          <li>Alan adı bağlama</li>
+        </ul>
         <button type="button" onclick="applyForPlan('Pro')">Pro'yu Seç</button>
       </div>
       <div class="pkg">
         <h3>Premium</h3>
-        <div class="price">Üyelik başvurusu</div>
-        <ul><li>Pro'daki her şey</li><li>Özel alan adı bağlama</li><li>Kurumsal şablonlar</li><li>Öncelikli destek</li></ul>
+        <div class="price">9.999,99 TL<small>/ay</small></div>
+        <ul>
+          <li><strong>Profesyonel yönet</strong></li>
+          <li>Pro özelliklerinin tamamı</li>
+          <li>Yüksek AI kullanım kotası</li>
+          <li>Müşteri projeleri yönetimi</li>
+          <li>Sürüm geçmişi ve yedekleme</li>
+          <li>Gelişmiş yayınlama seçenekleri</li>
+          <li>Öncelikli destek</li>
+        </ul>
         <button type="button" onclick="applyForPlan('Premium')">Premium'u Seç</button>
       </div>
     </div>
@@ -358,23 +374,29 @@ function selectPlan(name){
 
 function applyForPlan(plan){
   const recipient = 'cagbas.2026@gmail.com';
+  const price = plan === 'Pro' ? '6.999,99 TL/ay' : '9.999,99 TL/ay';
   const subject = 'ÇAĞBAŞ AI Studio ' + plan + ' Üyelik Başvurusu';
   const body = [
     'Merhaba,',
     '',
     'ÇAĞBAŞ AI Studio ' + plan + ' paketi için üyelik başvurusu yapmak istiyorum.',
+    'Paket ücreti: ' + price,
     '',
     'Ad Soyad:',
     'Telefon:',
     'E-posta:',
+    'İşletme / proje adı:',
     'Kullanım amacım:',
     '',
-    'Üyelik ve fiyatlandırma detayları hakkında benimle iletişime geçmenizi rica ederim.',
+    'Üyelik aktivasyonu ve ödeme adımları hakkında benimle iletişime geçmenizi rica ederim.',
     '',
     'İyi çalışmalar.'
   ].join('\\n');
-  const mailto = 'mailto:' + recipient + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
-  window.location.href = mailto;
+  const gmailCompose = 'https://mail.google.com/mail/?view=cm&fs=1&to=' + encodeURIComponent(recipient) + '&su=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+  const mailWindow = window.open(gmailCompose, '_blank', 'noopener');
+  if(!mailWindow){
+    window.location.href = 'mailto:' + recipient + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+  }
 }
 
 // ========== ÇOKLU SAYFA & SOL MENÜ ADAPTASYONU ==========
