@@ -1619,17 +1619,19 @@
           accent: state.accent,
           currentPageId: state.currentPageId,
           pages: state.pages.map(page => ({
-            id: page.id, name: page.name, slug: page.slug,
+            id: page.id, name: page.name,
             blocks: page.blocks.map(block => ({
-              id: block.id, type: block.type, name: block.name, title: block.title,
-              heading: block.heading, brand: block.brand, badge: block.badge,
-              subtitle: block.subtitle, cta: block.cta, buttonText: block.buttonText,
+              id: block.id, type: block.type, name: block.name,
+              title: block.title, heading: block.heading, brand: block.brand,
+              badge: block.badge, subtitle: block.subtitle,
+              cta: block.cta, buttonText: block.buttonText,
               primaryBtn: block.primaryBtn, secondaryBtn: block.secondaryBtn,
               items: block.items, cards: block.cards, plans: block.plans
             }))
           }))
         };
-        const priorConversation = aiConversation.slice(-8);
+        // Keep only the latest two conversational turns to minimize latency and token usage.
+        const priorConversation = aiConversation.slice(-4);
         const requestTimeout = setTimeout(() => controller.abort(new DOMException('İstek 50 saniyede tamamlanmadı.', 'TimeoutError')), 50000);
         let response;
         try {
@@ -1640,7 +1642,7 @@
           body: JSON.stringify({
             messages: [
               ...priorConversation,
-              { role: 'user', content: '[MEVCUT TASARIM DURUMU] ' + JSON.stringify(currentDesign).slice(0, 3500) },
+              { role: 'user', content: '[MEVCUT TASARIM DURUMU] ' + JSON.stringify(currentDesign).slice(0, 1800) },
               { role: 'user', content: cleanMessage }
             ]
             })
