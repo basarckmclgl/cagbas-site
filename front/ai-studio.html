@@ -1499,11 +1499,11 @@
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ messages: [
-            ...aiConversation.slice(-11),
+            ...aiConversation.slice(-10),
             { role: 'user', content: '[MEVCUT TASARIM DURUMU] ' + JSON.stringify({
               theme: state.theme, accent: state.accent, currentPageId: state.currentPageId,
-              pages: state.pages.map(page => ({ id: page.id, name: page.name, slug: page.slug, blocks: page.blocks }))
-            }).slice(0, 12000) },
+              pages: state.pages.map(page => ({ id: page.id, name: page.name, slug: page.slug, blocks: page.blocks.map(block => ({ id: block.id, type: block.type, name: block.name, title: block.title, heading: block.heading, brand: block.brand, badge: block.badge, subtitle: block.subtitle, cta: block.cta, buttonText: block.buttonText, primaryBtn: block.primaryBtn, secondaryBtn: block.secondaryBtn, items: block.items, cards: block.cards, plans: block.plans })) }))
+            }).slice(0, 3500) },
             { role: 'user', content: cleanMessage }
           ] })
         });
