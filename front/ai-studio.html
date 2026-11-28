@@ -10,9 +10,8 @@ body { background:#0f172a; color:#e2e8f0; height:100vh; overflow:hidden; display
 
 /* ===== ÜST BAR ===== */
 header { background:#1e293b; padding:10px 20px; display:flex; justify-content:space-between; align-items:center; border-bottom:2px solid #38bdf8; flex-shrink:0; gap:10px; }
-.logo { font-size:20px; font-weight:800; color:#38bdf8; display:flex; align-items:center; gap:8px; }
-.logo span { color:#f472b6; }
-.mode-pill { font-size:11px; background:rgba(56,189,248,.15); color:#38bdf8; border:1px solid rgba(56,189,248,.4); padding:3px 10px; border-radius:20px; font-weight:600; }
+.brand-logo { display:flex; align-items:center; justify-content:center; flex:0 0 auto; width:132px; height:38px; padding:3px 8px; background:#fff; border-radius:7px; }
+.brand-logo img { display:block; width:100%; height:100%; object-fit:contain; }
 .header-actions { display:flex; align-items:center; gap:8px; }
 header button { background:#38bdf8; border:none; color:#0f172a; padding:8px 14px; border-radius:8px; font-weight:700; cursor:pointer; transition:.15s; font-size:12.5px; }
 header button:hover { background:#0ea5e9; }
@@ -142,10 +141,9 @@ header button.btn-rescue:hover { background:#34d399; }
 <body>
 
 <header>
-  <div class="logo">
-    WebPanel <span>Pro</span>
-    <span class="mode-pill">Çoklu Sayfa • Canlı Metin Düzenleme</span>
-  </div>
+  <a class="brand-logo" href="/" aria-label="ÇAĞBAŞ ana sayfa">
+    <img src="/_assets/images/cagbas-logo.svg" alt="ÇAĞBAŞ">
+  </a>
   <div class="header-actions">
     <span id="planBadge" style="font-size:12px; color:#94a3b8;"></span>
     <button class="btn-rescue" onclick="fixAndProtectLayout()">✨ Eksikleri Tamamla & Düzeni Koru</button>
