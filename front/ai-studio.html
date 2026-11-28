@@ -266,7 +266,7 @@ header button.btn-rescue:hover { background:#34d399; }
     <!-- TASARIM SEVİYESİ -->
     <div class="design-choice">
       <div class="panel-title"><span>🎨 Tasarım Seviyesi</span></div>
-      <select id="designStyleSelect" onchange="selectedDesignStyle=this.value;notify('Tasarım seviyesi: '+this.options[this.selectedIndex].text)">
+      <select id="designStyleSelect" onchange="changeDesignStyle(this.value)">
         <option value="mini">Mini Tasarım</option>
         <option value="standard" selected>Standart Tasarım</option>
         <option value="pro">Pro Tasarım</option>
@@ -427,6 +427,20 @@ let selected = -1;
 let undoStack = [];
 let currentPlan = null;
 let selectedDesignStyle = 'standard';
+function changeDesignStyle(style){
+  selectedDesignStyle = style || 'standard';
+  let changed = false;
+  pages.forEach(page => page.blocks.forEach(block => {
+    if(block.designStyle !== undefined){
+      block.designStyle = selectedDesignStyle;
+      changed = true;
+    }
+  }));
+  if(changed) renderPreviewOnly();
+  const select = document.getElementById('designStyleSelect');
+  if(select && select.value !== selectedDesignStyle) select.value = selectedDesignStyle;
+  notify('Tasarım görünümü: ' + ({mini:'Mini',standard:'Standart',pro:'Pro',premium:'Premium'}[selectedDesignStyle] || 'Standart'));
+}
 
 const COLORS = {
   kırmızı:'#ef4444', mavi:'#3b82f6', lacivert:'#1e3a8a', yeşil:'#22c55e',
@@ -1381,6 +1395,46 @@ a{text-decoration:none}
 .canvas-block[data-family="consulting"] .pv-hero{background:#eff6ff!important;color:#1e3a8a!important;text-align:left;padding:110px 10%;border-left:8px solid #1d4ed8}.canvas-block[data-family="consulting"] .pv-hero h1{font:50px Georgia,serif;max-width:760px}.canvas-block[data-family="consulting"] .pv-card{border-radius:0!important;text-align:left!important;border-bottom:2px solid #1d4ed8}
 .canvas-block[data-family="events"] .pv-hero{background:linear-gradient(135deg,#701a75,#c026d3)!important;text-align:center;padding:130px 8%;color:#fff!important}.canvas-block[data-family="events"] .pv-hero h1{font:56px Georgia,serif}.canvas-block[data-family="events"] .pv-cards{background:#fdf4ff!important}.canvas-block[data-family="events"] .pv-card{border-radius:22px!important;text-align:center!important}
 @media(max-width:640px){.canvas-block[data-family] .pv-hero{padding:58px 20px!important}.canvas-block[data-family] .pv-hero h1{font-size:32px!important}.canvas-block[data-family] .pv-cards{grid-template-columns:1fr!important}}
+
+/* Distinct visual identity for each package level */
+.canvas-block[data-design="mini"] .pv-nav{padding:10px 16px;border-bottom:1px solid #e2e8f0}
+.canvas-block[data-design="mini"] .pv-hero{padding:42px 22px!important;text-align:center!important;background:#f8fafc!important;color:#1e293b!important;border-bottom:0!important;min-height:0!important}
+.canvas-block[data-design="mini"] .pv-hero h1{font:700 30px/1.2 'Segoe UI',sans-serif!important;letter-spacing:-.8px!important}
+.canvas-block[data-design="mini"] .pv-hero p{font-size:14px!important}
+.canvas-block[data-design="mini"] .pv-btn{border-radius:7px!important}
+.canvas-block[data-design="mini"] .pv-cards{padding:28px 18px!important;gap:12px!important;background:#fff!important}
+.canvas-block[data-design="mini"] .pv-card{padding:17px!important;border:1px solid #e5e7eb!important;border-radius:8px!important;box-shadow:none!important;text-align:center!important}
+.canvas-block[data-design="mini"] .pv-about{padding:30px 18px!important}
+.canvas-block[data-design="mini"] .pv-footer{padding:18px!important}
+.canvas-block[data-design="standard"] .pv-nav{padding:17px 26px}
+.canvas-block[data-design="standard"] .pv-hero{padding:72px 30px!important;text-align:center!important;min-height:290px}
+.canvas-block[data-design="standard"] .pv-hero h1{font-size:40px!important;max-width:800px;margin:0 auto 14px!important}
+.canvas-block[data-design="standard"] .pv-cards{padding:48px 30px!important;gap:18px!important}
+.canvas-block[data-design="standard"] .pv-card{border-radius:14px!important;padding:25px!important;box-shadow:0 8px 24px rgba(15,23,42,.07)!important}
+.canvas-block[data-design="pro"] .pv-nav{padding:22px 34px;border-bottom:0}
+.canvas-block[data-design="pro"] .pv-hero{padding:105px 8%!important;text-align:left!important;min-height:370px;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;background:linear-gradient(120deg,#111827,#334155)!important;color:#fff!important}
+.canvas-block[data-design="pro"] .pv-hero h1{font-size:clamp(42px,5vw,58px)!important;line-height:1.04!important;letter-spacing:-1.8px!important;max-width:820px}
+.canvas-block[data-design="pro"] .pv-hero p{font-size:18px!important;max-width:650px!important;margin-left:0!important}
+.canvas-block[data-design="pro"] .pv-btn{border-radius:5px!important;padding:14px 30px!important}
+.canvas-block[data-design="pro"] .pv-cards{max-width:1160px!important;padding:65px 34px!important;gap:22px!important}
+.canvas-block[data-design="pro"] .pv-card{border-radius:5px!important;padding:30px!important;text-align:left!important;box-shadow:0 14px 34px rgba(15,23,42,.12)!important;border-top:3px solid currentColor!important}
+.canvas-block[data-design="pro"] .pv-about{text-align:left!important;max-width:1000px!important;padding:75px 8%!important}
+.canvas-block[data-design="premium"] .pv-nav{padding:28px 5%;border-bottom:1px solid #d6c5a0}
+.canvas-block[data-design="premium"] .pv-hero{padding:145px 9%!important;text-align:left!important;min-height:490px;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;background:linear-gradient(115deg,#171717,#3f3a32)!important;color:#f8f5ed!important}
+.canvas-block[data-design="premium"] .pv-hero h1{font:500 clamp(48px,6vw,72px)/1.02 Georgia,serif!important;letter-spacing:-1.5px!important;max-width:900px}
+.canvas-block[data-design="premium"] .pv-hero p{font:18px/1.7 Georgia,serif!important;max-width:680px!important;margin-left:0!important;color:#e7dfd0!important}
+.canvas-block[data-design="premium"] .pv-btn{border-radius:0!important;padding:16px 34px!important;letter-spacing:1px!important;text-transform:uppercase!important}
+.canvas-block[data-design="premium"] .pv-cards{max-width:1240px!important;padding:90px 5%!important;gap:26px!important;background:#f5f1e8!important}
+.canvas-block[data-design="premium"] .pv-card{border-radius:0!important;padding:38px 30px!important;text-align:left!important;background:#fffdf8!important;border:1px solid #d8cbb4!important;box-shadow:0 18px 45px rgba(40,32,20,.08)!important}
+.canvas-block[data-design="premium"] .pv-card h3{font:26px Georgia,serif!important}
+.canvas-block[data-design="premium"] .pv-about{max-width:1050px!important;padding:100px 8%!important;font:19px/1.9 Georgia,serif!important}
+.canvas-block[data-design="premium"] .pv-footer{padding:38px!important;letter-spacing:.5px}
+@media(max-width:640px){
+ .canvas-block[data-design="pro"] .pv-hero,.canvas-block[data-design="premium"] .pv-hero{padding:58px 22px!important;min-height:0!important}
+ .canvas-block[data-design="pro"] .pv-hero h1,.canvas-block[data-design="premium"] .pv-hero h1{font-size:34px!important}
+ .canvas-block[data-design="pro"] .pv-cards,.canvas-block[data-design="premium"] .pv-cards{padding:34px 18px!important}
+}
+
 </style>
 </head>
 <body>
