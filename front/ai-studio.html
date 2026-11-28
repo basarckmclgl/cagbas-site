@@ -1557,14 +1557,19 @@
         aiAutoBuildController.abort();
         aiAutoBuildController = null;
         aiAutoBuildRequestId++;
+        const submitButton = input?.form?.querySelector('button[type="submit"]');
+        if (submitButton) {
+          submitButton.disabled = false;
+          submitButton.textContent = 'Şimdi oluştur';
+        }
       }
 
       if (!prompt) {
         setAutoBuildStatus('Yazmaya başla. Yazmayı bıraktığında tasarım otomatik oluşturulur.');
         return;
       }
-      if (prompt.length < 12) {
-        setAutoBuildStatus('Biraz daha ayrıntı yaz. En az 12 karakterden sonra otomatik oluşturma başlayabilir.');
+      if (prompt.length < 8) {
+        setAutoBuildStatus('Biraz daha ayrıntı yaz. En az 8 karakterden sonra otomatik oluşturma başlayabilir.');
         return;
       }
       if (prompt === lastAutoBuiltPrompt) {
